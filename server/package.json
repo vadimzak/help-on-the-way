@@ -1,0 +1,28 @@
+{
+  "name": "help-on-the-way-server",
+  "version": "0.0.1",
+  "description": "See the project [WIKI](https://github.com/dorldor/help-on-the-way/wiki) for more information.",
+  "main": "index.js",
+  "scripts": {
+    "test": "ava"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/dorldor/help-on-the-way.git"
+  },
+  "author": "Dorldor Dev Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/dorldor/help-on-the-way/issues"
+  },
+  "homepage": "https://github.com/dorldor/help-on-the-way#readme",
+  "devDependencies": {
+    "ava": "0.24.0"
+  },
+  "dependencies": {
+    "express": "4.16.2",
+    "pg": "7.4.1",
+    "reflect-metadata": "0.1.10",
+    "typeorm": "0.1.9"
+  }
+}
