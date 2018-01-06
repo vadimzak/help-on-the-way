@@ -2,7 +2,6 @@ import "reflect-metadata";
 import { createConnection } from "typeorm";
 import Person from "./entity/Person";
 const { DB_USER, DB_PW, DB_HOST, DB_NAME } = process.env;
-console.log(DB_USER, DB_PW, DB_HOST, DB_NAME);
 createConnection({
     type: 'postgres',
     host: DB_HOST,
