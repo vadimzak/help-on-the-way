@@ -1,0 +1,21 @@
+version: '2'
+services:
+  db:
+    image: "postgres:10.1-alpine"
+    environment:
+     POSTGRES_PASSWORD: ${DB_PW}
+     POSTGRES_USER: ${DB_USER}
+     POSTGRES_DB: ${DB_NAME}
+  web:
+    build: .
+    ports:
+     - "3000:3000"
+    volumes:
+     - .:/usr/src/app
+    links:
+    - db
+    environment:
+    - DB_HOST=db
+    - DB_USER=${DB_USER}
+    - DB_PW=${DB_PW}
+    - DB_NAME=${DB_NAME}
