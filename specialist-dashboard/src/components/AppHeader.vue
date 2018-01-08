@@ -16,10 +16,10 @@
     </div>
     <ul class="nav nav-tabs mt-3">
       <li class="nav-item">
-        <a class="nav-link active" href="#">מסך ראשי</a>
+        <router-link to="/" class="nav-link" :class="{active: this.$route.name == 'Main' }">מסך ראשי</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">פניות</a>
+        <router-link to="/tickets" class="nav-link" :class="{active: this.$route.name == 'TicketsView' }">פניות</router-link>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">מתנדבים</a>
@@ -38,10 +38,13 @@
 </template>
 
 <script>
+
 export default {
   data () {
     return {
     }
+  },
+  created(){
   }
 }
 </script>
