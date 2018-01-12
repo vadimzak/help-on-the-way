@@ -34,5 +34,10 @@ createConnection({
     console.log("Loaded people: ", users);
      
     console.log("Here you can setup and run express/koa/any other framework.");
+    console.log("Starting a loop");
+    // temp to make the server stay up, will be replaced with express
+    while (true) {
+        
+    }
     
 }).catch(error => console.log(error));
