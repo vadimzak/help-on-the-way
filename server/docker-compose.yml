@@ -6,16 +6,19 @@ services:
      POSTGRES_PASSWORD: ${DB_PW}
      POSTGRES_USER: ${DB_USER}
      POSTGRES_DB: ${DB_NAME}
+    ports:
+     - "5432:5432"
     networks:
      - dockernet1 
   web:
-    build: .
-    command: npm run start
+    image: "node:9"
+    init: true
+    user: "node"
+    working_dir: /usr/src/app
     ports:
      - "3000:3000"
     volumes:
      - .:/usr/src/app
-     - /usr/src/app/node_modules
      - /tmp/root:/root
     depends_on:
      - "db"
@@ -24,6 +27,7 @@ services:
     - DB_USER=${DB_USER}
     - DB_PW=${DB_PW}
     - DB_NAME=${DB_NAME}
+    command: bash -c "npm i && npm start"
     networks:
     - dockernet1
 networks:
