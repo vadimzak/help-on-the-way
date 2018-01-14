@@ -56,6 +56,7 @@ export default {
         title: this.newTagTitle,
         color: '#ff8383'
       })
+      this.newTagTitle = ''
     }
   }
 }
