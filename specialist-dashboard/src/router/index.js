@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Main from '@/components/Main'
 import NewTicketForm from '@/components/NewTicketForm'
 import TicketsView from '@/components/TicketsView'
+import TagManager from '@/components/TagManager'
 
 Vue.use(Router)
 
@@ -22,6 +23,11 @@ export default new Router({
       path: '/new-ticket',
       name: 'NewTicketForm',
       component: NewTicketForm
+    },
+    {
+      path: '/tags',
+      name: 'TagManager',
+      component: TagManager
     }
   ]
 })
