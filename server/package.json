@@ -2,7 +2,6 @@
   "name": "help-on-the-way-server",
   "version": "0.0.1",
   "description": "See the project [WIKI](https://github.com/dorldor/help-on-the-way/wiki) for more information.",
-  "main": "src/index.js",
   "scripts": {
     "start": "docker-compose up --build",
     "clean-containers": "docker-compose down"
