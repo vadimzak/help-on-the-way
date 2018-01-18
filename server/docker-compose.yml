@@ -10,26 +10,6 @@ services:
      - "5432:5432"
     networks:
      - dockernet1 
-  web:
-    image: "node:9"
-    init: true
-    user: "node"
-    working_dir: /usr/src/app
-    ports:
-     - "3000:3000"
-    volumes:
-     - .:/usr/src/app
-     - /tmp/root:/root
-    depends_on:
-     - "db"
-    environment:
-    - DB_HOST=db
-    - DB_USER=${DB_USER}
-    - DB_PW=${DB_PW}
-    - DB_NAME=${DB_NAME}
-    command: bash -c "npm i && npm start"
-    networks:
-    - dockernet1
 networks:
     dockernet1:
 
