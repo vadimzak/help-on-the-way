@@ -2,3 +2,5 @@
 DB_USER=postgres
 DB_PW=123456
 DB_NAME=postgres
+DB_SCHEMA=help
+JWT_SECRET=help_on_the_way
