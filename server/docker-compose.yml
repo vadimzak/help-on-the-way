@@ -11,10 +11,10 @@ services:
   migrations:
     build: ./migrations
     environment:
-      PGHOST: '${PGHOST}'
+      PGHOST: db
       PGUSER: '${PGUSER}'
       PGPASSWORD: '${PGPASSWORD}'
-    entrypoint: [ "wait-for-postgres.sh", "flyway", "-url=jdbc:postgresql://${PGHOST}:5432/${DB_NAME}", "-schemas=${DB_SCHEMA}", "-user=${PGUSER}", "-password=${PGPASSWORD}", "migrate" ]
+    entrypoint: [ "wait-for-postgres.sh", "flyway", "-url=jdbc:postgresql://db:5432/${DB_NAME}", "-schemas=${DB_SCHEMA}", "-user=${PGUSER}", "-password=${PGPASSWORD}", "migrate" ]
     volumes:
       - ./migrations/sql:/flyway/sql
     links:

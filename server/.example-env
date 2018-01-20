@@ -1,5 +1,4 @@
 # This is an example of how to define an ENV file. make sure to save it as .env
-PGHOST=db
 PGUSER=postgres
 PGPASSWORD=123456
 DB_NAME=postgres
