@@ -3,7 +3,8 @@
   "version": "0.0.1",
   "description": "See the project [WIKI](https://github.com/dorldor/help-on-the-way/wiki) for more information.",
   "scripts": {
-    "start": "docker-compose up --build",
+    "start": "docker-compose up",
+    "migrations": "docker-compose up migrations",
     "clean-containers": "docker-compose down"
   },
   "repository": {
