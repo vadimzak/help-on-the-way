@@ -9,10 +9,25 @@ TO run the project locally:
 4. If you woud like to get into the server container:
  - run `docker ps` and find your CONTAINER_ID
  - run `docker exec -it CONTAINER_ID bash` will start a bash terminal inside the docker.
-## Backend
-We are using [PostGraphQl](https://github.com/postgraphql/postgraphql) as our Backend, which makes a reflection of the db tables and functions in a GraphQL mannar.
-### Example of usage:
-In order to get familiar with the api, go to the [Localhost GraphIQL Endpoint](http://localhost:5000/graphiql) or [Windows 7 GraphIQL Endpoint](http://192.168.99.100:5000/graphiql).
+## High level description of the backend
+### DB - Postgres DB
+We are using Postgres 10 (which is currently the latest) as our db.
+### DB migrations - Flyway
+[Flyway by Boxfuse](https://github.com/flyway/) is a database migrations tool
+This service will 
+- Wait for the postgres db to be ready (via wait-for-postgres.sh script)
+- Connect to the db
+- Execute all /server/db/migrations/V[increasing number]__simple-description.sql files.
+Please keep each sql statement in a different file
+### Web - PostGraphQL
+[PostGraphQL](https://github.com/postgraphql/postgraphql) creates an automatic GraphQL based api according to the database structure. 
+In a nutshell, a Person table will automatically result with the following endpoints:
+- **allPeople**: returns all persons.
+- **personById**: which recieved a person's id and returns the person.
+- **createPerson**: create a person.
+- **deletePersonById**: deletes a person be id.
+#### Example of usage:
+In order to get familiar with the graphql api, run `docker-compose up` and go to the [Localhost GraphIQL Endpoint](http://localhost:5000/graphiql) or [Windows 7 GraphIQL Endpoint](http://192.168.99.100:5000/graphiql).
 - Register a new volunteer user, and return the user's id, first and last name.
 ```graphql
 mutation {
@@ -77,4 +92,5 @@ mutation {
     id
     description
   }
-}```
+}
+```

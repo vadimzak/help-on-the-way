@@ -7,22 +7,35 @@ services:
       POSTGRES_USER: '${PGUSER}'
       POSTGRES_DB: '${DB_NAME}'
     ports:
-      - 5432:5432
+      - '5432:5432'
+    networks:
+      - dockernet1
   migrations:
     build: ./migrations
     environment:
       PGHOST: db
       PGUSER: '${PGUSER}'
       PGPASSWORD: '${PGPASSWORD}'
-    entrypoint: [ "wait-for-postgres.sh", "flyway", "-url=jdbc:postgresql://db:5432/${DB_NAME}", "-schemas=${DB_SCHEMA}", "-user=${PGUSER}", "-password=${PGPASSWORD}", "migrate" ]
+    entrypoint:
+      - wait-for-postgres.sh
+      - flyway
+      - '-url=jdbc:postgresql://db:5432/${DB_NAME}'
+      - '-schemas=${DB_SCHEMA}'
+      - '-user=${PGUSER}'
+      - '-password=${PGPASSWORD}'
+      - migrate
     volumes:
-      - ./migrations/sql:/flyway/sql
-    links:
-      - db
+      - './migrations/sql:/flyway/sql'
+    networks:
+      - dockernet1
   postgraphql:
     image: erasche/postgraphql
+    init: true
+    user: node
     ports:
       - '5000:5000'
+    depends_on:
+      - db
     environment:
       DB_GRAPHQL_PATH: /graphql
       DB_GRAPHIQL_PATH: /graphiql
@@ -33,5 +46,7 @@ services:
       PGHOST: db
       PGPORT: 5432
       PGDATABASE: '${DB_NAME}'
-    links:
-      - db
+    networks:
+      - dockernet1
+networks:
+  dockernet1: null
