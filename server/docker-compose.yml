@@ -3,13 +3,22 @@ services:
   db:
     image: 'postgres:10.1-alpine'
     environment:
-      POSTGRES_PASSWORD: '${DB_PW}'
-      POSTGRES_USER: '${DB_USER}'
+      POSTGRES_PASSWORD: '${PGPASSWORD}'
+      POSTGRES_USER: '${PGUSER}'
       POSTGRES_DB: '${DB_NAME}'
     ports:
-      - '5432:5432'
-    networks:
-      - dockernet1
+      - 5432:5432
+  migrations:
+    build: ./migrations
+    environment:
+      PGHOST: '${PGHOST}'
+      PGUSER: '${PGUSER}'
+      PGPASSWORD: '${PGPASSWORD}'
+    entrypoint: [ "wait-for-postgres.sh", "flyway", "-url=jdbc:postgresql://${PGHOST}:5432/${DB_NAME}", "-schemas=${DB_SCHEMA}", "-user=${PGUSER}", "-password=${PGPASSWORD}", "migrate" ]
+    volumes:
+      - ./migrations/sql:/flyway/sql
+    links:
+      - db
   postgraphql:
     image: erasche/postgraphql
     ports:
@@ -19,14 +28,10 @@ services:
       DB_GRAPHIQL_PATH: /graphiql
       PG_SECRET: '${JWT_SECRET}'
       DB_SCHEMA: '${DB_SCHEMA}'
-      PGUSER: '${DB_USER}'
-      PGPASSWORD: '${DB_PW}'
+      PGUSER: '${PGUSER}'
+      PGPASSWORD: '${PGPASSWORD}'
       PGHOST: db
       PGPORT: 5432
       PGDATABASE: '${DB_NAME}'
-    networks:
-      - dockernet1
     links:
       - db
-networks:
-  dockernet1: null
