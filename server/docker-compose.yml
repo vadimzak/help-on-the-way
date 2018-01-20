@@ -1,35 +1,52 @@
 version: '2.2'
 services:
   db:
-    image: "postgres:10.1-alpine"
+    image: 'postgres:10.1-alpine'
     environment:
-     POSTGRES_PASSWORD: ${DB_PW}
-     POSTGRES_USER: ${DB_USER}
-     POSTGRES_DB: ${DB_NAME}
+      POSTGRES_PASSWORD: '${PGPASSWORD}'
+      POSTGRES_USER: '${PGUSER}'
+      POSTGRES_DB: '${DB_NAME}'
     ports:
-     - "5432:5432"
+      - '5432:5432'
     networks:
-     - dockernet1 
-  web:
-    image: "node:9"
-    init: true
-    user: "node"
-    working_dir: /usr/src/app
-    ports:
-     - "3000:3000"
+      - dockernet1
+  migrations:
+    build: ./migrations
+    environment:
+      PGHOST: db
+      PGUSER: '${PGUSER}'
+      PGPASSWORD: '${PGPASSWORD}'
+    entrypoint:
+      - wait-for-postgres.sh
+      - flyway
+      - '-url=jdbc:postgresql://db:5432/${DB_NAME}'
+      - '-schemas=${DB_SCHEMA}'
+      - '-user=${PGUSER}'
+      - '-password=${PGPASSWORD}'
+      - migrate
     volumes:
-     - .:/usr/src/app
-     - /tmp/root:/root
-    depends_on:
-     - "db"
-    environment:
-    - DB_HOST=db
-    - DB_USER=${DB_USER}
-    - DB_PW=${DB_PW}
-    - DB_NAME=${DB_NAME}
-    command: bash -c "npm i && npm start"
+      - './migrations/sql:/flyway/sql'
     networks:
-    - dockernet1
+      - dockernet1
+  postgraphql:
+    image: erasche/postgraphql
+    init: true
+    user: node
+    ports:
+      - '5000:5000'
+    depends_on:
+      - db
+    environment:
+      DB_GRAPHQL_PATH: /graphql
+      DB_GRAPHIQL_PATH: /graphiql
+      PG_SECRET: '${JWT_SECRET}'
+      DB_SCHEMA: '${DB_SCHEMA}'
+      PGUSER: '${PGUSER}'
+      PGPASSWORD: '${PGPASSWORD}'
+      PGHOST: db
+      PGPORT: 5432
+      PGDATABASE: '${DB_NAME}'
+    networks:
+      - dockernet1
 networks:
-    dockernet1:
-
+  dockernet1: null

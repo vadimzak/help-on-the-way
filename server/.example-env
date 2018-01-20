@@ -1,4 +1,6 @@
 # This is an example of how to define an ENV file. make sure to save it as .env
-DB_USER=postgres
-DB_PW=123456
+PGUSER=postgres
+PGPASSWORD=123456
 DB_NAME=postgres
+DB_SCHEMA=help
+JWT_SECRET=help_on_the_way
