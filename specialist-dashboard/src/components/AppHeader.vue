@@ -31,6 +31,9 @@
         <a class="nav-link" href="#">זקנים</a>
       </li>
       <li class="nav-item">
+        <router-link to="/tags" class="nav-link"  :class="{active: this.$route.name == 'TagManager' }">ניהול תגיות</router-link>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="#">מפה</a>
       </li>
     </ul>
