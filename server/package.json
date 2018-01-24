@@ -5,6 +5,7 @@
   "scripts": {
     "start": "docker-compose up",
     "migrations": "docker-compose up migrations",
+    "run-db": "docker-compose.cmd up -d db",
     "clean-containers": "docker-compose down"
   },
   "repository": {
@@ -16,5 +17,9 @@
   "bugs": {
     "url": "https://github.com/dorldor/help-on-the-way/issues"
   },
-  "homepage": "https://github.com/dorldor/help-on-the-way#readme"
+  "homepage": "https://github.com/dorldor/help-on-the-way#readme",
+  "dependencies": {
+    "express": "4.16.2",
+    "postgraphql": "3.5.4"
+  }
 }
