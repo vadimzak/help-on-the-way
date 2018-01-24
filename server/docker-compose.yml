@@ -17,7 +17,7 @@ services:
       PGUSER: '${PGUSER}'
       PGPASSWORD: '${PGPASSWORD}'
     entrypoint:
-      - wait-for-postgres.sh
+      # - wait-for-postgres.sh
       - flyway
       - '-url=jdbc:postgresql://db:5432/${DB_NAME}'
       - '-schemas=${DB_SCHEMA}'
