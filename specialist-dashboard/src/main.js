@@ -13,7 +13,7 @@ import 'font-awesome/css/font-awesome.css'
 Vue.config.productionTip = false
 
 const httpLink = new HttpLink({
-  uri: 'http://localhost:5000/graphql',
+  uri: 'http://localhost:8080/graphql',
 })
 
 const apolloClient = new ApolloClient({

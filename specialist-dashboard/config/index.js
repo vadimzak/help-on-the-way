@@ -20,7 +20,16 @@ module.exports = {
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    
+    proxyTable: {
+      '/graphql': {
+        target: 'http://localhost:5000/graphql',
+        changeOrigin: true,
+        pathRewrite: {
+          '^/graphql': ''
+        }      
+      }
+    },
+
     /**
      * Source Maps
      */

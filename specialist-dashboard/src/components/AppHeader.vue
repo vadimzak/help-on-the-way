@@ -22,7 +22,7 @@
         <router-link to="/tickets" class="nav-link" :class="{active: this.$route.name == 'TicketsView' }">פניות</router-link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">מתנדבים</a>
+        <router-link to="/volunteers" class="nav-link" :class="{active: this.$route.name == 'VolunteerView' }">מתנדבים</router-link>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="#">קבוצות מתנדבים</a>

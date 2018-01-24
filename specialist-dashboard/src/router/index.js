@@ -4,6 +4,7 @@ import Main from '@/components/Main'
 import NewTicketForm from '@/components/NewTicketForm'
 import TicketsView from '@/components/TicketsView'
 import TagManager from '@/components/TagManager'
+import VolunteersView from '@/components/VolunteersView'
 
 Vue.use(Router)
 
@@ -20,6 +21,11 @@ export default new Router({
       component: TicketsView
     },
     {
+      path: '/volunteers',
+      name: 'VolunteerView',
+      component: VolunteersView
+    },
+    {
       path: '/new-ticket',
       name: 'NewTicketForm',
       component: NewTicketForm
@@ -28,6 +34,6 @@ export default new Router({
       path: '/tags',
       name: 'TagManager',
       component: TagManager
-    }
+    },
   ]
 })
