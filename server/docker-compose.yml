@@ -5,7 +5,7 @@ services:
     environment:
       POSTGRES_PASSWORD: '${PGPASSWORD}'
       POSTGRES_USER: '${PGUSER}'
-      POSTGRES_DB: '${DB_NAME}'
+      POSTGRES_DB: '${PGDATABASE}'
     ports:
       - '5432:5432'
     networks:
@@ -17,9 +17,9 @@ services:
       PGUSER: '${PGUSER}'
       PGPASSWORD: '${PGPASSWORD}'
     entrypoint:
-      # - wait-for-postgres.sh
+      - wait-for-postgres.sh
       - flyway
-      - '-url=jdbc:postgresql://db:5432/${DB_NAME}'
+      - '-url=jdbc:postgresql://db:5432/${PGDATABASE}'
       - '-schemas=${DB_SCHEMA}'
       - '-user=${PGUSER}'
       - '-password=${PGPASSWORD}'
@@ -45,7 +45,7 @@ services:
       PGPASSWORD: '${PGPASSWORD}'
       PGHOST: db
       PGPORT: 5432
-      PGDATABASE: '${DB_NAME}'
+      PGDATABASE: '${PGDATABASE}'
     networks:
       - dockernet1
 networks:
