@@ -1,22 +1,16 @@
-const express = require('express');
-const app = express();
+const app = require('express')();
+const middlewaresInitializer = require('./middlewares/middlewaresInitializer');
+const passportInitializer = require('./passport/passportInitializer');
+const endpointsInitializer = require('./endpoints/endpointsInitializer');
 
-const middlewares = {
-    cookieParser: require('cookie-parser'),
-    bodyParser: require('body-parser'),
-    authCookieToHeader: require('./middlewares/authCookieToHeader'),
-    postgraphql: require('./middlewares/postgraphql')
-};
+middlewaresInitializer.init(app);
+passportInitializer.init(app);
+endpointsInitializer.init(app);
 
-const endpoints = {
-    login: require('./endpoints/login')
-};
+app.get('/', (req, res) => {
+    // req.user
+    res.json("");
+})
 
-app.use(middlewares.cookieParser());
-app.use(middlewares.bodyParser.json())
-app.use(middlewares.authCookieToHeader);
-app.use(middlewares.postgraphql);
-
-app.post('/login', endpoints.login);
 
 app.listen(3000);

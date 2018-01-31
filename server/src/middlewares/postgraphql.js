@@ -1,4 +1,4 @@
-const { postgraphql } = require('postgraphql');
+const postgraphql = require('postgraphql');
 const { PGHOST, PGPORT, PGUSER, PGPASSWORD, PGDATABASE, DB_SCHEMA, JWT_SECRET } = process.env;
 const CONNECTION_STRING = `postgres://${PGHOST}:${PGPORT}/${PGDATABASE}`;
 const OPTIONS = {
@@ -23,7 +23,7 @@ const OPTIONS = {
     // bodySizeLimit: 'Set the maximum size of JSON bodies that can be parsed (default 100kB). The size can be given as a human-readable string, such as "200kB" or "5MB" (case insensitive).'
 };
 
-const postgraphqlMiddleware = postgraphql(CONNECTION_STRING, DB_SCHEMA, OPTIONS);
+const postgraphqlMiddleware = postgraphql.default(CONNECTION_STRING, DB_SCHEMA, OPTIONS);
 
 module.exports = postgraphqlMiddleware;
 
