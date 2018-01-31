@@ -3,6 +3,7 @@ const Pool = require('pg-pool');
 const { graphql } = require('graphql');
 const { PGHOST, PGPORT, PGUSER, PGPASSWORD, PGDATABASE, DB_SCHEMA, JWT_SECRET } = process.env;
 const CONNECTION_STRING = `postgres://${PGHOST}:${PGPORT}/${PGDATABASE}`;
+const variableStringBuilder = require('./variableStringBuilder');
 
 const pgPool = new Pool();
 const OPTIONS = {
@@ -12,17 +13,21 @@ const OPTIONS = {
 
 const createSchema = createPostGraphQLSchema(CONNECTION_STRING, DB_SCHEMA, OPTIONS)
 
-const run = async query => {
+const query = async (query, variables) => {
     const schema = await createSchema;
-    
-    const context = { pgPool, pgDefaultRole: PGUSER };
-    const callback = async context => graphql(schema, query, null, context)
 
-    return await withPostGraphQLContext(context, callback);
+    const variablesStr = variableStringBuilder.build(variables);
+    const queryStr = `query name(${variablesStr}) {${query}}`;
+
+    const context = { pgPool, pgDefaultRole: PGUSER };
+    const callback = async context => graphql(schema, queryStr, null, context, variables)
+
+    const result = await withPostGraphQLContext(context, callback);
+    return result.data || result;
 }
 
 module.exports = {
-    run
+    query
 };
 
 // const myPgPool = new Pool();

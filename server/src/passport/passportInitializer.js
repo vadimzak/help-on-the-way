@@ -1,28 +1,30 @@
-var passport = require('passport');
-var Strategy = require('passport-facebook').Strategy;
+const postgraphqlQueryRunner = require('../postgraphql/postgraphqlQueryRunner');
+const passport = require('passport');
+const Strategy = require('passport-facebook').Strategy;
 
 passport.use(new Strategy({
     clientID: process.env.FACEBOOK_CLIENT_ID,
     clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
-    callbackURL: 'http://localhost:3000/login/facebook/return'
+    callbackURL: process.env.SERVER_URL + '/login/facebook/return'
 },
     function (accessToken, refreshToken, profile, cb) {
-        // In this example, the user's Facebook profile is supplied as the user
-        // record.  In a production-quality application, the Facebook profile should
-        // be associated with a user record in the application's database, which
-        // allows for account linking and authentication with other identity
-        // providers.
+        // check if there's already a user with the corresponding facebook profile
+        // if so, update 
+        // if not, create user
+        // return the user object (and not the profile)
+
         return cb(null, profile);
     }));
 
-passport.serializeUser(function (user, cb) {
+passport.serializeUser(async function (user, cb) {
     // supplying the user ID when serializing
-    cb(null, user);
+    cb(null, user.id);
 });
 
-passport.deserializeUser(function (obj, cb) {
+passport.deserializeUser(async function (userId, cb) {
     // querying the user record by ID from the database when deserializing
-    cb(null, obj);
+    const { personById } = await postgraphqlQueryRunner.query("personById(id: $id) { firstName, lastName }", { id: 1 });
+    cb(null, personById);
 });
 
 const init = (app, baseUrl = '/', loginUrl = '/login') => {

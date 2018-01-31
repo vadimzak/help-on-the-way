@@ -8,9 +8,7 @@ passportInitializer.init(app);
 endpointsInitializer.init(app);
 
 app.get('/', (req, res) => {
-    // req.user
-    res.json("");
+    res.json(req.user);
 })
-
 
 app.listen(3000);
