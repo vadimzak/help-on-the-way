@@ -3,7 +3,7 @@ const { PGHOST, PGPORT, PGUSER, PGPASSWORD, PGDATABASE, DB_SCHEMA, JWT_SECRET } 
 const CONNECTION_STRING = `postgres://${PGHOST}:${PGPORT}/${PGDATABASE}`;
 const OPTIONS = {
     // classicIds: 'Enables classic ids for Relay support. Instead of using the field name nodeId for globally unique ids, PostGraphQL will instead use the field name id for its globally unique ids. This means that table id columns will also get renamed to rowId.',
-    // dynamicJson: 'Setting this to true enables dynamic JSON which will allow you to use any JSON as input and get any arbitrary JSON as output. By default JSON types are just a JSON string.',
+    dynamicJson: true, //'Setting this to true enables dynamic JSON which will allow you to use any JSON as input and get any arbitrary JSON as output. By default JSON types are just a JSON string.',
     // disableDefaultMutations: 'Setting this to true will prevent the creation of the default mutation types & fields. Database mutation will only be possible through Postgres functions.',
     graphiql: true, // 'Set this to true to enable the GraphiQL interface.',
     // graphqlRoute: 'The endpoint the GraphQL executer will listen on. Defaults to /graphql.',

@@ -7,13 +7,44 @@ passport.use(new Strategy({
     clientSecret: process.env.FACEBOOK_CLIENT_SECRET,
     callbackURL: process.env.SERVER_URL + '/login/facebook/return'
 },
-    function (accessToken, refreshToken, profile, cb) {
-        // check if there's already a user with the corresponding facebook profile
-        // if so, update 
-        // if not, create user
-        // return the user object (and not the profile)
+    async function (accessToken, refreshToken, profile, cb) {
+        const personResultQuery = `person {id}`;
+        let data = await postgraphqlQueryRunner.mutation(
+            `findUserBySocial`,
+            `${personResultQuery}`,
+            [{
+                name: 'input',
+                type: 'FindUserBySocialInput!',
+                value: {
+                    "type": "FACEBOOK",
+                    "pId": profile.id
+                }
+            }]
+        );
+        if (data.errors) return cb(data.errors[0]);
+        let person = data.findUserBySocial.person;
 
-        return cb(null, profile);
+        if (!data.findUserBySocial.person) {
+            var [firstName, lastName] = profile.displayName.split(' ');
+            data = await postgraphqlQueryRunner.mutation(
+                `registerPerson`,
+                `${personResultQuery}`,
+                [{
+                    name: 'input',
+                    type: 'RegisterPersonInput!',
+                    value: {
+                        firstName,
+                        lastName,
+                        "type": "FACEBOOK",
+                        "data": { profile: profile._json }
+                    }
+                }]
+            );
+            if (data.errors) return cb(data.errors[0]);
+            person = data.registerPerson.person;
+        }
+
+        return cb(null, person);
     }));
 
 passport.serializeUser(async function (user, cb) {
@@ -23,7 +54,7 @@ passport.serializeUser(async function (user, cb) {
 
 passport.deserializeUser(async function (userId, cb) {
     // querying the user record by ID from the database when deserializing
-    const { personById } = await postgraphqlQueryRunner.query("personById(id: $id) { firstName, lastName }", { id: 1 });
+    const { personById } = await postgraphqlQueryRunner.query("personById(id: $id) { id, firstName, lastName }", { id: userId });
     cb(null, personById);
 });
 
