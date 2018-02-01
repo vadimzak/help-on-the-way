@@ -6,7 +6,7 @@ const middleware = session({
     store: new pgSession({
         pool,
         schemaName: 'help_private',
-        tableName: 'user_sessions'
+        tableName: 'session'
     }),
     secret: process.env.COOKIE_SECRET,
     resave: false,
