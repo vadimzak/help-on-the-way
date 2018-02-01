@@ -1,11 +1,11 @@
 const { withPostGraphQLContext, postgraphql, createPostGraphQLSchema } = require('postgraphql');
-const Pool = require('pg-pool');
 const { graphql } = require('graphql');
-const { PGHOST, PGPORT, PGUSER, PGPASSWORD, PGDATABASE, DB_SCHEMA, JWT_SECRET } = process.env;
-const CONNECTION_STRING = `postgres://${PGHOST}:${PGPORT}/${PGDATABASE}`;
+
+const pgPool = require('../services/pgPool');
 const variableStringBuilder = require('./variableStringBuilder');
 
-const pgPool = new Pool();
+const { PGHOST, PGPORT, PGUSER, PGPASSWORD, PGDATABASE, DB_SCHEMA, JWT_SECRET } = process.env;
+const CONNECTION_STRING = `postgres://${PGHOST}:${PGPORT}/${PGDATABASE}`;
 const OPTIONS = {
     dynamicJson: true, //'Setting this to true enables dynamic JSON which will allow you to use any JSON as input and get any arbitrary JSON as output. By default JSON types are just a JSON string.',
     jwtSecret: JWT_SECRET, // 'The secret for your JSON web tokens. This will be used to verify tokens in the Authorization header, and signing JWT tokens you return in procedures.',
