@@ -1,12 +1,13 @@
 const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
 const pool = require('../services/pgPool');
+const consts = require('../consts');
 
 const middleware = session({
     store: new pgSession({
         pool,
-        schemaName: 'help_private',
-        tableName: 'session'
+        schemaName: consts.db.privateSchemaName,
+        tableName: consts.db.sessionTableName
     }),
     secret: process.env.COOKIE_SECRET,
     resave: false,
