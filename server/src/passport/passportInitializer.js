@@ -54,14 +54,11 @@ passport.serializeUser(async function (user, cb) {
 
 passport.deserializeUser(async function (userId, cb) {
     // querying the user record by ID from the database when deserializing
-    const { personById } = await postgraphqlQueryRunner.query("personById(id: $id) { id, firstName, lastName }", { id: userId });
+    const { personById } = await postgraphqlQueryRunner.query("personById(id: $id) { id, type }", { id: userId });
     cb(null, personById);
 });
 
 const init = (app, baseUrl = '/', loginUrl = '/login') => {
-    app.use(passport.initialize());
-    app.use(passport.session());
-
     app.get('/login/facebook', passport.authenticate('facebook'));
 
     app.get('/login/facebook/return',
