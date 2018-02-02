@@ -64,7 +64,7 @@ const init = (app, baseUrl = '/', loginUrl = '/login') => {
     app.get('/login/facebook/return',
         passport.authenticate('facebook', { failureRedirect: loginUrl }),
         function (req, res) {
-            res.redirect(baseUrl);
+            req.session.save(() => res.redirect(baseUrl));
         });
 
     app.get('/logout', function (req, res) {

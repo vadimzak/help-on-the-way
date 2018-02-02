@@ -3,10 +3,11 @@
   "version": "0.0.1",
   "description": "See the project [WIKI](https://github.com/dorldor/help-on-the-way/wiki) for more information.",
   "scripts": {
-    "start": "docker-compose up",
-    "migrations": "docker-compose up migrations",
-    "run-db": "docker-compose.cmd up -d db",
-    "clean-containers": "docker-compose down"
+    "start": "node src/app.js",
+    "start-debug": "nodemon --inspect=0.0.0.0:9229 src/app.js",
+    "docker-start": "docker-compose.cmd up postgraphql",
+    "migrations": "docker-compose.cmd up migrations",
+    "run-db": "docker-compose.cmd up -d db"
   },
   "repository": {
     "type": "git",
@@ -28,5 +29,8 @@
     "passport": "0.4.0",
     "passport-facebook": "2.1.1",
     "postgraphql": "3.5.4"
+  },
+  "devDependencies": {
+    "nodemon": "1.14.12"
   }
 }

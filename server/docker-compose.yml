@@ -24,23 +24,30 @@ services:
     depends_on:
       - db
   postgraphql:
-    image: erasche/postgraphql
+    build: .
+    volumes:
+      - './:/app'
     init: true
-    user: node
     ports:
       - '5000:5000'
+      - '9229:9229'
     depends_on:
       - db
     environment:
       DB_GRAPHQL_PATH: /graphql
       DB_GRAPHIQL_PATH: /graphiql
-      PG_SECRET: '${JWT_SECRET}'
+      PGHOST: db
+      PGPORT: 5432
+      JWT_SECRET: '${JWT_SECRET}'
       DB_SCHEMA: '${DB_SCHEMA}'
       PGUSER: '${PGUSER}'
       PGPASSWORD: '${PGPASSWORD}'
-      PGHOST: db
-      PGPORT: 5432
       PGDATABASE: '${PGDATABASE}'
+      JWT_AUDIENCES: '${JWT_AUDIENCES}'
+      FACEBOOK_CLIENT_ID: '${FACEBOOK_CLIENT_ID}'
+      FACEBOOK_CLIENT_SECRET: '${FACEBOOK_CLIENT_SECRET}'
+      SERVER_URL: '${SERVER_URL}'
+      COOKIE_SECRET: '${COOKIE_SECRET}'
     networks:
       - dockernet1
 networks:
