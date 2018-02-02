@@ -1,11 +1,11 @@
 const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
-const pool = require('../services/pgPool');
+const pgPool = require('../services/pgPool');
 const consts = require('../consts');
 
 const middleware = session({
     store: new pgSession({
-        pool,
+        pool: pgPool,
         schemaName: consts.db.privateSchemaName,
         tableName: consts.db.sessionTableName
     }),

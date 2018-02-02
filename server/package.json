@@ -5,9 +5,9 @@
   "scripts": {
     "start": "node src/app.js",
     "start-debug": "nodemon --inspect=0.0.0.0:9229 src/app.js",
-    "docker-start": "docker-compose.cmd up postgraphql",
-    "migrations": "docker-compose.cmd up migrations",
-    "run-db": "docker-compose.cmd up -d db"
+    "docker-start": "docker-toolbox-compose.cmd up postgraphql",
+    "migrations": "docker-toolbox-compose.cmd up migrations",
+    "run-db": "docker-toolbox-compose.cmd up -d db"
   },
   "repository": {
     "type": "git",

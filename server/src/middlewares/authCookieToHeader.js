@@ -4,15 +4,16 @@ const jwtSignOptions = { noTimestamp: true };
 
 const authCookieToHeader = (req, res, next) => {
     req.headers.authorization = req.session.authorization =
-        req.session.authorization || generateAuthorization(req.user);
+        req.session.authorization || generateAuthorizationHeader(req.user);
     return next();
 };
 
-const generateAuthorization = (user) => {
+const generateAuthorizationHeader = (user) => {
     if (!user) return undefined;
 
     const { id: person_id, type } = user;
-    const jwt = jsonwebtoken.sign({ person_id, type, aud: JWT_AUDIENCES }, JWT_SECRET, jwtSignOptions);
+    const payload = { person_id, type, aud: JWT_AUDIENCES };
+    const jwt = jsonwebtoken.sign(payload, JWT_SECRET, jwtSignOptions);
     return `Bearer ${jwt}`;
 }
 
