@@ -1,12 +1,25 @@
 const build = variables => {
-    return variables ? Object.keys(variables).map(keyName => `$${keyName}: ${getType(variables[keyName])}`).join(',') : '';
-}
+    if (!variables) return [];
+
+    return Object.entries(variables).map(([name, item]) => {
+        if (item.graphqlType) {
+            var type = item.graphqlType;
+            var value = item.value;
+        } else {
+            var type = getType(item);
+            var value = item;
+        }
+        return { name, type, value };
+    })
+};
 
 const getType = value => {
     if (isString(value)) return 'String!';
     else if (isBoolean(value)) return 'Boolean!';
     else if (Number.isInteger(value)) return 'Int!';
     else if (isFloat(value)) return 'Float!';
+    
+    throw 'unknown type';
 }
 
 function isString(value) {
