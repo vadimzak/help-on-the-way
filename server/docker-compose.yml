@@ -16,18 +16,13 @@ services:
       PGHOST: db
       PGUSER: '${PGUSER}'
       PGPASSWORD: '${PGPASSWORD}'
-    entrypoint:
-      - wait-for-postgres.sh
-      - flyway
-      - '-url=jdbc:postgresql://db:5432/${PGDATABASE}'
-      - '-schemas=${DB_SCHEMA}'
-      - '-user=${PGUSER}'
-      - '-password=${PGPASSWORD}'
-      - migrate
+      PGDATABASE: '${PGDATABASE}'
     volumes:
       - './migrations/sql:/flyway/sql'
     networks:
       - dockernet1
+    depends_on:
+      - db
   postgraphql:
     image: erasche/postgraphql
     init: true
