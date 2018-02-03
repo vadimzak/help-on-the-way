@@ -33,6 +33,18 @@ Vue.use(VueGoogleMaps, {
   }
 });
 Vue.directive('on-click-outside', onClickOutside);
+Vue.filter('formatDate', function(value) {
+  if (value) {
+    let date = new Date(value);
+    return date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear()
+  }
+});
+
+Vue.filter('formatAddress', function(address) {
+  if (address) {
+    return address.street + ' ' + address.houseNumber + ', ' + address.city;
+  }
+});
 
 const apolloProvider = new VueApollo({
   defaultClient: apolloClient,
