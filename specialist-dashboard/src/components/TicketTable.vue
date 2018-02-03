@@ -16,7 +16,7 @@
     </div>
     <div class="row ticket" v-bind:class="{'active': ticket.id == selectedTicket.id}" v-for="ticket in tickets" v-on:click="onTicketClicked(ticket)">
       <div class="col-xs-3">
-        {{ticket.name}}
+        {{ticket.personByElderId.firstName}} {{ticket.personByElderId.lastName}}
       </div>
       <div class="col-xs-3">
 
@@ -32,12 +32,10 @@
         </div>
         <div class="phone-numbers">
           <div class="cell-phone">
-            <span>{{ticket.contactDetails.cellPhone}}</span>
+            <span></span>
           </div>
           <div class="phone-number">
-            <span>
-              {{ticket.contactDetails.phoneNumber}}
-            </span>
+            <span> {{ticket.personByElderId.phoneNumber}} </span>
           </div>
         </div>
       </div>
@@ -51,20 +49,8 @@
           </div>
         </div>
         <div class="ticket-dates">
-          <div class="asap" v-if="ticket.eta.asap">
-            <span>בהקדם האפשרי</span>
-          </div>
-          <div class="eta-time-range" v-else>
-            <div class="eta-date">
-              {{ticket.eta.specificDate.day}}
-            </div>
-            <div class="eta-specific-time center-text" v-if="ticket.eta.specificDate.specificTime">
-              {{ticket.eta.specificDate.specificTime}}
-            </div>
-            <div v-else>
-              {{ticket.eta.specificDate.timeRange.start}}
-              {{ticket.eta.specificDate.timeRange.end}}
-            </div>
+          <div class="due-date">
+            <span> {{ticket.dueDate | formatDate}} </span>
           </div>
         </div>
       </div>
@@ -109,7 +95,7 @@ export default {
     margin-bottom: 10px;
   }
 
-  .asap {
+  .due-date {
     word-wrap: break-word;
   }
 </style>

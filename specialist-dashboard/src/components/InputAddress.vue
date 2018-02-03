@@ -1,9 +1,9 @@
 <template>
   <div v-on-click-outside="hidePlaceInput" v-on:click="showPlaceInput()">
     <div>
-      <span v-if="!showAddressSelector">{{address}}</span>
+      <span v-if="!showAddressSelector">{{address | formatAddress}}</span>
     </div>
-    <gmap-place-input v-bind:defaultPlace="address" v-if="showAddressSelector" :select-first-on-enter="true" @place_changed="onSelect($event)"></gmap-place-input>
+    <gmap-place-input :defaultPlace="address | formatAddress" v-if="showAddressSelector" :select-first-on-enter="true" @place_changed="onSelect($event)"></gmap-place-input>
   </div>
 </template>
 
@@ -14,12 +14,17 @@
     mixins: [onClickOutside],
     data () {
       return {
-          showAddressSelector: false
+          showAddressSelector: false,
+          addressTypeConverter: {
+            street_number: "houseNumber",
+            route: 'street',
+            locality: 'city'
+          }
       }
     },
     props: {
-      address: String,
-      locationChanged: Object
+      address: Object,
+      locationChanged: Function
     },
     methods: {
         showPlaceInput: function() {
@@ -30,10 +35,15 @@
         },
         onSelect: function(address) {
             this.showAddressSelector = false;
-            this.locationChanged(address);
+            let convertedAddress = {}
+            for (let index = 0; index < address.address_components.length; index++) {
+              let addressComponent = address.address_components[index];
+              if (this.addressTypeConverter[addressComponent.types[0]]) {
+                convertedAddress[this.addressTypeConverter[addressComponent.types[0]]] = addressComponent.short_name;
+              }
+            }
+            this.locationChanged(convertedAddress);
         }
-
-
     }
   }
 </script>
