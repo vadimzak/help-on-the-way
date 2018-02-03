@@ -42,7 +42,7 @@
             <span>איסוף</span>
           </div>
           <div class="ticket-pickup">
-            <span>{{ticket.rootDescription.pickup}}</span>
+            <input-address v-bind:location-changed="changePickupLocation" v-bind:address="ticket.rootDescription.pickup"></input-address>
           </div>
         </div>
         <div class="location-details">
@@ -50,7 +50,7 @@
             <span>יעד</span>
           </div>
           <div class="ticket-pickup">
-            <span>{{ticket.rootDescription.operationLocation}}</span>
+            <input-address v-bind:location-changed="changeTicketLocation" v-bind:address="ticket.rootDescription.operationLocation"></input-address>
           </div>
         </div>
         <div class="location-details">
@@ -58,7 +58,7 @@
             <span>סיום</span>
           </div>
           <div class="ticket-pickup">
-            <span>{{ticket.rootDescription.dropOff}}</span>
+            <input-address v-bind:location-changed="changeDropoffLocation" v-bind:address="ticket.rootDescription.dropOff"></input-address>
           </div>
         </div>
       </div>
@@ -67,13 +67,26 @@
 </template>
 
 <script>
+  import InputAddress from '@/components/InputAddress'
 
   export default {
+    components: {  InputAddress },
     data () {
       return {}
     },
     props: {
         ticket: Object
+    },
+    methods: {
+      changePickupLocation: function(newLocation) {
+          this.ticket.rootDescription.pickup = newLocation.formatted_address;
+      },
+      changeTicketLocation: function(newLocation) {
+        this.ticket.rootDescription.operationLocation = newLocation.formatted_address;
+      },
+      changeDropoffLocation: function(newLocation) {
+        this.ticket.rootDescription.dropOff = newLocation.formatted_address;
+      }
     }
   }
 </script>
