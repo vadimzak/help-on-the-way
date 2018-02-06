@@ -3,9 +3,11 @@
   "version": "0.0.1",
   "description": "See the project [WIKI](https://github.com/dorldor/help-on-the-way/wiki) for more information.",
   "scripts": {
-    "start": "docker-compose up",
-    "migrations": "docker-compose up migrations",
-    "clean-containers": "docker-compose down"
+    "start": "node src/app.js",
+    "start-debug": "nodemon --inspect=0.0.0.0:9229 src/app.js",
+    "docker-start": "docker-toolbox-compose.cmd up postgraphql",
+    "migrations": "docker-toolbox-compose.cmd up migrations",
+    "run-db": "docker-toolbox-compose.cmd up -d db"
   },
   "repository": {
     "type": "git",
@@ -16,5 +18,19 @@
   "bugs": {
     "url": "https://github.com/dorldor/help-on-the-way/issues"
   },
-  "homepage": "https://github.com/dorldor/help-on-the-way#readme"
+  "homepage": "https://github.com/dorldor/help-on-the-way#readme",
+  "dependencies": {
+    "body-parser": "1.18.2",
+    "connect-pg-simple": "4.2.1",
+    "cookie-parser": "1.4.3",
+    "express": "4.16.2",
+    "express-session": "1.15.6",
+    "jsonwebtoken": "7.4.3",
+    "passport": "0.4.0",
+    "passport-facebook": "2.1.1",
+    "postgraphql": "3.5.4"
+  },
+  "devDependencies": {
+    "nodemon": "1.14.12"
+  }
 }

@@ -1,6 +1,11 @@
 # This is an example of how to define an ENV file. make sure to save it as .env
 PGUSER=postgres
 PGPASSWORD=123456
-DB_NAME=postgres
+PGDATABASE=postgres
 DB_SCHEMA=help
 JWT_SECRET=help_on_the_way
+JWT_AUDIENCES=help
+FACEBOOK_CLIENT_ID=FACEBOOK_CLIENT_ID
+FACEBOOK_CLIENT_SECRET=FACEBOOK_CLIENT_SECRET
+SERVER_URL=http://localhost:5000
+COOKIE_SECRET=dorldor
