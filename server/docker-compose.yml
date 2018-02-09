@@ -2,6 +2,7 @@ version: '2.2'
 services:
   db:
     image: 'postgres:10.1-alpine'
+    env_file: '.env'
     environment:
       POSTGRES_PASSWORD: '${PGPASSWORD}'
       POSTGRES_USER: '${PGUSER}'
@@ -12,11 +13,9 @@ services:
       - dockernet1
   migrations:
     build: ./migrations
+    env_file: '.env'
     environment:
       PGHOST: db
-      PGUSER: '${PGUSER}'
-      PGPASSWORD: '${PGPASSWORD}'
-      PGDATABASE: '${PGDATABASE}'
     volumes:
       - './migrations/sql:/flyway/sql'
     networks:

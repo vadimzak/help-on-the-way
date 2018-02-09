@@ -2,7 +2,7 @@ const postgraphqlQueryRunner = require('../postgraphql/postgraphqlQueryRunner');
 const PERSON_GRAPHQL_QUERY = 'person {id}';
 
 const findUserByFacebookId = async facebookProfileId => {
-    return await postgraphqlQueryRunner.mutation(
+    const { person } = await postgraphqlQueryRunner.mutation(
         'findUserBySocial',
         PERSON_GRAPHQL_QUERY,
         {
@@ -15,12 +15,13 @@ const findUserByFacebookId = async facebookProfileId => {
             }
         }
     );
+    return person;
 };
 
 const createUserFromFacebookProfile = async profile => {
-    var [firstName, lastName] = profile.displayName.split(' ');
+    const [firstName, lastName] = profile.displayName.split(' ');
 
-    return await postgraphqlQueryRunner.mutation(
+    const { person } = await postgraphqlQueryRunner.mutation(
         'registerPerson',
         PERSON_GRAPHQL_QUERY,
         {
@@ -35,6 +36,7 @@ const createUserFromFacebookProfile = async profile => {
             }
         }
     );
+    return person;
 };
 
 const getUserById = async userId => await postgraphqlQueryRunner.query('personById', 'id, type', { id: userId });

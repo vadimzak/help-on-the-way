@@ -9,7 +9,7 @@ passport.use(new Strategy({
 },
     async function (accessToken, refreshToken, profile, cb) {
         try {
-            const { person: user } = await db.findUserByFacebookId(profile.id) ||
+            const user = await db.findUserByFacebookId(profile.id) ||
                 await db.createUserFromFacebookProfile(profile);
 
             return cb(null, user);
