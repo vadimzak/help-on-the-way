@@ -1,5 +1,3 @@
-DROP FUNCTION help.register_person;
-
 CREATE FUNCTION help.register_person (
   first_name text,
   last_name text,

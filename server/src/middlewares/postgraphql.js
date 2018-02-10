@@ -7,7 +7,7 @@ const options = {
     graphiql: true, // 'Set this to true to enable the GraphiQL interface.',
     // graphqlRoute: 'The endpoint the GraphQL executer will listen on. Defaults to /graphql.',
     // graphiqlRoute: 'The endpoint the GraphiQL query interface will listen on (NOTE: GraphiQL will not be enabled unless the graphiql option is set to true). Defaults to /graphiql.',
-    // jwtRole: 'An array of strings describing the dotted path in the JWT from which to extract the postgres role. If none is provided it will use the key role on the root of the jwt. Defaults to ["role"].',
+    jwtRole: ['type'], //'An array of strings describing the dotted path in the JWT from which to extract the postgres role. If none is provided it will use the key role on the root of the jwt. Defaults to ["role"].',
     watchPg: true, //'When true, PostGraphQL will watch your database schemas and re-create the GraphQL API whenever your schema changes, notifying you as it does. This feature requires an event trigger to be added to the database by a superuser. When enabled PostGraphQL will try to add this trigger, if you did not connect as a superuser you will get a warning and the trigger won’t be added.',
     // showErrorStack: 'Enables adding a stack field to the error response. Can be either the boolean true (which results in a single stack string) or the string json (which causes the stack to become an array with elements for each line of the stack).',
     // extendedErrors: 'Extends the error response with additional details from the Postgres error. Example: ["hint", "detail", "errcode"]. Default is [].',
