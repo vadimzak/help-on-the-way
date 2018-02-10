@@ -32,6 +32,7 @@ services:
       - '9229:9229'
     depends_on:
       - db
+    env_file: '.env'
     environment:
       DB_GRAPHQL_PATH: /graphql
       DB_GRAPHIQL_PATH: /graphiql
