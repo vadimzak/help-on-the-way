@@ -27,12 +27,12 @@ const run = async (type, name, query, variables) => {
 
     const callback = async context => graphql(schema, graphQuery, null, context, graphVariables)
 
-    const { data } = await withPostGraphQLContext(CONTEXT, callback);
+    const result = await withPostGraphQLContext(CONTEXT, callback);
 
     return new Promise((resolve, reject) => {
-        if (data.errors) return reject(data.errors);
+        if (result.errors) return reject(result.errors);
 
-        resolve(data[name]);
+        resolve(result.data[name]);
     });
 }
 
