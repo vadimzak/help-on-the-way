@@ -4,7 +4,7 @@
   "description": "See the project [WIKI](https://github.com/dorldor/help-on-the-way/wiki) for more information.",
   "scripts": {
     "start": "node src/app.js",
-    "start-debug": "nodemon --inspect=0.0.0.0:9229 src/app.js",
+    "start-debug": "nodemon --inspect=0.0.0.0:9229 -L -d ./src src/app.js",
     "docker-start": "docker-compose up postgraphql",
     "migrations": "docker-compose up migrations",
     "run-db": "docker-compose up -d db"
