@@ -1,9 +1,6 @@
-FROM node:8.5.0
+FROM node:9
+COPY package*.json ./
 
-COPY . /app
-
-WORKDIR /app
-
-USER node
-
-ENTRYPOINT [ "npm", "run", "start-debug" ]
+RUN npm install
+COPY . .
+CMD [ "npm", "start" ]
