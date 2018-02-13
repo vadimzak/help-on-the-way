@@ -1,6 +1,7 @@
 const passport = require('passport');
 const Strategy = require('passport-facebook').Strategy;
 const db = require('./passportDbQueryRunner');
+const referrerMiddlewares = require('./referrerMiddlewares')
 
 passport.use(new Strategy({
     clientID: process.env.FACEBOOK_CLIENT_ID,
@@ -29,18 +30,22 @@ passport.deserializeUser(async function (userId, cb) {
     cb(null, user);
 });
 
-const init = (app, baseUrl = '/', loginUrl = '/login') => {
-    app.get('/login/facebook', passport.authenticate('facebook'));
+const init = (app, loginUrl = '/login') => {
+    app.get('/login/facebook',
+        referrerMiddlewares.saveReferrerToSession,
+        passport.authenticate('facebook')
+    );
 
     app.get('/login/facebook/return',
         passport.authenticate('facebook', { failureRedirect: loginUrl }),
+        referrerMiddlewares.popReferrerFromSession,
         function (req, res) {
-            req.session.save(() => res.redirect(baseUrl));
+            req.session.save(() => res.redirect(req.referer));
         });
 
     app.get('/logout', function (req, res) {
         req.logout();
-        res.redirect(baseUrl);
+        res.redirect(req.headers.referer);
     });
 };
 
