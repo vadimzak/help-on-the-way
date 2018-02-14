@@ -3,7 +3,7 @@
   "version": "0.0.1",
   "description": "See the project [WIKI](https://github.com/dorldor/help-on-the-way/wiki) for more information.",
   "scripts": {
-    "pre-start": "if [[ ${PROD_ENV} == \"true\" ]]; then npm run migrations-heroku; fi",
+    "prestart": "npm run migrations-heroku",
     "start": "node src/app.js",
     "start-debug": "nodemon --inspect=0.0.0.0:9229 src/app.js",
     "docker-start": "docker-compose up postgraphql",
