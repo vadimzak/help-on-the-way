@@ -3,10 +3,12 @@
   "version": "0.0.1",
   "description": "See the project [WIKI](https://github.com/dorldor/help-on-the-way/wiki) for more information.",
   "scripts": {
+    "pre-start": "if [[ ${PROD_ENV} == \"true\" ]]; then npm run migrations-heroku; fi",
     "start": "node src/app.js",
     "start-debug": "nodemon --inspect=0.0.0.0:9229 src/app.js",
     "docker-start": "docker-compose up postgraphql",
     "migrations": "docker-compose up migrations",
+    "migrations-heroku": "node ./migrations/migrate.js",
     "run-db": "docker-compose up -d db"
   },
   "repository": {
@@ -31,6 +33,7 @@
     "postgraphql": "3.5.4"
   },
   "devDependencies": {
+    "flywaydb-cli": "0.5.0",
     "nodemon": "1.14.12"
   }
 }
