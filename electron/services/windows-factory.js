@@ -1,11 +1,12 @@
 const electron = require('electron');
 const fs = require('fs');
-const {BrowserWindow} = electron;
+const { BrowserWindow } = electron;
 
 const createWindow = (options, url, scriptPath) => {
     return new Promise((resolve, reject) => {
         let win = new BrowserWindow(options);
         win.loadURL(url);
+        //todo - remove for production
         win.webContents.openDevTools();
         win.webContents.on('did-finish-load', () =>
             fs.readFile(scriptPath, (err, data) => {
@@ -18,4 +19,4 @@ const createWindow = (options, url, scriptPath) => {
     });
 };
 
-module.exports = {createWindow};
+module.exports = { createWindow };
