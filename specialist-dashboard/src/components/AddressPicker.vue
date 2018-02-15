@@ -84,7 +84,7 @@ export default {
       if(this.results.length){
         this.chosen = true
         this.choice = this.results[this.currentlySelected]
-        this.$emit('change', this.choice)
+        this.$emit('input', this.choice)
       }
     },
     unchoose(){
@@ -98,7 +98,7 @@ export default {
         this.$refs.inputField.select()
       })
       this.searchIfNeeded()
-      this.$emit('change', null)
+      this.$emit('input', null)
     },
     checkEmpty(){
       if(this.textInput == ''){

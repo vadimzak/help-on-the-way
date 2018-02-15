@@ -28,7 +28,7 @@ export default {
       } else {
         this.currentSelection = index
       }
-      this.$emit('change', this.currentSelection)
+      this.$emit('input', this.currentSelection)
     }
   }
 }
