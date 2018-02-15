@@ -19,14 +19,18 @@
       ]"
     />
 
+    <h4>בוחר כתובת</h4>
+    <address-picker/>
+
   </div>
 </template>
 
 <script>
 import RadioBoxes from '@/components/RadioBoxes'
+import AddressPicker from '@/components/AddressPicker'
 
 export default {
-  components: { RadioBoxes },
+  components: { RadioBoxes, AddressPicker },
   data () {
     return {
       
