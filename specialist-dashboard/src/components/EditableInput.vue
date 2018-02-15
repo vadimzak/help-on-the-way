@@ -34,7 +34,7 @@
     methods: {
         showAsLabel: function() {
             this.showEditableInput = false;
-            this.valueChanged(this.value);
+            this.valueChanged(this._value);
         },
         showAsInput: function() {
           this.showEditableInput = true;
