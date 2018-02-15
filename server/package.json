@@ -5,7 +5,7 @@
   "scripts": {
     "prestart": "npm run migrations-heroku",
     "start": "node src/app.js",
-    "start-debug": "nodemon --inspect=0.0.0.0:9229 src/app.js",
+    "start-debug": "nodemon --inspect=0.0.0.0:9229 -L -d ./src src/app.js",
     "docker-start": "docker-compose up postgraphql",
     "migrations": "docker-compose up migrations",
     "migrations-heroku": "node ./migrations/migrate.js",

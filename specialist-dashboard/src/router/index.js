@@ -5,6 +5,7 @@ import NewTicketForm from '@/components/NewTicketForm'
 import TicketsView from '@/components/TicketsView'
 import TagManager from '@/components/TagManager'
 import VolunteersView from '@/components/VolunteersView'
+import KitchenSink from '@/components/KitchenSink'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/tags',
       name: 'TagManager',
       component: TagManager
+    },
+    {
+      path: '/kitchenSink',
+      name: 'KitchenSink',
+      component: KitchenSink
     },
   ]
 })
