@@ -11,6 +11,11 @@ services:
       - '5432:5432'
     networks:
       - dockernet1
+    healthcheck:
+      test: "exit 0"
+      interval: 5s
+      timeout: 10s
+      retries: 12
   migrations:
     build: ./migrations
     env_file: '.env'
@@ -21,7 +26,9 @@ services:
     networks:
       - dockernet1
     depends_on:
-      - db
+      db:
+        condition: service_healthy
+
   postgraphql:
     build: .
     volumes:
@@ -31,7 +38,7 @@ services:
       - '5000:5000'
       - '9229:9229'
     depends_on:
-      - db
+      - migrations
     env_file: '.env'
     environment:
       DB_GRAPHQL_PATH: /graphql
