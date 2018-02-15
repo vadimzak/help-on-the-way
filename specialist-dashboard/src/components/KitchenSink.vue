@@ -19,6 +19,14 @@
       ]"
     />
 
+    <h4>אוטוקומפלט גנרי</h4>
+    Accepts a searchFunction prop with a signature (inputString, callback)
+    
+    <auto-complete
+      placeholder="התחל להקלד משהו"
+      :searchFunction="exampleSearchFunction"
+    />
+
     <h4>בוחר כתובת</h4>
     <address-picker/>
 
@@ -32,11 +40,12 @@
 
 <script>
 import RadioBoxes from '@/components/RadioBoxes'
+import AutoComplete from '@/components/AutoComplete'
 import AddressPicker from '@/components/AddressPicker'
 import GroupMessagePreview from '@/components/GroupMessagePreview'
 
 export default {
-  components: { RadioBoxes, AddressPicker, GroupMessagePreview },
+  components: { RadioBoxes, AutoComplete, AddressPicker, GroupMessagePreview },
   data () {
     return {
       exampleTicket:{
@@ -45,6 +54,26 @@ export default {
         ticketDescription: "ליווי לקניית רדיאטור חדש",
         ticketTiming: "היום או מחר",
         ticketPermalink: "https://bit.ly/dorldor"
+      }
+    }
+  },
+  methods: {
+    exampleSearchFunction(input,callback){
+      if (input != ''){
+        let testResponse = [
+          'result 1',
+          'result 2',
+          'result 3',
+          'the fourth results',
+          'and the last one'
+        ]
+
+        testResponse = testResponse.map(item => { return {
+          description: item+' '+input
+        }})
+        callback(testResponse)
+      } else {
+        callback([])
       }
     }
   }
