@@ -30,7 +30,12 @@
 </script>
 
 <style>
-  v-app {
+  .application {
     font-family: 'Rubik', Helvetica, Arial, sans-serif;
+    direction: rtl;
+    text-align: right;
+  }
+  .container.fill-height {
+    padding: 0;
   }
 </style>
