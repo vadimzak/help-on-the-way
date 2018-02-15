@@ -1,11 +1,11 @@
 <template>
   <div v-on-click-outside="showAsLabel">
     <div v-if="!showEditableInput">
-      <span>{{value}}</span>
+      <span>{{_value}}</span>
       <i v-on:click="showAsInput" v-bind:class="icon"></i>
     </div>
     <div v-if="showEditableInput">
-      <textarea type="text" v-if="showAsLabel" v-model="value" class="edit-box"/>
+      <textarea type="text" v-if="showAsLabel" v-model="_value" class="edit-box"/>
     </div>
   </div>
 </template>
@@ -17,11 +17,13 @@
     mixins: [onClickOutside],
     data () {
       return {
-        showEditableInput: false
+        showEditableInput: false,
+        _value: ''
       }
     },
     created: function() {
       this.showEditableInput = this.showInput;
+      this._value = this.value;
     },
     props: {
       value: String,
