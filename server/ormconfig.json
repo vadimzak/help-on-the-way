@@ -1,8 +1,0 @@
-{
-   "logging": false,
-   "cli": {
-      "entitiesDir": "src/entity",
-      "migrationsDir": "src/migration",
-      "subscribersDir": "src/subscriber"
-   }
-}

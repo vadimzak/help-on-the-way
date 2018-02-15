@@ -1,0 +1,20 @@
+{
+  "name": "communicator",
+  "version": "0.0.1",
+  "dependencies": {
+    "ajax-request": "^1.2.3",
+    "express": "^4.16.2",
+    "gulp": "^3.9.1",
+    "request": "^2.83.0",
+    "superagent": "^3.8.2",
+    "body-parser": "latest"
+  },
+  "description": "The communicator service, is responsibile for handlnig the comunncation to 3rd party chat appilcations, and allows us to send messages to user groups using differnt chat vendors.",
+  "main": "test1.js",
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
