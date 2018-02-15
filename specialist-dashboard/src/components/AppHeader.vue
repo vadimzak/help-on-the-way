@@ -36,6 +36,9 @@
       <li class="nav-item">
         <a class="nav-link" href="#">מפה</a>
       </li>
+      <li class="nav-item">
+        <router-link to="/kitchenSink" class="nav-link" :class="{active: this.$route.name == 'KitchenSink' }">דוגמאות של חתיכות מהממשק</router-link>
+      </li>
     </ul>
   </div>
 </template>
