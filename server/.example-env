@@ -2,6 +2,7 @@
 PGUSER=postgres
 PGPASSWORD=123456
 PGDATABASE=postgres
+PG_DEFAULT_ROLE=postgres
 DB_SCHEMA=help
 JWT_SECRET=help_on_the_way
 JWT_AUDIENCES=help
