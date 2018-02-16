@@ -1,3 +1,4 @@
+const { PGUSER } = process.env;
 const { withPostGraphQLContext, postgraphql, createPostGraphQLSchema } = require('postgraphql');
 const { graphql } = require('graphql');
 
@@ -6,7 +7,7 @@ const pgPool = require('../services/pgPool');
 const variablesArrBuilder = require('./variablesArrBuilder');
 
 const createSchema = createPostGraphQLSchema(consts.db.connectionString, process.env.DB_SCHEMA, consts.postgraphql.schemaOptions);
-const CONTEXT = { pgPool, ...consts.postgraphql.contextOptions };
+const CONTEXT = { pgPool, pgDefaultRole: PGUSER, ...consts.postgraphql.contextOptions };
 
 const query = async (name, query, variables) => {
     return await run('query', name, query, variables);
@@ -30,7 +31,7 @@ const run = async (type, name, query, variables) => {
     const result = await withPostGraphQLContext(CONTEXT, callback);
 
     return new Promise((resolve, reject) => {
-        if (result.errors) return reject(result.errors);
+        if (result.errors) return reject(JSON.stringify(result.errors));
 
         resolve(result.data[name]);
     });
