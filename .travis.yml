@@ -1,8 +1,8 @@
 language: node_js
 node_js:
   - "node"
-script: cd volunteer && npm i && npm build && cd ../specialist-dashboard &&
-  npm i && npm build
+script: cd volunteer && npm i && npm run build && cd ../specialist-dashboard &&
+  npm i && npm run build
 deploy:
   - provider: s3
     access_key_id: AKIAIWMMXABF5ZFKJBVA
