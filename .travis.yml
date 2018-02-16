@@ -7,7 +7,7 @@ deploy:
   - provider: s3
     access_key_id: AKIAIWMMXABF5ZFKJBVA
     bucket: aws-website-appdorldororgil-oi981
-    local_dir: volunteer/build
+    local_dir: volunteer/dist
     skip_cleanup: true
     acl: public_read
   - provider: s3
@@ -15,7 +15,7 @@ deploy:
     bucket: aws-website-dashboarddorldororgil-cu0yx
     skip_cleanup: true
     acl: public_read
-    local_dir: specialist-dashboard/build
+    local_dir: specialist-dashboard/dist
 env:
   global:
     secure: rmhtyBBaLEe9zmHrbYgpNO36UNiUOWOBVpN5wAtH2bHotlf67sTYnp0pEp9EEW2RvyY7tFwCcPZyMTzO9mCqxOGFRcxlrI7Cz2ofIVbR1b/WF7zrIBTj2PGWUpNNTGyCiae6W9hYfRVN5aRaup+ikiqtG5MxJrV82Mlbw3ZCkvGoEfcQbh6zgNP6keRYeTAKeawpC+5aJV2jEVx9AF9DusOuzr3ZCMJtvdRn801kyPkO3eE+pnIinTaQ40Au8zaFSF3FZATQdFjzlrBixKJ5ociIpe39akHuqDjV1c6rBLW7X8EQH24iSQlbQ9znt6MngA0d0GwUlvh3q8z2psAuX2MP2ROvciZI9Dc4qeYr3IfCWngvuxfDs9bpHIQpRN4FZziUQgONj/+ItMamyps9UQ9oOdl/jZBbBc8FMhZ4UXVecYbVBnlpvs9yN1Y6jMxkxbdGsACFpNJMSg0eNLY4iyzm+76Pp5wxGiuHcVFTN7T0jKFVL8Hi/tSksFTlunrcwTG1LOyuBuhVGIRm//8H38r5VrNWtT/eHSqjb1ZqJmJ8bCwHoQ5yGpCbJ3iSl96maQozcC4rKwc4On7tvTfTr1FWSUgvLzYjhpm8FsSf2+E/AQoFfgAq/Ka+M55oKjBLEc0FW0H6xqrbSMZ853Fco3RvkQrGg0DQZVaOIylpiE8=
