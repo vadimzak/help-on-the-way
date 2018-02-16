@@ -1,7 +1,5 @@
-const { PGHOST, PGPORT, PGDATABASE, DB_SCHEMA, PGUSER, PGPASSWORD, PROD_ENV } = process.env;
+const { PGHOST, PGPORT, PGDATABASE, DB_SCHEMA, PGUSER, PGPASSWORD, PROD_ENV, DATABASE_URL } = process.env;
 if (PROD_ENV == 'true') {
     require('child_process')
-    .execSync(`flyway -url=jdbc:postgresql://${PGHOST}:${PGPORT}/${PGDATABASE} -schemas=${DB_SCHEMA} -user=${PGUSER} -password=${PGPASSWORD} migrate`, { stdio: [0, 1, 2] });
-} else {
-    console.log('skipping migrations...');
-}
+    .execSync(`flyway -url="jdbc:${DATABASE_URL}" -user=${PGUSER} -password=${PGPASSWORD} -locations=filesystem:./migrations/sql migrate`, { stdio: [0, 1, 2] });
+}  
