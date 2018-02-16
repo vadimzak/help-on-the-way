@@ -1,7 +1,6 @@
 <template>
   <div v-if="ready" class="row">
     <div class="col-xs-6 tickets-list">
-      {{selectedTicket.id}}
       <ticket-table v-bind:selected-ticket="selectedTicket" v-bind:tickets="allTickets" v-bind:on-ticket-clicked="onTicketSelect"></ticket-table>
     </div>
     <div class="col-xs-6 ticket-view">
