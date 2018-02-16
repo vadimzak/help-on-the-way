@@ -1,7 +1,9 @@
+language: node_js
+node_js:
+  - "node"
 before_deploy: cd volunteer && npm i && npm build && cd ../specialist-dashboard &&
   npm i && npm build
 deploy:
-  matrix:
   - provider: s3
     access_key_id: AKIAIWMMXABF5ZFKJBVA
     bucket: aws-website-appdorldororgil-oi981
