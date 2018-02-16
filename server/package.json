@@ -8,8 +8,12 @@
     "start-debug": "nodemon --inspect=0.0.0.0:9229 -L -d ./src src/app.js",
     "docker-start": "docker-compose up postgraphql",
     "migrations": "docker-compose up migrations",
-    "migrations-heroku": "node ./migrations/migrate.js",
-    "run-db": "docker-compose up -d db"
+    "run-db": "docker-compose up -d db",
+    "heroku-migrations": "node ./migrations/migrate.js",
+    "heroku-deploy": "heroku container:push web --app dorldor-server",
+    "heroku-tail": "heroku logs --tail --app dorldor-server",
+    "heroku-connect": "heroku run bash --app dorldor-server",
+    "heroku-uptime": "heroku ps --app dorldor-server"
   },
   "repository": {
     "type": "git",

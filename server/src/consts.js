@@ -1,10 +1,10 @@
-const { PGHOST, PGPORT, PGUSER, PGDATABASE, JWT_SECRET, JWT_AUDIENCES } = process.env;
+const { PGHOST, PGPORT, PGUSER, PGDATABASE, JWT_SECRET, JWT_AUDIENCES, DATABASE_URL } = process.env;
 
 module.exports = {
     db: {
         privateSchemaName: 'help_private',
         sessionTableName: 'session',
-        connectionString: `postgres://${PGHOST}:${PGPORT}/${PGDATABASE}`,
+        connectionString: DATABASE_URL || `postgres://${PGHOST}:${PGPORT}/${PGDATABASE}`,
     },
     postgraphql: {
         schemaOptions: {
