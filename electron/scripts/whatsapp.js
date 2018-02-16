@@ -1,38 +1,96 @@
-const {ipcRenderer} = require('electron');
+const { ipcRenderer } = require('electron');
 
-//todo - implement sending and return the status for this message.
-const sendOneMessage = (message, group) => {
-    return new Promise((resolve, reject) => {
-        resolve({
-            group,
-            arrived: true
-        });
-    })
+const init = () => {
+    ipcRenderer.on('whatsapp-message', handleMessage);
+}
+
+const handleMessage = async (event, data) => {
+    await waitForWhatsappToLoad();
+
+    const { groups, message } = data;
+
+    let responses = await sendMessageToGroups(groups, message);
+
+    ipcRenderer.send('asynchronous-reply', responses);
+
+    ipcRenderer.send('close-message', 'https://web.whatsapp.com');
 };
 
-//todo - build and return a list of all group names
-const buildListFromArgs = args => {
-    return ['group1'];
+const sendMessageToGroups = async (groups, message) => {
+    var result = [];
+
+    for (var i = 0; i < groups.length; i++) {
+        let group = groups[i];;
+
+        try {
+            await sendMessageToGroup(group, message)
+            result.push({group, message, result: 'success'})
+        } catch (error) {
+            result.push({group, message, result: 'error', data: error})
+        }
+    }
+
+    return result;
 };
 
-//todo - complete this
-const getMessageFromArgs = args => {
-    return 'hi dor le dor :)'
+const waitForWhatsappToLoad = async () => {
+    await getElement(`#side`, 20);
 };
 
-const sendMessage = (event, args) => {
-    /**
-     * here you should get the message information under 'args' so you can implement the send logic -
-     * As you may choose (all other functions in this file except 'sendMessage' can be deleted)
-     *
-     * the function signatures here is just a suggestion.
-     */
-    const message = getMessageFromArgs(args);
-    let responses = buildListFromArgs(args).map(group => sendOneMessage(message, group));
-    Promise.all(responses).then((responseValues) => {
-        ipcRenderer.send('asynchronous-reply', responseValues);
-        ipcRenderer.send('close-message', 'https://web.whatsapp.com');
+const sendMessageToGroup = async (group, message) => {
+    console.log(group, message);
+    await sleep();
+    return selectGroup(group)
+        .catch(() => { throw 'Error selecting the group'; })
+        .then(() => sendMessage(message))
+        .catch(() => { throw 'Error sending the message'; });
+};
+
+const selectGroup = async group => {
+    sleep();
+    let relativeSelector = `span[title="${group.replace(/\"/g, '\\\"')}"]`
+    let chatNameElement = await getElement(`#side ${relativeSelector}`);
+
+    eventFire(chatNameElement, 'mousedown');
+
+    await getElement(`#main ${relativeSelector}`);
+};
+
+const getElement = (selector, remainingRetries = 5) => {
+    return new Promise(async (resolve, reject) => {
+        let element = document.querySelector(selector);
+        if (element) return resolve(element);
+
+        if (remainingRetries == 0) return reject();
+        await sleep();
+        getElement(selector, remainingRetries - 1)
+            .then(resolve, reject);
     });
 };
 
-ipcRenderer.on('whatsapp-message', sendMessage);
+const sleep = async () => {
+    return new Promise(resolve => setTimeout(resolve, 1000));
+};
+
+const eventFire = (element, eventType) => {
+    let event = document.createEvent("MouseEvents");
+    event.initMouseEvent(eventType, true, true, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+    element.dispatchEvent(event);
+}
+
+const sendMessage = async message => {
+    sleep();
+    let messageInputElement = await getElement('div.copyable-text.selectable-text[contenteditable]');
+
+    messageInputElement.innerHTML = message.replace(/  /gm, '');
+
+    let event = document.createEvent("UIEvents");
+    event.initUIEvent("input", true, true, window, 1);
+    messageInputElement.dispatchEvent(event);
+
+    let sendButton = await getElement('[data-icon=send]');
+
+    eventFire(sendButton, 'click');
+}
+
+init();
