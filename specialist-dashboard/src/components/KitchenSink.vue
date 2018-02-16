@@ -15,13 +15,13 @@
         {
           text: 'ליווי רפואי',
           icon: ''
-        }        
+        }
       ]"
     />
 
     <h4>אוטוקומפלט גנרי</h4>
     Accepts a searchFunction prop with a signature (inputString, callback)
-    
+
     <auto-complete
       placeholder="התחל להקלד משהו"
       :searchFunction="exampleSearchFunction"
@@ -31,10 +31,19 @@
     <address-picker/>
 
     <h4>תצוגה מקדימה להודעה קבוצתית</h4>
-    <group-message-preview 
+    <group-message-preview
       :ticket="exampleTicket"
     />
 
+    {{showModal==true}}
+    <button @click="showModal=true">open modal</button>
+    <modal v-bind:onESC="closeModal" v-if="showModal==true">
+      <date-picker v-model="time1" format="yyyy-MM-dd HH:mm:ss" lang="en" :placeholder="'Select date and time'" :type="'datetime'" :first-day-of-week="1"></date-picker>
+      <date-picker v-model="time3" :lang="'en'" :first-day-of-week="1"></date-picker>
+      <date-picker v-model="time2" :lang="'en'" range :shortcuts="shortcuts"></date-picker>
+
+      <button @click="showModal=false">close modal</button>
+    </modal>
   </div>
 </template>
 
@@ -43,12 +52,26 @@ import RadioBoxes from '@/components/RadioBoxes'
 import AutoComplete from '@/components/AutoComplete'
 import AddressPicker from '@/components/AddressPicker'
 import GroupMessagePreview from '@/components/GroupMessagePreview'
+import DatePicker from 'vue2-datepicker'
+import Modal from '@/components/Modal'
+
 
 export default {
-  components: { RadioBoxes, AutoComplete, AddressPicker, GroupMessagePreview },
+  components: { RadioBoxes, AutoComplete, AddressPicker, GroupMessagePreview, DatePicker, Modal },
   data () {
     return {
-      exampleTicket:{
+      showModal: false,
+      time1: '',
+      time2: '',
+      time3:'',
+      shortcuts: [
+        {
+          text: 'Today',
+          start: new Date(),
+          end: new Date()
+        }
+      ],
+      exampleTicket: {
         elderFirstName: "שמוליק",
         elderAddress: "המייסדים 25, גבעתיים",
         ticketDescription: "ליווי לקניית רדיאטור חדש",
@@ -58,6 +81,9 @@ export default {
     }
   },
   methods: {
+    closeModal: function() {
+      this.showModal = false;
+    },
     exampleSearchFunction(input,callback){
       if (input != ''){
         let testResponse = [
