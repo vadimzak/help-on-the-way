@@ -1,21 +1,29 @@
 language: node_js
 node_js:
-  - "node"
-script: cd volunteer && npm i && npm run build && cd ../specialist-dashboard &&
-  npm i && npm run build
+  - "8"
+if: branch = master
+script: ". deployment/deploy.sh"
 deploy:
-  - provider: s3
-    access_key_id: AKIAIWMMXABF5ZFKJBVA
-    bucket: aws-website-appdorldororgil-oi981
-    local_dir: volunteer/dist
-    skip_cleanup: true
-    acl: public_read
-  - provider: s3
-    access_key_id: AKIAIWMMXABF5ZFKJBVA
-    bucket: aws-website-dashboarddorldororgil-cu0yx
-    skip_cleanup: true
-    acl: public_read
-    local_dir: specialist-dashboard/dist
-env:
-  global:
-    secure: rmhtyBBaLEe9zmHrbYgpNO36UNiUOWOBVpN5wAtH2bHotlf67sTYnp0pEp9EEW2RvyY7tFwCcPZyMTzO9mCqxOGFRcxlrI7Cz2ofIVbR1b/WF7zrIBTj2PGWUpNNTGyCiae6W9hYfRVN5aRaup+ikiqtG5MxJrV82Mlbw3ZCkvGoEfcQbh6zgNP6keRYeTAKeawpC+5aJV2jEVx9AF9DusOuzr3ZCMJtvdRn801kyPkO3eE+pnIinTaQ40Au8zaFSF3FZATQdFjzlrBixKJ5ociIpe39akHuqDjV1c6rBLW7X8EQH24iSQlbQ9znt6MngA0d0GwUlvh3q8z2psAuX2MP2ROvciZI9Dc4qeYr3IfCWngvuxfDs9bpHIQpRN4FZziUQgONj/+ItMamyps9UQ9oOdl/jZBbBc8FMhZ4UXVecYbVBnlpvs9yN1Y6jMxkxbdGsACFpNJMSg0eNLY4iyzm+76Pp5wxGiuHcVFTN7T0jKFVL8Hi/tSksFTlunrcwTG1LOyuBuhVGIRm//8H38r5VrNWtT/eHSqjb1ZqJmJ8bCwHoQ5yGpCbJ3iSl96maQozcC4rKwc4On7tvTfTr1FWSUgvLzYjhpm8FsSf2+E/AQoFfgAq/Ka+M55oKjBLEc0FW0H6xqrbSMZ853Fco3RvkQrGg0DQZVaOIylpiE8=
+- provider: s3
+  access_key_id: AKIAI4CFEBTFA24MOKFQ
+  secret_access_key:
+    secure: "Px7basKDHNWtheuOrJZJAXHiwLB/BDj1oq0elznBT3MMWBznVp0nS0ZuwqrhjazIwnJbOr2j1nN/p+lipIAD1v2OWhQYW875ecQ26aI2qsVkZo+tf9ln+1upF3s5Jz97s/2cvkmSsQYqQ4ESWvW14XyzhiccRJVtzoCcPPClyHidBMFOQDJKDIN+clP+XRtBYJbL2rSEKyZDd16JtzqTN8O0YY0PVT4qJCdAhPsdMYdIXSTbM8mNbOWr7Tg4QIptOBDNQeDSwaliqn86QdcS/NFVW8U6+24ALUHNjlaB+UiMUKYwL3qWKI3OYKppr8MdHHV8YHh8Xl71U0Wfh2fS8JELy5HFxSM30X4soc4BtQKHkw7TM9vHdEC47Rc34h79Hg7DzODlAonxLA5+d+dJ1UUQ2TMsUV1/UmtYYuT6vA+u7rMiPnCygSWbwGppnNwewHg4yVnr/2Gc2q2AElc1ScD4Vll/26NdkvL3n0uf3yvSCOZ6TWOBPFoxNYVFiAsihrPDKZ8Lq+Xn7iP4OXQt2kkeLuMxBBvcQ+rpdMjgSeY5cVEAdttYLf1OAno/LRSU5QmmlK1vZScJVTRASBF5meIKiVTOLKrK/c+FEekQo5AX/aLZeMfen0MUkSYhch28e5k2jGkG9TO+fxU762BC9vUkeOA0fvXvxFBMNErshiY="
+  bucket: aws-website-appdorldororgil-oi981
+  local_dir: "./volunteer/dist"
+  skip_cleanup: true
+  acl: public_read
+  on:
+    branch: master
+    condition: "$DEPLOY_VOLUNTEER = true"
+- provider: s3
+  access_key_id: AKIAI4CFEBTFA24MOKFQ
+  bucket: aws-website-dashboarddorldororgil-cu0yx
+  secret_access_key:
+    secure: "Px7basKDHNWtheuOrJZJAXHiwLB/BDj1oq0elznBT3MMWBznVp0nS0ZuwqrhjazIwnJbOr2j1nN/p+lipIAD1v2OWhQYW875ecQ26aI2qsVkZo+tf9ln+1upF3s5Jz97s/2cvkmSsQYqQ4ESWvW14XyzhiccRJVtzoCcPPClyHidBMFOQDJKDIN+clP+XRtBYJbL2rSEKyZDd16JtzqTN8O0YY0PVT4qJCdAhPsdMYdIXSTbM8mNbOWr7Tg4QIptOBDNQeDSwaliqn86QdcS/NFVW8U6+24ALUHNjlaB+UiMUKYwL3qWKI3OYKppr8MdHHV8YHh8Xl71U0Wfh2fS8JELy5HFxSM30X4soc4BtQKHkw7TM9vHdEC47Rc34h79Hg7DzODlAonxLA5+d+dJ1UUQ2TMsUV1/UmtYYuT6vA+u7rMiPnCygSWbwGppnNwewHg4yVnr/2Gc2q2AElc1ScD4Vll/26NdkvL3n0uf3yvSCOZ6TWOBPFoxNYVFiAsihrPDKZ8Lq+Xn7iP4OXQt2kkeLuMxBBvcQ+rpdMjgSeY5cVEAdttYLf1OAno/LRSU5QmmlK1vZScJVTRASBF5meIKiVTOLKrK/c+FEekQo5AX/aLZeMfen0MUkSYhch28e5k2jGkG9TO+fxU762BC9vUkeOA0fvXvxFBMNErshiY="
+  skip_cleanup: true
+  acl: public_read
+  local_dir: specialist-dashboard/dist
+  on:
+    branch: master
+    condition: "$DEPLOY_DASHBOARD = true"
+    

@@ -1,0 +1,14 @@
+{
+  "name": "help-on-the-way-ci",
+  "version": "1.0.0",
+  "description": "A package that manges all our CI process",
+  "main": "deploy.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "simple-git": "1.89.0"
+  }
+}
