@@ -1,4 +1,4 @@
-const { PGHOST, PGPORT, PGUSER, PGDATABASE, JWT_SECRET, JWT_AUDIENCES, DATABASE_URL } = process.env;
+const { PGHOST, PGPORT, PGDATABASE, JWT_SECRET, JWT_AUDIENCES, DATABASE_URL } = process.env;
 
 module.exports = {
     db: {
@@ -15,7 +15,6 @@ module.exports = {
             jwtPgTypeIdentifier: 'help.jwt_token' //'The Postgres type identifier for the compound type which will be signed as a JWT token if ever found as the return type of a procedure. Can be of the form: my_schema.my_type. You may use quotes as needed: "my-special-schema".my_type.',
         },
         contextOptions: {
-            pgDefaultRole: PGUSER, // The default Postgres role that will be used if no role was found in jwtToken. It is a best security practice to always have a value for this option even though it is optional.
             jwtAudiences: JWT_AUDIENCES
         }
     }

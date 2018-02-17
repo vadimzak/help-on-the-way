@@ -4,6 +4,7 @@ const consts = require('../consts');
 const options = {
     ...consts.postgraphql.schemaOptions,
     ...consts.postgraphql.contextOptions,
+    pgDefaultRole: process.env.PG_DEFAULT_ROLE, // The default Postgres role that will be used if no role was found in jwtToken. It is a best security practice to always have a value for this option even though it is optional.
     graphiql: true, // 'Set this to true to enable the GraphiQL interface.',
     // graphqlRoute: 'The endpoint the GraphQL executer will listen on. Defaults to /graphql.',
     // graphiqlRoute: 'The endpoint the GraphiQL query interface will listen on (NOTE: GraphiQL will not be enabled unless the graphiql option is set to true). Defaults to /graphiql.',

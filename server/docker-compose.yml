@@ -55,6 +55,8 @@ services:
       FACEBOOK_CLIENT_SECRET: '${FACEBOOK_CLIENT_SECRET}'
       SERVER_URL: '${SERVER_URL}'
       COOKIE_SECRET: '${COOKIE_SECRET}'
+      COOKIE_DOMAIN: '${COOKIE_DOMAIN}'
+      PG_DEFAULT_ROLE: '${PG_DEFAULT_ROLE}'
     networks:
       - dockernet1
 networks:
