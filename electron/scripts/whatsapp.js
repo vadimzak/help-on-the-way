@@ -38,7 +38,6 @@ const waitForWhatsappToLoad = async () => {
 };
 
 const sendMessageToGroup = async (group, message) => {
-    console.log(group, message);
     await sleep();
     return selectGroup(group)
         .catch(() => { throw 'Error selecting the group'; })
@@ -47,7 +46,6 @@ const sendMessageToGroup = async (group, message) => {
 };
 
 const selectGroup = async group => {
-    sleep();
     let relativeSelector = `span[title="${group.replace(/\"/g, '\\\"')}"]`
     let chatNameElement = await getElement(`#side ${relativeSelector}`);
 
@@ -79,7 +77,6 @@ const eventFire = (element, eventType) => {
 }
 
 const sendMessage = async message => {
-    sleep();
     let messageInputElement = await getElement('div.copyable-text.selectable-text[contenteditable]');
 
     messageInputElement.innerHTML = message.replace(/  /gm, '');
