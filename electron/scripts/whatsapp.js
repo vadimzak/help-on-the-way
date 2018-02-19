@@ -4,29 +4,27 @@ const init = () => {
     ipcRenderer.on('whatsapp-message', handleMessage);
 }
 
-const handleMessage = async (event, data) => {
+const handleMessage = async (event, { messages }) => {
     await waitForWhatsappToLoad();
 
-    const { groups, message } = data;
-
-    let responses = await sendMessageToGroups(groups, message);
+    let responses = await sendMessages(messages);
 
     ipcRenderer.send('asynchronous-reply', responses);
 
     ipcRenderer.send('close-message', 'https://web.whatsapp.com');
 };
 
-const sendMessageToGroups = async (groups, message) => {
+const sendMessages = async (messages) => {
     var result = [];
 
-    for (var i = 0; i < groups.length; i++) {
-        let group = groups[i];;
+    for (var i = 0; i < messages.length; i++) {
+        let { group, message } = messages[i];
 
         try {
             await sendMessageToGroup(group, message)
-            result.push({group, message, result: 'success'})
+            result.push({ group, message, result: 'success' })
         } catch (error) {
-            result.push({group, message, result: 'error', data: error})
+            result.push({ group, message, result: 'error', data: error })
         }
     }
 

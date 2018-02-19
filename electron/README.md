@@ -13,15 +13,16 @@ run:
 2) npm start
 3) in "dor le dor" GUI simply send your message in the following format: 
 
-```
+```javascript
 window.postMessage(
     {
         platform: 'whatsapp',
-        groups: ['עזרה בדרך'],
-        message: 'היי חברים זו בדיקה'
+        messages: [
+            { group: 'קבוצה 1', message: 'הודעה ראשונה' },
+            { group: 'קבוצה 2', message: 'הודעה שניה' }
+        ]
     },
-    'http://localhost:8080')
-    
+    '*')    
 ```
 
 ### Params Explained:
