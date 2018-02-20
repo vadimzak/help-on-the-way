@@ -28,9 +28,8 @@ services:
       db:
         condition: service_healthy
     env_file: '.env'
+    command: 'npm run start-debug'
     environment:
-      DB_GRAPHQL_PATH: /graphql
-      DB_GRAPHIQL_PATH: /graphiql
       DO_MIGRATIONS: 'true'
       PGHOST: db
       PGPORT: 5432

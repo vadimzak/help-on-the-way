@@ -1,48 +1,27 @@
 const postgraphqlQueryRunner = require('../postgraphql/postgraphqlQueryRunner');
 const PERSON_GRAPHQL_QUERY = 'person {id}';
 
-const findUserByFacebookId = async facebookProfileId => {
+const getOrCreateUserBySocial = async (profile, accessToken, refreshToken) => {
     const { person } = await postgraphqlQueryRunner.mutation(
-        'findUserBySocial',
+        'getOrCreateUserBySocial',
         PERSON_GRAPHQL_QUERY,
         {
             input: {
-                graphqlType: 'FindUserBySocialInput!',
+                graphqlType: 'GetOrCreateUserBySocialInput!',
                 value: {
-                    'type': 'FACEBOOK',
-                    'pId': facebookProfileId
+                    'profileInput': (profile),
+                    'tokensInput': ({ accessToken, refreshToken })
                 }
             }
         }
     );
-    return person;
-};
 
-const createUserFromFacebookProfile = async profile => {
-    const [firstName, lastName] = profile.displayName.split(' ');
-
-    const { person } = await postgraphqlQueryRunner.mutation(
-        'registerPerson',
-        PERSON_GRAPHQL_QUERY,
-        {
-            input: {
-                graphqlType: 'RegisterPersonInput!',
-                value: {
-                    firstName,
-                    lastName,
-                    'type': 'FACEBOOK',
-                    'data': { profile: profile._json }
-                }
-            }
-        }
-    );
     return person;
 };
 
 const getUserById = async userId => await postgraphqlQueryRunner.query('personById', 'id, type', { id: userId });
 
 module.exports = {
-    findUserByFacebookId,
-    createUserFromFacebookProfile,
+    getOrCreateUserBySocial,
     getUserById
 }

@@ -1,0 +1,1 @@
+ALTER TYPE help_private.social_account_type ADD VALUE 'google';
