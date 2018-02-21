@@ -3,6 +3,7 @@
   "version": "0.0.1",
   "description": "See the project [WIKI](https://github.com/dorldor/help-on-the-way/wiki) for more information.",
   "scripts": {
+    "precommit": "pretty-quick --staged",
     "prestart": "npm run migrations",
     "start": "node src/app.js",
     "start-debug": "nodemon --inspect=0.0.0.0:9229 -L -d ./src src/app.js",
@@ -38,6 +39,9 @@
   },
   "devDependencies": {
     "flywaydb-cli": "0.5.0",
-    "nodemon": "1.14.12"
+    "husky": "0.14.3",
+    "nodemon": "1.14.12",
+    "prettier": "1.10.2",
+    "pretty-quick": "1.4.1"
   }
 }

@@ -10,53 +10,53 @@ const createSchema = createPostGraphQLSchema(consts.db.connectionString, DB_SCHE
 const CONTEXT = { pgPool, pgDefaultRole: PGUSER, ...consts.postgraphql.contextOptions };
 
 const query = async (name, query, variables) => {
-    return await run('query', name, query, variables);
-}
+	return await run('query', name, query, variables);
+};
 
 const mutation = async (name, query, variables) => {
-    return await run('mutation', name, query, variables);
-}
+	return await run('mutation', name, query, variables);
+};
 
 const run = async (type, name, query, variables) => {
-    const variablesRawArr = variablesArrBuilder.build(variables);
-    const queryName = buildQueryName(variablesRawArr);
-    const variablesStr = buildVariablesString(variablesRawArr);
-    const graphQuery = `${type} ${queryName} {${name} ${variablesStr} {${query}}}`;
-    const graphVariables = buildGraphVariables(variablesRawArr);
+	const variablesRawArr = variablesArrBuilder.build(variables);
+	const queryName = buildQueryName(variablesRawArr);
+	const variablesStr = buildVariablesString(variablesRawArr);
+	const graphQuery = `${type} ${queryName} {${name} ${variablesStr} {${query}}}`;
+	const graphVariables = buildGraphVariables(variablesRawArr);
 
-    const schema = await createSchema;
+	const schema = await createSchema;
 
-    const callback = async context => graphql(schema, graphQuery, null, context, graphVariables)
+	const callback = async context => graphql(schema, graphQuery, null, context, graphVariables);
 
-    const result = await withPostGraphQLContext(CONTEXT, callback);
+	const result = await withPostGraphQLContext(CONTEXT, callback);
 
-    return new Promise((resolve, reject) => {
-        if (result.errors) return reject(JSON.stringify(result.errors));
+	return new Promise((resolve, reject) => {
+		if (result.errors) return reject(JSON.stringify(result.errors));
 
-        resolve(result.data[name]);
-    });
-}
+		resolve(result.data[name]);
+	});
+};
 
 const buildQueryName = variablesRawArr => {
-    if (!variablesRawArr) return '';
+	if (!variablesRawArr) return '';
 
-    const variablesDefinition = variablesRawArr.map(x => `$${x.name}: ${x.type}`).join(',');
-    return `query_name(${variablesDefinition})`;
+	const variablesDefinition = variablesRawArr.map(x => `$${x.name}: ${x.type}`).join(',');
+	return `query_name(${variablesDefinition})`;
 };
 
 const buildVariablesString = variablesRawArr => {
-    if (!variablesRawArr) return '';
+	if (!variablesRawArr) return '';
 
-    return '(' + variablesRawArr.map(x => `${x.name}: $${x.name}`).join(',') + ')';
+	return '(' + variablesRawArr.map(x => `${x.name}: $${x.name}`).join(',') + ')';
 };
 
 const buildGraphVariables = variablesRawArr => {
-    const variables = {};
-    variablesRawArr.forEach(x => variables[x.name] = x.value);
-    return variables;
+	const variables = {};
+	variablesRawArr.forEach(x => (variables[x.name] = x.value));
+	return variables;
 };
 
 module.exports = {
-    query,
-    mutation
+	query,
+	mutation
 };

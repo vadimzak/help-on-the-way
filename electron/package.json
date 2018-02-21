@@ -4,13 +4,17 @@
     "description": "A minimal Electron POC for using whatsapp web",
     "main": "main.js",
     "scripts": {
+        "precommit": "pretty-quick --staged",
         "start": "electron ."
     },
     "keywords": [],
     "author": "Ilay",
     "license": "CC0-1.0",
     "devDependencies": {
-        "electron": "~1.7.8"
+        "electron": "~1.7.8",
+        "husky": "0.14.3",
+        "prettier": "1.10.2",
+        "pretty-quick": "1.4.1"
     },
     "dependencies": {}
 }
