@@ -1,80 +1,7 @@
 <template>
   <v-layout column wrap>
     <h4 class="greeting">היי, {{$store.state.user.firstName}}, כיף לראות אותך כאן :) </h4>
-    <v-flex>
-      <v-card>
-        <v-card-media
-          class="white--text card-image"
-          height="90px"
-          src="static/assets/card-title.png">
-          <v-container fill-height fluid>
-            <v-layout fill-height>
-              <v-flex xs12 align-end flexbo>
-                <span class="" id="ticket-headline">
-                  {{$data.ticket.title}}
-                </span>
-                <span class="duration">
-                  {{$data.ticket.durationEta}}
-                </span>
-              </v-flex>
-            </v-layout>
-          </v-container>
-        </v-card-media>
-        <v-card-title class="card-content">
-          <div class="ticket-details">
-            <ul>
-              <li>
-                <i class="material-icons">account_circle</i>
-                {{$data.ticket.elder.name}}, {{$data.ticket.elder.gender}} {{$data.ticket.elder.age}}
-              </li>
-              <li>
-                <i class="material-icons">event</i>
-                {{$data.ticket.when.day}}, {{$data.ticket.when.date}}
-              </li>
-              <li>
-                <i class="material-icons">alarm</i>
-                {{$data.ticket.when.startHour}}-
-                {{$data.ticket.when.endHour}}
-              </li>
-              <li>
-                <i class="material-icons">home</i>
-                {{$data.ticket.address}}
-              </li>
-            </ul>
-          </div>
-          <div class="ticket-tags">
-            <div class="tag" v-for="tag in $data.ticket.tags">
-              <i class="material-icons">{{tag.icon}}</i>
-              {{tag.name}}
-            </div>
-          </div>
-        </v-card-title>
-        <v-card-title class="important-things">
-          <h2>דברים שחשוב לדעת</h2>
-          <ul>
-            <li v-for="info in $data.ticket.importantInfo">
-              {{info}}
-            </li>
-          </ul>
-        </v-card-title>
-        <v-card-actions>
-          <v-dialog max-width="290">
-            <button class="volunteer" slot="activator">מתנדב/ת</button>
-            <v-card class="dialog-card">
-              <v-icon>close</v-icon>
-              <v-card-text>
-                <div> היי {{$store.state.user.firstName}},</div>
-                <div> האם ברצונך לסייע ל{{$data.ticket.elder.name}}?</div>
-              </v-card-text>
-              <v-card-actions>
-                <v-spacer></v-spacer>
-                <button class="agree" flat onclick="this.agree()">אשמח לעזור :)</button>
-              </v-card-actions>
-            </v-card>
-          </v-dialog>
-        </v-card-actions>
-      </v-card>
-    </v-flex>
+    <ticket-preview></ticket-preview>
     <div class="divider-title">
       <img src="static/assets/divider-image.png" class="divider-image">
       <div class="divider-text">
@@ -108,8 +35,10 @@
 </template>
 
 <script>
+import TicketPreview from './TicketPreview'
+
   export default {
-    components: {},
+    components: {TicketPreview},
     name: 'Ticket',
     methods: {
       agree: function () {

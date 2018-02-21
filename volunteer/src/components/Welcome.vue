@@ -11,7 +11,7 @@
     <div class="related-tickets">
       <v-list three-line>
         <template v-for="(ticket, index) in $data.related">
-          <v-list-tile avatar :key="ticket.title" @click="$router.replace('ticket/'+ticket.id)">
+          <v-list-tile avatar :key="ticket.title" @click="setPreview(index)" v-if="index !== preview">
             <v-list-tile-content>
               <div class="related-title">
                 <v-list-tile-title v-html="ticket.title"></v-list-tile-title>
@@ -25,6 +25,7 @@
               </div>
             </v-list-tile-content>
           </v-list-tile>
+          <ticket-preview v-else :closePreview="closePreview"></ticket-preview>
           <v-divider></v-divider>
         </template>
       </v-list>
@@ -33,10 +34,22 @@
 </template>
 
 <script>
+import TicketPreview from './TicketPreview'
+
 export default {
   name: 'Welcome',
+  components: { TicketPreview },
+  methods: {
+    setPreview: function(index) {
+      this.preview = index !== this.preview ? index : null;
+    },
+    closePreview: function(index) {
+      this.preview = null;
+    }
+  },
   data () {
     return {
+      preview: null,
       related: [
         {
           title: 'ליווי משה לקניית תרופות',
