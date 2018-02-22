@@ -1,0 +1,1 @@
+DROP TABLE help.tag_type, help.tag_value, help.ticket_tags;
