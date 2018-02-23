@@ -1,8 +1,7 @@
 <template>
   <div id="side-bar" class="mt-3 pt-3 h-100">
-    <router-link to="/new-ticket" tag="button" type="button" class="btn btn-primary btn-lg m-4 mx-auto d-block">פניה חדשה</router-link>
     <ul class="h4">
-
+      <NewTicketButton/>
       <li class="side-list-item mt-5">
         <router-link to="/" class="nav-link" :class="{active: this.$route.name == 'Main' }">מסך ראשי</router-link>
       </li>
@@ -32,10 +31,15 @@
 </template>
 
 <script>
-
+import NewTicketButton from '@/components/features/ticket/create/NewTicketButton';
 export default {
-  data () {
-    return {
+ components: { NewTicketButton },
+  methods: {
+    setNewTikcetModal(modalRef){
+      this.ticketModal = modalRef;
+    },
+    showTicketModal(){
+      this.ticketModal.show();
     }
   },
   created(){

@@ -35,15 +35,6 @@
       :ticket="exampleTicket"
     />
 
-    {{showModal==true}}
-    <button @click="showModal=true">open modal</button>
-    <modal v-bind:onESC="closeModal" v-if="showModal==true">
-      <date-picker v-model="time1" format="yyyy-MM-dd HH:mm:ss" lang="en" :placeholder="'Select date and time'" :type="'datetime'" :first-day-of-week="1"></date-picker>
-      <date-picker v-model="time3" :lang="'en'" :first-day-of-week="1"></date-picker>
-      <date-picker v-model="time2" :lang="'en'" range :shortcuts="shortcuts"></date-picker>
-
-      <button @click="showModal=false">close modal</button>
-    </modal>
 
     <div>
       selected filter : {{selectedFilter}}
@@ -55,17 +46,16 @@
 </template>
 
 <script>
-import RadioBoxes from '@/components/RadioBoxes'
+import RadioBoxes from '@/components/inputs/RadioBoxes'
 import AutoComplete from '@/components/AutoComplete'
 import AddressPicker from '@/components/AddressPicker'
 import GroupMessagePreview from '@/components/GroupMessagePreview'
 import DatePicker from 'vue2-datepicker'
-import Modal from '@/components/Modal'
 import TicketsFilter from '@/components/TicketsFilter'
 
 
 export default {
-  components: { RadioBoxes, AutoComplete, AddressPicker, GroupMessagePreview, DatePicker, Modal , TicketsFilter},
+  components: { RadioBoxes, AutoComplete, AddressPicker, GroupMessagePreview, DatePicker, TicketsFilter},
   data () {
     return {
       showModal: false,

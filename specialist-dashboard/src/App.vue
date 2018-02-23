@@ -13,16 +13,17 @@
         </div>
       </div>
     </div>
+        <FloatingScreenRoot/>
   </div>
 </template>
 
 <script>
-import SideBar from './components/SideBar'
-import AppHeader from './components/AppHeader'
-
+import SideBar from './components/layout/SideBar'
+import AppHeader from './components/layout/AppHeader'
+import FloatingScreenRoot from './components/layout/FloatingScreenContainer'
 export default {
   name: 'app',
-  components: {SideBar, AppHeader},
+  components: {SideBar, AppHeader, FloatingScreenRoot},
   data(){
     return {
       loggedInUser: '',

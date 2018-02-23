@@ -8,6 +8,7 @@ import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import VueApollo from 'vue-apollo'
+import BootstrapVue from 'bootstrap-vue'
 import 'font-awesome/css/font-awesome.css'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import { directive as onClickOutside } from 'vue-on-click-outside'
@@ -24,6 +25,7 @@ const apolloClient = new ApolloClient({
   connectToDevTools: true,
 })
 
+Vue.use(BootstrapVue);
 Vue.use(VueApollo);
 Vue.use(VueGoogleMaps, {
   installComponents: true,
