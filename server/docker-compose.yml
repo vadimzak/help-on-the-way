@@ -1,7 +1,7 @@
 version: '2.2'
 services:
   db:
-    image: 'postgres:9.6-alpine'
+    image: 'clkao/postgres-plv8:9.6-1.5'
     env_file: '.env'
     environment:
       POSTGRES_PASSWORD: '${PGPASSWORD}'
