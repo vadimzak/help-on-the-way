@@ -1,7 +1,7 @@
-CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+CREATE SEQUENCE help.ticket_sequence;
 
 create table help.ticket (
-    id uuid primary key default uuid_generate_v1(),
+    id bigint primary key default help_private.pseudo_encrypt(nextval('help.ticket_sequence')::int),
     elder_id integer not null references help.person(id),
     description text,
     duration_eta text,

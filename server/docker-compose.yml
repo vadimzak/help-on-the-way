@@ -19,7 +19,9 @@ services:
   postgraphql:
     build: .
     volumes:
-      - './:/app'
+      - './migrations:/app/migrations'
+      - './src:/app/src'
+      - './package.json:/app/package.json'
     init: true
     ports:
       - '5000:5000'

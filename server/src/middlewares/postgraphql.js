@@ -1,10 +1,11 @@
+const { PG_DEFAULT_ROLE, DB_SCHEMA } = process.env;
 const postgraphql = require('postgraphql');
 const consts = require('../consts');
 
 const options = {
 	...consts.postgraphql.schemaOptions,
 	...consts.postgraphql.contextOptions,
-	pgDefaultRole: process.env.PG_DEFAULT_ROLE, // The default Postgres role that will be used if no role was found in jwtToken. It is a best security practice to always have a value for this option even though it is optional.
+	pgDefaultRole: PG_DEFAULT_ROLE, // The default Postgres role that will be used if no role was found in jwtToken. It is a best security practice to always have a value for this option even though it is optional.
 	graphiql: true, // 'Set this to true to enable the GraphiQL interface.',
 	// graphqlRoute: 'The endpoint the GraphQL executer will listen on. Defaults to /graphql.',
 	// graphiqlRoute: 'The endpoint the GraphiQL query interface will listen on (NOTE: GraphiQL will not be enabled unless the graphiql option is set to true). Defaults to /graphiql.',
@@ -19,6 +20,6 @@ const options = {
 	// bodySizeLimit: 'Set the maximum size of JSON bodies that can be parsed (default 100kB). The size can be given as a human-readable string, such as "200kB" or "5MB" (case insensitive).'
 };
 
-const postgraphqlMiddleware = postgraphql.default(consts.db.connectionString, process.env.DB_SCHEMA, options);
+const postgraphqlMiddleware = postgraphql.default(consts.db.connectionString, DB_SCHEMA, options);
 
 module.exports = postgraphqlMiddleware;

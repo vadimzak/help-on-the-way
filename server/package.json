@@ -5,8 +5,9 @@
   "scripts": {
     "precommit": "pretty-quick --staged",
     "prestart": "npm run migrations",
+    "prestart-debug": "npm run migrations",
     "start": "node src/app.js",
-    "start-debug": "nodemon --inspect=0.0.0.0:9229 -L -d ./src src/app.js",
+    "start-debug": "nodemon --inspect=0.0.0.0:9229 -L -d src src/app.js",
     "docker-start": "docker-compose up postgraphql",
     "run-db": "docker-compose up -d db",
     "migrations": "node ./migrations/migrate.js",
@@ -31,6 +32,7 @@
     "cookie-parser": "1.4.3",
     "express": "4.16.2",
     "express-session": "1.15.6",
+    "express-subdomain": "1.0.5",
     "jsonwebtoken": "7.4.3",
     "passport": "0.4.0",
     "passport-facebook": "2.1.1",

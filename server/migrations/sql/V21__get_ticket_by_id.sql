@@ -1,5 +1,5 @@
 create type help.ticket_for_volunteer as (
-    ticket_id uuid,
+    ticket_id bigint,
     description text,
     duration_eta text,
     issuing_institue text,
@@ -27,7 +27,7 @@ create type help.ticket_for_volunteer as (
     end_address_enteranced text
 );
 
-create or replace function help."getTicketById"(ticket_id uuid) returns help.ticket_for_volunteer as $$
+create or replace function help."getTicketById"(ticket_id bigint) returns help.ticket_for_volunteer as $$
 SELECT 
 	ticket.id as ticket_id, 
 	ticket.description, 
@@ -67,5 +67,5 @@ FROM
 	left join help.address end_address on ticket.end_address_id = end_address.id
 $$ language sql strict security definer;
 
-REVOKE ALL ON FUNCTION help."getTicketById"(ticket_id uuid) FROM PUBLIC;
-GRANT EXECUTE ON FUNCTION help."getTicketById"(ticket_id uuid) TO "VOLUNTEER";
+REVOKE ALL ON FUNCTION help."getTicketById"(ticket_id bigint) FROM PUBLIC;
+GRANT EXECUTE ON FUNCTION help."getTicketById"(ticket_id bigint) TO "VOLUNTEER";
