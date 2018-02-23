@@ -44,6 +44,13 @@
 
       <button @click="showModal=false">close modal</button>
     </modal>
+
+    <div>
+      selected filter : {{selectedFilter}}
+      <tickets-filter :filterChanged="ticketFilterChanged" :buttonFilters="filters.buttons" :dropDownFilters="filters.dropDown">
+
+      </tickets-filter>
+    </div>
   </div>
 </template>
 
@@ -54,10 +61,11 @@ import AddressPicker from '@/components/AddressPicker'
 import GroupMessagePreview from '@/components/GroupMessagePreview'
 import DatePicker from 'vue2-datepicker'
 import Modal from '@/components/Modal'
+import TicketsFilter from '@/components/TicketsFilter'
 
 
 export default {
-  components: { RadioBoxes, AutoComplete, AddressPicker, GroupMessagePreview, DatePicker, Modal },
+  components: { RadioBoxes, AutoComplete, AddressPicker, GroupMessagePreview, DatePicker, Modal , TicketsFilter},
   data () {
     return {
       showModal: false,
@@ -77,12 +85,54 @@ export default {
         ticketDescription: "ליווי לקניית רדיאטור חדש",
         ticketTiming: "היום או מחר",
         ticketPermalink: "https://bit.ly/dorldor"
+      },
+      selectedFilter: { },
+      filters: {
+          buttons: [
+            {
+              name: 'open',
+              count: 4
+            },
+            {
+              name: 'today',
+              count: 3
+            },
+            {
+              name: "before execution",
+              count: 12
+            }
+          ],
+          dropDown: [
+            {
+              name: 'drafts',
+              count: 2
+            },
+            {
+              name: 'before approval',
+              count: 4
+            },
+            {
+              name: 'not approved',
+              count: 4
+            },
+            {
+              name: 'before assign',
+              count: 5
+            },
+            {
+              name: 'closed',
+              count: 20
+            }
+          ]
       }
     }
   },
   methods: {
     closeModal: function() {
       this.showModal = false;
+    },
+    ticketFilterChanged: function(newFilter) {
+      this.selectedFilter = newFilter;
     },
     exampleSearchFunction(input,callback){
       if (input != ''){
