@@ -1,6 +1,7 @@
 # This is an example of how to define an ENV file. make sure to save it as .env
 PGUSER=postgres
 PGPASSWORD=123456
+PGHOST=localhost
 PGDATABASE=postgres
 PG_DEFAULT_ROLE=postgres
 DB_SCHEMA=help
