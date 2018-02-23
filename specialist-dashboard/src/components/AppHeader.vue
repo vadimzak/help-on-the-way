@@ -1,45 +1,11 @@
 <template>
-  <div id="app-header" class="mt-3 pt-3">
-    <h1 class="text-center">עזרה בדרך</h1>
-    <div class="text-center m-4">
-      <ul class="nav nav-justified p-0">
-        <li class="nav-item">
-          משתמש מחובר: אוהד
-        </li>
-        <li class="nav-item">
-          <input class="form-control" type="text" placeholder="חיפוש">
-        </li>
-        <li class="nav-item">
-          7 בינואר 2018, 14:04:56
-        </li>
-      </ul>
+  <div id="app-header" class="m-0 p-4 row h3">
+    <div class="col">
+      משתמש: יהודית רביץ
     </div>
-    <ul class="nav nav-tabs mt-3">
-      <li class="nav-item">
-        <router-link to="/" class="nav-link" :class="{active: this.$route.name == 'Main' }">מסך ראשי</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link to="/tickets" class="nav-link" :class="{active: this.$route.name == 'TicketsView' }">פניות</router-link>
-      </li>
-      <li class="nav-item">
-        <router-link to="/volunteers" class="nav-link" :class="{active: this.$route.name == 'VolunteerView' }">מתנדבים</router-link>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">קבוצות מתנדבים</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">זקנים</a>
-      </li>
-      <li class="nav-item">
-        <router-link to="/tags" class="nav-link"  :class="{active: this.$route.name == 'TagManager' }">ניהול תגיות</router-link>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" href="#">מפה</a>
-      </li>
-      <li class="nav-item">
-        <router-link to="/kitchenSink" class="nav-link" :class="{active: this.$route.name == 'KitchenSink' }">דוגמאות של חתיכות מהממשק</router-link>
-      </li>
-    </ul>
+    <div class="col text-left">
+      עזרה בדרך
+    </div>
   </div>
 </template>
 

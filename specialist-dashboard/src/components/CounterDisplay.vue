@@ -22,6 +22,6 @@ export default {
 
 <style scoped>
 #main-number{
-  font-size: 3em;
+  font-size: 1.3em;
 }
 </style>
