@@ -17,7 +17,7 @@ const addWindow = (options, url, scriptUrl) => {
 };
 
 const removeWindow = url => {
-	if (windows[url]) windows[url].close();
+	if (windows[url]) windows[url].destroy();
 	windows[url] = null;
 };
 
