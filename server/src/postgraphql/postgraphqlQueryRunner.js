@@ -6,7 +6,8 @@ const consts = require('../consts');
 const pgPool = require('../services/pgPool');
 const variablesArrBuilder = require('./variablesArrBuilder');
 
-const createSchema = createPostGraphQLSchema(consts.db.connectionString, DB_SCHEMA, consts.postgraphql.schemaOptions);
+const DB_SCHEMAS = [DB_SCHEMA, 'help_private'];
+const createSchema = createPostGraphQLSchema(consts.db.connectionString, DB_SCHEMAS, consts.postgraphql.schemaOptions);
 const CONTEXT = { pgPool, pgDefaultRole: PGUSER, ...consts.postgraphql.contextOptions };
 
 const query = async (name, query, variables) => {
