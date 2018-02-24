@@ -15,10 +15,12 @@ module.exports = {
     },
     script_paths: {
         dorledor: './scripts/dor-le-dor.js',
-        whatsapp: './scripts/whatsapp.js'
+        whatsapp: './scripts/whatsapp.js',
+        whatsapp_auth: './scripts/whatsapp-auth.js'
     },
     msgs_names: {
-        whatsapp: 'whatsapp-message'
+        whatsapp: 'whatsapp-message',
+        whatsapp_auth: 'whatsapp-auth-message',
     },
     error_messages: {
         unsupported: 'Unspported target for sending messages',
