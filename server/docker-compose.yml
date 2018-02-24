@@ -12,7 +12,7 @@ services:
     networks:
       - dockernet1
     healthcheck:
-      test: "exit 0"
+      test: 'pg_isready -U postgres'
       interval: 5s
       timeout: 10s
       retries: 12
