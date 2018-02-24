@@ -42,6 +42,8 @@
 
       </tickets-filter>
     </div>
+
+     <InputAddress/>
   </div>
 </template>
 
@@ -52,10 +54,10 @@ import AddressPicker from '@/components/AddressPicker'
 import GroupMessagePreview from '@/components/GroupMessagePreview'
 import DatePicker from 'vue2-datepicker'
 import TicketsFilter from '@/components/TicketsFilter'
-
+import InputAddress from '@/components/InputAddress'
 
 export default {
-  components: { RadioBoxes, AutoComplete, AddressPicker, GroupMessagePreview, DatePicker, TicketsFilter},
+  components: { RadioBoxes, AutoComplete, AddressPicker, GroupMessagePreview, DatePicker, TicketsFilter, InputAddress},
   data () {
     return {
       showModal: false,
