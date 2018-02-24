@@ -1,5 +1,5 @@
 <template>
-  <div id="main">
+  <div>
     <div v-show="!chosen">
       <input
         :placeholder="this.placeholder"
@@ -11,7 +11,7 @@
         @keyup.enter="chooseResult"
         @blur="checkEmpty"
       />
-      <div v-if="results.length">
+      <div class="results" v-if="results.length">
         <div
           v-for="(result, index) in results" 
           :key="index"
@@ -54,6 +54,8 @@ export default {
         this.searchFunction(this.textInput, (res) => {
           this.results = res || []
         })
+      } else {
+        this.results = []
       }
     },
     selectResult(index){
@@ -107,12 +109,18 @@ export default {
 </script>
 
 <style scoped>
-#main{
-  width: 360px
+:host{
+  position: relative;
 }
 
 input{
   width: 100%
+}
+
+.results{
+  z-index: 11;
+  background-color: white;
+  position: absolute;
 }
 .result{
   border: 1px solid #777;
@@ -122,6 +130,7 @@ input{
 }
 
 .result.selected{
+  font-weight: bold;
   background-color: rgba(0,0,0,0.1)
 }
 </style>
