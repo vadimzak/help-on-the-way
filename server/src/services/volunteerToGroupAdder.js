@@ -1,4 +1,4 @@
-const postgraphqlQueryRunner = require('../postgraphql/postgraphqlQueryRunner');
+const postgraphqlQueryRunner = require('./postgraphqlQueryRunner');
 
 const add = async (volunteerId, groupId) => {
     let promise = postgraphqlQueryRunner.mutation('createGroupVolunteer', 'groupVolunteer { nodeId }', {

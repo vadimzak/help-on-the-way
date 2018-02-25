@@ -1,0 +1,1 @@
+ALTER TYPE help.person_type ADD VALUE 'volunteer_unverified';

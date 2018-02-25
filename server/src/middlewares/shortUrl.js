@@ -2,8 +2,7 @@ const router = require('express').Router();
 const subdomain = require('express-subdomain');
 const { SHORT_URL_SUBDOMAIN } = process.env;
 
-const postgraphqlQueryRunner = require('../postgraphql/postgraphqlQueryRunner');
-const volunteerToGroupAdder = require('../services/volunteerToGroupAdder');
+const { postgraphqlQueryRunner, volunteerToGroupAdder } = require('../services');
 
 router.get('/:encodedUrl', async (req, res, next) => {
     let param = req.params.encodedUrl;

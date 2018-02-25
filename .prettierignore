@@ -1,3 +1,1 @@
-*
-!server/**/*.js
-!electron/**/*.js
+package*.json

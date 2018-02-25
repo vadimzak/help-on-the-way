@@ -1,6 +1,6 @@
 const session = require('express-session');
 const pgSession = require('connect-pg-simple')(session);
-const pgPool = require('../services/pgPool');
+const { pgPool } = require('../services');
 const consts = require('../consts');
 
 const middleware = session({

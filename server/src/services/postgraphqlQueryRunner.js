@@ -3,8 +3,8 @@ const { withPostGraphQLContext, postgraphql, createPostGraphQLSchema } = require
 const { graphql } = require('graphql');
 
 const consts = require('../consts');
-const pgPool = require('../services/pgPool');
-const variablesArrBuilder = require('./variablesArrBuilder');
+const pgPool = require('./pgPool');
+const postgraphqlVariablesArrBuilder = require('./postgraphqlVariablesArrBuilder');
 
 const DB_SCHEMAS = [DB_SCHEMA, 'help_private'];
 const createSchema = createPostGraphQLSchema(consts.db.connectionString, DB_SCHEMAS, consts.postgraphql.schemaOptions);
@@ -19,7 +19,7 @@ const mutation = async (name, query, variables) => {
 };
 
 const run = async (type, name, query, variables) => {
-	const variablesRawArr = variablesArrBuilder.build(variables);
+	const variablesRawArr = postgraphqlVariablesArrBuilder.build(variables);
 	const queryName = buildQueryName(variablesRawArr);
 	const variablesStr = buildVariablesString(variablesRawArr);
 	const graphQuery = `${type} ${queryName} {${name} ${variablesStr} {${query}}}`;

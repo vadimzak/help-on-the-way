@@ -1,4 +1,4 @@
-const postgraphqlQueryRunner = require('../postgraphql/postgraphqlQueryRunner');
+const { postgraphqlQueryRunner } = require('../services');
 const PERSON_GRAPHQL_QUERY = 'person {id}';
 
 const getOrCreateUserBySocial = async (profile, accessToken, refreshToken) => {
