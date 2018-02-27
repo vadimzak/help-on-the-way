@@ -1,0 +1,80 @@
+@font-face {
+  font-family: 'dorldor-icons';
+  src:  url('fonts/dorldor-icons.eot?j8w9g5');
+  src:  url('fonts/dorldor-icons.eot?j8w9g5#iefix') format('embedded-opentype'),
+    url('fonts/dorldor-icons.ttf?j8w9g5') format('truetype'),
+    url('fonts/dorldor-icons.woff?j8w9g5') format('woff'),
+    url('fonts/dorldor-icons.svg?j8w9g5#dorldor-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'dorldor-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-contract:before {
+  content: "\e900";
+}
+.icon-doctor-stethoscope:before {
+  content: "\e901";
+}
+.icon-exit:before {
+  content: "\e902";
+}
+.icon-family-group-of-father-and-mother-with-two-babies-and-a-dog:before {
+  content: "\e903";
+}
+.icon-friends-talking:before {
+  content: "\e904";
+}
+.icon-frontal-taxi-cab:before {
+  content: "\e905";
+}
+.icon-help-(1):before {
+  content: "\e906";
+}
+.icon-human-resources:before {
+  content: "\e907";
+}
+.icon-icon:before {
+  content: "\e908";
+}
+.icon-login:before {
+  content: "\e909";
+}
+.icon-old-man-with-cane:before {
+  content: "\e90a";
+}
+.icon-party:before {
+  content: "\e90b";
+}
+.icon-placeholder:before {
+  content: "\e90c";
+}
+.icon-prayer:before {
+  content: "\e90d";
+}
+.icon-settings:before {
+  content: "\e90e";
+}
+.icon-shopping-cart:before {
+  content: "\e90f";
+}
+.icon-sports-car:before {
+  content: "\e910";
+}
+.icon-wheel-chair:before {
+  content: "\e911";
+}

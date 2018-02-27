@@ -5,6 +5,7 @@ import TicketsView from '@/components/TicketsView'
 import TagManager from '@/components/TagManager'
 import VolunteersView from '@/components/VolunteersView'
 import KitchenSink from '@/components/KitchenSink'
+import FontsDemo from '@/components/base/FontsDemo'
 
 Vue.use(Router)
 
@@ -34,6 +35,11 @@ export default new Router({
       path: '/kitchenSink',
       name: 'KitchenSink',
       component: KitchenSink
+    },
+    {
+      path: '/fonts-demo',
+      name: 'fontsDemo',
+      component: FontsDemo
     },
   ]
 })
