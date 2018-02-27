@@ -6,15 +6,15 @@
       :options="[
         {
           text: 'ליווי לחנות',
-          icon: ''
+          icon: 'shopping-cart'
         },
         {
           text: 'ליווי חברתי',
-          icon: ''
+          icon: 'party'
         },
         {
           text: 'ליווי רפואי',
-          icon: ''
+          icon: 'doctor-stethoscope'
         }
       ]"
     />

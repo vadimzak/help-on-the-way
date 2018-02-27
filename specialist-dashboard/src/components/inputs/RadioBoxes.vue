@@ -7,6 +7,7 @@
       @click="changeSelection(index)"
       :class="{selected: index==currentSelection}"
     >
+    <span class="option-icon" :class="{ ['icon-' + option.icon ] : true }"></span>
       {{option.text}}
     </div>
   </div>
@@ -44,6 +45,11 @@ export default {
     user-select: none;
   }
 
+  .option-icon{
+    display: block;
+    text-align: center;
+    font-size: 40px;
+  }
   .option:hover{
     background-color: #eee;
   }
