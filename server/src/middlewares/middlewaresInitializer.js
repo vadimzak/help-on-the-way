@@ -6,6 +6,7 @@ const sessionMiddleware = require('./session');
 const authCookieToHeaderMiddleware = require('./authCookieToHeader');
 const postgraphqlMiddlesware = require('./postgraphql');
 const shortUrlMiddleware = require('./shortUrl');
+const volunteerToGroupAdderMiddleware = require('./volunteerToGroupAdder');
 
 const init = app => {
 	app.use(sessionMiddleware);
@@ -15,6 +16,7 @@ const init = app => {
 	app.use(passport.initialize());
 	app.use(passport.session());
 	app.use(authCookieToHeaderMiddleware);
+	app.use(volunteerToGroupAdderMiddleware);
 	app.use(postgraphqlMiddlesware);
 	app.use(shortUrlMiddleware);
 };

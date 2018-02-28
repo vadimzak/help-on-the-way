@@ -9,7 +9,7 @@ const init = (app, loginUrl) => {
 
 	app.get('/logout', function(req, res) {
 		req.logout();
-		res.redirect(req.headers.referer);
+		req.session.destroy(() => res.redirect(req.headers.referer));
 	});
 };
 

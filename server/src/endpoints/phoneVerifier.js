@@ -49,7 +49,7 @@ const handleVerifyTwiloResult = async (twiloResult, req) => {
 	if (!twiloResult.data.success) return;
 
 	await userRepository.update(req.user.id, { type: roles.VOLUNTEER });
-	authCookieToHeaderSetter.set(req);
+	authCookieToHeaderSetter.set(req, true);
 };
 
 init();

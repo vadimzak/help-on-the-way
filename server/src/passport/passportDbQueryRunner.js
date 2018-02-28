@@ -15,7 +15,8 @@ const getOrCreateUserBySocial = async (profile, accessToken, refreshToken) => {
 	return person;
 };
 
-const getUserById = async userId => await postgraphqlQueryRunner.query('personById', 'id, type', { id: userId });
+const getUserById = async userId =>
+	await postgraphqlQueryRunner.query('personById', 'id, firstName, lastName, type', { id: userId });
 
 module.exports = {
 	getOrCreateUserBySocial,

@@ -6,6 +6,7 @@ const twiloVerifier = require('./twiloVerifier');
 const volunteerToGroupAdder = require('./volunteerToGroupAdder');
 const postgraphqlQueryRunner = require('./postgraphqlQueryRunner');
 const authCookieToHeaderSetter = require('./authCookieToHeaderSetter');
+const groupToSessionRepository = require('./groupToSessionRepository');
 
 module.exports = {
 	externalApiCallsMaker,
@@ -15,5 +16,6 @@ module.exports = {
 	twiloVerifier,
 	volunteerToGroupAdder,
 	postgraphqlQueryRunner,
-	authCookieToHeaderSetter
+	authCookieToHeaderSetter,
+	groupToSessionRepository
 };

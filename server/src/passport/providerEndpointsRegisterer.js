@@ -1,5 +1,5 @@
 const passport = require('passport');
-const referrerMiddlewares = require('./referrerMiddlewares');
+const redirectUrlMiddleware = require('./redirectUrlMiddleware');
 const db = require('./passportDbQueryRunner');
 
 const register = (app, loginUrl = '/login', provider) => {
@@ -7,15 +7,15 @@ const register = (app, loginUrl = '/login', provider) => {
 
 	app.get(
 		`/login/${provider.name}`,
-		referrerMiddlewares.saveReferrerToSession,
+		redirectUrlMiddleware.saveRedirectUrlToSession,
 		passport.authenticate(provider.name, provider.authenticationConfig)
 	);
 
 	app.get(
 		`/login/${provider.name}/return`,
 		passport.authenticate(provider.name, { failureRedirect: loginUrl }),
-		referrerMiddlewares.popReferrerFromSession,
-		(req, res) => req.session.save(() => res.redirect(req.referer))
+		redirectUrlMiddleware.popRedirectUrlFromSession,
+		(req, res) => req.session.save(() => res.redirect(req.redirectUrl))
 	);
 };
 
