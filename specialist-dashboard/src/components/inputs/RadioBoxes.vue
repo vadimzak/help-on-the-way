@@ -1,7 +1,7 @@
 <template>
   <div>
     <div 
-      class="option"
+      class="option text-center"
       v-for="(option,index) of options" 
       :key="index"
       @click="changeSelection(index)"

@@ -13,6 +13,10 @@ import VueApollo from 'vue-apollo'
 import BootstrapVue from 'bootstrap-vue'
 import 'font-awesome/css/font-awesome.css'
 import * as VueGoogleMaps from 'vue2-google-maps'
+import VueVirtualScroller from 'vue-virtual-scroller'
+// import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
+require('vue-virtual-scroller/dist/vue-virtual-scroller.css')
+
 import { directive as onClickOutside } from 'vue-on-click-outside'
 
 Vue.config.productionTip = false
@@ -29,6 +33,7 @@ const apolloClient = new ApolloClient({
 
 Vue.use(BootstrapVue);
 Vue.use(VueApollo);
+Vue.use(VueVirtualScroller);
 Vue.use(VueGoogleMaps, {
   installComponents: true,
   load: {

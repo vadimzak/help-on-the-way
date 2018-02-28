@@ -1,14 +1,14 @@
 <template>
   <div>
       <h2>פתיחת פניה חדשה</h2>
-      <p class="small">נא לבחור את מקור הפניה.</p>
-      <RadioBoxes :options="sources"/>
+      <p class="small">הקלד את שם ו/או מספר הטלפון של הזקן לחיפוש.</p>
+      <ElderSearch callToActionLabel="צור פניה" />
   </div>
 </template>
 <script>
-import RadioBoxes from '@/components/inputs/RadioBoxes';
+import { ElderSearch } from '@/components/features/elder/';
 export default {
-  components: { RadioBoxes },
+  components: { ElderSearch },
   data() {
     return {
       sources: [

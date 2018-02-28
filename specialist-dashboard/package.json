@@ -18,11 +18,13 @@
     "font-awesome": "^4.7.0",
     "graphql": "^0.12.3",
     "graphql-tag": "^2.6.1",
+    "lodash": "4.17.5",
     "vue": "^2.5.2",
     "vue-apollo": "^3.0.0-alpha.3",
     "vue-multiselect": "^2.0.8",
     "vue-on-click-outside": "^1.0.3",
     "vue-router": "^3.0.1",
+    "vue-virtual-scroller": "0.11.5",
     "vue2-datepicker": "^1.8.3"
   },
   "devDependencies": {

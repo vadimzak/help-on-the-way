@@ -64,6 +64,15 @@ module.exports = {
           limit: 10000,
           name: utils.assetsPath('fonts/[name].[hash:7].[ext]')
         }
+      },
+      {
+        test: '/node_modules/**/*.css',
+        loader: 'postcss-loader',
+        options: {
+          config: { 
+            path: path.resolve(__dirname, '../', '.postcssrc.js'),
+          } 
+        }
       }
     ]
   },
