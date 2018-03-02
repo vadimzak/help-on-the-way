@@ -6,33 +6,20 @@ require('../static/fonts.css')
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import { ApolloClient } from 'apollo-client'
-import { HttpLink } from 'apollo-link-http'
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import VueApollo from 'vue-apollo'
 import BootstrapVue from 'bootstrap-vue'
 import 'font-awesome/css/font-awesome.css'
 import * as VueGoogleMaps from 'vue2-google-maps'
 import VueVirtualScroller from 'vue-virtual-scroller'
-// import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
+import store from './store'
 require('vue-virtual-scroller/dist/vue-virtual-scroller.css')
-
+import { apolloProvider } from "./graphql/apolloClient";
 import { directive as onClickOutside } from 'vue-on-click-outside'
 
 Vue.config.productionTip = false
 
-const httpLink = new HttpLink({
-  uri: 'http://localhost:8080/graphql',
-})
 
-const apolloClient = new ApolloClient({
-  link: httpLink,
-  cache: new InMemoryCache(),
-  connectToDevTools: true,
-})
 
 Vue.use(BootstrapVue);
-Vue.use(VueApollo);
 Vue.use(VueVirtualScroller);
 Vue.use(VueGoogleMaps, {
   installComponents: true,
@@ -55,15 +42,14 @@ Vue.filter('formatAddress', function(address) {
   }
 });
 
-const apolloProvider = new VueApollo({
-  defaultClient: apolloClient,
-})
+
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
   apolloProvider,
+  store,
   template: '<App/>',
   components: { App }
 })

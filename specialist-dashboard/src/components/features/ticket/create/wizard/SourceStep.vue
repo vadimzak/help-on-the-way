@@ -3,6 +3,7 @@
       <h2>פתיחת פניה חדשה</h2>
       <p class="small">נא לבחור את מקור הפניה.</p>
       <RadioBoxes :options="sources"/>
+      <b-btn>המשך</b-btn>
   </div>
 </template>
 <script>

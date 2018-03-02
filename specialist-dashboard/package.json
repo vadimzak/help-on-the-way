@@ -24,8 +24,10 @@
     "vue-multiselect": "^2.0.8",
     "vue-on-click-outside": "^1.0.3",
     "vue-router": "^3.0.1",
+    "vue-types": "1.1.3",
     "vue-virtual-scroller": "0.11.5",
-    "vue2-datepicker": "^1.8.3"
+    "vue2-datepicker": "^1.8.3",
+    "vuex": "3.0.1"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.2",

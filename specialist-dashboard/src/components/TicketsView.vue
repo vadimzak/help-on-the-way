@@ -12,7 +12,7 @@
 <script>
 import TicketTable from '@/components/TicketTable'
 import TicketView from '@/components/TicketView'
-import { ALL_TICKETS_QUERY } from '../constants/graphql'
+import { ALL_TICKETS_QUERY } from '@/graphql/queries/ticket'
 
 
 export default {

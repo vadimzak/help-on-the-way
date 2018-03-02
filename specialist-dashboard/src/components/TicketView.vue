@@ -113,7 +113,8 @@
 <script>
   import InputAddress from '@/components/InputAddress'
   import EditableInput from '@/components/EditableInput'
-  import { UPDATE_TICKET, UPDATE_ADDRESS } from '../constants/graphql'
+  import { UPDATE_TICKET } from '../graphql/queries/ticket'
+  import { UPDATE_ADDRESS } from '../graphql/queries/address'
 
   export default {
     components: {  InputAddress, EditableInput },
@@ -157,7 +158,7 @@
         }
         this.$apollo.mutate({
           mutation: UPDATE_TICKET,
-          variables: {id: this.ticket.id, ticketPatch: {"issuingInstitue": newIssuingInstitue}}
+          variables: {id: this.ticket.id, ticket: {"issuingInstitue": newIssuingInstitue}}
         });
       },
       updateTicketDescription: function(newDescription) {
@@ -166,7 +167,7 @@
         }
         this.$apollo.mutate({
           mutation: UPDATE_TICKET,
-          variables: {id: this.ticket.id, ticketPatch: {"description": newDescription}}
+          variables: {id: this.ticket.id, ticket: {"description": newDescription}}
         })
       }
     }

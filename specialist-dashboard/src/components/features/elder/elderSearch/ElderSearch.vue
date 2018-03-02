@@ -1,7 +1,7 @@
 <script>
 import ElderRow from './ElderRow';
 import { buildSearchByConditionQuery } from '@/services/queryBuilder'
-import { AUTO_COMPLETE_PERSON_OF_TYPE } from '@/constants/graphql/person'
+import { AUTO_COMPLETE_PERSON_OF_TYPE } from '@/graphql/queries/person'
 import PersonTypes from '@/constants/enums/PersonTypes'
 import _ from 'lodash'
 export default {
@@ -18,7 +18,7 @@ export default {
     methods: {
         onElderPick(elder){
             console.log('elder picked', elder);
-            this.$emit('elderPicked', elder);
+            this.$emit('select', elder);
         },
         searchElder: _.debounce(function() {
             this.searchInProgress = true;
