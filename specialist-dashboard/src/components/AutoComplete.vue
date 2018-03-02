@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div v-show="!chosen">
+    <div v-show="!chosen || !options.toggleOnChoice">
       <input
         :placeholder="this.placeholder"
         v-model="textInput"
@@ -20,11 +20,13 @@
           @click="chooseResult(index)"
           @mouseover="selectResult(index)"
         >
+        <slot :item="result" :index="index">
           {{result.description}}
+        </slot>
         </div>
       </div>
     </div>
-    <div v-if="chosen">
+    <div v-if="chosen && options.toggleOnChoice">
       {{choice.description}}
       <button @click="unchoose">edit</button>
     </div>
@@ -32,10 +34,16 @@
 </template>
 
 <script>
-
-export default {
+import VueTypes from 'vue-types';
+export default {  
   components: {  },
-  props: [ 'options', 'placeholder', 'searchFunction' ],
+  props: {
+    options: VueTypes.shape({ 
+      toggleOnChoice: VueTypes.bool,
+      }).def({ toggleOnChoice: true}), 
+    placeholder: String,
+    searchFunction: Function
+  },
   created(){
   },
   data () {
@@ -82,6 +90,8 @@ export default {
       if(this.results.length){
         this.chosen = true
         this.choice = this.results[this.currentlySelected]
+        this.textInput = '';
+        this.results = [];
         this.$emit('input', this.choice)
       }
     },
