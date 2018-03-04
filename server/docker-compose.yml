@@ -32,7 +32,6 @@ services:
     env_file: '.env'
     command: 'npm run start-debug'
     environment:
-      DO_MIGRATIONS: 'true'
       PGHOST: db
       PGPORT: 5432
       JWT_SECRET: '${JWT_SECRET}'

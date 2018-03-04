@@ -3,10 +3,12 @@ import Router from 'vue-router'
 // index.js or main.js
 import Welcome from '@/components/Welcome'
 import Ticket from '@/components/Ticket'
+import authenticationForcer from '../services/authenticationForcer'
+import { routes as loginRoutes } from './login'
 
 Vue.use(Router)
 
-export default new Router({
+let router = new Router({
   routes: [
     {
       path: '/',
@@ -17,6 +19,11 @@ export default new Router({
       path: '/ticket/:id',
       name: 'Ticket',
       component: Ticket
-    }
+    },
+    ...loginRoutes
   ]
 })
+
+authenticationForcer.force(router);
+
+export default router;

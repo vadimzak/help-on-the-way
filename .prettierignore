@@ -1,1 +1,4 @@
+*.*
 package*.json
+!server/**/*.js
+!electron/**/*.js
