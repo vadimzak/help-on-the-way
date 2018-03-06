@@ -21,13 +21,11 @@
 import config from '../services/config';
 
 export default {
-  name: 'Login',
   components: {  },
-  methods: {
-  },
+  methods: {},
   data () {
     return {
-      redirectUrl: `${APP_URL}/welcome`,
+      redirectUrl: `${config.APP_URL}/welcome`,
       SERVER_BASE_URL: config.SERVER_BASE_URL,
       APP_URL: config.APP_URL
     }
