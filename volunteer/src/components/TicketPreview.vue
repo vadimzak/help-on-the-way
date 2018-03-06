@@ -5,15 +5,15 @@
         class="white--text card-image"
         height="90px"
         src="static/assets/card-title.png"
-        @click="closePreview">
+        v-on:click="closePreview">
         <v-container fill-height fluid>
           <v-layout fill-height>
             <v-flex xs12 align-end flexbo>
                 <span class="" id="ticket-headline">
-                  {{$data.ticket.title}}
+                  {{ticket.description}}
                 </span>
               <span class="duration">
-                  {{$data.ticket.durationEta}}
+                  {{ticket.durationEta}} שעות
                 </span>
             </v-flex>
           </v-layout>
@@ -24,25 +24,25 @@
           <ul>
             <li>
               <i class="material-icons">account_circle</i>
-              {{$data.ticket.elder.name}}, {{$data.ticket.elder.gender}} {{$data.ticket.elder.age}}
+              {{ticket.elderFirstName}} {{ticket.elderLastName}}
             </li>
             <li>
               <i class="material-icons">event</i>
-              {{$data.ticket.when.day}}, {{$data.ticket.when.date}}
+              {{this.$moment(ticket.dueDate).format('L')}}
             </li>
             <li>
               <i class="material-icons">alarm</i>
-              {{$data.ticket.when.startHour}}-
-              {{$data.ticket.when.endHour}}
+              {{this.$moment(ticket.dueDate).format('HH:mm')}}-
+              {{this.$moment(ticket.dueDate).add(ticket.durationEta, 'hour').format('HH:mm')}}
             </li>
             <li>
               <i class="material-icons">home</i>
-              {{$data.ticket.address}}
+              {{ticket.startAddressStreet}}, {{ticket.startAddressCity}}
             </li>
           </ul>
         </div>
         <div class="ticket-tags">
-          <div class="tag" v-for="tag in $data.ticket.tags">
+          <div class="tag" v-for="tag in ticket.tags">
             <i class="material-icons">{{tag.icon}}</i>
             {{tag.name}}
           </div>
@@ -51,7 +51,7 @@
       <v-card-title class="important-things">
         <h2>דברים שחשוב לדעת</h2>
         <ul>
-          <li v-for="info in $data.ticket.importantInfo">
+          <li v-for="info in ticket.importantInfo">
             {{info}}
           </li>
         </ul>
@@ -63,7 +63,7 @@
             <v-icon>close</v-icon>
             <v-card-text>
               <div> היי {{$store.state.user.firstName}},</div>
-              <div> האם ברצונך לסייע ל{{$data.ticket.elder.name}}?</div>
+              <div> האם ברצונך לסייע ל{{ticket.elderName}}?</div>
             </v-card-text>
             <v-card-actions>
               <v-spacer></v-spacer>
@@ -79,41 +79,22 @@
 <script>
   export default {
     name: "ticket-preview",
-    props: ["closePreview"],
-    data() {
-      return {
-        ticket: {
-          id: 1,
-          state: 'summary',
-          title: 'ליווי רוזה לקופת החולים',
-          address: 'הרצל 72, תל אביב',
-          when: {
-            startHour: '17:00',
-            endHour: '20:00',
-            date: '17 בינואר',
-            day: 'ראשון',
-          },
-          description: `He is afraid to climb a ladder alone,
-       due to his physical state. We need someone to go help him`,
-          durationEta: '3 שעות',
-          status: 'open',
-          elder: {
-            name: 'רוזה לוין',
-            age: '70',
-            gender: 'בת'
-          },
-          tags: [
-            {name: 'עזרה בהליכה', icon: 'directions_walk'},
-            {name: 'נסיעה במונית', icon: 'local_taxi'},
-            {name: 'כבד שמיעה', icon: 'hearing'},
-          ],
-          importantInfo: [
-            'רוזה תחכה בתוך הבית',
-            'רוזה משלמת על המונית',
-            'המטפלת של רוזה תצטרף לליווי',
-            'רוזה מצפה לשיחת טלפון ממך'
-          ]
-        }
+    mounted: function () {
+      this.getTicketById()
+    },
+    methods: {
+      getTicketById: function(id){
+        this.$store.dispatch('setActiveTicketById', {
+          id: this.$route.params.id
+        })
+      },
+      closePreview: function(index) {
+        this.preview = null;
+      }
+    },
+    computed: {
+      ticket() {
+        return this.$store.getters.activeTicket || {}
       }
     }
   }
@@ -250,5 +231,4 @@
   .related-tickets li:nth-of-type(4) {
     border-right: 6px solid #ff9141;
   }
-
 </style>

@@ -8,20 +8,21 @@ const paths = {
     verify: '/login/verify'
 };
 
-const routes = [{
-    path: paths.login,
-    component: Login
-},
-{
-    path: paths.update,
-    component: LoginUpdate
-},
-{
-    path: paths.verify,
-    component: LoginVerify
-}];
-
-export {
+export default {
     paths,
-    routes
+    routes: [{
+        path: paths.login,
+        name: 'Login',
+        component: Login
+    },
+    {
+        path: paths.update,
+        name: 'LoginUpdate',
+        component: LoginUpdate
+    },
+    {
+        path: paths.verify,
+        name: 'LoginVerify',
+        component: LoginVerify
+    }]
 }
