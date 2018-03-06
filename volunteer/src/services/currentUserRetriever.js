@@ -6,4 +6,4 @@ const retrieve = async () => {
   return { name, role }
 }
 
-export { retrieve }
+export default { retrieve }
