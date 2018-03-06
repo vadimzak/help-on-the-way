@@ -1,4 +1,4 @@
-import currentUserRetriever from '../services/currentUserProvider'
+import currentUserRetriever from '../services/currentUserRetriever'
 import store from '../store/store'
 import { paths as routes } from '../router/login'
 
