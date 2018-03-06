@@ -15,17 +15,23 @@ import loginRoutes from '../router/login';
 
 export default {
 	name: 'LoginVerify',
+	data() {
+		return {
+			verificationCode: ''
+		};
+	},
 	methods: {
 		submit: async function() {
-			let { status, body } = await this.$http.post(`${config.SERVER_BASE_URL}/phone/verify`, {
-				verificationCode: this.verificationCode
-			});
-
-			if (status == 200) {
-				window.location.href = '/';
-			} else {
-				alert(body);
-			}
+			this.$http
+				.post(`${config.SERVER_BASE_URL}/phone/verify`, {
+					verificationCode: this.verificationCode
+				})
+				.then(({ status, body }) => {
+					window.location.href = '/';
+				})
+				.catch(({ status, body }) => {
+					alert(body);
+				});
 		}
 	}
 };

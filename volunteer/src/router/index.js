@@ -4,25 +4,24 @@ import Router from 'vue-router'
 import Welcome from '@/components/Welcome'
 import TicketPreview from '@/components/TicketPreview'
 import authenticationForcer from '../services/authenticationForcer'
-import login from './login'
-
+import { routes as loginRoutes } from './login'
 Vue.use(Router)
 
 let router = new Router({
-    routes: [{
-            path: '/',
-            name: 'Welcome',
-            component: Welcome
-        },
-        {
-            path: '/ticket/:id',
-            name: 'TicketPreview',
-            component: TicketPreview
-        },
-        ...login.routes
-    ]
+  routes: [{
+    path: '/',
+    name: 'Welcome',
+    component: Welcome
+  },
+  {
+    path: '/ticket/:id',
+    name: 'TicketPreview',
+    component: TicketPreview
+  },
+  ...loginRoutes
+  ]
 })
 
-authenticationForcer.force(router);
+authenticationForcer.force(router)
 
-export default router;
+export default router

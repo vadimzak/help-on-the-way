@@ -11,21 +11,27 @@
 
 <script>
 import config from '../services/config';
-import loginRoutes from '../router/login';
+import { paths as loginRoutes } from '../router/login';
 
 export default {
 	name: 'LoginUpdate',
+	data() {
+		return {
+			phoneNumber: ''
+		};
+	},
 	methods: {
 		submit: async function() {
-			let { status, body } = await this.$http.post(`${config.SERVER_BASE_URL}/phone/update`, {
-				phoneNumber: this.phoneNumber
-			});
-
-			if (status == 200) {
-				this.$router.push(loginRoutes.paths.verify);
-			} else {
-				alert(body);
-			}
+			this.$http
+				.post(`${config.SERVER_BASE_URL}/phone/update`, {
+					phoneNumber: this.phoneNumber
+				})
+				.then(({ status, body }) => {
+					this.$router.push(loginRoutes.verify);
+				})
+				.catch(({ status, body }) => {
+					alert(body);
+				});
 		}
 	}
 };
