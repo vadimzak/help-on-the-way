@@ -1,10 +1,16 @@
 <template>
   <v-layout column wrap>
-    <h1>phone number</h1>
-    <form>
-        <h2>הכנס את מס' הנייד שלך לצורך אימות</h2>
-        <input type="text" name="phoneNumber" placeholder="מס' נייד" v-model="phoneNumber" />
-        <button type="button" @click="submit()">Submit</button>
+    <form class="container">
+      <img src="static/assets/sms.png" class="sms">
+      <h2>הכנס את מס' הנייד שלך לצורך אימות</h2>
+      <input type="number"
+        required
+        v-model="phoneNumber"
+        ref="number"
+        placeholder="05*-*******"
+      />
+      <v-btn @click="submit()" color="success">שלח קוד</v-btn>
+
     </form>
   </v-layout>
 </template>
@@ -38,5 +44,22 @@ export default {
 </script>
 
 <style scoped>
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
 
+  .sms {
+    max-width: 30%;
+  }
+
+  input {
+    width: 60%;
+    height: 40px;
+    font-size: 32px;
+    direction: ltr;
+    border-bottom: 1px solid lightgray;
+  }
 </style>

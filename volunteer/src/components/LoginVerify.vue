@@ -1,10 +1,11 @@
 <template>
   <v-layout column wrap>
-    <h1>Verification Code</h1>
-    <form>
-        <h2>אנא הכנס את הקוד שנשלח אלייך בSMS</h2>
-        <input type="text" name="verificationCode" v-model="verificationCode" />
-        <button type="button" @click="submit()">Submit</button>
+    <form class="container">
+      <img src="static/assets/sms.png" class="sms">
+      <h2>אנא הכנס את הקוד שנשלח בSMS</h2>
+      <input type="text" name="verificationCode" v-model="verificationCode" />
+      <v-btn @click="submit()" color="success">אישור</v-btn>
+
     </form>
   </v-layout>
 </template>
@@ -38,5 +39,22 @@ export default {
 </script>
 
 <style scoped>
+  form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+  }
 
+  .sms {
+    max-width: 30%;
+  }
+
+  input {
+    width: 60%;
+    height: 40px;
+    font-size: 32px;
+    direction: ltr;
+    border-bottom: 1px solid lightgray;
+  }
 </style>

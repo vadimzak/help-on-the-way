@@ -8,7 +8,7 @@
     <v-list dense>
       <v-list-tile @click="">
         <v-list-tile-content>
-          <h3>Hello, {{$store.state.user.firstName}} </h3>
+          <h3>היי {{$store.state.user.name}} :)</h3>
         </v-list-tile-content>
       </v-list-tile>
       <v-list-tile @click="">
@@ -16,7 +16,15 @@
           <v-icon>home</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>Your Tickets</v-list-tile-title>
+          <v-list-tile-title>דף הבית</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+      <v-list-tile @click="">
+        <v-list-tile-action>
+          <v-icon>home</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>הכרטיסים שלך</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
       <v-list-tile @click="">
@@ -24,17 +32,35 @@
           <v-icon>chat</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title>Chat</v-list-tile-title>
+          <v-list-tile-title>צור קשר</v-list-tile-title>
+        </v-list-tile-content>
+      </v-list-tile>
+      <v-list-tile @click="logout()">
+        <v-list-tile-action>
+          <v-icon>chat</v-icon>
+        </v-list-tile-action>
+        <v-list-tile-content>
+          <v-list-tile-title>התנתקות</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
     </v-list>
   </v-navigation-drawer></template>
 
 <script>
+import config from "../services/config";
+import store from "../store/store";
+
 export default {
   name: 'AppSidenav',
   data () {
     return {
+      SERVER_BASE_URL: config.SERVER_BASE_URL,
+    }
+  },
+  methods:{
+    logout : function () {
+     store.commit('logout');
+     window.location.href =  `${this.SERVER_BASE_URL}/logout/`
     }
   }
 }

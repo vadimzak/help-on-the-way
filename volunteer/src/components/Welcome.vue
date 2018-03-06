@@ -1,6 +1,6 @@
 <template>
   <v-layout column wrap>
-    <h4 class="greeting">היי, {{$store.state.user.firstName}}, כיף לראות אותך כאן :) </h4>
+    <h4 class="greeting">היי, {{$store.state.user.name}}, כיף לראות אותך כאן :) </h4>
     <div class="divider-title">
       <div class="divider-text">
  יש לנו עבורך <span class="highlighted"> 5 הזדמנויות </span> לעשות מעשה טוב בדרך שלך

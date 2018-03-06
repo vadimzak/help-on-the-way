@@ -1,6 +1,6 @@
 <template>
   <v-layout column wrap>
-    <h4 class="greeting">היי, {{$store.state.user.firstName}}, כיף לראות אותך כאן :) </h4>
+    <h4 class="greeting">היי, {{$store.state.user.name}}, כיף לראות אותך כאן :) </h4>
     <ticket-preview></ticket-preview>
     <div class="divider-title">
       <img src="static/assets/divider-image.png" class="divider-image">
