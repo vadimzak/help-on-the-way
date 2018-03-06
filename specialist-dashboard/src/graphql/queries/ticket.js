@@ -40,7 +40,7 @@ export const ALL_TICKETS_QUERY = gql`{
             houseNumber
           }
         }
-        ticketMatchedVolunteersByTicketId{
+        ticketAssignedVolunteersByTicketId{
            nodes {
             personByVolunteerId {
               firstName
