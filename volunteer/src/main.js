@@ -10,7 +10,7 @@ import 'vuetify/dist/vuetify.css' // Ensure you are using css-loader
 import 'font-awesome/css/font-awesome.css'
 import { apolloProvider } from '@/graphql/apolloClient'
 import moment from 'moment'
-
+import './services/facebookRedirectHashFixer'
 Vue.use(Vuetify)
 Vue.use(VueResource)
 Object.defineProperty(Vue.prototype, '$moment', { value: moment })
