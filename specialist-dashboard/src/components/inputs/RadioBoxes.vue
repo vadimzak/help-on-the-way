@@ -4,8 +4,8 @@
       class="option text-center"
       v-for="(option,index) of options" 
       :key="index"
-      @click="changeSelection(index)"
-      :class="{selected: index==currentSelection}"
+      @click="changeSelection(option.value)"
+      :class="{selected: option.value === currentSelection}"
     >
     <span class="option-icon" :class="{ ['icon-' + option.icon ] : true }"></span>
       {{option.text}}
@@ -16,18 +16,18 @@
 <script>
 export default {
   components: {  },
-  props: [ 'options' ],
+  props: [ 'options', 'value' ],
   data () {
     return {
-      currentSelection: undefined,
+      currentSelection: this.value,
     }
   },
   methods: {
-    changeSelection(index){
-      if(this.currentSelection==index){
-        this.currentSelection = undefined
+    changeSelection(value){
+      if(this.currentSelection === value){
+        this.currentSelection = ''
       } else {
-        this.currentSelection = index
+        this.currentSelection = value
       }
       this.$emit('input', this.currentSelection)
     }

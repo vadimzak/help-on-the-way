@@ -22,8 +22,9 @@ export default {
 
 <style scoped>
     .close{
+        z-index: 12;
         position: absolute;
         left: 10px;
-        top: 10px;
+        top: 0;
     }
 </style>

@@ -11,9 +11,14 @@ mutation autoCompletePersonOfType($input: GetPersonByConditionInput!){
         type,
         phoneNumber,
         address: addressByAddressId{
+          id,
           city,
           street,
           houseNumber,
+          floor,
+          enterance,
+          lat,
+          long
         }
       }
     }

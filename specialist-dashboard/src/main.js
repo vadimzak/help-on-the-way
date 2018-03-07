@@ -14,10 +14,14 @@ import store from './store'
 require('vue-virtual-scroller/dist/vue-virtual-scroller.css')
 import { apolloProvider } from "./graphql/apolloClient";
 import { directive as onClickOutside } from 'vue-on-click-outside'
-
+import filters from './filters';
+import moment from 'moment';
+import momentDuration from 'moment-duration-format';
 Vue.config.productionTip = false
 
 
+moment.locale('he');
+momentDuration(moment);
 
 Vue.use(BootstrapVue);
 Vue.use(VueVirtualScroller);
@@ -29,19 +33,6 @@ Vue.use(VueGoogleMaps, {
   }
 });
 Vue.directive('on-click-outside', onClickOutside);
-Vue.filter('formatDate', function(value) {
-  if (value) {
-    let date = new Date(value);
-    return date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear()
-  }
-});
-
-Vue.filter('formatAddress', function(address) {
-  if (address) {
-    return address.street + ' ' + address.houseNumber + ', ' + address.city;
-  }
-});
-
 
 
 /* eslint-disable no-new */

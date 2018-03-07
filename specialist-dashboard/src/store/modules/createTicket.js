@@ -1,10 +1,13 @@
 import { CREATE_TICKET, UPDATE_TICKET } from '@/graphql/queries/ticket';
 import { apolloClient } from '@/graphql/apolloClient';
-import ticketStatuses from '@/constants/enums/TicketStatus';
+import { TicketStatus } from '@/constants/enums/index';
+import _ from 'lodash';
 const state = {
     ticket: {
-        status: ticketStatuses.draft
+        status: TicketStatus.draft,
+        details: {}
     },
+    ticketSource: undefined,
     currentStep: 1,
 };
   
@@ -12,7 +15,7 @@ const state = {
 const getters = {
     ticketServerModel(state) {
         const mapFullModelToId = {
-            elder: 'elder_id',
+            elder: 'elderId',
             startAddress: 'startAddressId',
             destinationAddress: 'destinationAddressId',
             endAddress: 'endAddressId',
@@ -28,7 +31,7 @@ const getters = {
             }
             return serverModel;
         }, {});
-    }
+    },
 };
   
   // actions
@@ -47,12 +50,17 @@ const actions = {
   // mutations
   const mutations = {
     updateTicket (state, ticketUpdate) {
-        Object.assign(state.ticket, ticketUpdate);
+        state.ticket = _.merge({}, state.ticket, ticketUpdate);
     },
-  
+      updateTicketSource(state, source) {
+          state.ticketSource = source;
+    },
     moveStep(state) {
           state.currentStep++;
-    },
+      },
+    goBackStep(state) {
+          state.currentStep = Math.max(1, state.currentStep - 1);
+    }
   }
   
 export default {
