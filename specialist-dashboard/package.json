@@ -2,7 +2,7 @@
   "name": "specialist-dashboard",
   "version": "1.0.0",
   "description": "Help on the way - specialist dashboard",
-  "author": "Ohad Ron <ohad@ohadron.com>",
+  "author": "Dor Le Dor Dev Team",
   "private": true,
   "scripts": {
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
