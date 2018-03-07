@@ -24,9 +24,7 @@ mutation createTicket($ticket: TicketInput!) {
   }`;
 
 export const ALL_TICKETS_QUERY = gql`{
-    allTickets(condition: {
-      status: OPEN
-    }) {
+    allTickets(condition: {}) {
       nodes {
         id
         personByElderId {
