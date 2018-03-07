@@ -35,6 +35,14 @@
       :ticket="exampleTicket"
     />
 
+    <List v-model="exampleListModel" :search="exampleSearchFunction">
+      <div slot="auto-complete-result" slot-scope="props">
+        {{props.item.description}}
+      </div>
+      <div slot="list-item" slot-scope="props">
+            {{props.item.description}}
+      </div>
+    </List>
 
     <div>
       selected filter : {{selectedFilter}}
@@ -55,9 +63,10 @@ import GroupMessagePreview from '@/components/GroupMessagePreview'
 import DatePicker from 'vue2-datepicker'
 import TicketsFilter from '@/components/TicketsFilter'
 import InputAddress from '@/components/InputAddress'
+import List from '@/components/inputs/List'
 
 export default {
-  components: { RadioBoxes, AutoComplete, AddressPicker, GroupMessagePreview, DatePicker, TicketsFilter, InputAddress},
+  components: { RadioBoxes, AutoComplete, AddressPicker, GroupMessagePreview, DatePicker, TicketsFilter, InputAddress, List},
   data () {
     return {
       showModal: false,
@@ -79,6 +88,7 @@ export default {
         ticketPermalink: "https://bit.ly/dorldor"
       },
       selectedFilter: { },
+      exampleListModel: [{name: 'תל אביב'}, {name: 'חיפה'}],
       filters: {
           buttons: [
             {
