@@ -6,7 +6,7 @@
         </div>
         <div class="p-3 d-flex flex-column  align-items-start justify-content-start ">
             <Truncate class="font-weight-bold" v-if="ticket.category">{{ticket.category| formatCategory}}</Truncate>
-            <Truncate class="small" v-if="ticket.subcategory">{{ticket.subcategory | formatSubCategory}}</Truncate>
+            <Truncate class="small" v-if="ticket.subCategory">{{ticket.subCategory | formatSubCategory}}</Truncate>
         </div>
         <div class="p-3 d-flex flex-column  align-items-start justify-content-center ">
             <Truncate class="font-weight-bold" v-if="ticket.durationEta">{{ticket.durationEta| formatMinutes}}</Truncate>

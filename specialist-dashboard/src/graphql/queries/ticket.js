@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 
 
 export const UPDATE_TICKET = gql`
-  mutation ($id: Int!, $ticket: TicketPatch!) {
+  mutation ($id: BigInt!, $ticket: TicketPatch!) {
     updateTicketById(input: {
       id: $id,
       ticketPatch: $ticket

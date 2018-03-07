@@ -27,8 +27,8 @@
             <hr>
         </b-col>
         <b-col cols="12" class="justify-content-center d-flex">
-            <RadioBoxes class="indoor" v-if="ticket.isIndoor === true" :value="ticket.category" @input="(val) => updateTicket({category: val, subcategory: null})" :options="indoorCategories"/>
-            <RadioBoxes class="outdoor" v-if="ticket.isIndoor === false" :value="ticket.category" @input="(val) => updateTicket({category: val, subcategory: null})" :options="outdoorCategories"/>
+            <RadioBoxes class="indoor" v-if="ticket.isIndoor === true" :value="ticket.category" @input="(val) => updateTicket({category: val, subCategory: null})" :options="indoorCategories"/>
+            <RadioBoxes class="outdoor" v-if="ticket.isIndoor === false" :value="ticket.category" @input="(val) => updateTicket({category: val, subCategory: null})" :options="outdoorCategories"/>
         </b-col>     
       </b-row>
       <b-row v-if="categories[ticket.category] && categories[ticket.category].subCategories.length">
@@ -39,7 +39,7 @@
             <hr>
         </b-col>
         <b-col cols="12" class="justify-content-center d-flex">
-            <RadioBoxes  :value="ticket.subcategory" @input="(val) => updateTicket({subcategory: val})" :options="categories[ticket.category].subCategories"/>
+            <RadioBoxes  :value="ticket.subCategory" @input="(val) => updateTicket({subCategory: val})" :options="categories[ticket.category].subCategories"/>
         </b-col>     
       </b-row>      
       <b-row>
@@ -66,7 +66,7 @@ export default {
         canContinueSep: function() {
             const ticket = this.ticket;
             const categories = this.categories;
-            const canContinue = !_.isUndefined(ticket.isIndoor) && ticket.category && (!categories[ticket.category].subCategories.length || ticket.subcategory);
+            const canContinue = !_.isUndefined(ticket.isIndoor) && ticket.category && (!categories[ticket.category].subCategories.length || ticket.subCategory);
             this.$emit('canContinue', canContinue)
         },
         isUrgent: {

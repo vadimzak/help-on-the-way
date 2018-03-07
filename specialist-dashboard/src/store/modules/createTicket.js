@@ -39,7 +39,7 @@ const actions = {
     async saveAndAdvanceStep({ commit, state, getters }, ) {
         const { ticket } = state;
         // we don't have all the required fields, so we must continue
-        if (ticket.elder && ticket.startAddres) {
+        if (ticket.elder && ticket.startAddress) {
             const updatedTicket = await createOrUpdateTicket(getters.ticketServerModel);
             commit('updateTicket', updatedTicket);
         }
@@ -73,10 +73,28 @@ export default {
   
 
 async function createOrUpdateTicket(ticketServerModel) {
-    const method = ticketServerModel.id ? UPDATE_TICKET : CREATE_TICKET;
-    return apolloClient.mutate({
-        mutation: method,
-        variables: { ticket: ticketServerModel },
+    if (ticketServerModel.id) {
+        return updateTicket(ticketServerModel);
+    }
+    return createTicket(ticketServerModel);
+}
+
+
+async function createTicket(ticket) {
+    const response = await  apolloClient.mutate({
+        mutation: CREATE_TICKET,
+        variables: { ticket: ticket},
+    });
+    ticket = response.data.createTicket.ticket;
+    return { id: ticket.id };
+
+}
+
+async function updateTicket(ticket) {
+    const response =  await apolloClient.mutate({
+        mutation: UPDATE_TICKET,
+        variables: { ticket: ticket, id: ticket.id},
     });
 
+    return {};
 }
