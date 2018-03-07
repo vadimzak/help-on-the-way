@@ -1,6 +1,5 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Main from '@/components/Main'
 import TicketsView from '@/components/TicketsView'
 import TagManager from '@/components/TagManager'
 import VolunteersView from '@/components/VolunteersView'
@@ -13,11 +12,6 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'Main',
-      component: Main
-    },
-    {
-      path: '/tickets',
       name: 'TicketsView',
       component: TicketsView
     },
