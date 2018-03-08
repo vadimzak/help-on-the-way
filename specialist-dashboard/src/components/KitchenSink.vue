@@ -60,13 +60,12 @@ import RadioBoxes from '@/components/inputs/RadioBoxes'
 import AutoComplete from '@/components/AutoComplete'
 import AddressPicker from '@/components/AddressPicker'
 import GroupMessagePreview from '@/components/GroupMessagePreview'
-import DatePicker from 'vue2-datepicker'
 import TicketsFilter from '@/components/TicketsFilter'
 import InputAddress from '@/components/InputAddress'
 import List from '@/components/inputs/List'
 
 export default {
-  components: { RadioBoxes, AutoComplete, AddressPicker, GroupMessagePreview, DatePicker, TicketsFilter, InputAddress, List},
+  components: { RadioBoxes, AutoComplete, AddressPicker, GroupMessagePreview, TicketsFilter, InputAddress, List},
   data () {
     return {
       showModal: false,
