@@ -1,7 +1,7 @@
 version: '2.2'
 services:
   db:
-    build: ./docker-db
+    image: 'barakdr/postgres-postgis-plv8'
     env_file: '.env'
     environment:
       POSTGRES_PASSWORD: '${PGPASSWORD}'
