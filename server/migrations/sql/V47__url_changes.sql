@@ -10,7 +10,7 @@ CREATE TABLE help_private.url (
     unique (metadata, url)
 );
 
-CREATE EXTENSION plv8;
+CREATE EXTENSION IF NOT EXISTS plv8;
 
 CREATE FUNCTION help.get_short_url (
   metadata jsonb

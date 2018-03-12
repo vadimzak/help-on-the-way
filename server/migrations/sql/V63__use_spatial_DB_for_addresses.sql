@@ -1,3 +1,4 @@
+CREATE EXTENSION IF NOT EXISTS postgis;
 alter table help.address
 add column geom geometry(Point, 4326),
 drop column long,
