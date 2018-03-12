@@ -1,5 +1,5 @@
 const { DB_SCHEMA, PGUSER } = process.env;
-const { withPostGraphQLContext, postgraphql, createPostGraphQLSchema } = require('postgraphql');
+const { withPostGraphQLContext, postgraphql, createPostGraphQLSchema } = require('postgraphile');
 const { graphql } = require('graphql');
 
 const consts = require('../consts');

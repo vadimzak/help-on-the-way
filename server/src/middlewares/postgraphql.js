@@ -1,5 +1,5 @@
 const { PG_DEFAULT_ROLE, DB_SCHEMA } = process.env;
-const postgraphql = require('postgraphql');
+const postgraphql = require('postgraphile');
 const consts = require('../consts');
 
 const options = {
