@@ -3,6 +3,7 @@
 // see http://vuejs-templates.github.io/webpack for documentation.
 
 const path = require('path')
+const proxyTable = require('../../shared/config/dev.proxy.config')
 
 module.exports = {
   dev: {
@@ -10,8 +11,6 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
-
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
     port: 8080, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
@@ -20,15 +19,7 @@ module.exports = {
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    proxyTable: {
-      '/graphql': {
-        target: 'http://localhost:5000/graphql',
-        changeOrigin: true,
-        pathRewrite: {
-          '^/graphql': ''
-        }      
-      }
-    },
+    proxyTable,
 
     /**
      * Source Maps

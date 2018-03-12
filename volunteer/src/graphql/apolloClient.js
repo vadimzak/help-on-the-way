@@ -5,7 +5,7 @@ import VueApollo from 'vue-apollo'
 import Vue from 'vue'
 
 const link = new HttpLink({
-  uri: 'http://localhost:5000/graphql'
+  uri: process.env.SERVER_BASE_URL
 })
 
 const cache = new InMemoryCache()

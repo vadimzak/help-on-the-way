@@ -1,4 +1,4 @@
 'use strict'
-module.exports = {
-  NODE_ENV: '"production"'
-}
+const sharedPordConfig = require('../../shared/config/prod.config')
+
+module.exports = sharedPordConfig
