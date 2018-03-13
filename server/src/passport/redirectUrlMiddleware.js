@@ -16,6 +16,7 @@ const popRedirectUrlFromSession = (req, res, next) => {
 };
 
 const validate = redirectUrl => {
+	return true; // TODO - temp override, remove this
 	return VALIDATE_REDIRECT_URL_REGEX.test(redirectUrl);
 };
 
