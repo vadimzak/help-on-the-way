@@ -6,7 +6,6 @@ mutation getTicketById($ticketId: BigInt!){
       ticketId: $ticketId
     }) {
       ticketForVolunteer{
-  ticketId,
   description,
   durationEta,
   issuingInstitue,
