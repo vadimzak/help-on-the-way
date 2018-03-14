@@ -21,7 +21,7 @@ Vue.http.interceptors.push((request, next) => {
   next()
 })
 Vue.http.headers.common['Access-Control-Allow-Credentials'] = 'include'
-
+Vue.http.headers.common['Access-Control-Allow-Origin'] = process.env.SERVER_BASE_URL
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
