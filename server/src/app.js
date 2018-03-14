@@ -4,7 +4,7 @@ const app = require('express')();
 const middlewaresInitializer = require('./middlewares/middlewaresInitializer');
 const passportInitializer = require('./passport/passportInitializer');
 const endpointsInitializer = require('./endpoints/endpointsInitializer');
-const devModeAppInitializer = require('../src/dev/devModeAppInitializer');
+const devModeAppInitializer = require('./development-code/devModeAppInitializer');
 
 if (isInDevelopmentMode) {
 	devModeAppInitializer.init(app);
