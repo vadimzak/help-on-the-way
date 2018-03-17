@@ -1,12 +1,4 @@
 {
-  "compilerOptions": {
-    "baseUrl": "./",
-    "paths": {
-      "@/*": [
-        "src/*"
-      ]
-    }
-  },
     "include": [
       "./src/**/*"
     ],
@@ -15,6 +7,9 @@
       "paths": {
         "@/*": [
           "src/*"
+        ],
+        "shared/*": [
+          "../shared/*"
         ]
       }
     },

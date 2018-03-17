@@ -1,13 +1,11 @@
-import currentUserRetriever from '../services/currentUserRetriever'
 import store from '../store/store'
 import { paths as routes } from '../router/login'
-
 const ANONYMOUS = process.env.ANONYMOUS_ROLE
 
 const force = router => {
   router.beforeResolve(async (to, from, next) => {
     if (!store.state.user) {
-      const user = await currentUserRetriever.retrieve()
+      const user = await router.app.$authContext.getUser()
       store.commit('login', user)
     }
 

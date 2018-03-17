@@ -3,25 +3,21 @@
 import Vue from 'vue'
 import App from './App'
 import router from './router'
-import VueResource from 'vue-resource'
 import Vuetify from 'vuetify'
 import store from './store/store'
 import 'vuetify/dist/vuetify.css' // Ensure you are using css-loader
 import 'font-awesome/css/font-awesome.css'
-import { apolloProvider } from '@/graphql/apolloClient'
-import moment from 'moment'
-import './services/facebookRedirectHashFixer'
-Vue.use(Vuetify)
-Vue.use(VueResource)
-Object.defineProperty(Vue.prototype, '$moment', { value: moment })
-
+import { provider as apolloProvider, install as apolloInit } from 'shared/providers/apolloProvider'
+import momentSetup from 'shared/providers/moment'
+import 'shared/initializers/facebookRedirectHashFixer'
+import vueResourceSetup from 'shared/providers/vueResource'
+import authPlugin from 'shared/providers/authProvider'
 Vue.config.productionTip = false
-Vue.http.interceptors.push((request, next) => {
-  request.credentials = true
-  next()
-})
-Vue.http.headers.common['Access-Control-Allow-Credentials'] = 'include'
-Vue.http.headers.common['Access-Control-Allow-Origin'] = process.env.SERVER_BASE_URL
+Vue.use(vueResourceSetup)
+Vue.use(Vuetify)
+Vue.use(authPlugin)
+Vue.use(momentSetup)
+Vue.use(apolloInit)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',

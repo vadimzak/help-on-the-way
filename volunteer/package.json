@@ -5,6 +5,7 @@
   "author": "Dor Le Dor Dev Team",
   "private": true,
   "scripts": {
+    "postinstall": "cd ../shared && npm i && ncp ./node_modules ../volunteer/node_modules",
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
@@ -14,16 +15,9 @@
     "build": "node build/build.js"
   },
   "dependencies": {
-    "apollo-cache-inmemory": "1.1.10",
-    "apollo-client": "2.2.6",
-    "apollo-link-http": "1.5.3",
     "font-awesome": "^4.7.0",
-    "graphql": "0.13.1",
-    "graphql-tag": "2.8.0",
-    "moment": "^2.21.0",
+    "help-on-the-way-shared": "file:../shared",
     "vue": "^2.5.13",
-    "vue-apollo": "3.0.0-beta.4",
-    "vue-resource": "^1.4.0",
     "vue-router": "^3.0.1",
     "vuetify": "^0.17.7",
     "vuex": "^3.0.1"
@@ -72,6 +66,7 @@
     "karma-spec-reporter": "0.0.31",
     "karma-webpack": "^2.0.2",
     "mocha": "^3.2.0",
+    "ncp": "2.0.0",
     "nightwatch": "^0.9.12",
     "node-notifier": "^5.1.2",
     "optimize-css-assets-webpack-plugin": "^3.2.0",

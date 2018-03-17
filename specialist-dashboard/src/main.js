@@ -21,7 +21,6 @@ Vue.config.productionTip = false
 
 
 moment.locale('he');
-momentDuration(moment);
 
 Vue.use(BootstrapVue);
 Vue.use(VueVirtualScroller);

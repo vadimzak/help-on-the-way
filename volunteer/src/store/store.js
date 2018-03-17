@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import { GET_BY_ID } from '@/graphql/queries/ticket'
-import { apolloClient } from '@/graphql/apolloClient';
+import { client as apolloClient } from 'shared/providers/apolloProvider'
 Vue.use(Vuex)
 const state = {
   user: null,
@@ -9,7 +9,7 @@ const state = {
   menuOpen: false,
   tickets: [],
   ticketToMove: undefined,
-  activeTicket: undefined,
+  activeTicket: undefined
 }
 
 const get = (path, object) =>
@@ -17,32 +17,29 @@ const get = (path, object) =>
     (xs && xs[x]) ? xs[x] : null, object)
 
 const mutations = {
-  toggleMenu(state) {
+  toggleMenu (state) {
     state.menuOpen = !state.menuOpen
   },
-  login(state, user) {
-    state.user = user;
+  login (state, user) {
+    state.user = user
   },
-  logout(state) {
-    state.user = null;
+  logout (state) {
+    state.user = null
   },
-  toggleMenu(state) {
-    state.menuOpen = !state.menuOpen
-  },
-  setActiveTicket(state, {data}) {
-    const ticket = get(['getTicketById', 'ticketForVolunteer'], data);
-    state.activeTicket = ticket;
+  setActiveTicket (state, {data}) {
+    const ticket = get(['getTicketById', 'ticketForVolunteer'], data)
+    state.activeTicket = ticket
   }
 }
 
 const actions = {
   toggleMenu: ({commit}) => commit('toggleMenu'),
-  async fetchTickets() {
-    const tickets = await getTickets();
+  async fetchTickets () {
+    const tickets = await getTickets()
   },
-  async setActiveTicketById({state, commit}, {id}) {
-    const ticket = await getTicketById(id);
-    commit('setActiveTicket', ticket);
+  async setActiveTicketById ({state, commit}, {id}) {
+    const ticket = await getTicketById(id)
+    commit('setActiveTicket', ticket)
   }
 }
 
@@ -57,9 +54,9 @@ export default new Vuex.Store({
   actions
 })
 
-async function getTicketById(ticketId) {
+async function getTicketById (ticketId) {
   return apolloClient.mutate({
     mutation: GET_BY_ID,
-    variables: {ticketId: ticketId},
-  });
+    variables: {ticketId: ticketId}
+  })
 }
