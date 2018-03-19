@@ -1,7 +1,7 @@
 <template>
-  <div id="side-bar" class="mt-3 pt-3 h-100">
+  <div id="side-bar" class="pt-3">
+     <NewTicketButton/>
     <ul class="h4">
-      <NewTicketButton/>
       <li class="side-list-item mt-5">
         <router-link to="/" class="nav-link" :class="{active: this.$route.name == 'Main' }">מסך ראשי</router-link>
       </li>
@@ -48,11 +48,20 @@ export default {
 </script>
 
 <style scoped>
+
 #side-bar{
-  background-color: #eee;
+  background-color: black;
+  height: 93vh;
+}
+
+#side-bar ul{
+      margin-top: 12vh;
 }
 .side-list-item{
   list-style: none;
   padding: 0.5em 0em 0.5em 0em;
+}
+.side-list-item a{
+  color: #eee;
 }
 </style>

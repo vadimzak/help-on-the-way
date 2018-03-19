@@ -5,10 +5,10 @@
     </div>
     <div id="app" class="container">
       <div class="row">
-        <div class="col-3 h-100">
+        <div class="col-2 h-100">
           <side-bar />
         </div>
-        <div class="col">
+        <div class="col-10 pl-0">
           <router-view/>
         </div>
       </div>

@@ -1,7 +1,7 @@
 <template>
-  <div id="main" :style="style" class="card text-center m-4 p-3">
-    <div id="main-number">{{counterValue}}</div>
+  <div id="main" :style="style" class="card text-center m-5 p-1">
     <div id="description">{{description}}</div>
+      <div id="main-number">({{counterValue}})</div>
   </div>
 </template>
 
@@ -21,7 +21,8 @@ export default {
 </script>
 
 <style scoped>
-#main-number{
-  font-size: 1.3em;
-}
+ .card-deck .card{
+    flex-direction: row;
+    justify-content: center;
+  }
 </style>

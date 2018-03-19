@@ -1,14 +1,13 @@
 <template>
-  <div v-if="selectedFilter" id="filters">
-    <div class="button-filters">
+  <div v-if="selectedFilter" id="filters" class="row">
+    <div class="button-filters col-12 row">
       <div v-for="filter in buttonFilters"
            v-bind:class="{'active': filter.name==selectedFilter.name}"
-           class="button-filter"
+           class="button-filter col"
            v-on:click="selectedFilterChanged(filter)">
         <span class="filter-text">{{filter.name}} {{ filter.count }}</span>
       </div>
-    </div>
-    <div v-bind:class="{'active-drop-down' : isDropDownFiltersSelected()}" class="drop-down-filters">
+         <div v-bind:class="{'active-drop-down' : isDropDownFiltersSelected()}" class="drop-down-filters col">
       <multiselect @input="dropDownFilterSelected"
                    v-model="selectedDropDownFilter"
                    :options="dropDownFilters"
@@ -24,6 +23,7 @@
                    :placeholder="placeHolderText"
                    :custom-label="dropDownFilterLabel"
                    track-by="name"></multiselect>
+    </div>
     </div>
   </div>
 </template>
@@ -82,19 +82,12 @@ export default {
 <style scoped>
   .button-filters {
     margin: 10px;
-    display: inline-block;
   }
 
-  .drop-down-filters {
-    display: inline-block;
-  }
   .button-filter {
-    display: inline-block;
-    margin: 10px;
     background-color: white;
     border: 1px solid black;
     color: black;
-    padding: 3px 30px;
     cursor: pointer;
   }
 

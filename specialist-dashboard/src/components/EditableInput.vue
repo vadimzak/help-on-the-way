@@ -1,9 +1,9 @@
 <template>
-  <div v-on-click-outside="showAsLabel">
+  <div v-on-click-outside="showAsLabel" class="editable-input">
     <div v-if="!showEditableInput">
       <span>{{_value}}</span>
-      <i v-on:click="showAsInput" v-bind:class="icon"></i>
     </div>
+      <i  v-if="!showEditableInput" v-on:click="showAsInput" v-bind:class="icon" class="icon"></i>
     <div v-if="showEditableInput">
       <textarea type="text" v-if="showAsLabel" v-model="_value" class="edit-box"/>
     </div>
@@ -46,4 +46,15 @@
   .edit-box {
     width: 100%;
   }
+  .editable-input{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+  } 
+ .icon{
+     color:  #6699ff;
+     padding: 0px 0px 10px 5px;
+  }
+
+
 </style>

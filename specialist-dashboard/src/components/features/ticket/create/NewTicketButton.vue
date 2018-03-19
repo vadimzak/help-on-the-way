@@ -3,7 +3,7 @@
     <FloatingScreen target="ticket-btn">
       <TicketWizard></TicketWizard>
     </FloatingScreen>
-    <button id="ticket-btn" tag="button" type="button" class="btn btn-primary btn-lg m-4 mx-auto d-block">פניה חדשה</button>
+    <div id="ticket-btn" class="ticket-btn p-4 h4">פניה חדשה</div>
 </div>
 </template>
 
@@ -14,3 +14,12 @@ export default {
   components: {TicketWizard, FloatingScreen},
   }
 </script>
+
+<style scoped>
+.ticket-btn{
+  text-align: center;
+  background-color: #e6eeff;
+  cursor: pointer;
+}
+
+</style>

@@ -14,7 +14,7 @@ const client = new ApolloClient({
     cache,
     connectToDevTools: true,
 })
-
+console.log(client, 'client')
 const provider = new VueApollo({
     defaultClient: client,
 });

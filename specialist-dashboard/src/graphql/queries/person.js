@@ -17,8 +17,7 @@ mutation autoCompletePersonOfType($input: GetPersonByConditionInput!){
           houseNumber,
           floor,
           enterance,
-          lat,
-          long
+          geom
         }
       }
     }
