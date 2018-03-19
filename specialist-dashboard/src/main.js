@@ -12,16 +12,19 @@ import * as VueGoogleMaps from 'vue2-google-maps'
 import VueVirtualScroller from 'vue-virtual-scroller'
 import store from './store'
 require('vue-virtual-scroller/dist/vue-virtual-scroller.css')
-import { apolloProvider } from "./graphql/apolloClient";
+import { provider as apolloProvider, install as apolloInit } from 'shared/providers/apolloProvider'
 import { directive as onClickOutside } from 'vue-on-click-outside'
 import filters from './filters';
-import moment from 'moment';
-import momentDuration from 'moment-duration-format';
+import momentSetUp from 'shared/providers/moment';
+import vueResourceSetup from 'shared/providers/vueResource'
+import authPlugin from 'shared/providers/authProvider'
+import 'shared/initializers/facebookRedirectHashFixer'
 Vue.config.productionTip = false
 
-
-moment.locale('he');
-
+Vue.use(vueResourceSetup)
+Vue.use(authPlugin)
+Vue.use(apolloInit)
+Vue.use(momentSetUp)
 Vue.use(BootstrapVue);
 Vue.use(VueVirtualScroller);
 Vue.use(VueGoogleMaps, {
@@ -38,7 +41,7 @@ Vue.directive('on-click-outside', onClickOutside);
 new Vue({
   el: '#app',
   router,
-  apolloProvider,
+  provide: apolloProvider.provide(),
   store,
   template: '<App/>',
   components: { App }

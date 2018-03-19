@@ -23,7 +23,7 @@ new Vue({
   el: '#app',
   router,
   store,
-  apolloProvider,
+  provide: apolloProvider.provide(),
   components: { App },
   template: '<App/>',
   use: Vuetify

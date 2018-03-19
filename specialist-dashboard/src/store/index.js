@@ -2,13 +2,15 @@ import Vue from 'vue';
 import Vuex from 'vuex';
 import createTicket from './modules/createTicket';
 import categories from './modules/categories';
+import auth from './modules/auth';
 Vue.use(Vuex);
 const debug = process.env.NODE_ENV !== 'production';
 
 export default new Vuex.Store({
     modules: {
         createTicket,
-        categories
+        categories,
+        auth
     },
     strict: debug,
     plugins: []

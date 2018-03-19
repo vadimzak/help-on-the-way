@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "shared code between the volunteer & specialist apps",
   "main": "index.js",
+  "private": true,
   "scripts": {},
   "author": "Dor le Dor Dev Team",
   "license": "MIT",

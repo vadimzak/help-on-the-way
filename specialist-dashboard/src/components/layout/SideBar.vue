@@ -3,13 +3,10 @@
      <NewTicketButton/>
     <ul class="h4">
       <li class="side-list-item mt-5">
-        <router-link to="/" class="nav-link" :class="{active: this.$route.name == 'Main' }">מסך ראשי</router-link>
+        <router-link to="/" append class="nav-link">מסך ראשי</router-link>
       </li>
       <li class="side-list-item">
-        <router-link to="/tickets" class="nav-link" :class="{active: this.$route.name == 'TicketsView' }">פניות</router-link>
-      </li>
-      <li class="side-list-item">
-        <router-link to="/volunteers" class="nav-link" :class="{active: this.$route.name == 'VolunteerView' }">מתנדבים</router-link>
+        <router-link to="/volunteers" append class="nav-link">מתנדבים</router-link>
       </li>
       <li class="side-list-item">
         <a class="nav-link" href="#">קבוצות מתנדבים</a>
@@ -18,13 +15,7 @@
         <a class="nav-link" href="#">זקנים</a>
       </li>
       <li class="side-list-item">
-        <router-link to="/tags" class="nav-link"  :class="{active: this.$route.name == 'TagManager' }">ניהול תגיות</router-link>
-      </li>
-      <li class="side-list-item">
-        <a class="nav-link" href="#">מפה</a>
-      </li>
-      <li class="side-list-item">
-        <router-link to="/kitchenSink" class="nav-link" :class="{active: this.$route.name == 'KitchenSink' }">דוגמאות של חתיכות מהממשק</router-link>
+        <router-link to="/kitchenSink" class="nav-link">דוגמאות של חתיכות מהממשק</router-link>
       </li>
     </ul>
   </div>
@@ -63,5 +54,9 @@ export default {
 }
 .side-list-item a{
   color: #eee;
+}
+
+.side-list-item a.router-link-exact-active{
+  color: yellow;
 }
 </style>

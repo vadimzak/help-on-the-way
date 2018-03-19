@@ -1,4 +1,5 @@
 <template>
+<div>
   <div v-if="ready" class="mt-5 mr-4">
     <!-- <tickets-filter :filterChanged="ticketFilterChanged" :buttonFilters="filters.buttons" :dropDownFilters="filters.dropDown"></tickets-filter> -->
       <div class="row p-2 tickets-view-header">פניות למוקד</div>
@@ -11,6 +12,10 @@
     </div>
     </div>
   </div>
+  <div v-if="!ready">
+    טוען פניות מהשרת....
+  </div>
+</div>  
 </template>
 
 <script>

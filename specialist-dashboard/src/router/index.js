@@ -1,39 +1,47 @@
 import Vue from 'vue'
 import Router from 'vue-router'
+import AppLayout from '@/AppLayout'
 import TicketsView from '@/components/TicketsView'
-import TagManager from '@/components/TagManager'
 import VolunteersView from '@/components/VolunteersView'
 import KitchenSink from '@/components/KitchenSink'
 import FontsDemo from '@/components/base/FontsDemo'
-
+import { Login, Unauthorized } from '@/components/features/auth/'
+import authenticationForcer from '../services/authEnforce'
 Vue.use(Router)
-
-export default new Router({
+let router = new Router({
   routes: [
     {
       path: '/',
-      name: 'TicketsView',
-      component: TicketsView
+      component: AppLayout,
+      children: [
+        {
+          path: '',
+          name: 'TicketsView',
+          component: TicketsView
+        },
+        {
+          path: '/volunteers',
+          name: 'VolunteerView',
+          component: VolunteersView
+        },
+        {
+          path: '/kitchenSink',
+          name: 'KitchenSink',
+          component: KitchenSink
+        },
+      ]
     },
     {
-      path: '/volunteers',
-      name: 'VolunteerView',
-      component: VolunteersView
-    },
-    {
-      path: '/tags',
-      name: 'TagManager',
-      component: TagManager
-    },
-    {
-      path: '/kitchenSink',
-      name: 'KitchenSink',
-      component: KitchenSink
-    },
-    {
-      path: '/fonts-demo',
-      name: 'fontsDemo',
-      component: FontsDemo
+      path: '/login',
+      name: 'login',
+      component: Login
+    }, {
+      path: '/unauthorized',
+      name: 'unauthorized',
+      component: Unauthorized
     },
   ]
+  
 })
+authenticationForcer.force(router)
+export default router;

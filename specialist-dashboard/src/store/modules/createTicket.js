@@ -1,5 +1,5 @@
 import { CREATE_TICKET, UPDATE_TICKET } from '@/graphql/queries/ticket';
-import { apolloClient } from '@/graphql/apolloClient';
+import { client as apolloClient } from 'shared/providers/apolloProvider';
 import { TicketStatus } from '@/constants/enums/index';
 import _ from 'lodash';
 const state = {

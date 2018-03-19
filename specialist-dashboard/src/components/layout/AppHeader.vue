@@ -1,7 +1,8 @@
 <template>
   <div id="app-header" class="m-0 ml-5 mr-5 p-4 row h3">
     <div class="col">
-      משתמש: יהודית רביץ
+      משתמש: {{$store.state.auth.user.name}}
+      <a class="small btn btn-link" @click="$store.dispatch('auth/logout')">התנתק</a>
     </div>
     <div class="col text-left">
       עזרה בדרך
