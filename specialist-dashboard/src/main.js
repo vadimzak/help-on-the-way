@@ -31,7 +31,8 @@ Vue.use(VueGoogleMaps, {
   installComponents: true,
   load: {
     key: 'AIzaSyCI8i6KIO3fqbvT35LTQVsGAN4Je1mJTa0',
-    libraries: 'places'
+    libraries: 'places',
+    language: 'he',
   }
 });
 Vue.directive('on-click-outside', onClickOutside);

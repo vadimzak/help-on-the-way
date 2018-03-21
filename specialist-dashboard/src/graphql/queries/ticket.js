@@ -33,9 +33,13 @@ export const ALL_TICKETS_QUERY = gql`{
           lastName
           phoneNumber
           addressByAddressId {
+            id
             city
             street
             houseNumber
+            floor
+            enterance
+            location
           }
         }
         ticketAssignedVolunteersByTicketId{
@@ -45,9 +49,13 @@ export const ALL_TICKETS_QUERY = gql`{
               lastName
               phoneNumber
               addressByAddressId {
+                id
                 city
                 street
                 houseNumber
+                floor
+                enterance
+                location
               }
             }
           }
@@ -61,21 +69,27 @@ export const ALL_TICKETS_QUERY = gql`{
           city
           street
           houseNumber
+          floor
           enterance
+          location
         }
         addressByEndAddressId {
           id
           city
           street
           houseNumber
+          floor
           enterance
+          location
         }
         addressByStartAddressId {
           id
           city
           street
           houseNumber
+          floor
           enterance
+          location
         }
         status
         createdBy

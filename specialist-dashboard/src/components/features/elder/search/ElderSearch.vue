@@ -1,7 +1,7 @@
 <script>
 import ElderRow from './ElderRow';
 import ElderForm from '../create/ElderForm'
-import { buildSearchByConditionQuery } from '@/services/queryBuilder'
+import { buildSearchByConditionQuery } from '@/graphql/utils/queryBuilder'
 import { AUTO_COMPLETE_PERSON_OF_TYPE } from '@/graphql/queries/person'
 import PersonTypes from '@/constants/enums/PersonTypes'
 import _ from 'lodash'

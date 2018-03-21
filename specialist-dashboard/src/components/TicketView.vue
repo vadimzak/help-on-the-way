@@ -50,7 +50,7 @@
               <span>איסוף</span>
             </div>
             <div class="ticket-pickup">
-              <input-address v-bind:location-changed="changePickupLocation" v-bind:address="ticket.addressByStartAddressId"></input-address>
+              <input-address  v-model="startAddress"></input-address>
             </div>
             </div>
           </div>
@@ -63,7 +63,7 @@
               <span>יעד</span>
             </div>
             <div class="ticket-destination">
-              <input-address v-bind:location-changed="changeDestinationLocation" v-bind:address="ticket.addressByDestinationAddressId"></input-address>
+              <input-address  v-model="destinationAddress"></input-address>
             </div>
           </div>
           </div>
@@ -76,7 +76,7 @@
               <span>נקודת סיום</span>
             </div>
             <div class="ticket-end">
-              <input-address v-bind:location-changed="changeEndLocation" v-bind:address="ticket.addressByEndAddressId"></input-address>
+              <input-address v-model="endAddress"></input-address>
             </div>
             </div>
           </div>
@@ -103,8 +103,7 @@
 <script>
   import InputAddress from '@/components/InputAddress'
   import EditableInput from '@/components/EditableInput'
-  import { UPDATE_TICKET } from '../graphql/queries/ticket'
-  import { UPDATE_ADDRESS } from '../graphql/queries/address'
+  import { UPDATE_TICKET, ALL_TICKETS_QUERY } from '../graphql/queries/ticket'
 
   export default {
     components: {  InputAddress, EditableInput },
@@ -117,30 +116,56 @@
     props: {
         ticket: Object
     },
+    computed: {
+      startAddress: {
+          get(){
+              return this.ticket.addressByStartAddressId;
+          },
+          set(value){
+            this.updateTicket({ startAddressId: value.id });
+          }
+      },
+      destinationAddress: {
+          get(){
+              return this.ticket.addressByDestinationAddressId;
+          },
+          set(value){
+            this.updateTicket({ destinationAddressId: value.id });
+          },
+      },
+      endAddress: {
+         get(){
+              return this.ticket.addressByEndAddressId;
+          },
+          set(value){
+            this.updateTicket({ endAddressId: value.id });
+          },
+      },
+    },
     methods: {
-      changePickupLocation: function(newLocation) {
-        this.$apollo.mutate({
-          mutation: UPDATE_ADDRESS,
-          variables: {id: this.ticket.addressByStartAddressId.id, addressPatch: newLocation}
-        });
-      },
-      changeDestinationLocation: function(newLocation) {
-        this.$apollo.mutate({
-          mutation: UPDATE_ADDRESS,
-          variables: {id: this.ticket.addressByDestinationAddressId.id, addressPatch: newLocation}
-        });
-      },
-      changeEndLocation: function(newLocation) {
-        this.$apollo.mutate({
-          mutation: UPDATE_ADDRESS,
-          variables: {id: this.ticket.addressByEndAddressId.id, addressPatch: newLocation}
-        });
-      },
       changeView: function(view) {
           this.selectedView = view
       },
       showEditDescription: function() {
         this.showEditableDescription = true;
+      },
+      updateTicket(update){
+        this.$apollo.mutate({
+          mutation: UPDATE_TICKET,
+          variables: {id: this.ticket.id, ticket: update },
+          update: (store) => {
+            const allTicketsQueryResult = store.readQuery({ query: ALL_TICKETS_QUERY })
+            const tickets = allTicketsQueryResult.allTickets.nodes
+            const currentTicketId = tickets.findIndex( t => t.id === this.ticket.id)
+            if(currentTicketId > -1){
+              Object.assign(tickets[currentTicketId], update)
+            }
+            store.writeQuery({ 
+              query: ALL_TICKETS_QUERY, 
+              data: allTicketsQueryResult,
+              })
+          }
+        });
       },
       updateTicketIssuingInstitue: function(newIssuingInstitue) {
         if (newIssuingInstitue == this.ticket.issuing_institue) {

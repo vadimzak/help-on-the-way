@@ -1,12 +1,12 @@
 import gql from 'graphql-tag';
 
-export const UPDATE_ADDRESS = gql`
-  mutation ($id: Int!, $addressPatch: AddressPatch!) {
-    updateAddressById(input: {
-      id: $id,
-      addressPatch: $addressPatch
-    }) {
-      address {
-        id
-      }
-  }}`;
+export const GET_ADDRESS = gql`
+mutation getAddress($address: AddressInput!){
+  getAddress(input: {
+    address: $address
+  }){
+    address{
+      id,
+    }
+  }
+}`;

@@ -1,20 +1,31 @@
 <template>
   <div v-on-click-outside="hidePlaceInput" v-on:click="showPlaceInput()">
     <div>
-      <span v-if="!showAddressSelector && !keepOpen">{{address | formatAddress}}</span>
+      <span v-if="!showAddressSelector && !keepOpen">{{value | formatAddress | formatEmpty}}</span>
     </div>
-    <gmap-place-input :componentRestrictions="{country: 'IL'}" :defaultPlace="address | formatAddress" v-if="showAddressSelector || keepOpen" :select-first-on-enter="true" @place_changed="onSelect($event)"></gmap-place-input>
+    <div v-if="showAddressSelector || keepOpen" >
+      <GmapAutocomplete
+          :componentRestrictions="{country: 'IL'}"
+          :types="['address']"
+          class="w-100"
+          :value="value | formatAddress"
+          @place_changed="onSelect($event)"
+          :select-first-on-enter="true"
+      ></GmapAutocomplete>
+      <input type="number" min="0" max="100" :value="value.floor" @input="(e) => updatedModel({floor: e.target.value})" placeholder="קומה">
+      <input type="text" :value="value.enterance" @input="(e) => updatedModel({enterance: e.target.value })" placeholder="כניסה">
+     </div>
   </div>
 </template>
 
 <script>
   import { mixin as onClickOutside } from 'vue-on-click-outside'
-
+  import _ from 'lodash'
+  import VueTypes from 'vue-types'
   export default {
     props: {
       keepOpen: Boolean,
-      address: Object,
-      locationChanged: Function
+      value: VueTypes.object.def({}),
     },
     mixins: [onClickOutside],
     data () {
@@ -36,7 +47,6 @@
           this.showAddressSelector = false;
         },
         onSelect: function(address) {
-            this.showAddressSelector = false;
             let convertedAddress = {}
             for (let index = 0; index < address.address_components.length; index++) {
               let addressComponent = address.address_components[index];
@@ -44,8 +54,17 @@
                 convertedAddress[this.addressTypeConverter[addressComponent.types[0]]] = addressComponent.short_name;
               }
             }
-            this.locationChanged(convertedAddress);
-        }
+            convertedAddress.location = {
+              lng: address.geometry.location.lng(),
+              lat: address.geometry.location.lat()
+            };
+            this.updatedModel(convertedAddress)
+        },
+         updatedModel: _.debounce(async function (addressInput){
+          addressInput = Object.assign({}, this.value, addressInput);
+          const address = await this.$store.dispatch('address/get', addressInput);
+          this.$emit('input', Object.assign({}, this.value, address));
+      }, 600)
     }
   }
 </script>

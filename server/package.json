@@ -12,6 +12,7 @@
     "run-db": "docker-compose up -d db",
     "migrations": "node ./migrations/migrate.js",
     "heroku-deploy": "heroku container:push web --app dorldor-server",
+    "heroku-deploy-stage": "heroku container:push web --app dorldor-dev",
     "heroku-tail": "heroku logs --tail --app dorldor-server",
     "heroku-connect": "heroku run bash --app dorldor-server",
     "heroku-uptime": "heroku ps --app dorldor-server"

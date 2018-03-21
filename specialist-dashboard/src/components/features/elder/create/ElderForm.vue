@@ -1,5 +1,5 @@
 <template>
-  <b-form  @submit="onSubmit">
+  <b-form  @submit="onSubmit" class="w-100">
       <b-form-group>
               <label for="elderFirstName">שם פרטי</label>
               <b-form-input id="elderFirstName" type="text" v-model="elder.firstName" required></b-form-input>
@@ -17,10 +17,10 @@
       </b-form-radio-group>
     </b-form-group>
     <b-form-group label="כתובת">
-        <InputAddress :keepOpen="true" :address="elder.address" :locationChanged="(address) => elder.address = address"></InputAddress>
+        <InputAddress class="w-100" :keepOpen="true" v-model="elder.address"></InputAddress>
     </b-form-group>    
     <b-form-group label="תאריך לידה">
-        <DatePicker language="he" required></DatePicker>
+        <DatePicker placeholder="בחר תאריך לידה" :inline="true" language="he" required></DatePicker>
     </b-form-group>
     <b-form-row>
         <b-button type="submit" variant="secondary">
