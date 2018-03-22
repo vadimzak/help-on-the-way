@@ -5,7 +5,8 @@
   "author": "Dor Le Dor Dev Team",
   "private": true,
   "scripts": {
-    "postinstall": "cd ../shared && npm i && ncp ./node_modules ../volunteer/node_modules",
+    "preinstall": "cd ../shared && npm i",
+    "postinstall": "ncp ../shared/node_modules ./node_modules",
     "dev": "webpack-dev-server --inline --progress --config build/webpack.dev.conf.js",
     "start": "npm run dev",
     "unit": "cross-env BABEL_ENV=test karma start test/unit/karma.conf.js --single-run",
