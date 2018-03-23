@@ -7,8 +7,8 @@ const state = {};
 const getters = {};
   
 const actions = {
-    async get(context,address) {
-        return getAddress(address);
+    async get(context, address) {
+        return await getAddress(address);
     },
 };
   
@@ -29,7 +29,7 @@ async function getAddress(address) {
         mutation: GET_ADDRESS,
         variables: { address: address},
     });
-    return Object.assign({}, address, response.data.getAddress.address);
+    return  Object.assign({}, address, response.data.getAddress.address)
 }
 
 

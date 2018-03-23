@@ -15,10 +15,13 @@ require('vue-virtual-scroller/dist/vue-virtual-scroller.css')
 import { provider as apolloProvider, install as apolloInit } from 'shared/providers/apolloProvider'
 import { directive as onClickOutside } from 'vue-on-click-outside'
 import filters from './filters';
+import validators from './validators';
 import momentSetUp from 'shared/providers/moment';
 import vueResourceSetup from 'shared/providers/vueResource'
 import authPlugin from 'shared/providers/authProvider'
 import 'shared/initializers/facebookRedirectHashFixer'
+import VeeValidate from 'vee-validate'
+
 Vue.config.productionTip = false
 
 Vue.use(vueResourceSetup)
@@ -35,6 +38,7 @@ Vue.use(VueGoogleMaps, {
     language: 'he',
   }
 });
+Vue.use(VeeValidate)
 Vue.directive('on-click-outside', onClickOutside);
 
 

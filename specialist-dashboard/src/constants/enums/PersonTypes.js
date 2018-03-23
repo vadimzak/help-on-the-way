@@ -1,1 +1,1 @@
-export default {elder: 'elder', volunteer: 'volunteer', specialist: 'specialist', relative: 'relative', socialWorker: 'social_worker'}; 
+export default {elder: 'ELDER', volunteer: 'VOLUNTEER', specialist: 'SPECIALIST', relative: 'RELATIVE', socialWorker: 'SOCIAL_WORKER'}; 

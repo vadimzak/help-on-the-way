@@ -23,3 +23,28 @@ mutation autoCompletePersonOfType($input: GetPersonByConditionInput!){
       }
     }
   }`;
+
+export const CREATE = gql`
+mutation createPerson($person: PersonInput!){
+  createPerson(input: {
+    person: $person,
+  }){
+    person{
+      id
+    }
+  }
+}
+  `
+
+export const UPDATE = gql`
+mutation updatePerson($id: Int!, $person: PersonPatch!){
+  updatePersonById(input: {
+    id: $id,
+    personPatch: $person
+  }){
+      person{
+        id
+      }
+    }
+  }
+  `

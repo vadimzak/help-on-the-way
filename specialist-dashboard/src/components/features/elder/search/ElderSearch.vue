@@ -1,12 +1,12 @@
 <script>
 import ElderRow from './ElderRow';
-import ElderForm from '../create/ElderForm'
+import PersonForm from '@/components/features/person/PersonForm'
 import { buildSearchByConditionQuery } from '@/graphql/utils/queryBuilder'
 import { AUTO_COMPLETE_PERSON_OF_TYPE } from '@/graphql/queries/person'
 import PersonTypes from '@/constants/enums/PersonTypes'
 import _ from 'lodash'
 export default {
-    components: { ElderRow, ElderForm },
+    components: { ElderRow, PersonForm },
 	props: {
 		callToActionLabel: String,
     },
@@ -17,6 +17,7 @@ export default {
         createElderMode: false,
         elderToCreate: {},
         searchTerm: '',
+        elderType: PersonTypes.elder
 	}),
     methods: {
         onElderPick(elder){
@@ -54,7 +55,7 @@ function constructSearchQuery(textQuery){
                 {lastName:  { like: `%${textQuery}%` }},
                 {phoneNumber:  { like: `%${textQuery}%` }},
             ] },
-            { type: { eq: PersonTypes.elder} },
+            { type: { eq: PersonTypes.elder.toLowerCase() } },
         ]
     };
     return buildSearchByConditionQuery(query);
@@ -97,7 +98,7 @@ function constructSearchQuery(textQuery){
         </b-col>
     </b-row>
     <b-row v-if="createElderMode" class="m-0">
-        <ElderForm :elder="elderToCreate" @save="onElderPick"/>
+        <PersonForm :personType="elderType" @save="onElderPick"/>
     </b-row>
 </div>
 </template>

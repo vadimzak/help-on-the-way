@@ -62,6 +62,7 @@
         },
          updatedModel: _.debounce(async function (addressInput){
           addressInput = Object.assign({}, this.value, addressInput);
+          this.$emit('input', addressInput);
           const address = await this.$store.dispatch('address/get', addressInput);
           this.$emit('input', Object.assign({}, this.value, address));
       }, 600)
