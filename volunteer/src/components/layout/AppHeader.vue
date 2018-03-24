@@ -5,7 +5,7 @@
       <!-- <img src="/static/apple-touch-icon-180x180.png" alt="avatar"> -->
     </v-avatar>
     <v-spacer></v-spacer>
-    <v-toolbar-title class="top-title"  @click="$router.go('Welcome')">עזרה בדרך</v-toolbar-title>
+    <v-toolbar-title class="top-title"  @click="$router.push('/')">עזרה בדרך</v-toolbar-title>
     <v-spacer></v-spacer>
     <v-toolbar-side-icon v-if="$store.state.user" @click.stop="toggleMenu"></v-toolbar-side-icon>
   </v-toolbar>
