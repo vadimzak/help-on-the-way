@@ -60,33 +60,11 @@ export default {
   .divider-text i {
     display:block;
   }
-  .list__tile__sub-title, .list__tile__title{
-    text-align:right;
-  }
 
-  .list__tile__content{
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
 
   .highlighted{
     background-color: #1273ff;
     color: white;
   }
 
-  .related-tickets li:first-of-type{
-    border-right:6px solid #ff5f5f;
-  }
-  .related-tickets li:nth-of-type(2){
-    border-right:6px solid #23f7c4;
-  }
-  .related-tickets li:nth-of-type(3){
-    border-right:6px solid #fff34c;
-  }
-  .related-tickets li:nth-of-type(4){
-    border-right:6px solid #ff9141;
-  }
 </style>
