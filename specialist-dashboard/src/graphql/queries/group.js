@@ -21,3 +21,19 @@ query getGroups{
       }
     }
   }`
+
+export const ASSIGN_GROUP_TO_TICKET = gql`
+mutation assignGroupToTicket($ticketId: BigInt!, $groupId: Int! ){
+  createTicketGroup(input: {
+    ticketGroup: {
+      ticketId: $ticketId,
+      groupId: $groupId,
+    }
+  }){
+    ticketGroup{
+      groupId,
+      ticketId,
+    }
+  }
+}
+`
