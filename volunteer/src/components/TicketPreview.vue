@@ -4,7 +4,6 @@
       <v-card-media
         class="white--text card-image"
         height="90px"
-        src="static/assets/card-title.png"
         v-on:click="closePreview">
         <v-container fill-height fluid>
           <v-layout fill-height>
@@ -13,8 +12,11 @@
                   {{ticket.description}}
                 </span>
               <span class="duration">
-                  {{ticket.durationEta}} שעות
+                  {{ticket.durationEta}}
                 </span>
+              <span class="hours">
+                 שעות
+              </span>
             </v-flex>
           </v-layout>
         </v-container>
@@ -27,18 +29,30 @@
               {{ticket.elderFirstName}} {{ticket.elderLastName}}
             </li>
             <li>
-              <i class="material-icons">event</i>
+              <i class="material-icons">date_range</i>
               {{this.$moment(ticket.dueDate).format('L')}}
-            </li>
-            <li>
-              <i class="material-icons">alarm</i>
               {{this.$moment(ticket.dueDate).format('HH:mm')}}-
               {{this.$moment(ticket.dueDate).add(ticket.durationEta, 'hour').format('HH:mm')}}
             </li>
             <li>
-              <i class="material-icons">home</i>
-              {{ticket.startAddressStreet}}, {{ticket.startAddressCity}}
+              <i class="material-icons">local_taxi</i>
+              נוסעים במונית
             </li>
+            <div class="address">
+              <v-card class="start-address">
+                <img src="static/assets/placeholder-copy.png">
+                {{ticket.startAddressStreet}},
+                {{ticket.startAddressCity}}
+              </v-card>
+              <div class="arrows">
+                <img src="static/assets/transfer-1.png">
+              </div>
+              <v-card class="end-address">
+                <img src="static/assets/flag.png">
+                {{ticket.endAddressStreet}},
+                {{ticket.endAddressCity}}
+              </v-card>
+            </div>
           </ul>
         </div>
         <div class="ticket-tags">
@@ -49,7 +63,10 @@
         </div>
       </v-card-title>
       <v-card-title class="important-things">
-        <h2>דברים שחשוב לדעת</h2>
+        <h2>
+          <i class="material-icons">star</i>
+          דברים שחשוב לדעת
+        </h2>
         <ul>
           <li v-for="info in ticket.importantInfo">
             {{info}}
@@ -57,17 +74,17 @@
         </ul>
       </v-card-title>
       <v-card-actions>
-        <v-dialog max-width="290">
-          <button class="volunteer" slot="activator">מתנדב/ת</button>
+        <v-dialog max-width="290" v-model="dialog">
+          <button class="volunteer" @click="dialog = !dialog" slot="activator">אני בפנים</button>
           <v-card class="dialog-card">
-            <v-icon>close</v-icon>
             <v-card-text>
               <div> היי {{$store.state.user.firstName}},</div>
               <div> האם ברצונך לסייע ל{{ticket.elderName}}?</div>
             </v-card-text>
-            <v-card-actions>
+            <v-card-actions class="actions">
               <v-spacer></v-spacer>
-              <button class="agree" flat @click="$router.replace('ticket/'+ticket.id)">אשמח לעזור :)</button>
+              <button class="agree" flat @click="assignTicket()">אשמח לעזור :)</button>
+              <button class="cancel" flat @click="dialog=false">לחצתי בטעות</button>
             </v-card-actions>
           </v-card>
         </v-dialog>
@@ -78,18 +95,28 @@
 
 <script>
   export default {
+    data() {
+      return {
+        dialog: false,
+      }
+    },
     name: "ticket-preview",
     mounted: function () {
       this.getTicketById()
     },
     methods: {
-      getTicketById: function(id){
+      getTicketById: function (id) {
         this.$store.dispatch('setActiveTicketById', {
           id: this.$route.params.id
         })
       },
-      closePreview: function(index) {
+      closePreview: function (index) {
         this.preview = null;
+      },
+      assignTicket: function () {
+        this.$store.dispatch('assignTicket', {
+          id: this.$route.params.id
+        })
       }
     },
     computed: {
@@ -116,7 +143,6 @@
   }
 
   .card-content {
-    background-color: #eeeaff;
   }
 
   .card-content ul {
@@ -137,7 +163,8 @@
   }
 
   .card-image {
-    background-color: #7821f0;
+    background-image: linear-gradient(63deg, #963efa, #7146fe);
+    box-shadow: 0px 3px 14.6px 1.4px rgba(126, 67, 253, 0.42);
   }
 
   .ticket-details {
@@ -169,21 +196,35 @@
     width: 100%;
   }
 
-  .volunteer, .agree {
+  .volunteer, .agree, .cancel {
     width: 150px;
     height: 40px;
     color: white;
     margin: auto;
     font-size: 24px;
     font-weight: bold;
-    border-radius: 52px;
-    background-color: #6e47ff;
-    box-shadow: 0px 5px 17.9px 3.2px rgba(92, 91, 91, 0.44);
+    border-radius: 10px;
+    background-color: #1273ff;
+    box-shadow: 0px 6px 13px 0 rgba(136, 136, 136, 0.44);
+  }
+
+  .volunteer {
+    width: 90vw;
+    margin-bottom: 2vw;
   }
 
   .agree {
     background-color: #1273ff;
     font-size: 20px;
+    font-weight: lighter;
+  }
+
+  .cancel {
+    font-size: 20px;
+    font-weight: lighter;
+    background-color: #f6f6f6;
+    color: #343434;
+    margin-top: 10px;
   }
 
   .card .card__actions {
@@ -192,11 +233,17 @@
     justify-content: center;
   }
 
-  .duration {
+  .duration, .hours {
     font-weight: bold;
     left: 10px;
     position: absolute;
+    top: 15px;
+    font-size: 28px;
+  }
+
+  .hours {
     top: 45px;
+    font-size: 16px;
   }
 
   .dialog-card {
@@ -230,5 +277,42 @@
 
   .related-tickets li:nth-of-type(4) {
     border-right: 6px solid #ff9141;
+  }
+
+  .address {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .address .card {
+    flex: 3;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    padding: 3vw;
+  }
+
+  .address .card img {
+    max-height: 20px;
+    width: auto;
+    margin-bottom: 10px;
+  }
+
+  .arrows {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .arrows img {
+    max-width: 50%;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
   }
 </style>

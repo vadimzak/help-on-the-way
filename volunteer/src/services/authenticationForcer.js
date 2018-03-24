@@ -16,7 +16,7 @@ const force = router => {
     } else if (currentRole === 'VOLUNTEER_UNVERIFIED' && [routes.update, routes.verify].indexOf(to.path) === -1) {
       return next(routes.update)
     } else if (currentRole === 'VOLUNTEER' && [routes.login, routes.update, routes.verify].indexOf(to.path) !== -1) {
-      return next('/')
+      return next()
     }
 
     next()

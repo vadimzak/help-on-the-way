@@ -34,3 +34,11 @@ mutation getTicketById($ticketId: BigInt!){
       }
     }
   }`
+
+export const ASSIGN_TICKET = gql`mutation assignTicket($ticketId: BigInt! ) {
+	assignCurrentUserToTicket(input: {
+    ticketId: $ticketId,
+  }){
+    clientMutationId
+  }
+}`

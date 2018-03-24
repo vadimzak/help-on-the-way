@@ -1,6 +1,5 @@
 <template>
   <v-layout column wrap>
-    <h4 class="greeting">היי, {{$store.state.user.name}}, כיף לראות אותך כאן :) </h4>
     <div class="divider-title">
       <div class="divider-text">
  יש לנו עבורך <span class="highlighted"> 5 הזדמנויות </span> לעשות מעשה טוב בדרך שלך
@@ -87,11 +86,7 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  .greeting {
-    text-align: center;
-    width: 100%;
-    margin: 15px 0;
-  }
+
   .divider-title {
     height: 180px;
     position: relative;

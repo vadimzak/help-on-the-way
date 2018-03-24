@@ -1,6 +1,5 @@
 <template>
-  <v-layout column wrap>
-    <h4 class="greeting">היי, {{$store.state.user.name}}, כיף לראות אותך כאן :) </h4>
+  <v-layout row wrap>
     <ticket-preview></ticket-preview>
     <div class="divider-title">
       <img src="static/assets/divider-image.png" class="divider-image">
@@ -9,36 +8,19 @@
         <i class="material-icons">keyboard_arrow_down</i>
       </div>
     </div>
-
-    <div class="related-tickets">
-      <v-list three-line>
-        <template v-for="(ticket, index) in $data.related">
-          <v-list-tile avatar :key="ticket.title" @click="$router.replace('/ticket/'+ticket.id)">
-            <v-list-tile-content>
-              <div class="related-title">
-                <v-list-tile-title v-html="ticket.title"></v-list-tile-title>
-                <v-list-tile-sub-title v-html="ticket.where"></v-list-tile-sub-title>
-              </div>
-              <div class="related-when">
-                {{ticket.when}}
-              </div>
-              <div class="related-duration">
-                {{ticket.durationEta}}
-              </div>
-            </v-list-tile-content>
-          </v-list-tile>
-          <v-divider></v-divider>
-        </template>
-      </v-list>
-    </div>
+    <related-tickets></related-tickets>
   </v-layout>
 </template>
 
 <script>
-import TicketPreview from './TicketPreview'
+  import TicketPreview from './TicketPreview'
+  import RelatedTickets from "./TicketsList.vue";
 
   export default {
-    components: {TicketPreview},
+    components: {
+      RelatedTickets,
+      TicketPreview
+    },
     name: 'Ticket',
     methods: {
       agree: function () {
@@ -78,36 +60,6 @@ import TicketPreview from './TicketPreview'
             'רוזה מצפה לשיחת טלפון ממך'
           ]
         },
-        related: [
-          {
-            title: 'ליווי משה לקניית תרופות',
-            where: 'הרצל פינת פלורנטין, תל אביב',
-            when: 'היום',
-            durationEta: '45 דקות',
-            id: 2,
-          },
-          {
-            title: 'תיקון קומקום לאהרון',
-            where: 'ארלוזורוב, תל אביב',
-            when: 'מחר',
-            durationEta: '30 דקות',
-            id: 3
-          },
-          {
-            title: 'ישיבה לקפה עם קלרה',
-            where: 'קפה city, פלורנטין 78 תל אביב',
-            when: 'מחר',
-            durationEta: '1.5 שעות',
-            id: 4
-          },
-          {
-            title: 'הדרכת מחשב לשרה',
-            where: 'ארלוזורוב, תל אביב',
-            when: 'חמישי',
-            durationEta: '2 שעות',
-            id: 5
-          },
-        ]
       }
     }
   }
@@ -266,34 +218,6 @@ import TicketPreview from './TicketPreview'
 
   .divider-text i {
     display: block;
-  }
-
-  .list__tile__sub-title, .list__tile__title {
-    text-align: right;
-  }
-
-  .list__tile__content {
-    width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-  }
-
-  .related-tickets li:first-of-type {
-    border-right: 6px solid #ff5f5f;
-  }
-
-  .related-tickets li:nth-of-type(2) {
-    border-right: 6px solid #23f7c4;
-  }
-
-  .related-tickets li:nth-of-type(3) {
-    border-right: 6px solid #fff34c;
-  }
-
-  .related-tickets li:nth-of-type(4) {
-    border-right: 6px solid #ff9141;
   }
 
   .divider {

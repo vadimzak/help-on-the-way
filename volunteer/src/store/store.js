@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { GET_BY_ID } from '@/graphql/queries/ticket'
+import { GET_BY_ID, ASSIGN_TICKET } from '@/graphql/queries/ticket'
 import { client as apolloClient } from 'shared/providers/apolloProvider'
 Vue.use(Vuex)
 const state = {
@@ -40,8 +40,11 @@ const actions = {
   async setActiveTicketById ({state, commit}, {id}) {
     const ticket = await getTicketById(id)
     commit('setActiveTicket', ticket)
+  },
+  async assignTicket ({state, commit}, {id}) {
+    const ticket = await assignTicket(id, state.user.id)
   }
-}
+};
 
 const getters = {
   activeTicket: ({activeTicket}) => activeTicket
@@ -58,5 +61,11 @@ async function getTicketById (ticketId) {
   return apolloClient.mutate({
     mutation: GET_BY_ID,
     variables: {ticketId: ticketId}
+  })
+}
+async function assignTicket (ticketId, volunteerId) {
+  return apolloClient.mutate({
+    mutation: ASSIGN_TICKET,
+    variables: {ticketId: ticketId, volunteerId: volunteerId}
   })
 }
