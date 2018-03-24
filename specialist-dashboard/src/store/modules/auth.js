@@ -1,5 +1,3 @@
-import { TicketStatus } from '@/constants/enums/index';
-import categoriesTree from '@/constants/categoriesTree';
 const state = {
     user: null,
 };

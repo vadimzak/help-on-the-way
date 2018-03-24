@@ -1,5 +1,5 @@
 import { TicketStatus } from '@/constants/enums/index';
-import categoriesTree from '@/constants/categoriesTree';
+import categoriesTree from 'shared/constants/categoriesTree';
 const state = {
     categories: categoriesTree,
 };

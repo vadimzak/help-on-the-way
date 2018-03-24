@@ -1,6 +1,6 @@
-import TicketCategory from './TicketCategory';
+import TicketCategory from 'shared/constants/enums/TicketCategory';
 import TicketStatus from './TicketStatus';
-import TicketSubCategory from './TicketSubCategory';
+import TicketSubCategory from 'shared/constants/enums/TicketSubCategory';
 import PersonTypes from './PersonTypes';
 import PersonRelations from './PersonRelationsTypes';
 export {

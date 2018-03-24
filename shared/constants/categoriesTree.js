@@ -1,11 +1,10 @@
 import { TicketSubCategory, TicketCategory } from './enums'
-import categoryToFormMap from './categoryToFormMap'
 function constructTicketCategories() {
     const categories = Object.keys(TicketCategory).map(key => TicketCategory[key]);
     const subCategories = Object.keys(TicketSubCategory).map(key => TicketSubCategory[key]);
     return categories
         .map(category => {
-            const categoryWithSubs = { self: category, form: categoryToFormMap[category.value] };
+            const categoryWithSubs = { self: category };
             const subs = subCategories
                 .filter(subcat => subcat.parent.value === category.value);
             // support direct access to each subcategory by it unqiue value
