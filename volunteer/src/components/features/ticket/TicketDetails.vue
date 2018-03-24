@@ -3,19 +3,18 @@
     <v-card>
       <v-card-media
         class="white--text card-image"
-        height="90px"
-        v-on:click="closePreview">
+        height="90px">
         <v-container fill-height fluid>
           <v-layout fill-height>
             <v-flex xs12 align-end flexbo>
                 <span class="" id="ticket-headline">
-                  {{ticket.description}}
+                  {{ticket | formatTicketTitle}}
                 </span>
               <span class="duration">
-                  {{ticket.durationEta}}
+                  {{timeCount}}
                 </span>
               <span class="hours">
-                 שעות
+                 {{timeUnit}}
               </span>
             </v-flex>
           </v-layout>
@@ -95,34 +94,28 @@
 
 <script>
   export default {
+    props: ['ticket'],
     data() {
       return {
         dialog: false,
       }
     },
-    mounted: function () {
-      this.getTicketById()
+    computed: {
+      timeUnit(){
+        return this.$options.filters.formatMinutes(this.ticket.durationEta).split(' ')[1]
+      },
+      timeCount(){
+        return this.$options.filters.formatMinutes(this.ticket.durationEta).split(' ')[0]
+
+      }
     },
     methods: {
-      getTicketById: function (id) {
-        this.$store.dispatch('setActiveTicketById', {
-          id: this.$route.params.id
-        })
-      },
-      closePreview: function (index) {
-        this.preview = null;
-      },
       assignTicket: function () {
         this.$store.dispatch('assignTicket', {
           id: this.$route.params.id
         })
       }
     },
-    computed: {
-      ticket() {
-        return this.$store.getters.activeTicket || {}
-      }
-    }
   }
 </script>
 
@@ -262,21 +255,7 @@
     display: block;
   }
 
-  .related-tickets li:first-of-type {
-    border-right: 6px solid #ff5f5f;
-  }
-
-  .related-tickets li:nth-of-type(2) {
-    border-right: 6px solid #23f7c4;
-  }
-
-  .related-tickets li:nth-of-type(3) {
-    border-right: 6px solid #fff34c;
-  }
-
-  .related-tickets li:nth-of-type(4) {
-    border-right: 6px solid #ff9141;
-  }
+  
 
   .address {
     display: flex;

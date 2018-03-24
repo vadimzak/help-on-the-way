@@ -12,9 +12,9 @@
 
 <script>
 import { mapState, mapMutations } from 'vuex'
-import {TicketPreview, OpenTicketsList } from '@/components/features/ticket/'
+import { OpenTicketsList } from '@/components/features/ticket/'
 export default {
-  components: { TicketPreview, OpenTicketsList },
+  components: { OpenTicketsList },
     data () { return {} },
   computed: {
     ...mapState(['openTickets'])

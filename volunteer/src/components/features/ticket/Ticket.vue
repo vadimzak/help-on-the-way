@@ -1,6 +1,6 @@
 <template>
   <v-layout row wrap>
-    <ticket-preview></ticket-preview>
+    <TicketDetails v-if="activeTicket" :ticket="activeTicket" />
     <div class="divider-title">
       <img src="static/assets/divider-image.png" class="divider-image">
       <div class="divider-text">
@@ -13,55 +13,37 @@
 </template>
 
 <script>
-  import TicketPreview from './TicketPreview'
+  import TicketDetails from './TicketDetails'
   import RelatedTickets from "./TicketsList.vue";
-
+  import { GET_BY_ID } from '@/graphql/queries/ticket'
+  import { mapState } from 'vuex'
   export default {
     components: {
       RelatedTickets,
-      TicketPreview
+      TicketDetails
     },
-    name: 'Ticket',
-    methods: {
-      agree: function () {
-        console.log('hi')
-      }
-    },
+    methods: {},
     data() {
-      return {
-        ticket: {
-          state: 'summary',
-          title: 'ליווי רוזה לקופת החולים',
-          address: 'הרצל 72, תל אביב',
-          when: {
-            startHour: '17:00',
-            endHour: '20:00',
-            date: '17 בינואר',
-            day: 'ראשון',
-          },
-          description: `He is afraid to climb a ladder alone,
-       due to his physical state. We need someone to go help him`,
-          durationEta: '3 שעות',
-          status: 'open',
-          elder: {
-            name: 'רוזה לוין',
-            age: '70',
-            gender: 'בת'
-          },
-          tags: [
-            {name: 'עזרה בהליכה', icon: 'directions_walk'},
-            {name: 'נסיעה במונית', icon: 'local_taxi'},
-            {name: 'כבד שמיעה', icon: 'hearing'},
-          ],
-          importantInfo: [
-            'רוזה תחכה בתוך הבית',
-            'רוזה משלמת על המונית',
-            'המטפלת של רוזה תצטרף לליווי',
-            'רוזה מצפה לשיחת טלפון ממך'
-          ]
-        },
+      return {}
+    },
+    computed: {
+    ...mapState(['activeTicket'])
+    },
+    apollo: {
+      ticket(){
+          return {
+            query: GET_BY_ID,
+            variables(){
+              return {
+                ticketId: this.$route.params.id,
+              }
+            },
+            update(data){
+              this.$store.commit('setActiveTicket', data.ticket)
+            }
+          }
       }
-    }
+  },
   }
 </script>
 

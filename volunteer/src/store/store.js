@@ -25,8 +25,7 @@ const mutations = {
   logout (state) {
     state.user = null
   },
-  setActiveTicket (state, {data}) {
-    const ticket = get(['getTicketById', 'ticketForVolunteer'], data)
+  setActiveTicket (state, ticket) {
     state.activeTicket = ticket
   },
   updateOpenTickets (state, tickets) {
@@ -56,12 +55,6 @@ export default new Vuex.Store({
   actions
 })
 
-async function getTicketById (ticketId) {
-  return apolloClient.mutate({
-    mutation: GET_BY_ID,
-    variables: {ticketId: ticketId}
-  })
-}
 async function assignTicket (ticketId, volunteerId) {
   return apolloClient.mutate({
     mutation: ASSIGN_TICKET,

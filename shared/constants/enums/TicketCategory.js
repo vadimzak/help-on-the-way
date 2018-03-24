@@ -26,7 +26,7 @@ export default {
     repairs: {
         value: 'REPAIRS',
         text: 'תיקונים',
-        noun: 'תיקון',
+        noun: 'תיקון ',
         color: '#ffeb3b',
         icon: 'icon-settings',
         isIndoor: true,
@@ -34,7 +34,7 @@ export default {
     instructions: {
         value: 'INSTRUCTIONS',
         text: 'הדרכות ותפעול',
-        noun: 'הדרכת',
+        noun: 'הדרכת ',
         color: '#35a7ff',
         icon: 'fa-slideshare',
         isIndoor: true,

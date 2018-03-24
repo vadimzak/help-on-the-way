@@ -14,7 +14,7 @@
                 {{ticket.when}}
               </div>
               <div class="related-duration">
-                {{ticket.durationEta}}
+                {{ticket.durationEta | formatMinutes }}
               </div>
             </v-list-tile-content>
           </v-list-tile>
