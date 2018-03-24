@@ -2,89 +2,27 @@
   <v-layout column wrap>
     <div class="divider-title">
       <div class="divider-text">
- יש לנו עבורך <span class="highlighted"> 5 הזדמנויות </span> לעשות מעשה טוב בדרך שלך
+ יש לנו עבורך <span class="highlighted"> {{openTickets.length}} הזדמנויות </span> לעשות מעשה טוב בדרך שלך
       </div>
       <img src="static/assets/homepage.png" class="divider-image">
     </div>
-
-    <div class="related-tickets">
-      <v-list three-line>
-        <template v-for="(ticket, index) in $data.related">
-          <v-list-tile avatar :key="ticket.title" @click="setPreview(index)" v-if="index !== preview">
-            <v-list-tile-content>
-              <div class="related-title">
-                <v-list-tile-title v-html="ticket.title"></v-list-tile-title>
-                <v-list-tile-sub-title v-html="ticket.where"></v-list-tile-sub-title>
-              </div>
-              <div class="related-when">
-                {{ticket.when}}
-              </div>
-              <div class="related-duration">
-                {{ticket.durationEta}}
-              </div>
-            </v-list-tile-content>
-          </v-list-tile>
-          <ticket-preview v-else :closePreview="closePreview"></ticket-preview>
-          <v-divider></v-divider>
-        </template>
-      </v-list>
-    </div>
+        <OpenTicketsList/>
   </v-layout>
 </template>
 
 <script>
-import TicketPreview from './TicketPreview'
-
+import { mapState, mapMutations } from 'vuex'
+import {TicketPreview, OpenTicketsList } from '@/components/features/ticket/'
 export default {
-  name: 'Welcome',
-  components: { TicketPreview },
-  methods: {
-    setPreview: function(index) {
-      this.preview = index !== this.preview ? index : null;
-    },
-    closePreview: function(index) {
-      this.preview = null;
-    }
+  components: { TicketPreview, OpenTicketsList },
+    data () { return {} },
+  computed: {
+    ...mapState(['openTickets'])
   },
-  data () {
-    return {
-      preview: null,
-      related: [
-        {
-          title: 'ליווי משה לקניית תרופות',
-          where: 'הרצל פינת פלורנטין, תל אביב',
-          when: 'היום',
-          durationEta: '45 דקות',
-          id: 2,
-        },
-        {
-          title: 'תיקון קומקום לאהרון',
-          where: 'ארלוזורוב, תל אביב',
-          when: 'מחר',
-          durationEta: '30 דקות',
-          id: 3
-        },
-        {
-          title: 'ישיבה לקפה עם קלרה',
-          where: 'קפה city, פלורנטין 78 תל אביב',
-          when: 'מחר',
-          durationEta: '1.5 שעות',
-          id: 4
-        },
-        {
-          title: 'הדרכת מחשב לשרה',
-          where: 'ארלוזורוב, תל אביב',
-          when: 'חמישי',
-          durationEta: '2 שעות',
-          id: 5
-        },
-      ]
-    }
-  }
+  methods: {}
 }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
   .divider-title {

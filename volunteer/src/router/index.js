@@ -1,8 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// index.js or main.js
 import Welcome from '@/components/Welcome'
-import Ticket from '@/components/Ticket'
+import Ticket from '@/components/features/ticket/Ticket'
 import authenticationForcer from '../services/authenticationForcer'
 import { routes as loginRoutes } from './login'
 Vue.use(Router)

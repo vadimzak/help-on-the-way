@@ -12,6 +12,7 @@ import momentSetup from 'shared/providers/moment'
 import 'shared/initializers/facebookRedirectHashFixer'
 import vueResourceSetup from 'shared/providers/vueResource'
 import authPlugin from 'shared/providers/authProvider'
+import './filters'
 Vue.config.productionTip = false
 Vue.use(vueResourceSetup)
 Vue.use(Vuetify)

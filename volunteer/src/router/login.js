@@ -1,6 +1,6 @@
-import Login from '@/components/Login'
-import LoginUpdate from '@/components/LoginUpdate'
-import LoginVerify from '@/components/LoginVerify'
+import Login from '@/components/features/auth/Login'
+import LoginUpdate from '@/components/features/auth/LoginUpdate'
+import LoginVerify from '@/components/features/auth/LoginVerify'
 
 const paths = {
   login: '/login',

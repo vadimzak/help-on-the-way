@@ -13,9 +13,9 @@
 </template>
 
 <script>
-  import AppHeader from './components/AppHeader.vue'
-  import AppSidenav from './components/AppSidenav.vue'
-  import AppFooter from './components/AppFooter.vue'
+  import AppHeader from './components/layout/AppHeader.vue'
+  import AppSidenav from './components/layout/AppSidenav.vue'
+  import AppFooter from './components/layout/AppFooter.vue'
 
   export default {
     components: {

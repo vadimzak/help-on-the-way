@@ -100,7 +100,6 @@
         dialog: false,
       }
     },
-    name: "ticket-preview",
     mounted: function () {
       this.getTicketById()
     },

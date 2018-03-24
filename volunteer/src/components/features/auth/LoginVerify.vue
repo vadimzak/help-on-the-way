@@ -2,38 +2,32 @@
   <v-layout column wrap>
     <form class="container">
       <img src="static/assets/sms.png" class="sms">
-      <h2>הכנס את מס' הנייד שלך לצורך אימות</h2>
-      <input type="number"
-        required
-        v-model="phoneNumber"
-        ref="number"
-        placeholder="05*-*******"
-      />
-      <v-btn @click="submit()" color="success">שלח קוד</v-btn>
+      <h2>אנא הכנס את הקוד שנשלח בSMS</h2>
+      <input type="text" name="verificationCode" v-model="verificationCode" />
+      <v-btn @click="submit()" color="success">אישור</v-btn>
 
     </form>
   </v-layout>
 </template>
 
 <script>
-import config from '../services/config';
-import { paths as loginRoutes } from '../router/login';
+import config from '@/services/config';
+import loginRoutes from '@/router/login';
 
 export default {
-	name: 'LoginUpdate',
 	data() {
 		return {
-			phoneNumber: ''
+			verificationCode: ''
 		};
 	},
 	methods: {
 		submit: async function() {
 			this.$http
-				.post(`${config.SERVER_BASE_URL}/phone/update`, {
-					phoneNumber: this.phoneNumber
+				.post(`${config.SERVER_BASE_URL}/phone/verify`, {
+					verificationCode: this.verificationCode
 				})
 				.then(({ status, body }) => {
-					this.$router.push(loginRoutes.verify);
+					window.location.href = '/';
 				})
 				.catch(({ status, body }) => {
 					alert(body);

@@ -7,8 +7,7 @@ const state = {
   user: null,
   count: 0,
   menuOpen: false,
-  tickets: [],
-  ticketToMove: undefined,
+  openTickets: [],
   activeTicket: undefined
 }
 
@@ -29,14 +28,14 @@ const mutations = {
   setActiveTicket (state, {data}) {
     const ticket = get(['getTicketById', 'ticketForVolunteer'], data)
     state.activeTicket = ticket
+  },
+  updateOpenTickets (state, tickets) {
+    state.openTickets = tickets
   }
 }
 
 const actions = {
   toggleMenu: ({commit}) => commit('toggleMenu'),
-  async fetchTickets () {
-    const tickets = await getTickets()
-  },
   async setActiveTicketById ({state, commit}, {id}) {
     const ticket = await getTicketById(id)
     commit('setActiveTicket', ticket)

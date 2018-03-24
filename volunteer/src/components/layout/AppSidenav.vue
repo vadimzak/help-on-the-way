@@ -47,8 +47,7 @@
   </v-navigation-drawer></template>
 
 <script>
-import config from "../services/config";
-import store from "../store/store";
+import config from "@/services/config";
 
 export default {
   name: 'AppSidenav',
@@ -59,7 +58,7 @@ export default {
   },
   methods:{
     logout : function () {
-     store.commit('logout');
+     this.$store.commit('logout');
      window.location.href =  `${this.SERVER_BASE_URL}/logout/`
     }
   }

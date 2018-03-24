@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import config from '../services/config';
+import config from '@/services/config';
 
 export default {
   components: {  },

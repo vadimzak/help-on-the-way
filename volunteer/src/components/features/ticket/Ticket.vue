@@ -8,7 +8,7 @@
         <i class="material-icons">keyboard_arrow_down</i>
       </div>
     </div>
-    <related-tickets></related-tickets>
+    <RelatedTickets/>
   </v-layout>
 </template>
 
