@@ -2,7 +2,7 @@
     <div class="related-tickets">
       <v-list three-line>
         <template v-for="(ticket, index) in openTickets">
-          <v-list-tile avatar :key="index" @click="$router.replace('/ticket/'+ticket.id)">
+          <v-list-tile avatar :style="getStyle(ticket)" :key="index" @click="$router.replace('/ticket/'+ticket.id)">
             <v-list-tile-content>
               <div class="related-title">
                 <v-list-tile-title>
@@ -35,17 +35,14 @@
       exclude : Array,
     },
     data(){
-      return {
-        preview: null,
-      }
+      return {}
     },
     methods: {
-      setPreview: function(index) {
-        this.preview = index !== this.preview ? index : null;
-      },
-      closePreview: function(index) {
-        this.preview = null;
-      },
+      getStyle(ticket){
+        return {
+          '--category-color': categoriesTree[ticket.category].self.color,
+        }
+      }
     },
     computed: {
       ...mapState(['openTickets'])
