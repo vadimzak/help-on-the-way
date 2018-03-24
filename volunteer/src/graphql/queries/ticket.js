@@ -2,7 +2,10 @@ import gql from 'graphql-tag'
 
 const ticketFieldsFragment = `
 fragment ticketFields on TicketForVolunteer {
-  description,
+    id,
+    category,
+    subCategory,
+    description,
     durationEta,
     dueDate,
     status,
@@ -15,15 +18,11 @@ fragment ticketFields on TicketForVolunteer {
 `
 
 export const GET_BY_ID = gql`
-mutation getTicketById($ticketId: BigInt!){
-    getTicketById(input: {
-      ticketId: $ticketId
-    }) {
-      ticketForVolunteer{
+query getTicketByIdForVolunteer($ticketId: BigInt!){
+  ticket: getTicketByIdForVolunteer(ticketId: $ticketId){
         ...ticketFields
-      }
-    }
   }
+}
   ${ticketFieldsFragment}
   `
 
