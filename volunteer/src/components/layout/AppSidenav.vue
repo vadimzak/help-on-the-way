@@ -11,7 +11,7 @@
           <h3>היי {{$store.state.user.name}} :)</h3>
         </v-list-tile-content>
       </v-list-tile>
-      <v-list-tile @click="">
+      <v-list-tile @click="$router.replace('/')">
         <v-list-tile-action>
           <v-icon>home</v-icon>
         </v-list-tile-action>
@@ -19,12 +19,12 @@
           <v-list-tile-title>דף הבית</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
-      <v-list-tile @click="">
+      <v-list-tile @click="$router.replace('/mine')">
         <v-list-tile-action>
           <v-icon>home</v-icon>
         </v-list-tile-action>
         <v-list-tile-content>
-          <v-list-tile-title @click="$router.replace('/mine')">הכרטיסים שלך</v-list-tile-title>
+          <v-list-tile-title>הכרטיסים שלך</v-list-tile-title>
         </v-list-tile-content>
       </v-list-tile>
       <v-list-tile @click="">
