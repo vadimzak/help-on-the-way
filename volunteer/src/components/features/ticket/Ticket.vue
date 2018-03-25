@@ -1,6 +1,6 @@
 <template>
-  <v-layout row wrap>
-    <TicketDetails v-if="activeTicket" :ticket="activeTicket" />
+  <v-layout column wrap>
+    <TicketPreview v-if="activeTicket" :ticket="activeTicket" />
     <div class="divider-title">
       <img src="static/assets/divider-image.png" class="divider-image">
       <div class="divider-text">
@@ -8,19 +8,19 @@
         <i class="material-icons">keyboard_arrow_down</i>
       </div>
     </div>
-    <RelatedTickets/>
+    <RelatedTickets :excludeIds="[activeTicket.id]" />
   </v-layout>
 </template>
 
 <script>
-  import TicketDetails from './TicketDetails'
+  import TicketPreview from './TicketPreview'
   import RelatedTickets from "./TicketsList.vue";
   import { GET_BY_ID } from '@/graphql/queries/ticket'
   import { mapState } from 'vuex'
   export default {
     components: {
       RelatedTickets,
-      TicketDetails
+      TicketPreview
     },
     methods: {},
     data() {

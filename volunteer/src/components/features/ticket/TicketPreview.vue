@@ -2,6 +2,7 @@
   <v-flex>
     <v-card>
       <v-card-media
+        @click=" closePreview ? closePreview() : void 0"
         class="white--text card-image"
         height="90px">
         <v-container fill-height fluid>
@@ -94,7 +95,7 @@
 
 <script>
   export default {
-    props: ['ticket'],
+    props: ['ticket', 'closePreview'],
     data() {
       return {
         dialog: false,
@@ -132,9 +133,6 @@
     line-height: 32px;
     letter-spacing: -1px;
     font-weight: bold;
-  }
-
-  .card-content {
   }
 
   .card-content ul {

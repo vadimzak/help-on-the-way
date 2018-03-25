@@ -1,6 +1,6 @@
 import OpenTicketsList from './TicketsList'
-import TicketDetails from './TicketDetails'
+import TicketPreview from './TicketPreview'
 export {
   OpenTicketsList,
-  TicketDetails
+  TicketPreview
 }

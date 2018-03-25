@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { GET_BY_ID, ASSIGN_TICKET } from '@/graphql/queries/ticket'
+import { ASSIGN_TICKET } from '@/graphql/queries/ticket'
 import { client as apolloClient } from 'shared/providers/apolloProvider'
 Vue.use(Vuex)
 const state = {
@@ -10,10 +10,6 @@ const state = {
   openTickets: [],
   activeTicket: undefined
 }
-
-const get = (path, object) =>
-  path.reduce((xs, x) =>
-    (xs && xs[x]) ? xs[x] : null, object)
 
 const mutations = {
   toggleMenu (state) {
@@ -35,14 +31,10 @@ const mutations = {
 
 const actions = {
   toggleMenu: ({commit}) => commit('toggleMenu'),
-  async setActiveTicketById ({state, commit}, {id}) {
-    const ticket = await getTicketById(id)
-    commit('setActiveTicket', ticket)
-  },
   async assignTicket ({state, commit}, {id}) {
-    const ticket = await assignTicket(id, state.user.id)
+    return assignTicket(id, state.user.id)
   }
-};
+}
 
 const getters = {
   activeTicket: ({activeTicket}) => activeTicket
