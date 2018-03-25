@@ -1,12 +1,11 @@
 <template>
   <div>
-      <b-row>
+      <b-row v-if="!this.ticket.isIndoor">
         <b-col cols="12">
-        <h3>פרטים נוספים</h3>
-        <p class="small">הזן פרטים נוספים הנחוצים למתנדב על מנת לבצע את הפניה.</p>
+        <h4>לאן</h4>
         </b-col>
         <b-col cols="12" class="justify-content-center d-flex">
-            <textarea v-model="description" class="w-100"></textarea>
+           <InputAddress class="w-100" :keepOpen="true" name="address" v-validate="'address'" v-model="address"/>
         </b-col>
       </b-row>
       <b-row>
@@ -17,25 +16,37 @@
            <DurationPicker v-model="durationEta"/>
         </b-col>
       </b-row>
+      <b-row>
+        <b-col cols="12">
+        <h3>פרטים נוספים</h3>
+        <p class="small">הזן פרטים נוספים הנחוצים למתנדב על מנת לבצע את הפניה.</p>
+        </b-col>
+        <b-col cols="12" class="justify-content-center d-flex">
+            <textarea v-model="description" class="w-100"></textarea>
+        </b-col>
+      </b-row>
+
   </div>
 </template>
 <script>
 import _ from 'lodash';
 import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
 import DurationPicker from '@/components/inputs/DurationPicker'
+import InputAddress from '@/components/InputAddress'
+
 export default {
-  components: { DurationPicker },
+  components: { DurationPicker, InputAddress },
   data() {
     return {}
   },
     computed: {
         durationEta: {
             get(){
-                return this.ticket.details.description;
+                return this.ticket.durationEta;
             },
             set(val){
-                this.$emit('canContinue', !!val);
                 this.updateTicket({ durationEta: val })
+                this.checkCanContinue()
             }
         },
         description: {
@@ -48,9 +59,25 @@ export default {
                 } });
             }
         },
+        address: {
+            get(){
+                return this.ticket.details.address;
+            },
+            set(val){
+                this.updateTicket({ details: {
+                    address: val
+                } });
+                this.checkCanContinue()
+            }
+        },
       ...mapState('createTicket', ['ticket']),
   },
   methods: {
+      checkCanContinue(){
+        if(this.durationEta && this.address){
+            this.$emit('canContinue', true);
+        }
+      },
     ...mapMutations('createTicket', ['updateTicket'])
   }
 }
