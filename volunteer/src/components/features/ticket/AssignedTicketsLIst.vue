@@ -1,5 +1,5 @@
 <template>
-     <TicketsList :tickets="assignedTickets" />
+     <TicketsList :goToTicketOnClick="true" :tickets="assignedTickets" />
 </template>
 <script>
 import { GET_ASSIGNED_TICKETS } from '@/graphql/queries/ticket'
