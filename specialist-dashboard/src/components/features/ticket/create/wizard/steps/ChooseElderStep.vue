@@ -12,8 +12,8 @@ export default {
   data() {
     return {}
   },
-  methods: {
-      onElderSelect(elder) {
+  methods:{
+        onElderSelect(elder) {
           this.$emit('update', { elder });
           this.$emit('next');
       }

@@ -15,4 +15,7 @@ body{
   direction: rtl;
   text-align: right;
 }
+.content{
+  margin: 0 auto;
+}
 </style>

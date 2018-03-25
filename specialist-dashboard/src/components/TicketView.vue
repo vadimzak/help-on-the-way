@@ -1,14 +1,13 @@
 <template>
   <div v-if="ticket" class="ticket-preview">
-    <div class="table-header"></div>
     <div class="ticket-tabs">
-      <div v-on:click="changeView('elderDetailsView')" class="col p-2 elder-tab-button">
+      <div v-bind:class="{'active': selectedView =='elderDetailsView'}" v-on:click="changeView('elderDetailsView')" class="col p-2 elder-tab-button">
         <span>פרטי הזקן</span>
       </div>
-      <div v-on:click="changeView('ticketDetailsView')" class="col p-2 ticket-tab-button">
+      <div v-bind:class="{'active': selectedView == 'ticketDetailsView'}" v-on:click="changeView('ticketDetailsView')" class="col p-2 ticket-tab-button">
         <span>פרטי הפנייה</span>
       </div>
-      <div v-on:click="changeView('volunteerDetailsView')" class="col p-2 volunteer-tab-button">
+      <div v-bind:class="{'active': selectedView == 'volunteerDetailsView'}" v-on:click="changeView('volunteerDetailsView')" class="col p-2 volunteer-tab-button">
         <span>פרטי המתנדב</span>
       </div>
     </div>
@@ -25,23 +24,22 @@
         <span>{{ticket.personByElderId.addressByAddressId.houseNumber}}</span>
       </div>
     </div>
-    <div v-if="selectedView=='ticketDetailsView'" class="ticket-details">
-      <div class="ticket-detail p-2">
+    <div v-if="selectedView=='ticketDetailsView'" class="ticket-details p-4">
+      <div class="ticket-detail p-4">
         <span class="ticket-sub-header">מספר פניה</span>
         <div>
            {{ticket.id}}
         </div>
-          <i class="icon icon-contract"></i>
       </div>
-      <div class="ticket-detail p-2">
+      <div class="ticket-detail p-4">
         <span class="ticket-sub-header"> נפתח על ידי</span>
         <editable-input v-bind:icon="'fa fa-pencil'" v-bind:valueChanged="updateTicketIssuingInstitue"  v-bind:value="ticket.issuingInstitue"></editable-input>
       </div>
-      <div class="ticket-detail p-2">
+      <div class="ticket-detail p-4">
         <span class="description-header ticket-sub-header">תיאור הפנייה</span>
         <editable-input v-bind:icon="'fa fa-pencil'" v-bind:valueChanged="updateTicketDescription"  v-bind:value="ticket.description"></editable-input>
       </div>
-          <div class="start-location-details location-details">
+          <div class="start-location-details ticket-detail p-4 location-details">
             <div class="start-location-icon ticket-location-details-icon">
             <i class="fa fa-map-marker"></i>
             </div>
@@ -53,8 +51,8 @@
               <input-address  v-model="startAddress"></input-address>
             </div>
             </div>
-          </div>
-          <div class="destination-location-details location-details">
+            </div>
+          <div class="destination-location-details ticket-detail p-4 location-details">
           <div class="destination-location-icon ticket-location-details-icon">
             <i class="fa fa-compass"></i>
           </div>
@@ -67,7 +65,7 @@
             </div>
           </div>
           </div>
-          <div class="end-location-details location-details">
+          <div class="end-location-details ticket-detail p-4 location-details">
               <div class="start-location-icon ticket-location-details-icon">
             <i class="fa fa-map-marker"></i>
             </div>
@@ -79,8 +77,7 @@
               <input-address v-model="endAddress"></input-address>
             </div>
             </div>
-          </div>
-      </div>
+            </div>
     <div v-if="selectedView=='volunteerDetailsView'" class="volunteers-details">
       <div v-for="volunteer in ticket.ticketMatchedVolunteersByTicketId.nodes" class="volunteer-view">
         <div class="volunteer-name">
@@ -95,6 +92,7 @@
           <span>{{volunteer.addressByAddressId.houseNumber}}</span>
         </div>
       </div>
+    </div>
     </div>
 
   </div>
@@ -191,8 +189,8 @@
 
 <style scoped>
   .ticket-preview {
-    background-color: #e6eeff;
-        height: 86vh;
+    background-color: #f4f4f4;
+    font-family: 'Open Sans Hebrew'
   }
 
   .location-details{
@@ -203,13 +201,11 @@
 
   .ticket-location-details-icon {
     flex: 1 0 0;
-    text-align: center;
     justify-content: center;
-    align-self: center;
 }
 
 .ticket-location-details{
-  flex: 7 0 0;
+  flex: 12 0 0;
 }
 
   .start-location-details {
@@ -222,20 +218,9 @@
   }
 
   .elder-tab-button, .ticket-tab-button, .volunteer-tab-button {
-    border-bottom: solid 1px #3b3a30;
-    border-top: none;
-    display: inline-block;
-    width: 30%;
     text-align: center;
-    font-weight: 100;
     cursor: pointer;
     
-  }
-
-  .ticket-tab-button{
-   border-right: solid 1px #9fa9a3;
-   border-left: solid 1px #9fa9a3;
-
   }
 
   .volunteer-view {
@@ -245,7 +230,13 @@
   .ticket-tabs {
     margin-right: 0;
     display: flex;
-  }
+    height: 35px;
+    background-color: #ffffff;
+     }
+
+     .ticket-tabs .active{
+       background-color: #f4f4f4;
+     }
 
   .table-header{
     background-color: #3b3a30;
@@ -253,7 +244,13 @@
     height: 35px;
   }
   .ticket-detail{
-    border-bottom: solid 1px #9fa9a3;
+    border-bottom: solid 1px #cfcfcf;
+  }
+
+  .ticket-detail i{
+    font-size:23px;
+    text-align: right;
+    color: #888888;    
   }
 
   .icon-contract{

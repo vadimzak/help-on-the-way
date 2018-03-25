@@ -62,7 +62,6 @@ export const ALL_TICKETS_QUERY = gql`{
         }
         description
         durationEta
-        issuingInstitue
         dueDate
         addressByDestinationAddressId {
           id

@@ -3,12 +3,12 @@
     <div>
       <app-header />
     </div>
-    <div id="app" class="container">
+    <div id="app" class="container-fluid">
       <div class="row">
-        <div class="col-2 h-100">
+        <div class="col-1">
           <side-bar />
         </div>
-        <div class="col-10 pl-0">
+        <div class="col-10 content pl-0">
           <router-view/>
         </div>
       </div>

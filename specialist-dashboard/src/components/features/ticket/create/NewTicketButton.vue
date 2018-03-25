@@ -1,9 +1,9 @@
 <template>
-<div>
+<div class="col-2">
     <FloatingScreen target="ticket-btn">
       <TicketWizard></TicketWizard>
     </FloatingScreen>
-    <div id="ticket-btn" class="ticket-btn p-4 h4">פניה חדשה</div>
+    <div id="ticket-btn" class="ticket-btn p-4 h4"> + פניה חדשה</div>
 </div>
 </template>
 
@@ -17,9 +17,17 @@ export default {
 
 <style scoped>
 .ticket-btn{
+  border-radius: 1px;
+  background-color: #299dff;
+  box-shadow: 0px 5px 14.9px 1.1px rgba(142, 142, 142, 0.26);
+  font-family:  'Open Sans Hebrew';
+  font-size: 30px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
   text-align: center;
-  background-color: #e6eeff;
-  cursor: pointer;
+  color: #ffffff;
 }
 
 </style>

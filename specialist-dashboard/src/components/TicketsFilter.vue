@@ -1,42 +1,22 @@
 <template>
   <div v-if="selectedFilter" id="filters" class="row">
-    <div class="button-filters col-12 row">
+    <div class="button-filters justify-content-between col-12 row">
       <div v-for="filter in buttonFilters"
            v-bind:class="{'active': filter.name==selectedFilter.name}"
-           class="button-filter col"
+           class="button-filter d-flex flex-row col-2 p-0"
            v-on:click="selectedFilterChanged(filter)">
-        <span class="filter-text">{{filter.name}} {{ filter.count }}</span>
+              <span class="filter-count"> {{ filter.count }}</span>
+        <span class="filter-text">{{filter.name}}</span>
       </div>
-         <div v-bind:class="{'active-drop-down' : isDropDownFiltersSelected()}" class="drop-down-filters col">
-      <multiselect @input="dropDownFilterSelected"
-                   v-model="selectedDropDownFilter"
-                   :options="dropDownFilters"
-                   :maxHeight=500
-                   :searchable="false"
-                   :close-on-select="true"
-                   :allow-empty="true"
-                   label="name"
-                   selectLabel=""
-                   selectedLabel=""
-                   deselectLabel=""
-                   openDirection="below"
-                   :placeholder="placeHolderText"
-                   :custom-label="dropDownFilterLabel"
-                   track-by="name"></multiselect>
-    </div>
     </div>
   </div>
 </template>
 
 <script>
 
-import Multiselect from 'vue-multiselect'
-
 export default {
-  components: { Multiselect },
   props: {
     buttonFilters: Array,
-    dropDownFilters: Array,
     filterChanged: Function
   },
   created() {
@@ -48,33 +28,12 @@ export default {
   methods: {
     selectedFilterChanged: function(filter) {
       this.selectedFilter = filter;
-      this.selectedDropDownFilter = {};
       this.filterChanged(filter);
     },
-    dropDownFilterLabel: function(filter) {
-      return filter.name ? `${filter.name}  ${filter.count} ` : this.placeHolderText;
-    },
-    dropDownFilterSelected: function(drop) {
-      this.selectedFilter = {};
-      this.filterChanged(this.selectedDropDownFilter);
-    },
-    isDropDownFiltersSelected: function() {
-      if (!this.selectedDropDownFilter.name) {
-        return false;
-      }
-      for (let i = 0; i < this.dropDownFilters.length; i++) {
-        if (this.dropDownFilters[i].name == this.selectedDropDownFilter.name) {
-            return true;
-        }
-      }
-      return false;
-    }
   },
   data () {
     return {
       selectedFilter: {},
-      selectedDropDownFilter: {},
-      placeHolderText: 'פילטורים נוספים'
     }
   },
 }
@@ -85,10 +44,9 @@ export default {
   }
 
   .button-filter {
-    background-color: white;
-    border: 1px solid black;
-    color: black;
     cursor: pointer;
+    background-color: #ffffff;
+    box-shadow: 0px 5px 14.9px 1.1px rgba(142, 142, 142, 0.08);
   }
 
   .active-drop-down {
@@ -97,9 +55,37 @@ export default {
   }
 
   .active {
-    background-color: gray;
-    color: white;
+    color: #0089fd;
+    box-shadow: 0px 5px 14.9px 1.1px rgba(106, 183, 248, 0.24);
+  }
+  .active .filter-count{
+    background-color: #0089fd;
+  }
+
+  .filter-text{
+    flex: 2 0 0;
+    -webkit-box-flex: 2;
+    -ms-flex: 2 0 0px;
+    flex: 2 0 0;
+    font-family: 'Open Sans Hebrew';
+    align-self: center;
+    text-align: center;
+  }
+  .filter-count{
+    -webkit-box-flex: 1;
+    -ms-flex: 1 0 0px;
+    flex: 1 0 0;
+    align-self: center;
+    text-align: center;
+    font-size: 50px;
+    font-family: 'Open Sans Hebrew';
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    letter-spacing: -7.2px;
+    background-color: #e7e7e7;
+    color: #ffffff;
+    box-shadow: 0px 5px 14.9px 1.1px rgba(142, 142, 142, 0.08);
   }
 
 </style>
-<style src="vue-multiselect/dist/vue-multiselect.min.css"></style>

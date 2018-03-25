@@ -52,7 +52,7 @@
     justify-content: space-between;
   } 
  .icon{
-     color:  #6699ff;
+     color:  #0089fd;
      padding: 0px 0px 10px 5px;
   }
 

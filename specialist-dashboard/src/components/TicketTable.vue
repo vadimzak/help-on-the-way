@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="tickets-table">
     <div class="row table-header center-text">
       <div class="col">
         שם הזקן
@@ -15,22 +15,13 @@
       </div>
     </div>
     <div class="row ticket" v-bind:class="{'active': ticket.id == selectedTicket.id}" v-for="ticket in tickets" v-bind:key="ticket.id" v-on:click="onTicketClicked(ticket)">
-      <div class="col-3 ticket-cell elder-name-cell">
-        <input class="radio" name='elder' type="radio"/>
+      <div class="col d-flex justify-content-center ticket-cell elder-name-cell">
         <span class="elder-name">{{ticket.personByElderId.firstName}} {{ticket.personByElderId.lastName}}</span>
       </div>
-      <div class="col-3 ticket-cell">
-
+      <div class="col d-flex justify-content-center ticket-cell">
+            הכנת אוכל
       </div>
-      <div class="col-3 ticket-cell">
-        <div class="phone-icons">
-          <div class="home-phone">
-            <i class="fa fa-phone"></i>
-          </div>
-          <div class="cell-phone">
-            <i class="fa fa-mobile"></i>
-          </div>
-        </div>
+      <div class="col d-flex justify-content-center ticket-cell">
         <div class="phone-numbers">
           <div class="cell-phone">
             <span></span>
@@ -40,15 +31,7 @@
           </div>
         </div>
       </div>
-      <div class="col-3 ticket-cell">
-        <div class="date-icons">
-          <div class="calender">
-            <i class="fa fa-calendar-o"></i>
-          </div>
-          <div class="clock">
-            <i class="fa fa-clock-o"></i>
-          </div>
-        </div>
+      <div class="col d-flex justify-content-center ticket-cell">
         <div class="ticket-dates">
           <div class="due-date">
             <span> {{ticket.dueDate | formatDate}} </span>
@@ -71,15 +54,19 @@ export default {
 
 
 <style scoped>
+.tickets-table{
+   font-family: 'Open Sans Hebrew'
+}
   .active {
-    background-color: #e6eeff;
+    background-color: #f4f4f4;
   }
 
   .ticket{
-    border-bottom: solid 1px #9fa9a3;
-    border-collapse: collapse;
-    border-left: solid 1px #9fa9a3;
     padding: 10px 0 10px 0;
+    border-top: 2px solid #f4f4f4;
+  }
+  .ticket:first-of-type{
+        border-top: 2px solid #f4f4f4;
   }
 
   .ell-phone {
@@ -101,10 +88,14 @@ export default {
 
   .due-date {
     word-wrap: break-word;
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
   }
   .table-header{
-    background-color: #3b3a30;
-    color: white;
+    background-color: #ffffff;
+    color: black;
     height: 35px;
     white-space: nowrap;
     align-items: center
@@ -117,6 +108,11 @@ export default {
   }
   .elder-name{
     padding: 0 10px 0px 0;
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    text-align: center;
   }
   .radio{
     align-self: center;

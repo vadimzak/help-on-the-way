@@ -1,21 +1,27 @@
 <template>
   <div id="side-bar" class="pt-3">
-     <NewTicketButton/>
-    <ul class="h4">
+    <ul class="h4 p-0">
       <li class="side-list-item mt-5">
-        <router-link to="/" append class="nav-link">מסך ראשי</router-link>
+        <router-link to="/" class="nav-link" :class="{active: this.$route.name == 'TicketsView' }"><i class="material-icons">home</i></router-link>
       </li>
+ 
       <li class="side-list-item">
-        <router-link to="/volunteers" append class="nav-link">מתנדבים</router-link>
+        <router-link to="/volunteers" class="nav-link" :class="{active: this.$route.name == 'VolunteerView' }"><i class="fa icon-human-resources"></i></router-link>
       </li>
-      <li class="side-list-item">
+      <!-- <li class="side-list-item">
         <a class="nav-link" href="#">קבוצות מתנדבים</a>
-      </li>
+      </li> -->
       <li class="side-list-item">
-        <a class="nav-link" href="#">זקנים</a>
+        <a class="nav-link" href="#"><i class="fa icon-old-man-with-cane"></i></a>
       </li>
+      <!-- <li class="side-list-item">
+        <router-link to="/tags" class="nav-link"  :class="{active: this.$route.name == 'TagManager' }">ניהול תגיות</router-link>
+      </li> -->
+      <!-- <li class="side-list-item">
+        <a class="nav-link" href="#">מפה</a>
+      </li> -->
       <li class="side-list-item">
-        <router-link to="/kitchenSink" class="nav-link">דוגמאות של חתיכות מהממשק</router-link>
+        <router-link to="/kitchenSink" class="nav-link" :class="{active: this.$route.name == 'KitchenSink' }"><i class="fa icon-prayer"></i></router-link>
       </li>
     </ul>
   </div>
@@ -26,12 +32,6 @@ import NewTicketButton from '@/components/features/ticket/create/NewTicketButton
 export default {
  components: { NewTicketButton },
   methods: {
-    setNewTikcetModal(modalRef){
-      this.ticketModal = modalRef;
-    },
-    showTicketModal(){
-      this.ticketModal.show();
-    }
   },
   created(){
   }
@@ -41,8 +41,9 @@ export default {
 <style scoped>
 
 #side-bar{
-  background-color: black;
-  height: 93vh;
+  height: 100vh;
+    background-color: #ffffff;
+    box-shadow: 0px 2px 38px 0 rgba(39, 39, 39, 0.06);
 }
 
 #side-bar ul{
@@ -53,10 +54,16 @@ export default {
   padding: 0.5em 0em 0.5em 0em;
 }
 .side-list-item a{
-  color: #eee;
+  color:  #c2c2c2;
+      text-align: center;
 }
 
-.side-list-item a.router-link-exact-active{
-  color: yellow;
+.side-list-item i{
+  text-align: center;
+  color:  #c2c2c2;
+      font-size: 44px;
+}
+.router-link-active i{
+  color: #0089fd;
 }
 </style>
