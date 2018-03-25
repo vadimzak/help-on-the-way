@@ -1,6 +1,6 @@
 <template>
   <v-layout column wrap>
-    <TicketPreview v-if="activeTicket" :ticket="activeTicket" />
+    <TicketPreview :ticket="activeTicket" />
     <div class="divider-title">
       <img src="static/assets/divider-image.png" class="divider-image">
       <div class="divider-text">
@@ -29,21 +29,6 @@
     computed: {
     ...mapState(['activeTicket'])
     },
-    apollo: {
-      ticket(){
-          return {
-            query: GET_BY_ID,
-            variables(){
-              return {
-                ticketId: this.$route.params.id,
-              }
-            },
-            update(data){
-              this.$store.commit('setActiveTicket', data.ticket)
-            }
-          }
-      }
-  },
   }
 </script>
 

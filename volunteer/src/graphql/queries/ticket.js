@@ -9,7 +9,6 @@ fragment ticketFields on TicketForVolunteer {
     durationEta,
     dueDate,
     status,
-    maxVolunteers,
     elder,
     startAddress,
     destinationAddress,
@@ -20,7 +19,9 @@ fragment ticketFields on TicketForVolunteer {
 export const GET_BY_ID = gql`
 query getTicketByIdForVolunteer($ticketId: BigInt!){
   ticket: getTicketByIdForVolunteer(ticketId: $ticketId){
+        assignedVolunteers,
         ...ticketFields
+        
   }
 }
   ${ticketFieldsFragment}

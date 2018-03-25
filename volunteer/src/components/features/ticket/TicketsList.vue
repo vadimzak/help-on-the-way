@@ -37,7 +37,7 @@
     },
     props: {
       excludeIds: {
-        default: [],
+        default: () => [],
         type: Array
         },
       goToTicketOnClick: Boolean, // if true when we click on a ticket it should go to the ticket route instead of opening the preview

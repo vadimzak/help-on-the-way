@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { ASSIGN_TICKET } from '@/graphql/queries/ticket'
+import { ASSIGN_TICKET, GET_BY_ID } from '@/graphql/queries/ticket'
 import { client as apolloClient } from 'shared/providers/apolloProvider'
 Vue.use(Vuex)
 const state = {
@@ -33,12 +33,13 @@ const actions = {
   toggleMenu: ({commit}) => commit('toggleMenu'),
   async assignTicket ({state, commit}, {id}) {
     return assignTicket(id, state.user.id)
+  },
+  async getTicketById ({ commit }, ticketId) {
+    return getTicketById(ticketId)
   }
 }
 
-const getters = {
-  activeTicket: ({activeTicket}) => activeTicket
-}
+const getters = {}
 
 export default new Vuex.Store({
   state,
@@ -52,4 +53,13 @@ async function assignTicket (ticketId, volunteerId) {
     mutation: ASSIGN_TICKET,
     variables: {ticketId: ticketId, volunteerId: volunteerId}
   })
+}
+
+async function getTicketById (ticketId) {
+  const response = await apolloClient.query({
+    query: GET_BY_ID,
+    variables: { ticketId }
+  }
+  )
+  return response.data.ticket
 }

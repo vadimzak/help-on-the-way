@@ -15,7 +15,13 @@ let router = new Router({
   {
     path: '/ticket/:id',
     name: 'Ticket',
-    component: Ticket
+    component: Ticket,
+    beforeEnter: async (to, from, next) => {
+      const app = router.app
+      const ticket = await app.$store.dispatch('getTicketById', to.params.id)
+      app.$store.commit('setActiveTicket', ticket)
+      next()
+    }
   },
   ...loginRoutes
   ]

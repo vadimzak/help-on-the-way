@@ -15,10 +15,10 @@ import authPlugin from 'shared/providers/authProvider'
 import './filters'
 Vue.config.productionTip = false
 Vue.use(vueResourceSetup)
+Vue.use(apolloInit)
 Vue.use(Vuetify)
 Vue.use(authPlugin)
 Vue.use(momentSetup)
-Vue.use(apolloInit)
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
