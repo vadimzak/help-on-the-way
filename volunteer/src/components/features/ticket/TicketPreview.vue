@@ -111,10 +111,20 @@
       }
     },
     methods: {
-      assignTicket: function () {
-        this.$store.dispatch('assignTicket', {
-          id: this.$route.params.id
+      assignTicket: async function () {
+        try{
+        await this.$store.dispatch('assignTicket', {
+          id: this.ticket.id
         })
+        this.$router.replace('/ticket/'+this.ticket.id)
+        } catch (e) {
+            if(e.message && e.message.indexOf('ticket already assigned') > -1){
+            // handle case if the ticket already assigned
+            console.warn('ticket already assigned!')
+            } else{
+              throw e
+            }
+        }
       }
     },
   }

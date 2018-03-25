@@ -8,6 +8,7 @@ const state = {
   count: 0,
   menuOpen: false,
   openTickets: [],
+  assignedTickets: [],
   activeTicket: undefined
 }
 
@@ -23,6 +24,9 @@ const mutations = {
   },
   setActiveTicket (state, ticket) {
     state.activeTicket = ticket
+  },
+  setAssignedTickets (state, tickets) {
+    state.assignedTickets = tickets
   },
   updateOpenTickets (state, tickets) {
     state.openTickets = tickets
@@ -51,7 +55,7 @@ export default new Vuex.Store({
 async function assignTicket (ticketId, volunteerId) {
   return apolloClient.mutate({
     mutation: ASSIGN_TICKET,
-    variables: {ticketId: ticketId, volunteerId: volunteerId}
+    variables: { ticketId: ticketId }
   })
 }
 

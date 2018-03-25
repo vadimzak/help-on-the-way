@@ -1,7 +1,7 @@
 <template>
     <div class="related-tickets">
       <v-list three-line>
-        <template v-for="(ticket, index) in openTickets">
+        <template v-for="(ticket, index) in tickets">
           <v-list-tile avatar :style="getStyle(ticket)" :key="index" v-if="ticketToPreivew !== ticket.id &&  !excludeIds.includes(ticket.id)"  @click="onTicketClick(ticket)">
             <v-list-tile-content>
               <div class="related-title">
@@ -27,10 +27,7 @@
 
 <script>
   import categoriesTree from 'shared/constants/categoriesTree'
-  import { mapState, mapMutations } from 'vuex'
   import TicketPreview from './TicketPreview'
-  import { GET_AVAILABLE_TICKETS } from '@/graphql/queries/ticket'
-  import config from '@/services/config';
   export default {
     components: {
       TicketPreview,
@@ -40,6 +37,10 @@
         default: () => [],
         type: Array
         },
+      tickets: {
+        default: () => [],
+        type: Array,
+      },  
       goToTicketOnClick: Boolean, // if true when we click on a ticket it should go to the ticket route instead of opening the preview
     },
     data(){
@@ -55,25 +56,12 @@
       },
       onTicketClick(ticket){
           if(this.goToTicketOnClick){
-            this.router.replace('/ticket/'+ticket.id)
+            this.$router.replace('/ticket/'+ticket.id)
           } else{
             this.ticketToPreivew = ticket.id
           }
       },
     },
-    computed: {
-      ...mapState(['openTickets'])
-    },
-    apollo: {
-    tickets(){
-      return {
-        query: GET_AVAILABLE_TICKETS,
-        update(data){
-          this.$store.commit('updateOpenTickets', data.tickets.nodes)
-        }
-      }
-    }
-  },
   }
 </script>
 

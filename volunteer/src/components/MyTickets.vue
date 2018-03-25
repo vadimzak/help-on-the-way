@@ -2,22 +2,22 @@
   <v-layout column wrap>
     <div class="divider-title">
       <div class="divider-text">
- יש לנו עבורך <span class="highlighted"> {{openTickets.length}} הזדמנויות </span> לעשות מעשה טוב בדרך שלך
+ יש לך <span class="highlighted"> {{assignedTickets.length}} בקשות לעזרה </span> לטיפולך
       </div>
       <img src="static/assets/homepage.png" class="divider-image">
     </div>
-        <OpenTicketsList/>
+        <AssignedTicketsLIst/>
   </v-layout>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import { OpenTicketsList } from '@/components/features/ticket/'
+import { AssignedTicketsLIst } from '@/components/features/ticket/'
 export default {
-  components: { OpenTicketsList },
+  components: { AssignedTicketsLIst },
     data () { return {} },
   computed: {
-    ...mapState(['openTickets'])
+    ...mapState(['assignedTickets'])
   },
   methods: {}
 }

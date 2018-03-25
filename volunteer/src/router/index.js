@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Welcome from '@/components/Welcome'
+import MyTickets from '@/components/MyTickets'
 import Ticket from '@/components/features/ticket/Ticket'
 import authenticationForcer from '../services/authenticationForcer'
 import { routes as loginRoutes } from './login'
@@ -22,6 +23,11 @@ let router = new Router({
       app.$store.commit('setActiveTicket', ticket)
       next()
     }
+  },
+  {
+    path: '/mine',
+    name: 'myTickets',
+    component: MyTickets
   },
   ...loginRoutes
   ]

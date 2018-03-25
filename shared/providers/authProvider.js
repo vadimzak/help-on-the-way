@@ -5,8 +5,8 @@ function install(Vue, options) {
   }
   
   const retrieve = async () => {
-    const { body: { name, role } } = await Vue.http.get(`${process.env.SERVER_BASE_URL}/me`)
-    return { name, role }
+    const { body: { name, role, person_id } } = await Vue.http.get(`${process.env.SERVER_BASE_URL}/me`)
+    return { name, role, id: person_id }
   }
 
 

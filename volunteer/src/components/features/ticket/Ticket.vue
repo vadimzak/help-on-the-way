@@ -1,20 +1,26 @@
 <template>
   <v-layout column wrap>
-    <TicketPreview :ticket="activeTicket" />
-    <div class="divider-title">
-      <img src="static/assets/divider-image.png" class="divider-image">
-      <div class="divider-text">
-        יש לנו הזדמנויות נוספות לעשות טוב בדרך שלך
-        <i class="material-icons">keyboard_arrow_down</i>
-      </div>
+    <div v-if="ticketAssignedToCurrentuser">
+        Full Ticket Details and actions here
     </div>
-    <RelatedTickets :excludeIds="[activeTicket.id]" />
+    <div v-else>
+      <TicketPreview v-if="activeTicket.status === 'OPEN'" :ticket="activeTicket" />
+      <div v-else>היי! מישהו כבר לקח את הפנייה הזאת, אבל אולי תוכל לעזור במקום אחר</div>
+      <div class="divider-title">
+        <img src="static/assets/divider-image.png" class="divider-image">
+        <div class="divider-text">
+          יש לנו הזדמנויות נוספות לעשות טוב בדרך שלך
+          <i class="material-icons">keyboard_arrow_down</i>
+        </div>
+      </div>
+      <RelatedTickets :excludeIds="[activeTicket.id]" />
+    </div>
   </v-layout>
 </template>
 
 <script>
   import TicketPreview from './TicketPreview'
-  import RelatedTickets from "./TicketsList.vue";
+  import RelatedTickets from "./OpenTicketsList.vue";
   import { GET_BY_ID } from '@/graphql/queries/ticket'
   import { mapState } from 'vuex'
   export default {
@@ -27,12 +33,15 @@
       return {}
     },
     computed: {
+      ticketAssignedToCurrentuser(){
+        const currentUserId = this.$store.state.user.id
+        return this.activeTicket.assignedVolunteers.includes(currentUserId)
+      },
     ...mapState(['activeTicket'])
     },
   }
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
 
   .greeting {
