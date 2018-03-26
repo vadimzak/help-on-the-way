@@ -1,6 +1,6 @@
 export default {
     open: {
-      presentationName: 'פתוחות',
+      presentationName: 'ממתינות למתנדב',
       queryTern: 'OPEN'
     },
     closed: {
@@ -12,15 +12,15 @@ export default {
       queryTern: 'DRAFT'
     },
     matched: {
-      presentationName: 'ממתינות למתנד',
+      presentationName: 'לפני תיאום',
       queryTern: 'MATCHED'
     },
     scheduled: {
-      presentationName: 'ממתינות לתיאום',
+      presentationName: 'לפני מפגש',
       queryTern: 'SCHEDULED'
     },
     done_verified: {
-      presentationName: 'ממתינות למפגש',
+      presentationName: 'סיפור הצלחה',
       queryTern: 'DONE_VERIFIED'
     },
     pending_approval: {

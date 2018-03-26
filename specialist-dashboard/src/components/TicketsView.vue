@@ -56,6 +56,11 @@ export default {
           queryTern: TicketStatus.draft.queryTern
         },
         {
+          name: TicketStatus.open.presentationName,
+          count: this.countByFilter(this.ticketsStatus.open.queryTern, self.ticketsByTypeCount),
+          queryTern: TicketStatus.open.queryTern
+        },
+        {
           name: TicketStatus.matched.presentationName,
           count: this.countByFilter(this.ticketsStatus.matched.queryTern, self.ticketsByTypeCount),
           queryTern: TicketStatus.matched.queryTern
@@ -64,11 +69,6 @@ export default {
           name: TicketStatus.scheduled.presentationName,
           count: this.countByFilter(this.ticketsStatus.scheduled.queryTern, self.ticketsByTypeCount),
           queryTern: TicketStatus.scheduled.queryTern
-        },
-        {
-          name: TicketStatus.done_verified.presentationName,
-          count: this.countByFilter(this.ticketsStatus.done_verified.queryTern, self.ticketsByTypeCount),
-          queryTern: TicketStatus.done_verified.queryTern
         }
       ]
     };
