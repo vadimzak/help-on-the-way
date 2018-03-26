@@ -243,6 +243,10 @@
     color: white;
     height: 35px;
   }
+  .ticket-details{
+    height: 60vh;
+    overflow-y: scroll;
+  }
   .ticket-detail{
     border-bottom: solid 1px #cfcfcf;
   }

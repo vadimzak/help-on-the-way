@@ -2,6 +2,7 @@
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
 require('../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss')
 require('../static/fonts.css')
+require('../static/scroll.css')
 
 import Vue from 'vue'
 import App from './App'

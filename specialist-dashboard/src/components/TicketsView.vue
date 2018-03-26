@@ -86,6 +86,8 @@ export default {
   .ticket-view {
     padding-right: 0;
     background-color: #f4f4f4;
+    height: auto;
+    overflow: hidden;
   }
   .tickets-view-header{
     background-color: #f4f4f4;

@@ -14,6 +14,7 @@
         מתי
       </div>
     </div>
+    <div class="table-body">
     <div class="row ticket" v-bind:class="{'active': ticket.id == selectedTicket.id}" v-for="ticket in tickets" v-bind:key="ticket.id" v-on:click="onTicketClicked(ticket)">
       <div class="col d-flex justify-content-center ticket-cell elder-name-cell">
         <span class="elder-name">{{ticket.personByElderId.firstName}} {{ticket.personByElderId.lastName}}</span>
@@ -39,6 +40,7 @@
         </div>
       </div>
     </div>
+    </div>
   </div>
 </template>
 
@@ -56,6 +58,11 @@ export default {
 <style scoped>
 .tickets-table{
    font-family: 'Open Sans Hebrew'
+}
+.table-body{
+    overflow-y: scroll;
+    height: 60vh;
+    overflow-x: hidden;
 }
   .active {
     background-color: #f4f4f4;
