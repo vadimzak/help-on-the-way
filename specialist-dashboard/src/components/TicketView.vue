@@ -11,17 +11,19 @@
         <span>פרטי המתנדב</span>
       </div>
     </div>
-    <div v-if="selectedView=='elderDetailsView'" class="elder-details">
-      <div class="name">
-        <span>שם: </span><span>{{ticket.personByElderId.firstName}}</span> <span>{{ticket.personByElderId.lastName}}</span>
+    <div v-if="selectedView=='elderDetailsView'" class="ticket-details p-4">
+      <div class="ticket-detail p-4">
+        <span class="ticket-sub-header">שם: </span>
+        <div>
+          <span>{{ticket.personByElderId.firstName}}</span> <span>{{ticket.personByElderId.lastName}}</span>
+        </div>
       </div>
-      <div class="phone">
-        <span>טלפון:</span> <span>{{ticket.personByElderId.phoneNumber}}</span>
-      </div>
-      <div class="phone">
-        <span>כתובת</span><span>{{ticket.personByElderId.addressByAddressId.city}}</span>
-        <span>{{ticket.personByElderId.addressByAddressId.street}}</span>
-        <span>{{ticket.personByElderId.addressByAddressId.houseNumber}}</span>
+      <div class="ticket-detail p-4">
+        <span class="ticket-sub-header">כתובת: </span>
+        <div>
+          <span>{{ticket.personByElderId.addressByAddressId.street}}</span>
+          <span>{{ticket.personByElderId.addressByAddressId.houseNumber}}</span>
+        </div>
       </div>
     </div>
     <div v-if="selectedView=='ticketDetailsView'" class="ticket-details p-4">
@@ -39,80 +41,90 @@
         <span class="description-header ticket-sub-header">תיאור הפנייה</span>
         <editable-input v-bind:icon="'fa fa-pencil'" v-bind:valueChanged="updateTicketDescription"  v-bind:value="ticket.description"></editable-input>
       </div>
-          <div class="start-location-details ticket-detail p-4 location-details">
-            <div class="start-location-icon ticket-location-details-icon">
-            <i class="fa fa-map-marker"></i>
-            </div>
-            <div class="ticket-location-details">
-             <div class="ticket-sub-header">
-              <span>איסוף</span>
-            </div>
-            <div class="ticket-pickup">
-              <input-address  v-model="startAddress"></input-address>
-            </div>
-            </div>
-            </div>
-          <div class="destination-location-details ticket-detail p-4 location-details">
-          <div class="destination-location-icon ticket-location-details-icon">
-            <i class="fa fa-compass"></i>
-          </div>
-          <div class="ticket-location-details">
-            <div class="ticket-sub-header">
-              <span>יעד</span>
-            </div>
-            <div class="ticket-destination">
-              <input-address  v-model="destinationAddress"></input-address>
-            </div>
-          </div>
-          </div>
-          <div class="end-location-details ticket-detail p-4 location-details">
-              <div class="start-location-icon ticket-location-details-icon">
-            <i class="fa fa-map-marker"></i>
-            </div>
-             <div class="ticket-location-details">
-            <div class="ticket-sub-header">
-              <span>נקודת סיום</span>
-            </div>
-            <div class="ticket-end">
-              <input-address v-model="endAddress"></input-address>
-            </div>
-            </div>
-            </div>
-    <div v-if="selectedView=='volunteerDetailsView'" class="volunteers-details">
-      <div v-for="volunteer in ticket.ticketMatchedVolunteersByTicketId.nodes" class="volunteer-view">
-        <div class="volunteer-name">
-          <span>שם:</span> <span>{{volunteer.firstName}}</span> <span>{{volunteer.lastName}}</span>
+      <div class="start-location-details ticket-detail p-4 location-details">
+        <div class="start-location-icon ticket-location-details-icon">
+          <i class="fa fa-map-marker"></i>
         </div>
-        <div class="volunteer-phone">
-          <span>טלפון:</span> <span>{{volunteer.phoneNumber}}</span>
+        <div class="ticket-location-details">
+          <div class="ticket-sub-header">
+            <span>איסוף</span>
+          </div>
+          <div class="ticket-pickup">
+            <input-address  v-model="startAddress"></input-address>
+          </div>
         </div>
-        <div v-if="volunteer.addressByAddressId" class="volunteer-phone">
-          <span>כתובת:</span> <span>{{volunteer.addressByAddressId.city}}</span>
-          <span>{{volunteer.addressByAddressId.street}}</span>
-          <span>{{volunteer.addressByAddressId.houseNumber}}</span>
+      </div>
+      <div class="destination-location-details ticket-detail p-4 location-details">
+        <div class="destination-location-icon ticket-location-details-icon">
+          <i class="fa fa-compass"></i>
+        </div>
+        <div class="ticket-location-details">
+          <div class="ticket-sub-header">
+            <span>יעד</span>
+          </div>
+          <div class="ticket-destination">
+            <input-address  v-model="destinationAddress"></input-address>
+          </div>
+        </div>
+      </div>
+      <div class="end-location-details ticket-detail p-4 location-details">
+        <div class="start-location-icon ticket-location-details-icon">
+          <i class="fa fa-map-marker"></i>
+        </div>
+        <div class="ticket-location-details">
+          <div class="ticket-sub-header">
+            <span>נקודת סיום</span>
+          </div>
+          <div class="ticket-end">
+            <input-address v-model="endAddress"></input-address>
+          </div>
         </div>
       </div>
     </div>
+    <div v-if="selectedView=='volunteerDetailsView'" class="ticket-details p-4">
+      <div v-if="volunteer" class="volunteer-view">
+        <div class="ticket-detail p-4">
+          <span class="ticket-sub-header">שם המתנדב:</span>
+          <div>
+            <span>{{volunteer.firstName}}</span> <span>{{volunteer.lastName}}</span>
+          </div>
+        </div>
+        <div class="ticket-detail p-4">
+          <span class="ticket-sub-header">טלפון</span>
+          <div>
+            <span>{{volunteer.phoneNumber}}</span>
+          </div>
+        </div>
+        <div v-if="volunteer.groups.nodes" class="ticket-detail p-4">
+          <span class="ticket-sub-header">קבוצות:</span>
+          <span v-for="group of volunteer.groups.nodes">{{group.group.channels}}</span>
+        </div>
+      </div>
     </div>
-
   </div>
 </template>
 
 <script>
   import InputAddress from '@/components/InputAddress'
   import EditableInput from '@/components/EditableInput'
-  import { UPDATE_TICKET, ALL_TICKETS_QUERY } from '../graphql/queries/ticket'
+  import { UPDATE_TICKET, ALL_TICKETS_QUERY, VOLUNTEERS_BY_TICKET_ID } from '../graphql/queries/ticket'
 
   export default {
     components: {  InputAddress, EditableInput },
     data () {
       return {
-          selectedView: 'ticketDetailsView',
-          showEditableDescription: false
+        selectedView: 'ticketDetailsView',
+        showEditableDescription: false,
+        volunteer: undefined
       }
     },
     props: {
         ticket: Object
+    },
+    watch: {
+      ticket: function(newValue) {
+        this.getVolunteerDetails(newValue.id)
+      }
     },
     computed: {
       startAddress: {
@@ -142,7 +154,22 @@
     },
     methods: {
       changeView: function(view) {
-          this.selectedView = view
+        this.selectedView = view
+        if (view == 'volunteerDetailsView') {
+            this.getVolunteerDetails(this.ticket.id);
+        }
+      },
+      getVolunteerDetails: function(ticketId) {
+        let self = this;
+        this.$apollo.query({
+          query: VOLUNTEERS_BY_TICKET_ID,
+          variables: {ticketId: ticketId}
+        }).then(
+          (result) => {
+            self.volunteer = result.data.ticketById.volunteers.nodes[0] ?
+              result.data.ticketById.volunteers.nodes[0].volunteer : undefined;
+          }
+        )
       },
       showEditDescription: function() {
         this.showEditableDescription = true;
@@ -158,8 +185,8 @@
             if(currentTicketId > -1){
               Object.assign(tickets[currentTicketId], update)
             }
-            store.writeQuery({ 
-              query: ALL_TICKETS_QUERY, 
+            store.writeQuery({
+              query: ALL_TICKETS_QUERY,
               data: allTicketsQueryResult,
               })
           }
@@ -220,7 +247,7 @@
   .elder-tab-button, .ticket-tab-button, .volunteer-tab-button {
     text-align: center;
     cursor: pointer;
-    
+
   }
 
   .volunteer-view {
@@ -254,7 +281,7 @@
   .ticket-detail i{
     font-size:23px;
     text-align: right;
-    color: #888888;    
+    color: #888888;
   }
 
   .icon-contract{

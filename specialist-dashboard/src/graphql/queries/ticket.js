@@ -105,3 +105,24 @@ query ticketsByTypeCount($ticketStatus: TicketStatus!) {
       totalCount
     }
   }`;
+
+export const VOLUNTEERS_BY_TICKET_ID = gql `query getTicketVolunteers($ticketId : BigInt!){
+  ticketById(id: $ticketId){
+    volunteers: ticketAssignedVolunteersByTicketId{
+     nodes{
+      volunteer: personByVolunteerId{
+        firstName,
+        lastName
+        phoneNumber
+        groups: groupVolunteersByVolunteerId{
+          nodes{
+            group: groupByGroupId{
+              channels
+            }
+          }
+        }
+      }
+    } 
+    }
+  }
+}`;
