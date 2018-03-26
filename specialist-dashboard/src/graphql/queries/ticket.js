@@ -27,6 +27,7 @@ export const ALL_TICKETS_QUERY = gql`{
     allTickets(condition: {}) {
       nodes {
         id
+        category
         personByElderId {
           id
           firstName

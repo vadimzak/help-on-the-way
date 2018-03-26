@@ -2,7 +2,7 @@
   <div v-if="ready" class="mt-5">
     <tickets-filter :filterChanged="ticketFilterChanged" :buttonFilters="filters.buttons"></tickets-filter>
     <div class="row col-9 mt-5 p-0 mb-5 tickets-view">
-       <div class="col-xs-6 tickets-list">
+       <div class="col-xs-6 tickets-list p-0">
       <ticket-table v-bind:selected-ticket="selectedTicket" v-bind:tickets="allTickets" v-bind:on-ticket-clicked="onTicketSelect"></ticket-table>
     </div>
     <div  class="col-xs-6 p-0 ticket-view">
