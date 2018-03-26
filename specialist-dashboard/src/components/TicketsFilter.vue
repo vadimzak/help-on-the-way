@@ -5,7 +5,7 @@
            v-bind:class="{'active': filter.name==selectedFilter.name}"
            class="button-filter d-flex flex-row col-2 p-0"
            v-on:click="selectedFilterChanged(filter)">
-              <span class="filter-count"> {{ filter.count }}</span>
+              <span class="filter-count"> {{ filter.count() }}</span>
         <span class="filter-text">{{filter.name}}</span>
       </div>
     </div>

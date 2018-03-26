@@ -1,10 +1,34 @@
 export default {
-    open: 'OPEN',
-    closed: 'CLOSED',
-    draft: 'DRAFT',
-    matched: 'MATCHED',
-    scheduled: 'SCHEDULED',
-    done_verified: 'DONE_VERIFIED',
-    pending_approval: 'PENDING_APPROVAL',
-    unapproved: 'UNAPPROVED'
+    open: {
+      presentationName: 'פתוחות',
+      queryTern: 'OPEN'
+    },
+    closed: {
+      presentationName: 'סגורות',
+      queryTern: 'CLOSED'
+    },
+    draft: {
+      presentationName: 'טיוטות',
+      queryTern: 'DRAFT'
+    },
+    matched: {
+      presentationName: 'ממתינות למתנד',
+      queryTern: 'MATCHED'
+    },
+    scheduled: {
+      presentationName: 'ממתינות לתיאום',
+      queryTern: 'SCHEDULED'
+    },
+    done_verified: {
+      presentationName: 'ממתינות למפגש',
+      queryTern: 'DONE_VERIFIED'
+    },
+    pending_approval: {
+      presentationName: 'ממתינות לאישור',
+      queryTern: 'PENDING_APPROVAL'
+    },
+    unapproved: {
+      presentationName: 'לא מאושרות',
+      queryTern: 'UNAPPROVED'
+    }
 };

@@ -23,8 +23,9 @@ mutation createTicket($ticket: TicketInput!) {
     }
   }`;
 
-export const ALL_TICKETS_QUERY = gql`{
-    allTickets(condition: {}) {
+export const ALL_TICKETS_QUERY = gql`
+query allTicketsSearchQuery($ticketStatus: TicketStatus!) {
+    allTickets(condition: {status: $ticketStatus}) {
       nodes {
         id
         category
@@ -97,4 +98,10 @@ export const ALL_TICKETS_QUERY = gql`{
       }
     }
   }`;
-    
+
+export const TICKET_BY_TYPE_COUNT = gql`
+query ticketsByTypeCount($ticketStatus: TicketStatus!) {
+    allTickets(condition: {status: $ticketStatus}) {
+      totalCount
+    }
+  }`;

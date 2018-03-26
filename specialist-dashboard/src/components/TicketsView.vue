@@ -18,8 +18,10 @@
 <script>
 import TicketTable from '@/components/TicketTable'
 import TicketView from '@/components/TicketView'
-import { ALL_TICKETS_QUERY } from '@/graphql/queries/ticket'
+import { ALL_TICKETS_QUERY, TICKET_BY_TYPE_COUNT } from '@/graphql/queries/ticket'
 import TicketsFilter from '@/components/TicketsFilter'
+import TicketStatus from '@/constants/enums/TicketStatus'
+import _ from 'lodash'
 
 export default {
   components: {  TicketTable, TicketView ,TicketsFilter},
@@ -27,35 +29,59 @@ export default {
     return {
       selectedTicket: {},
       ready: false,
+      ticketsStatus: TicketStatus,
       selectedFilter: { },
+      ticketsByTypeCount: {},
       exampleListModel: [{name: 'תל אביב'}, {name: 'חיפה'}],
-      filters: {
-          buttons: [
-            {
-              name: 'טיוטות',
-              count: 4
-            },
-            {
-              name: 'ממתינות למתנדב',
-              count: 3
-            },
-            {
-              name: "לפני תיאום",
-              count: 12
-            },
-              {
-              name: 'לפני מפגש',
-              count: 2
-            }
-          ],
-        
-      }
+      filters: { },
     }
-  }
-  ,
+  },
+  mounted() {
+    let self = this;
+    _.each(this.ticketsStatus, (status) => {
+      this.$apollo.query({
+        query: TICKET_BY_TYPE_COUNT,
+        variables: {ticketStatus: status.queryTern}
+      }).then(
+        (result) => {
+          self.ticketsByTypeCount[status.queryTern] = result.data.allTickets.totalCount;
+        }
+      )
+    });
+    this.filters = {
+      buttons: [
+        {
+          name: TicketStatus.draft.presentationName,
+          count: this.countByFilter(this.ticketsStatus.draft.queryTern, self.ticketsByTypeCount),
+          queryTern: TicketStatus.draft.queryTern
+        },
+        {
+          name: TicketStatus.matched.presentationName,
+          count: this.countByFilter(this.ticketsStatus.matched.queryTern, self.ticketsByTypeCount),
+          queryTern: TicketStatus.matched.queryTern
+        },
+        {
+          name: TicketStatus.scheduled.presentationName,
+          count: this.countByFilter(this.ticketsStatus.scheduled.queryTern, self.ticketsByTypeCount),
+          queryTern: TicketStatus.scheduled.queryTern
+        },
+        {
+          name: TicketStatus.done_verified.presentationName,
+          count: this.countByFilter(this.ticketsStatus.done_verified.queryTern, self.ticketsByTypeCount),
+          queryTern: TicketStatus.done_verified.queryTern
+        }
+      ]
+    };
+    this.selectedFilter = this.filters.buttons[0];
+  },
   apollo: {
     allTickets: {
       query: ALL_TICKETS_QUERY,
+      variables() {
+        return {
+          ticketStatus: this.selectedFilter.queryTern
+        }
+      },
       update: (data) => data.allTickets.nodes,
       result() {
         this.selectedTicket = this.allTickets[0];
@@ -64,11 +90,16 @@ export default {
     }
   },
   methods: {
-      onTicketSelect: function(ticket) {
-        this.selectedTicket = ticket
-      },
-       ticketFilterChanged: function(newFilter) {
+    onTicketSelect: function(ticket) {
+      this.selectedTicket = ticket
+    },
+    ticketFilterChanged: function(newFilter) {
       this.selectedFilter = newFilter;
+    },
+    countByFilter: function(filter, ticketsCount) {
+      return () => {
+        return ticketsCount[filter];
+      };
     }
   }
 }
