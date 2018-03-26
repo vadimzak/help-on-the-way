@@ -30,7 +30,11 @@ const mutations = {
   },
   updateOpenTickets (state, tickets) {
     state.openTickets = tickets
+  },
+  removeOpenTicket (state, id) {
+    state.openTickets = state.openTickets.filter(t => t.id !== id);
   }
+ 
 }
 
 const actions = {
