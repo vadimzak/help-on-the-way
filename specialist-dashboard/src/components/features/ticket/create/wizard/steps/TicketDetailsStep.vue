@@ -61,12 +61,10 @@ export default {
         },
         address: {
             get(){
-                return this.ticket.details.address;
+                return this.ticket.destinationAddress;
             },
             set(val){
-                this.updateTicket({ details: {
-                    address: val
-                } });
+                this.updateTicket({ destinationAddress: val});
                 this.checkCanContinue()
             }
         },
