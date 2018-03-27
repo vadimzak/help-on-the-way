@@ -56,9 +56,14 @@ export default {
   data() {
     return {
       isIndoorBoxes: indoorBoxes(),
-      updateIndoorStatus(value){
+      updateIndoorStatus(indoors){
             const ticket = this.ticket;
-            this.updateTicket({isIndoor: value, startAddress: ticket.elder.address })
+            if(indoors){
+                this.updateTicket({isIndoor: indoors, startAddress: ticket.elder.address })
+            }else{
+                this.updateTicket({isIndoor: indoors, startAddress: ticket.elder.address, 
+                endAddress: ticket.elder.address })
+            }
         },
     }
   },

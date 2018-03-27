@@ -3,6 +3,7 @@ import SourceStep from './SourceStep';
 import TicketDetailsStep from './TicketDetailsStep';
 import TicketTypeStep from './TicketTypeStep';
 import TicketSummaryStep from './TicketSummaryStep';
+import TicketRouteSummaryStep from './TicketRouteSummaryStep';
 import Step from './Step';
 
 export default {
@@ -11,5 +12,6 @@ export default {
     TicketDetailsStep,
     TicketTypeStep,
     TicketSummaryStep,
+    TicketRouteSummaryStep,
     Step
 }
