@@ -56,12 +56,11 @@ export default {
     }
   },
   methods: {
-    searchIfNeeded(){
+    async searchIfNeeded(){
       if(this.textInput != ''){
         this.results = []
-        this.searchFunction(this.textInput, (res) => {
-          this.results = res || []
-        })
+        const results = await this.searchFunction(this.textInput)
+        this.results = results
       } else {
         this.results = []
       }

@@ -38,7 +38,7 @@
                     <span class="members-count">[{{item.count}}]</span>
                   </slot>
               </div>
-              <button v-on:click="removeItem(index)" class="remove">
+              <button v-on:click="onRemove(index)" class="remove">
                 <i class="fa fa-trash" aria-hidden="true"></i>
               </button>
           </div>
@@ -53,7 +53,7 @@ import { mixin as onClickOutside } from 'vue-on-click-outside'
 export default {
     components: {AutoComplete},
     mixins: [onClickOutside],
-    props:['value', 'search'],
+    props:['value', 'search', 'addItem', 'removeItem'],
     computed: {},
   data(){
       return{
@@ -61,11 +61,28 @@ export default {
       }
   },
   methods: {
-    addItemToList(item){
-        this.value.push(item);
+    async addItemToList(item){
+        this.addInProgress = true
+        try {
+            await this.addItem(item)
+        } catch (error) {
+            // TODO handle error here
+            throw error
+        }finally{
+            this.addInProgress = false
+        }
     },
-    removeItem(index){
-        this.value.splice(index, 1)
+    async onRemove(index){
+        const item = this.value[index]
+        this.removeInProgress = true
+        try {
+            await this.removeItem(item, index)
+        } catch (error) {
+            // TODO handle error here
+            throw error
+        }finally{
+            this.removeInProgress = false
+        }
     },
     toggleItemSearch(){
         this.showItemSearch = !this.showItemSearch

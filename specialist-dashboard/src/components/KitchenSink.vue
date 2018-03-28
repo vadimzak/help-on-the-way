@@ -56,13 +56,12 @@
 <script>
 import RadioBoxes from '@/components/inputs/RadioBoxes'
 import AutoComplete from '@/components/AutoComplete'
-import GroupMessagePreview from '@/components/GroupMessagePreview'
 import TicketsFilter from '@/components/TicketsFilter'
 import InputAddress from '@/components/InputAddress'
 import List from '@/components/inputs/List'
 
 export default {
-  components: { RadioBoxes, AutoComplete, GroupMessagePreview, TicketsFilter, InputAddress, List},
+  components: { RadioBoxes, AutoComplete, TicketsFilter, InputAddress, List},
   data () {
     return {
       showModal: false,

@@ -5,7 +5,9 @@ import _ from 'lodash';
 const state = {
     ticket: {
         status: TicketStatus.draft.queryTern,
-        details: {}
+        details: {},
+        remarks: {},
+        groups: [],
     },
     ticketSource: undefined,
     currentStep: 1,
@@ -21,12 +23,13 @@ const getters = {
             endAddress: 'endAddressId',
             issuingPerson: 'issuingPerson',
         };
+        const stripFields = {groups: true };
         return Object.keys(state.ticket).reduce((serverModel, currentField) => {
             const mappedName = mapFullModelToId[currentField];
             if (mappedName) {
                 const currentValue = state.ticket[currentField];
                 serverModel[mappedName] = currentValue ? currentValue.id : undefined;
-            } else {
+            } else if(!stripFields[currentField]){
                 serverModel[currentField] = state.ticket[currentField];
             }
             return serverModel;
@@ -52,8 +55,11 @@ const actions = {
     updateTicket (state, ticketUpdate) {
         state.ticket = _.merge({}, state.ticket, ticketUpdate);
     },
-      updateTicketSource(state, source) {
+    updateTicketSource(state, source) {
           state.ticketSource = source;
+      },
+    setTicketGroups(state, { groups }) {
+        state.ticket = { ...state.ticket, groups: groups };
     },
     moveStep(state) {
           state.currentStep++;

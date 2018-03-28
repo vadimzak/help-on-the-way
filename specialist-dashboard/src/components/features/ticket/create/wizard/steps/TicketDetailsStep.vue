@@ -72,7 +72,7 @@ export default {
   },
   methods: {
       checkCanContinue(){
-        if(this.durationEta && this.address){
+        if(this.durationEta && (this.address || this.ticket.isIndoor)){
             this.$emit('canContinue', true);
         }
       },
