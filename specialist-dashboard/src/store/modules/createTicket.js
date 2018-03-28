@@ -4,7 +4,7 @@ import { TicketStatus } from '@/constants/enums/index';
 import _ from 'lodash';
 const state = {
     ticket: {
-        status: TicketStatus.draft,
+        status: TicketStatus.draft.queryTern,
         details: {}
     },
     ticketSource: undefined,
