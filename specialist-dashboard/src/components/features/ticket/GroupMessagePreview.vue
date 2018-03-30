@@ -13,7 +13,7 @@
 <script>
 export default {
   components: {  },
-  props: [ 'ticket' ],
+  props: [ 'ticket', 'value' ],
   data () {
     return {
       modified: false,
@@ -27,21 +27,22 @@ export default {
   },
   created(){
     this.compileText()
-    this.$emit('initialValue', this.textareaText)
+    this.$emit('input', this.textareaText)
   },
   methods: {
     modifyText(){
       if(!this.modified){
         this.modified = true
       } 
-      this.$emit('change', this.textareaText)
+      this.$emit('input', this.textareaText)
     },
     undoMods(){
       this.modified = false
       this.compileText()
+      this.$emit('input', this.textareaText)
     },
     compileText(){
-      this.textareaText = `${this.ticket.elderFirstName}, מ${this.ticket.elderAddress}, צריך/ה עזרה ב${this.ticket.ticketDescription} ${this.ticket.ticketTiming}.\nרוצה לעזור ל${this.ticket.elderFirstName}? לחץ על הקישור: ${this.ticket.ticketPermalink}`
+      this.textareaText = `${this.ticket.elder.firstName}, מ${this.ticket.elder.lastName}, צריך/ה עזרה ב${this.ticket.ticketDescription} ${this.ticket.ticketTiming}.\nרוצה לעזור ל${this.ticket.elder.firstName}? `
     }
   }
 }

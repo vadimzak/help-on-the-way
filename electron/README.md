@@ -15,7 +15,7 @@ run:
 
 ```javascript
 window.sendMessage({
-        platform: 'whatsapp',
+        action: 'whatsappMessage',
         messages: [
             { group: 'קבוצה 1', message: 'הודעה ראשונה' },
             { group: 'קבוצה 2', message: 'הודעה שניה' }
@@ -25,11 +25,11 @@ window.sendMessage({
 
 ### Params Explained:
     
-postMessage is getting 2 params:
+sendMessage is getting 2 params:
 
 1) Object with properties as follow:
 
-    1.1) platform - string represent the message provider - should by aligned with electron main.
+    1.1) action - string represent the whe required action, in this case whatsappMessage
     
     1.2) groups - a list with the group names - those we want to receive this message.
     

@@ -5,6 +5,7 @@ import categories from './modules/categories';
 import auth from './modules/auth';
 import address from './modules/address';
 import person from './modules/person';
+import messages from './modules/messages';
 Vue.use(Vuex);
 const debug = process.env.NODE_ENV !== 'production';
 
@@ -14,7 +15,8 @@ export default new Vuex.Store({
         categories,
         auth,
         address,
-        person
+        person,
+        messages
     },
     strict: debug,
     plugins: []

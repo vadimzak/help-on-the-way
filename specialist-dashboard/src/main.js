@@ -21,6 +21,7 @@ import momentSetUp from 'shared/providers/moment';
 import vueResourceSetup from 'shared/providers/vueResource'
 import authPlugin from 'shared/providers/authProvider'
 import 'shared/initializers/facebookRedirectHashFixer'
+import * as whatsAppCommunicator from '@/services/whatsAppCommunicator'
 import VeeValidate from 'vee-validate'
 
 Vue.config.productionTip = false
@@ -41,7 +42,7 @@ Vue.use(VueGoogleMaps, {
 });
 Vue.use(VeeValidate)
 Vue.directive('on-click-outside', onClickOutside);
-
+whatsAppCommunicator.init(store)
 
 /* eslint-disable no-new */
 new Vue({

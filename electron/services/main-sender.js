@@ -2,8 +2,8 @@ const config = require('./../config');
 const whatsappMessageSender = require('./whatsapp-message-sender');
 
 const send = (event, messageObject) => {
-	switch (messageObject.platform) {
-		case 'whatsapp':
+	switch (messageObject.action) {
+		case 'whatsappMessage':
 			whatsappMessageSender.send(messageObject);
 			break;
 		default:
