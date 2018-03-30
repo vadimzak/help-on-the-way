@@ -28,6 +28,9 @@ import { mapState, mapMutations } from 'vuex';
 
 export default {
   components: { InputAddress },
+  mounted(){
+      this.$emit('canContinue', true)
+  },
   data() {
     return {}
   },
