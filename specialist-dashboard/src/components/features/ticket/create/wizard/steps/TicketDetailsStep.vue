@@ -58,10 +58,10 @@ export default {
         },
         destinationAlias: {
             get(){
-                return this.ticket.details.destinationAlias;     
+                return this.ticket.details.destinationAddressAlias;     
             },
             set(val){
-                this.updateTicket({ details: { destinationAlias: val } });
+                this.updateTicket({ details: { destinationAddressAlias: val } });
             }
         },
         description: {

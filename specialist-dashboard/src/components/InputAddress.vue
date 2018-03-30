@@ -1,7 +1,7 @@
 <template>
   <div v-on-click-outside="hidePlaceInput" v-on:click="showPlaceInput()">
     <div>
-      <span v-if="!showAddressSelector && !keepOpen">{{value | formatAddress | formatEmpty}}{{addressAlias ? addressAlias + ',' : ''}}</span>
+      <span v-if="!showAddressSelector && !keepOpen">{{addressAlias ? addressAlias + ',' : ''}}{{value | formatAddress | formatEmpty}}</span>
     </div>
     <div v-if="showAddressSelector || keepOpen" >
       <GmapAutocomplete

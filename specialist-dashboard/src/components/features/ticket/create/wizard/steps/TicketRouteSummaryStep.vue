@@ -4,19 +4,19 @@
 
         <div class="pickup address">
             <h5 class="sub-title">איסוף</h5>
-           <InputAddress :keepOpen="false" name="startAddress" 
+           <InputAddress :addressAlias="ticket.details.startAddressAlias" :keepOpen="false" name="startAddress" 
            v-validate="'address'" v-model="startAddress"/>
         </div>
 
         <div class="destination address">
             <h5 class="sub-title">יעד</h5>
-           <InputAddress :keepOpen="false" name="destinationAddress" 
+           <InputAddress :addressAlias="ticket.details.destinationAddressAlias" :keepOpen="false" name="destinationAddress" 
            v-validate="'address'" v-model="destinationAddress"/>
         </div>
 
         <div class="end address">
             <h5 class="sub-title">חזרה</h5>
-           <InputAddress :keepOpen="false" name="endAddress" 
+           <InputAddress :addressAlias="ticket.details.endAddressAlias" :keepOpen="false" name="endAddress" 
            v-validate="'address'" v-model="endAddress"/>
         </div>
     </div>
