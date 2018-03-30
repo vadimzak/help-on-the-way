@@ -1,5 +1,5 @@
 const CHECK_INTERAVL = 10 * 1000
-const MAX_ATTEMPTS_FOR_ELECTRON_CHECK = 10
+const MAX_ATTEMPTS_FOR_ELECTRON_CHECK = 5
 let attempts = 1;
 function init(store) {
 
@@ -12,7 +12,6 @@ function init(store) {
         }
         if (!window.sendMessage) {
             console.log(`No electron found yet. Attempt ${attempts} out of ${MAX_ATTEMPTS_FOR_ELECTRON_CHECK}`)
-            return;
         } else {
             clearInterval(interval);
             store.commit('messages/setIsMessagesAvilable', true)
