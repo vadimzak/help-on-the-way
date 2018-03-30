@@ -1,7 +1,7 @@
 <template>
   <div v-on-click-outside="hidePlaceInput" v-on:click="showPlaceInput()">
     <div>
-      <span v-if="!showAddressSelector && !keepOpen">{{value | formatAddress | formatEmpty}}</span>
+      <span v-if="!showAddressSelector && !keepOpen">{{value | formatAddress | formatEmpty}}{{addressAlias ? addressAlias + ',' : ''}}</span>
     </div>
     <div v-if="showAddressSelector || keepOpen" >
       <GmapAutocomplete
@@ -26,6 +26,7 @@
     props: {
       keepOpen: Boolean,
       value: VueTypes.object.def({}),
+      addressAlias: String,
     },
     mixins: [onClickOutside],
     data () {

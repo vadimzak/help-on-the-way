@@ -7,7 +7,7 @@
         v-for="(address, index) in addresses"
         v-if="ticket[address.field]" :key="index">
         <span  class="icon mx-3" :class="{ [address.icon] : true }"></span>
-        <span> {{ticket[address.field] | formatAddress }} </span>
+        <span> {{ticket.details[address.field + 'Name'] ? ticket.details[address.field + 'Alias'] + ',' : ''}} {{ticket[address.field] | formatAddress }}  </span>
         </b-col>
       </b-row>
   </div>

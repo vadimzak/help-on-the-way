@@ -58,11 +58,20 @@ export default {
       isIndoorBoxes: indoorBoxes(),
       updateIndoorStatus(indoors){
             const ticket = this.ticket;
+            const details = {
+                startAddressAlias: 'בית הזקן',
+            }
             if(indoors){
-                this.updateTicket({isIndoor: indoors, startAddress: ticket.elder.address })
+                this.updateTicket({isIndoor: indoors, startAddress: ticket.elder.address, details, endAddress: null, destinationAddress: null })
             }else{
-                this.updateTicket({isIndoor: indoors, startAddress: ticket.elder.address, 
-                endAddress: ticket.elder.address })
+                details.endAddressAlias = 'בית הזקן'
+                this.updateTicket({
+                isIndoor: indoors,
+                startAddress: ticket.elder.address, 
+                destinationAddress: {},
+                endAddress: ticket.elder.address,
+                details
+                })
             }
         },
     }

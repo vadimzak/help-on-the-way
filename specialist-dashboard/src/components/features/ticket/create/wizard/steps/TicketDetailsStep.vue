@@ -5,6 +5,13 @@
         <h4>לאן</h4>
         </b-col>
         <b-col cols="12" class="justify-content-center d-flex">
+        <label for="destinationAlias">שם/סוג המקום:</label>
+        <input
+                   class="align-self-start"
+                  id="destinationAlias"
+                  v-model.trim="destinationAlias"
+                  type="text"
+                  placeholder="שם המקום"/>
            <InputAddress class="w-100" :keepOpen="true" name="address" v-validate="'address'" v-model="address"/>
         </b-col>
       </b-row>
@@ -47,6 +54,14 @@ export default {
             set(val){
                 this.updateTicket({ durationEta: val })
                 this.checkCanContinue()
+            }
+        },
+        destinationAlias: {
+            get(){
+                return this.ticket.details.destinationAlias;     
+            },
+            set(val){
+                this.updateTicket({ details: { destinationAlias: val } });
             }
         },
         description: {
