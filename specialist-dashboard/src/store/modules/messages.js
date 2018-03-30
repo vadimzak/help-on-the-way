@@ -36,10 +36,11 @@ async function sendMessageToGroups(context, { groups, ticketId, message }) {
     // TODO - error handling, itteraite of response and check if we got any error results
 }
 
-function getShortUrl(group_id, ticket_id) {
-    return apolloClient.mutate({
+async function getShortUrl(group_id, ticket_id) {
+   const response =  await apolloClient.mutate({
         mutation: GET_SHORT_URL,
         variables: { metadata: { group_id, ticket_id } }
     });
+    return response.data.getShortUrl.string;
 }
 
