@@ -16,7 +16,6 @@ const handleMessage = async (event, { messages, id }) => {
 
 const sendMessages = async (messages, id) => {
 	var result = [];
-
 	for (var i = 0; i < messages.length; i++) {
 		let { group, message } = messages[i];
 
@@ -49,7 +48,7 @@ const sendMessageToGroup = async (group, message) => {
 };
 
 const searchGroup = async groupName => {
-	let searchInput = await getElement('#input-chatlist-search');
+	let searchInput = await getElement('#side input.selectable-text');
 	const focusEvent = new Event('focus', { bubbles: true });
 	searchInput.dispatchEvent(focusEvent);
 	setTimeout(updateValue, 400);
