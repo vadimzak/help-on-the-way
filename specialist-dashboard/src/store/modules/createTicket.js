@@ -60,6 +60,10 @@ const actions = {
       },
     setTicketGroups(state, { groups }) {
         state.ticket = { ...state.ticket, groups: groups };
+      },
+    setNeedToKnowPoints(state, points) {
+        state.ticket.details = { ...state.ticket.details, ...{ needToKnow: points } }
+        state.ticket = { ...state.ticket}  
     },
     moveStep(state) {
           state.currentStep++;

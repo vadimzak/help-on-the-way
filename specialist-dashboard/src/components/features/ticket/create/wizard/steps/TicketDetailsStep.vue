@@ -12,7 +12,7 @@
                   v-model.trim="destinationAlias"
                   type="text"
                   placeholder="שם המקום"/>
-           <InputAddress class="w-100" :keepOpen="true" name="address" v-validate="'address'" v-model="address"/>
+           <InputAddress class="w-100" :keepOpen="true" name="address" v-validate="'address'" v-model="destinationAddress"/>
         </b-col>
       </b-row>
       <b-row>
@@ -28,11 +28,20 @@
         <h3>פרטים נוספים</h3>
         <p class="small">הזן פרטים נוספים הנחוצים למתנדב על מנת לבצע את הפניה.</p>
         </b-col>
-        <b-col cols="12" class="justify-content-center d-flex">
-            <textarea v-model="description" class="w-100"></textarea>
+        <b-col cols="12">
+            <b-form-group
+                description="נושא זה ישמש לבניית ההודעה למתנדבים"
+                label="נושא הפנייה"
+                label-for="ticketSubject">
+                 <b-form-input id="ticketSubject"  v-model.trim="subject"></b-form-input>
+            </b-form-group>
+        </b-col>
+        <b-col cols="12">
+            <h4>נקודות חשובות למתנדב</h4>
+            <TicketNeedToKnowPoints v-model="needToKnow"/>
         </b-col>
       </b-row>
-
+    <input type="hidden" v-model="checkCanContinue">
   </div>
 </template>
 <script>
@@ -40,22 +49,16 @@ import _ from 'lodash';
 import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
 import DurationPicker from '@/components/inputs/DurationPicker'
 import InputAddress from '@/components/InputAddress'
+import TicketNeedToKnowPoints from '@/components/features/ticket/TicketNeedToKnowPoints'
+import { mapStateForForm } from '@/store/utils'
 
 export default {
-  components: { DurationPicker, InputAddress },
+  components: { DurationPicker, InputAddress, TicketNeedToKnowPoints },
   data() {
     return {}
   },
     computed: {
-        durationEta: {
-            get(){
-                return this.ticket.durationEta;
-            },
-            set(val){
-                this.updateTicket({ durationEta: val })
-                this.checkCanContinue()
-            }
-        },
+        ...mapStateForForm(['durationEta', 'description', 'destinationAddress'], 'createTicket', 'ticket', 'createTicket/updateTicket'),
         destinationAlias: {
             get(){
                 return this.ticket.details.destinationAddressAlias;     
@@ -64,34 +67,32 @@ export default {
                 this.updateTicket({ details: { destinationAddressAlias: val } });
             }
         },
-        description: {
+        needToKnow: {
             get(){
-                return this.ticket.details.description;
+                return this.ticket.details.needToKnow || [];   
             },
             set(val){
-                this.updateTicket({ details: {
-                    description: val,
-                } });
+                this.setNeedToKnowPoints(val)
             }
         },
-        address: {
+        subject: {
             get(){
-                return this.ticket.destinationAddress;
-            },
-            set(val){
-                this.updateTicket({ destinationAddress: val});
-                this.checkCanContinue()
+                return this.ticket.details.subject; 
+            }, set(val){
+                this.updateTicket({ details: { subject: val } })
             }
         },
+        checkCanContinue(){
+        if(this.durationEta && (this.destinationAddress || this.ticket.isIndoor)){
+            this.$emit('canContinue', true);
+        } else{
+            this.$emit('canContinue', false);
+        }
+      },
       ...mapState('createTicket', ['ticket']),
   },
   methods: {
-      checkCanContinue(){
-        if(this.durationEta && (this.address || this.ticket.isIndoor)){
-            this.$emit('canContinue', true);
-        }
-      },
-    ...mapMutations('createTicket', ['updateTicket'])
+    ...mapMutations('createTicket', ['updateTicket', 'setNeedToKnowPoints'])
   }
 }
 
