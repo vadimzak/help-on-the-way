@@ -8,6 +8,7 @@
     <Step v-if="this.ticket.isIndoor" :current-step="currentStep" step="5"><TicketSummaryStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
     <Step v-if="!this.ticket.isIndoor" :current-step="currentStep" step="5"><TicketRouteSummaryStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
     <Step :current-step="currentStep" step="6"><AnnounceStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
+    <Step :current-step="currentStep" step="7"><TicketMobilityStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
     <footer>
         <b-btn @click="back" v-if="currentStep > 1">חזור אחורה</b-btn>
         <b-btn @click="saveAndAdvanceStep"  v-if="canContinue">המשך</b-btn>
