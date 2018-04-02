@@ -18,9 +18,17 @@
       </b-row>   
       <b-row class="my-5">
         <b-col cols="12">
-            <b-btn :disabled="!isMessagesAvilable" @click="sendMessages" id="announceToGroups">שלח</b-btn>
+            <b-btn :disabled="!canSendMessages.canSend" @click="sendMessages" id="announceToGroups">שלח</b-btn>
             <p v-show="!isMessagesAvilable" class="text-danger small">נראה שאינך מחובר לווטסאפ במערכת זאת.</p>
-            <p v-show="isMessagesAvilable && !groups.length" class="text-danger small">עליך לבחור קבוצות לשליחת ההודעה</p>
+            <p v-show="canSendMessages.isMessagesAvilable && !canSendMessages.haveGropus" class="text-danger small">עליך לבחור קבוצות לשליחת ההודעה</p>
+            <p v-show="canSendMessages.isMessagesAvilable && !canSendMessages.validStatus" class="text-danger small">לא ניתן לפרסם הודעה כשסטטוס הכרטיס אינו ממתין למתנדבים.</p>
+        </b-col>
+      </b-row>
+      <b-row class="my-5">
+        <b-col cols="12">
+          <b-form-group label="סטוס פנייה">
+          <TicketStatusSelect v-model="status" />          
+          </b-form-group>
         </b-col>
       </b-row>
   </div>
@@ -28,13 +36,16 @@
 <script>
 import TicketGroupPicker from '../../../TicketGroupPicker';
 import GroupMessagePreview from '../../../GroupMessagePreview';
+import TicketStatusSelect from '@/components/inputs/TicketStatusSelect';
 import { mapStateForForm } from '@/store/utils';
 import { mapState } from 'vuex'
+import { TicketStatus} from "@/constants/enums";
+
 export default {
   mounted(){
       this.$emit('canContinue', true)
   },
-  components: { TicketGroupPicker, GroupMessagePreview },
+  components: { TicketGroupPicker, GroupMessagePreview, TicketStatusSelect },
   data() {
     return {
       messageText: '',
@@ -43,7 +54,18 @@ export default {
     computed: {
         ...mapState('messages', ['isMessagesAvilable']),
         ...mapState('createTicket', ['ticket']),
-        ...mapStateForForm(['groups'], 'createTicket', 'ticket', 'createTicket/setTicketGroups'),
+        ...mapStateForForm(['groups', 'status'], 'createTicket', 'ticket', 'createTicket/setTicketGroups'),
+        canSendMessages(){
+            const messagingAvilable = this.isMessagesAvilable
+            const haveGroups = !!(this.groups || []).length
+            const validStatus = this.status === TicketStatus.open 
+            return {
+              haveGroups,
+              validStatus,
+              messagingAvilable,
+              canSend: messagingAvilable && haveGroups && validStatus
+            }
+        },
     },
     methods: {
       async sendMessages(){
