@@ -10,7 +10,7 @@
     <Step :current-step="currentStep" step="6"><AnnounceStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
     <footer>
         <b-btn @click="back" v-if="currentStep > 1">חזור אחורה</b-btn>
-        <b-btn @click="saveAndAdvanceStep" :disabled="saveInProgress" v-if="canContinue">המשך</b-btn>
+        <b-btn @click="saveAndAdvanceStep" :disabled="saveInProgress" v-if="canContinue && currentStep < lastStep">המשך</b-btn>
         <b-btn @click="saveAndClose"  v-if="currentStep === lastStep">שמור וסגור</b-btn>
     </footer>
   </div>
@@ -40,7 +40,7 @@ export default {
       this.saveInProgress = true
       try {
           await this.$store.dispatch('createTicket/saveCurrentTicket');
-          this.$store.commit('createTicket/moveStep')
+          this.$store.commit('createTicket/nextStep')
           this.canContinue = false;
       } catch (error) {
           // tood manage error handling

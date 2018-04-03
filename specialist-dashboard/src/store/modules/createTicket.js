@@ -55,8 +55,11 @@ const mutations = {
         state.ticket.details = { ...state.ticket.details, needToKnow: points, isDirty: true }
         state.ticket = { ...state.ticket}  
     },
-    moveStep(state) {
-          state.currentStep++;
+    nextStep(state) {
+        state.currentStep++;  
+    },
+    setStep(state, step) {
+          state.currentStep = step
       },
     goBackStep(state) {
           state.currentStep = Math.max(1, state.currentStep - 1);
