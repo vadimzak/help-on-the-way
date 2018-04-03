@@ -41,34 +41,34 @@ export default {
     _.each(this.ticketsStatus, (status) => {
       this.$apollo.query({
         query: TICKET_BY_TYPE_COUNT,
-        variables: {ticketStatus: status.queryTern}
+        variables: {ticketStatus: status.value}
       }).then(
         (result) => {
-          self.ticketsByTypeCount[status.queryTern] = result.data.allTickets.totalCount;
+          self.ticketsByTypeCount[status.value] = result.data.allTickets.totalCount;
         }
       )
     });
     this.filters = {
       buttons: [
         {
-          name: TicketStatus.draft.presentationName,
-          count: this.countByFilter(this.ticketsStatus.draft.queryTern, self.ticketsByTypeCount),
-          queryTern: TicketStatus.draft.queryTern
+          name: TicketStatus.draft.text,
+          count: this.countByFilter(this.ticketsStatus.draft.value, self.ticketsByTypeCount),
+          value: TicketStatus.draft.value
         },
         {
-          name: TicketStatus.open.presentationName,
-          count: this.countByFilter(this.ticketsStatus.open.queryTern, self.ticketsByTypeCount),
-          queryTern: TicketStatus.open.queryTern
+          name: TicketStatus.open.text,
+          count: this.countByFilter(this.ticketsStatus.open.value, self.ticketsByTypeCount),
+          value: TicketStatus.open.value
         },
         {
-          name: TicketStatus.matched.presentationName,
-          count: this.countByFilter(this.ticketsStatus.matched.queryTern, self.ticketsByTypeCount),
-          queryTern: TicketStatus.matched.queryTern
+          name: TicketStatus.matched.text,
+          count: this.countByFilter(this.ticketsStatus.matched.value, self.ticketsByTypeCount),
+          value: TicketStatus.matched.value
         },
         {
-          name: TicketStatus.scheduled.presentationName,
-          count: this.countByFilter(this.ticketsStatus.scheduled.queryTern, self.ticketsByTypeCount),
-          queryTern: TicketStatus.scheduled.queryTern
+          name: TicketStatus.scheduled.text,
+          count: this.countByFilter(this.ticketsStatus.scheduled.value, self.ticketsByTypeCount),
+          value: TicketStatus.scheduled.value
         }
       ]
     };
@@ -79,7 +79,7 @@ export default {
       query: ALL_TICKETS_QUERY,
       variables() {
         return {
-          ticketStatus: this.selectedFilter.queryTern
+          ticketStatus: this.selectedFilter.value
         }
       },
       update: (data) => data.allTickets.nodes,

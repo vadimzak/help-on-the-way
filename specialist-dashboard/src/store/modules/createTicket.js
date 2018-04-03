@@ -27,7 +27,7 @@ const actions = {
 const mutations = {
     newTicket(state) {
         state.ticket =  {
-            status: TicketStatus.draft.queryTern,
+            status: TicketStatus.draft.value,
             details: {},
             remarks: {},
             groups: [],

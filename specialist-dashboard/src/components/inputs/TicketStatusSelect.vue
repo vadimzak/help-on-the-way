@@ -7,9 +7,7 @@
 export default {
   props: ['value'],
   data(){
-      const statusOptions = Object.values(TicketStatus).map(status => ({ 
-          text: status.presentationName, value: status.queryTern
-          }));
+      const statusOptions = Object.values(TicketStatus)
       return {
           statusOptions,
       }
