@@ -1,5 +1,5 @@
 <template>
-    <b-form-select :value="value" @input="v => $emit('input', e)" size="md"  :options="statusOptions">
+    <b-form-select :value="value" @input="v => $emit('input', v)" size="md"  :options="statusOptions">
     </b-form-select>
 </template>
 <script>

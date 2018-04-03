@@ -1,5 +1,5 @@
 import gql from 'graphql-tag';
-
+import { GROUP_FRAGMENT } from './group'
 
 export const UPDATE_TICKET = gql`
   mutation ($id: BigInt!, $ticket: TicketPatch!) {
@@ -25,16 +25,17 @@ mutation createTicket($ticket: TicketInput!) {
 
 export const ALL_TICKETS_QUERY = gql`
 query allTicketsSearchQuery($ticketStatus: TicketStatus!) {
-    allTickets(condition: {status: $ticketStatus}) {
+    allTickets(condition: {status: $ticketStatus}, orderBy: CREATED_AT_DESC) {
       nodes {
         id
         category
-        personByElderId {
+        subCategory
+        elder: personByElderId {
           id
           firstName
           lastName
           phoneNumber
-          addressByAddressId {
+          address: addressByAddressId {
             id
             city
             street
@@ -44,7 +45,14 @@ query allTicketsSearchQuery($ticketStatus: TicketStatus!) {
             location
           }
         }
-        ticketAssignedVolunteersByTicketId{
+        groups: ticketGroupsByTicketId{
+          nodes{
+            group: groupByGroupId{
+              ...groupFields
+            }
+          }
+        }
+        volunteers: ticketAssignedVolunteersByTicketId{
            nodes {
             personByVolunteerId {
               firstName
@@ -65,7 +73,7 @@ query allTicketsSearchQuery($ticketStatus: TicketStatus!) {
         description
         durationEta
         dueDate
-        addressByDestinationAddressId {
+        destinationAddress: addressByDestinationAddressId {
           id
           city
           street
@@ -74,7 +82,7 @@ query allTicketsSearchQuery($ticketStatus: TicketStatus!) {
           enterance
           location
         }
-        addressByEndAddressId {
+        endAddress: addressByEndAddressId {
           id
           city
           street
@@ -83,7 +91,7 @@ query allTicketsSearchQuery($ticketStatus: TicketStatus!) {
           enterance
           location
         }
-        addressByStartAddressId {
+        startAddress: addressByStartAddressId {
           id
           city
           street
@@ -93,11 +101,16 @@ query allTicketsSearchQuery($ticketStatus: TicketStatus!) {
           location
         }
         status
+        details
+        remarks
         createdBy
+        isIndoor
+        isUrgent
+        createdAt
         maxVolunteers
       }
     }
-  }`;
+  }${GROUP_FRAGMENT}`;
 
 export const TICKET_BY_TYPE_COUNT = gql`
 query ticketsByTypeCount($ticketStatus: TicketStatus!) {

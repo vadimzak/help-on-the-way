@@ -15,14 +15,14 @@
       <div class="ticket-detail p-4">
         <span class="ticket-sub-header">שם: </span>
         <div>
-          <span>{{ticket.personByElderId.firstName}}</span> <span>{{ticket.personByElderId.lastName}}</span>
+          <span>{{ticket.elder.firstName}}</span> <span>{{ticket.elder.lastName}}</span>
         </div>
       </div>
       <div class="ticket-detail p-4">
         <span class="ticket-sub-header">כתובת: </span>
         <div>
-          <span>{{ticket.personByElderId.addressByAddressId.street}}</span>
-          <span>{{ticket.personByElderId.addressByAddressId.houseNumber}}</span>
+          <span>{{ticket.elder.address.street}}</span>
+          <span>{{ticket.elder.address.houseNumber}}</span>
         </div>
       </div>
     </div>
@@ -30,6 +30,7 @@
       <div class="ticket-detail p-4">
         <span class="ticket-sub-header">מספר פניה</span>
         <div>
+          <span class="fa fa-pencil" @click="() => $store.commit('createTicket/setActiveTicket', this.ticket)"></span>
            {{ticket.id}}
         </div>
       </div>
@@ -129,7 +130,7 @@
     computed: {
       startAddress: {
           get(){
-              return this.ticket.addressByStartAddressId;
+              return this.ticket.startAddress;
           },
           set(value){
             this.updateTicket({ startAddressId: value.id });
@@ -137,7 +138,7 @@
       },
       destinationAddress: {
           get(){
-              return this.ticket.addressByDestinationAddressId;
+              return this.ticket.destinationAddress;
           },
           set(value){
             this.updateTicket({ destinationAddressId: value.id });
@@ -145,7 +146,7 @@
       },
       endAddress: {
          get(){
-              return this.ticket.addressByEndAddressId;
+              return this.ticket.endAddress;
           },
           set(value){
             this.updateTicket({ endAddressId: value.id });

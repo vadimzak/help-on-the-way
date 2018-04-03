@@ -19,7 +19,7 @@
      v-for="ticket in tickets"
      v-bind:key="ticket.id" v-on:click="onTicketClicked(ticket)">
       <div class="col d-flex justify-content-center ticket-cell elder-name-cell">
-        <span class="elder-name">{{ticket.personByElderId.firstName}} {{ticket.personByElderId.lastName}}</span>
+        <span class="elder-name">{{ticket.elder.firstName}} {{ticket.elder.lastName}}</span>
       </div>
       <div class="col d-flex justify-content-center ticket-cell">
            {{getTicketActivity(ticket)}}
@@ -30,7 +30,7 @@
             <span></span>
           </div>
           <div class="phone-number">
-            <span> {{ticket.personByElderId.phoneNumber}} </span>
+            <span> {{ticket.elder.phoneNumber}} </span>
           </div>
         </div>
       </div>

@@ -1,17 +1,20 @@
 <template>
 <div class="col-2">
-    <FloatingScreen target="ticket-btn">
-      <TicketWizard></TicketWizard>
+    <FloatingScreen :isOpen="!!ticket" @close="() => setActiveTicket(undefined)" target="ticket-btn">
+      <TicketWizard v-if="ticket"></TicketWizard>
     </FloatingScreen>
-    <div id="ticket-btn" class="ticket-btn p-4 h4"> + פניה חדשה</div>
+    <div id="ticket-btn" @click="newTicket" class="ticket-btn p-4 h4"> + פניה חדשה</div>
 </div>
 </template>
 
 <script>
 import TicketWizard from './wizard/TicketWizard';
 import FloatingScreen from '@/components/layout/FloatingScreen';
+import {mapMutations, mapState} from 'vuex'
 export default {
   components: {TicketWizard, FloatingScreen},
+  methods: { ...mapMutations('createTicket', ['newTicket', 'setActiveTicket'])},
+  computed: { ...mapState('createTicket', ['ticket'])}
   }
 </script>
 

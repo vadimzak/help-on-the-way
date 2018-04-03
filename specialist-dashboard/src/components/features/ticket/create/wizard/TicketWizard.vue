@@ -10,7 +10,8 @@
     <Step :current-step="currentStep" step="6"><AnnounceStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
     <footer>
         <b-btn @click="back" v-if="currentStep > 1">חזור אחורה</b-btn>
-        <b-btn @click="saveAndAdvanceStep"  v-if="canContinue">המשך</b-btn>
+        <b-btn @click="saveAndAdvanceStep" :disabled="saveInProgress" v-if="canContinue">המשך</b-btn>
+        <b-btn @click="saveAndClose"  v-if="currentStep === lastStep">שמור וסגור</b-btn>
     </footer>
   </div>
 </template>
@@ -23,6 +24,8 @@ export default {
   data(){
     return {
       canContinue: false,
+      lastStep: 6,
+      saveInProgress: false
     }
   },
   components: {  ...steps, WizardHeader  },
@@ -30,9 +33,34 @@ export default {
       ...mapState(['currentStep', 'ticket'])
   },
   methods: {
-    saveAndAdvanceStep(){
-      this.$store.dispatch('createTicket/saveAndAdvanceStep');
-      this.canContinue = false;
+    async saveAndAdvanceStep(){
+      if(this.saveInProgress){
+        return
+      }
+      this.saveInProgress = true
+      try {
+          await this.$store.dispatch('createTicket/saveCurrentTicket');
+          this.$store.commit('createTicket/moveStep')
+          this.canContinue = false;
+      } catch (error) {
+          // tood manage error handling
+          throw error
+      }finally{
+          this.saveInProgress = false
+      }
+
+    },
+    async saveAndClose(){
+      this.saveInProgress = true
+      try {
+          await this.$store.dispatch('createTicket/saveCurrentTicket');
+           this.$store.commit('createTicket/setActiveTicket', null)
+      } catch (error) {
+          // tood manage error handling
+          throw error
+      } finally{
+              this.saveInProgress = false
+      }
     },
     back(){
       this.canContinue = false;

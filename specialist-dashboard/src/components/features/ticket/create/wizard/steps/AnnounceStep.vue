@@ -42,9 +42,6 @@ import { mapState } from 'vuex'
 import { TicketStatus} from "@/constants/enums";
 
 export default {
-  mounted(){
-      this.$emit('canContinue', true)
-  },
   components: { TicketGroupPicker, GroupMessagePreview, TicketStatusSelect },
   data() {
     return {
@@ -54,7 +51,8 @@ export default {
     computed: {
         ...mapState('messages', ['isMessagesAvilable']),
         ...mapState('createTicket', ['ticket']),
-        ...mapStateForForm(['groups', 'status'], 'createTicket', 'ticket', 'createTicket/setTicketGroups'),
+        ...mapStateForForm(['status'], 'createTicket', 'ticket', 'createTicket/updateTicket'),
+        ...mapStateForForm(['groups'], 'createTicket', 'ticket', 'createTicket/setTicketGroups'),
         canSendMessages(){
             const messagingAvilable = this.isMessagesAvilable
             const haveGroups = !!(this.groups || []).length
