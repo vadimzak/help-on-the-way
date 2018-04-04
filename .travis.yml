@@ -15,7 +15,7 @@ deploy:
   on:
     all_branches: true
     condition: "$DEPLOY_VOLUNTEER = true"
-    condition: "$DEPLOY_PROD = true"
+    condition: "$DEPLOY_PROD = PROD"
 - provider: s3
   access_key_id: AKIAI4CFEBTFA24MOKFQ
   bucket: aws-website-dashboarddorldororgil-cu0yx
@@ -27,5 +27,5 @@ deploy:
   on:
     all_branches: true
     condition: "$DEPLOY_DASHBOARD = true"
-    condition: "$DEPLOY_PROD = true"
+    condition: "$DEPLOY_TO = PROD"
     
