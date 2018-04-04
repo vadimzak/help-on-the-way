@@ -1,0 +1,232 @@
+<template>
+  <v-flex>
+    <v-card>
+      <v-card-media
+        class="white--text card-image"
+        height="30vh"
+        :style="getStyle(ticket)">
+        <v-container fill-height fluid>
+          <v-layout fill-height class="mr-4 ml-2">
+            <v-flex xs12 align-end flexbox>
+              <v-layout column>
+                <span class="" id="ticket-headline">
+                  {{ticket | formatTicketTitle}}
+                </span>
+                <img align-self-center :src="`static/assets/posters/${ticket.category.toLowerCase()}.png`" class="ticket-poster">
+              </v-layout>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-card-media>
+      <v-btn
+        :style="getActionStyle(ticket)"
+        dark
+        fab
+        class="call-button"
+        :href="`tel:${ticket.elder.phoneNumber.replace(/^\0/, '972')}`"
+      >
+        <v-icon>phone</v-icon>
+      </v-btn>
+    </v-card>
+       <div class="card-content">
+        <div class="ticket-details">
+          <div class="when section">
+            <i class="material-icons">date_range</i>
+            <span v-if="ticket.dueDate">
+            {{this.$moment(ticket.dueDate).format('L')}}
+            {{this.$moment(ticket.dueDate).add(ticket.durationEta, 'hour').format('HH:mm')}}
+                 <a class="add-to-calendar" :href="getCalendarLink()" target="_blank">
+              הכנס ליומן
+            </a>
+              </span>
+            <span v-else>גמיש</span>
+          </div>
+          <div class="where section">
+            <TransportType :type="ticket.transport"/>
+            <TransportRoute :ticket="ticket"/>
+          </div>
+          <div class="who section">
+            <ElderBasicInfo :elder="ticket.elder" :elder-mobility="ticket.elderMobility"/>
+          </div>
+          <div class="ticket-tags">
+            <div class="tag" v-for="tag in ticket.tags">
+              <i class="material-icons">{{tag.icon}}</i>
+              {{tag.name}}
+            </div>
+          </div>
+
+      <div class="important-things section">
+        <NeedToKnow :items="ticket.details.needToKnow"/>
+      </div>
+    </div>
+   </div>
+  </v-flex>
+</template>
+
+<script>
+  import categoriesTree from 'shared/constants/categoriesTree'
+  import TransportType from '../templates/TransportType'
+  import TransportRoute from '../templates/TransportRoute'
+  import ElderBasicInfo from '../templates/ElderBasicInfo'
+  import NeedToKnow from '../templates/NeedToKnow'
+
+  export default {
+    props: ['ticket'],
+    components: {
+      TransportType,
+      TransportRoute,
+      ElderBasicInfo,
+      NeedToKnow
+    },
+    data() {
+      return {
+        dialog: false,
+      }
+    },
+    computed: {
+      timeUnit() {
+        return this.$options.filters.formatMinutes(this.ticket.durationEta).split(' ')[1]
+      },
+      timeCount() {
+        return this.$options.filters.formatMinutes(this.ticket.durationEta).split(' ')[0]
+
+      }
+    },
+    methods: {
+      getStyle(ticket) {
+        return {
+          '--background-color': categoriesTree[ticket.category].self.background,
+        }
+      },
+      getActionStyle(ticket) {
+        return {
+          'background-color': '#207bff',
+        }
+      },
+      getCalendarLink(){
+        return `https://www.google.com/calendar/render?action=TEMPLATE
+        &dates=${this.$moment(this.ticket.dueDate).toISOString()}/${this.$moment(this.ticket.dueDate).toISOString()}
+        &text=${this.$options.filters.formatTicketTitle(this.ticket).replace(" ","")}
+        &location=${this.ticket.startAddress}
+        &details=`
+      }
+    },
+  }
+</script>
+
+<style scoped>
+
+  #ticket-headline {
+    font-size: 22px;
+    line-height: 32px;
+    letter-spacing: -1px;
+    font-family: 'Open Sans Hebrew', Arial;
+  }
+
+  .card-content ul {
+    list-style: none;
+  }
+
+  .card-content ul li {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 10px;
+    font-size: 16px;
+  }
+
+  .card-content ul li i {
+    width: 40px;
+    text-align: right;
+  }
+
+  .card-image {
+    background-image: var(--background-color);
+    box-shadow: 0px 1px 2px 1px rgba(126, 67, 253, 0.42);
+  }
+
+  .call-button{
+    background-color: var(--action-color);
+    position: absolute;
+    left: 0;
+    bottom: -35px;
+    border-radius: 100px;
+  }
+
+  .ticket-details {
+    width: 100%;
+  }
+
+  .ticket-tags {
+    margin-top: 10px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  .tag {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    opacity: 0.7;
+  }
+
+  .tag i {
+    font-size: 30px;
+  }
+
+  .important-things > * {
+    width: 100%;
+  }
+
+  .when, .who {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    font-family: 'Tahoma';
+  }
+
+  .when > span {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    padding-right: 10px;
+  }
+
+  .where {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    font-family: 'Tahoma';
+  }
+
+  .add-to-calendar {
+    color: #2d83ff;
+    font-size: 12px;
+  }
+
+  .section{
+    padding: 15px;  
+    position:relative;
+  }
+
+  .section:after{
+    content:"";
+    width: 80%;
+    height: 1px;
+    position: absolute;
+    bottom: 0;
+    background-color: gainsboro;
+    margin-right: 8%;
+  }
+
+  .ticket-poster{
+    align-self: center;
+    max-height: 100%;
+    width: auto;
+  }
+</style>

@@ -13,6 +13,9 @@ fragment ticketFields on TicketForVolunteer {
     startAddress,
     destinationAddress,
     endAddress,
+    transport,
+    elderMobility,
+    details
   }
 `
 

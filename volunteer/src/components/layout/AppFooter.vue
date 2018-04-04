@@ -1,7 +1,9 @@
 <template>
   <v-footer app>
+    <a href="tel:*5823">
     <span>המוקד שלנו זמין לכל שאלה</span>
     <i class="material-icons">phone</i>
+    </a>
   </v-footer>
 </template>
 
@@ -22,5 +24,17 @@
     align-items: center;
     color: white;
     justify-content: center;
+  }
+
+  .footer a {
+    width:100%;
+    text-decoration:none;
+    color:white;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .footer a span {
+    margin-left:10px;
   }
 </style>

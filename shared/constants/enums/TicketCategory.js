@@ -6,6 +6,8 @@ export default {
         color: '#ff5f5f',
         icon: 'icon-doctor-stethoscope',
         isIndoor: false,
+        background:'linear-gradient(60deg, #ff9b51, #ff5fc1, #ff8886, #ff5f5f)',
+        actionColor: '#207bff',
     },
     shopping: {
         value: 'SHOPPING',
@@ -14,6 +16,8 @@ export default {
         color: '#23f7c4',
         icon: ' icon-shopping-cart',
         isIndoor: false,
+        background:' linear-gradient(60deg, #a1ffe3, #23f7c4)',
+        actionColor: '#207bff',
     },
     socialEscort: {
         value: 'SOCIAL_ESCORT',
@@ -22,6 +26,8 @@ export default {
         color: '#6e47ff',
         icon: 'icon-party',
         isIndoor: false,
+        background : 'linear-gradient(60deg, #993ef9, #6e47ff)',
+        actionColor: '#20eaba',
     },
     repairs: {
         value: 'REPAIRS',
@@ -30,6 +36,8 @@ export default {
         color: '#ffeb3b',
         icon: 'icon-settings',
         isIndoor: true,
+        background:'linear-gradient(60deg, #e6b82d, #ffeb3b)',
+        actionColor: '#58dd68',
     },
     instructions: {
         value: 'INSTRUCTIONS',
@@ -38,6 +46,8 @@ export default {
         color: '#35a7ff',
         icon: 'fa-slideshare',
         isIndoor: true,
+        background: 'linear-gradient(60deg, #6067ff, #35a7ff)',
+        actionColor: '#ff6f6a',
     },
     bureaucracy: {
         value: 'BUREAUCRACY',
@@ -46,7 +56,9 @@ export default {
         color: '#ff5ca9',
         icon: 'icon-contract',
         isIndoor: true,
-    },  
+        background: 'linear-gradient(60deg, #ff6b83, #ff5ca9)',
+        actionColor: '#ffb13e',
+    },
     clean_organize: {
         value: 'CLEAN_ORGANIZE',
         text: 'סדר וארגון',
@@ -54,6 +66,8 @@ export default {
         color: '#3ce778',
         icon: 'fa-dolly',
         isIndoor: true,
+        background:'linear-gradient(60deg, #20c659, #3ce778)',
+        actionColor: '#efcc33',
     },
     social: {
         value: 'SOCIAL_AT_HOME',
@@ -61,6 +75,8 @@ export default {
         text: 'חברתי',
         noun: 'ישיבה לקפה',
         icon: 'fa-coffee',
-        isIndoor: true, 
+        isIndoor: true,
+        background: ' linear-gradient(60deg, #993ef9, #6e47ff)',
+        actionColor: '#20eaba',
     },
 }
