@@ -5,7 +5,7 @@
         שם הזקן
       </div>
       <div class="col">
-        סוג הפניה
+        נושא הפניה
       </div>
       <div class="col">
         איך ליצור קשר?
@@ -22,7 +22,7 @@
         <span class="elder-name">{{ticket.elder.firstName}} {{ticket.elder.lastName}}</span>
       </div>
       <div class="col d-flex justify-content-center ticket-cell">
-           {{getTicketActivity(ticket)}}
+           {{ticket | formatTicketTitle}}
       </div>
       <div class="col d-flex justify-content-center ticket-cell">
         <div class="phone-numbers">
@@ -60,9 +60,6 @@ export default {
 				'--category-color': categoriesTree[ticket.category].self.color
 			};
 		},
-		getTicketActivity(ticket) {
-			return categoriesTree[ticket.category].self.text;
-		}
 	}
 };
 </script>

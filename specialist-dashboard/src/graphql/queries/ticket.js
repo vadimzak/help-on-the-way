@@ -35,6 +35,7 @@ query allTicketsSearchQuery($ticketStatus: TicketStatus!) {
           firstName
           lastName
           phoneNumber
+          gender
           address: addressByAddressId {
             id
             city
