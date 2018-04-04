@@ -24,7 +24,11 @@ mutation createGroup($group: GroupInput!){
 
 export const GET_ALL = gql`
 query getGroups{
-  ...groupFields
+  allGroups{
+    nodes{
+      ...groupFields
+    }
+  }
 }
 ${GROUP_FRAGMENT}`
 

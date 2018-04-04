@@ -56,7 +56,7 @@ export default {
         canSendMessages(){
             const messagingAvilable = this.isMessagesAvilable
             const haveGroups = !!(this.groups || []).length
-            const validStatus = this.status === TicketStatus.open 
+            const validStatus = this.status === TicketStatus.open.value 
             return {
               haveGroups,
               validStatus,
