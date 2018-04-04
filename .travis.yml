@@ -13,8 +13,8 @@ deploy:
   skip_cleanup: true
   acl: public_read
   on:
-    branch: master
-    condition: "$DEPLOY_VOLUNTEER = true"
+    all_branches: true
+    condition: "$DEPLOY_VOLUNTEER = true && $DEPLOY_PROD = true"
 - provider: s3
   access_key_id: AKIAI4CFEBTFA24MOKFQ
   bucket: aws-website-dashboarddorldororgil-cu0yx
@@ -24,6 +24,6 @@ deploy:
   acl: public_read
   local_dir: specialist-dashboard/dist
   on:
-    branch: master
-    condition: "$DEPLOY_DASHBOARD = true"
+    all_branches: true
+    condition: "$DEPLOY_DASHBOARD = true && $DEPLOY_PROD = true"
     
