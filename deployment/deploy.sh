@@ -1,6 +1,6 @@
 cd ./deployment && npm i && cd ..
 eval $(node ./deployment/should-deploy.js)
-echo should deploy: volunteer: $DEPLOY_VOLUNTEER, dashboard: $DEPLOY_DASHBOARD, server: $DEPLOY_SERVER to $DEPLOY_TO
+printf "===== DEPLOY TO $DEPLOY_TO ===== \n volunteer: $DEPLOY_VOLUNTEER \n dashboard: $DEPLOY_DASHBOARD \n server: $DEPLOY_SERVER \n"
 if [ $DEPLOY_TO = "STAGE" ]
 then
 export SERVER_BASE_URL="http://server.dev.dorldor.org.il"

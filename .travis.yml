@@ -9,13 +9,12 @@ deploy:
   secret_access_key:
     secure: "Px7basKDHNWtheuOrJZJAXHiwLB/BDj1oq0elznBT3MMWBznVp0nS0ZuwqrhjazIwnJbOr2j1nN/p+lipIAD1v2OWhQYW875ecQ26aI2qsVkZo+tf9ln+1upF3s5Jz97s/2cvkmSsQYqQ4ESWvW14XyzhiccRJVtzoCcPPClyHidBMFOQDJKDIN+clP+XRtBYJbL2rSEKyZDd16JtzqTN8O0YY0PVT4qJCdAhPsdMYdIXSTbM8mNbOWr7Tg4QIptOBDNQeDSwaliqn86QdcS/NFVW8U6+24ALUHNjlaB+UiMUKYwL3qWKI3OYKppr8MdHHV8YHh8Xl71U0Wfh2fS8JELy5HFxSM30X4soc4BtQKHkw7TM9vHdEC47Rc34h79Hg7DzODlAonxLA5+d+dJ1UUQ2TMsUV1/UmtYYuT6vA+u7rMiPnCygSWbwGppnNwewHg4yVnr/2Gc2q2AElc1ScD4Vll/26NdkvL3n0uf3yvSCOZ6TWOBPFoxNYVFiAsihrPDKZ8Lq+Xn7iP4OXQt2kkeLuMxBBvcQ+rpdMjgSeY5cVEAdttYLf1OAno/LRSU5QmmlK1vZScJVTRASBF5meIKiVTOLKrK/c+FEekQo5AX/aLZeMfen0MUkSYhch28e5k2jGkG9TO+fxU762BC9vUkeOA0fvXvxFBMNErshiY="
   bucket: aws-website-appdorldororgil-oi981
-  local_dir: "./volunteer/dist"
+  local_dir: "volunteer/dist"
   skip_cleanup: true
   acl: public_read
   on:
-    all_branches: true
-    condition: "$DEPLOY_VOLUNTEER = true"
-    condition: "$DEPLOY_PROD = PROD"
+    branch: master
+    condition: $DEPLOY_VOLUNTEER = true && $DEPLOY_TO = "PROD"
 - provider: s3
   access_key_id: AKIAI4CFEBTFA24MOKFQ
   bucket: aws-website-dashboarddorldororgil-cu0yx
@@ -25,22 +24,21 @@ deploy:
   acl: public_read
   local_dir: specialist-dashboard/dist
   on:
-    all_branches: true
-    condition: "$DEPLOY_DASHBOARD = true"
-    condition: "$DEPLOY_TO = PROD"
+    branch: master
+    condition: $DEPLOY_DASHBOARD = true && $DEPLOY_TO = "PROD"
 deploy:
 - provider: s3
   access_key_id: AKIAI4CFEBTFA24MOKFQ
   secret_access_key:
     secure: "Px7basKDHNWtheuOrJZJAXHiwLB/BDj1oq0elznBT3MMWBznVp0nS0ZuwqrhjazIwnJbOr2j1nN/p+lipIAD1v2OWhQYW875ecQ26aI2qsVkZo+tf9ln+1upF3s5Jz97s/2cvkmSsQYqQ4ESWvW14XyzhiccRJVtzoCcPPClyHidBMFOQDJKDIN+clP+XRtBYJbL2rSEKyZDd16JtzqTN8O0YY0PVT4qJCdAhPsdMYdIXSTbM8mNbOWr7Tg4QIptOBDNQeDSwaliqn86QdcS/NFVW8U6+24ALUHNjlaB+UiMUKYwL3qWKI3OYKppr8MdHHV8YHh8Xl71U0Wfh2fS8JELy5HFxSM30X4soc4BtQKHkw7TM9vHdEC47Rc34h79Hg7DzODlAonxLA5+d+dJ1UUQ2TMsUV1/UmtYYuT6vA+u7rMiPnCygSWbwGppnNwewHg4yVnr/2Gc2q2AElc1ScD4Vll/26NdkvL3n0uf3yvSCOZ6TWOBPFoxNYVFiAsihrPDKZ8Lq+Xn7iP4OXQt2kkeLuMxBBvcQ+rpdMjgSeY5cVEAdttYLf1OAno/LRSU5QmmlK1vZScJVTRASBF5meIKiVTOLKrK/c+FEekQo5AX/aLZeMfen0MUkSYhch28e5k2jGkG9TO+fxU762BC9vUkeOA0fvXvxFBMNErshiY="
   bucket: app.dev.dorldor.org.il
-  local_dir: "./volunteer/dist"
+  region: eu-west-1
+  local_dir: "volunteer/dist"
   skip_cleanup: true
   acl: public_read
   on:
-    all_branches: true
-    condition: "$DEPLOY_VOLUNTEER = true"
-    condition: "$DEPLOY_PROD = STAGE"
+    branch: master
+    condition: $DEPLOY_VOLUNTEER = true && $DEPLOY_TO = "STAGE"
 - provider: s3
   access_key_id: AKIAI4CFEBTFA24MOKFQ
   bucket: dashboard.dev.dorldor.org.il
@@ -49,8 +47,8 @@ deploy:
   skip_cleanup: true
   acl: public_read
   local_dir: specialist-dashboard/dist
+  region: eu-west-1
   on:
-    all_branches: true
-    condition: "$DEPLOY_DASHBOARD = true"
-    condition: "$DEPLOY_TO = STAGE"
+    branch: master
+    condition: $DEPLOY_DASHBOARD = true && $DEPLOY_TO = "STAGE"
         
