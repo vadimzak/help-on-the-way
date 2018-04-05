@@ -1,9 +1,9 @@
 <template>
   <div id="app-header" class="m-0 row align-items-center h3">
-    <div class="pr-5 app-header-text text-right col-2">
+    <div class="pr-5 app-header-text text-right row align-content-center align-items-center">
       עזרה בדרך
+      <NewTicketButton/>
     </div>
-     <NewTicketButton/>
   </div>
 </template>
 

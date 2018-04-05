@@ -1,5 +1,5 @@
 <template>
-<div class="col-2">
+<div class="col">
     <FloatingScreen :isOpen="!!ticket" @close="() => setActiveTicket(undefined)" target="ticket-btn">
       <TicketWizard v-if="ticket"></TicketWizard>
     </FloatingScreen>
@@ -20,6 +20,7 @@ export default {
 
 <style scoped>
 .ticket-btn{
+  width: 250px;
   border-radius: 1px;
   background-color: #299dff;
   box-shadow: 0px 5px 14.9px 1.1px rgba(142, 142, 142, 0.26);

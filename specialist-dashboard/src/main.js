@@ -1,6 +1,6 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
-require('../node_modules/bootstrap-sass/assets/stylesheets/_bootstrap.scss')
+require('../static/bootstrap_override.scss')
 require('../static/fonts.css')
 require('../static/scroll.css')
 
