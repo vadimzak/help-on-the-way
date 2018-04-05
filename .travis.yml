@@ -1,7 +1,7 @@
 language: node_js
 node_js:
   - "8"
-# if: branch = master
+if: branch = master
 script: ". deployment/deploy.sh"
 deploy:
 - provider: s3
@@ -13,7 +13,7 @@ deploy:
   skip_cleanup: true
   acl: public_read
   on:
-    all_branches: true
+    branch: master
     condition: $DEPLOY_VOLUNTEER = true && $DEPLOY_TO = "PROD"
 - provider: s3
   access_key_id: AKIAI4CFEBTFA24MOKFQ
@@ -24,7 +24,7 @@ deploy:
   acl: public_read
   local_dir: specialist-dashboard/dist
   on:
-    all_branches: true
+    branch: master
     condition: $DEPLOY_DASHBOARD = true && $DEPLOY_TO = "PROD"
 deploy:
 - provider: s3
@@ -37,7 +37,7 @@ deploy:
   skip_cleanup: true
   acl: public_read
   on:
-    all_branches: true
+    branch: master
     condition: $DEPLOY_VOLUNTEER = true && $DEPLOY_TO = "STAGE"
 - provider: s3
   access_key_id: AKIAI4CFEBTFA24MOKFQ
@@ -49,6 +49,6 @@ deploy:
   local_dir: specialist-dashboard/dist
   region: eu-west-1
   on:
-    all_branches: true
+    branch: master
     condition: $DEPLOY_DASHBOARD = true && $DEPLOY_TO = "STAGE"
         
