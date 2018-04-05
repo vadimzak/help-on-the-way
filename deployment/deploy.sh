@@ -11,7 +11,6 @@ then
 echo "building volunteer app"
 cd ./volunteer && npm i && npm run build
 cd ..
-mkdir  ./volunteer/dist
 fi
 if [ $DEPLOY_DASHBOARD = true ]
 then
