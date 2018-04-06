@@ -24,8 +24,9 @@
     <b-form-group label="תאריך לידה">
         <DatePicker placeholder="בחר תאריך לידה" :inline="true" language="he" name="birthdate" v-model="birthdate"></DatePicker>
     </b-form-group>
-    <b-form-row>
-        <b-button type="submit" variant="secondary">
+    <b-form-row class="justify-content-between">
+        <b-button  variant="secondary" @click="$emit('cancel')">ביטול</b-button> 
+        <b-button type="submit" variant="primary">
             שמור והמשך
         </b-button>
     </b-form-row>

@@ -1,20 +1,24 @@
 <template>
 <div class="col">
-    <FloatingScreen :isOpen="!!ticket" @close="() => setActiveTicket(undefined)" target="ticket-btn">
-      <TicketWizard v-if="ticket"></TicketWizard>
+    <FloatingScreen @shown="variant = 'outline-primary'" @hidden="variant = 'primary'"	 target="ticket-btn">
+      <CreateTicketForElder/> 
     </FloatingScreen>
-    <div id="ticket-btn" @click="newTicket" class="ticket-btn p-4 h4"> + פניה חדשה</div>
+    <b-btn v-show="$route.name !== 'Ticket'" :variant="variant" id="ticket-btn" size="lg" class=""> + פניה חדשה</b-btn>
+    <b-btn @click="() => $router.go(-1)" v-show="$route.name === 'Ticket'" variant="outline-primary"  size="lg" class=""> x פניה חדשה</b-btn>
 </div>
 </template>
 
 <script>
-import TicketWizard from './wizard/TicketWizard';
+import CreateTicketForElder from './CreateTicketForElder';
 import FloatingScreen from '@/components/layout/FloatingScreen';
 import {mapMutations, mapState} from 'vuex'
 export default {
-  components: {TicketWizard, FloatingScreen},
-  methods: { ...mapMutations('createTicket', ['newTicket', 'setActiveTicket'])},
-  computed: { ...mapState('createTicket', ['ticket'])}
+  components: {CreateTicketForElder, FloatingScreen},
+  data(){
+    return {
+      variant: 'primary',
+    }
+  }
   }
 </script>
 

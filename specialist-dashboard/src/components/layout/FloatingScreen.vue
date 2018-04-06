@@ -1,6 +1,6 @@
 <template>
 <div>
-    <b-popover ref="popover" :disabled="isOpen" :target="target" boundary="viewport" placement="left" triggers="click" container="floating-screen-container-root">
+    <b-popover ref="popover" @shown="(e) => $emit('shown', e)" @hidden="(e) => $emit('hidden', e)" :target="target" boundary="viewport" placement="bottomleft" triggers="click" container="floating-screen-container-root">
             <button @click="close" class="close">x</button>
             <slot></slot>
 </b-popover>
@@ -11,7 +11,6 @@
 export default {
   props: {
       target: { type: String, required: true },
-      isOpen: { type: Boolean, required: true }
   },
   methods: {
       close(){

@@ -2,10 +2,11 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import AppLayout from '@/AppLayout'
 import TicketsView from '@/components/TicketsView'
+import { FullScreenTicketEditor } from '@/components/features/ticket'
 import VolunteersView from '@/components/VolunteersView'
 import KitchenSink from '@/components/KitchenSink'
 import FontsDemo from '@/components/base/FontsDemo'
-import { Login, Unauthorized } from '@/components/features/auth/'
+import { Login, Unauthorized, PageNotFound } from '@/components/features/auth/'
 import authenticationForcer from '../services/authEnforce'
 Vue.use(Router)
 let router = new Router({
@@ -18,6 +19,24 @@ let router = new Router({
           path: '',
           name: 'TicketsView',
           component: TicketsView
+        },
+        {
+          path: '/ticket/:id',
+          name: 'Ticket',
+          component: FullScreenTicketEditor,
+          beforeEnter: async (to, from, next) => {
+            const app = router.app
+            try {
+              const ticket = await app.$store.dispatch('createTicket/getTicketById', to.params.id)
+              app.$store.commit('createTicket/setActiveTicket', ticket)
+              app.$store.commit('createTicket/setStep', 1)
+              next()
+            } catch (error) {
+              console.error(error);
+              next('notfound')
+            }
+
+          }
         },
         {
           path: '/volunteers',
@@ -40,6 +59,10 @@ let router = new Router({
       name: 'unauthorized',
       component: Unauthorized
     },
+    {
+      path: '*',
+      component: PageNotFound,
+    }
   ]
   
 })

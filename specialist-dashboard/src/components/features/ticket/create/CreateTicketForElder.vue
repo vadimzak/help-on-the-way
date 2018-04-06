@@ -1,6 +1,6 @@
 <template>
   <div>
-      <h2>פתיחת פניה חדשה</h2>
+      <h2>פרטים ראשונים</h2>
       <p class="small">הקלד את שם ו/או מספר הטלפון של הזקן לחיפוש.</p>
       <ElderSearch @select="onElderSelect" callToActionLabel="צור פניה" />
   </div>
@@ -13,9 +13,9 @@ export default {
     return {}
   },
   methods:{
-        onElderSelect(elder) {
-          this.$emit('update', { elder });
-          this.$emit('next');
+        async onElderSelect(elder) {
+          const ticket = await this.$store.dispatch('createTicket/createTicketForElder', elder);
+          this.$router.push({ name: 'Ticket', params: { id: ticket.id }})
       }
   }
 }

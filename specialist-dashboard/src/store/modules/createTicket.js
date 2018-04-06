@@ -1,4 +1,4 @@
-import { CREATE_TICKET, UPDATE_TICKET } from '@/graphql/queries/ticket';
+import { CREATE_TICKET, UPDATE_TICKET, GET_BY_ID } from '@/graphql/queries/ticket';
 import { client as apolloClient } from 'shared/providers/apolloProvider';
 import { TicketStatus } from '@/constants/enums/index';
 import _ from 'lodash';
@@ -21,6 +21,12 @@ const actions = {
             commit('updateTicket', updatedTicket);
         }
     },
+    createTicketForElder({}, elder) {
+        return createOrUpdateTicket({ elder, startAddress: elder.address, status: TicketStatus.draft.value});
+    },
+    getTicketById({}, id) {
+        return getTicketById(id)
+    }
 };
   
   // mutations
@@ -115,6 +121,16 @@ async function createTicket(ticket) {
     });
     ticket = response.data.createTicket.ticket;
     return { id: ticket.id };
+
+}
+
+async function getTicketById(id) {
+    const response = await  apolloClient.query({
+        query: GET_BY_ID,
+        variables: { id },
+    });
+    const ticket = response.data.ticket;
+    return ticket;
 
 }
 

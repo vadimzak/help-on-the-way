@@ -30,7 +30,6 @@
       <div class="ticket-detail p-4">
         <span class="ticket-sub-header">מספר פניה</span>
         <div>
-          <span class="fa fa-pencil" @click="() => $store.commit('createTicket/setActiveTicket', this.ticket)"></span>
            {{ticket.id}}
         </div>
       </div>

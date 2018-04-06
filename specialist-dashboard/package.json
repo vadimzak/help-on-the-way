@@ -21,6 +21,7 @@
     "moment-duration-format": "2.2.2",
     "vee-validate": "2.0.6",
     "vue": "2.5.2",
+    "vue-context-menu": "2.0.6",
     "vue-form-generator": "2.2.0",
     "vue-multiselect": "^2.0.8",
     "vue-on-click-outside": "^1.0.3",
