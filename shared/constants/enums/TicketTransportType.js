@@ -7,7 +7,7 @@ export default {
     BUS: {
         icon: 'directions_bus',
         text: 'אוטובוס',
-        value: 'WALK',
+        value: 'BUS',
     },
     TAXI: {
         icon: 'local_taxi',

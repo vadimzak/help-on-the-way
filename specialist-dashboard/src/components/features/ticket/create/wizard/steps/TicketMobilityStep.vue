@@ -1,5 +1,5 @@
 <template>
-  <div class="container">
+  <div class="">
 
       <div class="elder-mobility">
           <h3 class="mobility-title">ניידות הזקן</h3>

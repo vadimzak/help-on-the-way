@@ -1,38 +1,47 @@
 <template> 
-    <div>
+    <div class="container">
         <h4 class="title">כתובות</h4>
 
         <div class="pickup address">
-            <h5 class="sub-title">איסוף</h5>
+            <i class="fa fa-map-marker"></i>
+
             <div class="input-wrapper">
+                <h5 class="sub-title">איסוף</h5>
                 <InputAddress :addressAlias="ticket.details.startAddressAlias" :keepOpen="false" name="startAddress" 
-           v-validate="'address'" v-model="startAddress"/>
-                <button class="remove-address" v-on:click="removeStartAddress">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                </button>
+                v-validate="'address'" v-model="startAddress"/>
             </div>
+
+            <button class="remove-address" v-on:click="removeStartAddress">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
         </div>
 
         <div class="destination address">
-            <h5 class="sub-title">יעד</h5>
+            <i class="fa fa-flag"></i>
+
             <div class="input-wrapper">
+                <h5 class="sub-title">יעד</h5>
                 <InputAddress :addressAlias="ticket.details.destinationAddressAlias" :keepOpen="false" name="destinationAddress" 
                 v-validate="'address'" v-model="destinationAddress"/>
-                <button class="remove-address" v-on:click="removeDestinationAddress">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                </button>
             </div>
+
+            <button class="remove-address" v-on:click="removeDestinationAddress">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
         </div>
 
         <div class="end address">
-            <h5 class="sub-title">חזרה</h5>
+            <i class="fa fa-map-marker"></i>
+
             <div class="input-wrapper">
+                <h5 class="sub-title">חזרה</h5>
                  <InputAddress :addressAlias="ticket.details.endAddressAlias" :keepOpen="false" name="endAddress" 
                  v-validate="'address'" v-model="endAddress"/>
-                <button class="remove-address" v-on:click="removeEndAddress">
-                    <i class="fa fa-trash" aria-hidden="true"></i>
-                </button>
             </div>
+
+            <button class="remove-address" v-on:click="removeEndAddress">
+                <i class="fa fa-trash" aria-hidden="true"></i>
+            </button>
         </div>
     </div>
 </template>
@@ -91,13 +100,42 @@ export default {
 }
 </script>
 <style scoped>
-    .input-wrapper{
+    .container{
+        font-family:  'Open Sans Hebrew';
+        width: 100%;
+        padding-bottom: 20px;
+    }
+    .title{
+        font-size: 2rem;
+        margin-bottom: 0;
+        border-bottom: 2px solid gray;
+    }
+    .sub-title{
+        font-size: 1.2rem;
+        color: #8a8585;
+    }
+    .address{
         display: flex;
         justify-content: space-between;
+        align-items: center;
+        padding-bottom: 10px;
+        border-bottom: 1px solid lightgray;
+    }
+    .input-wrapper{
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex: 0 0 75%;
     }
     .remove-address{
         background: transparent;
         outline: none;
         border: none;
+    }
+    .fa{
+        font-size: 2vw;
+    }
+    .fa-trash{
+        font-size: 1.5vw;
     }
 </style>
