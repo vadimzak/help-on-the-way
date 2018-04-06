@@ -26,18 +26,17 @@ export default {
   }
   },
     computed: {
-      ...mapState(['ticket'])
+      ...mapState(['ticket']),
   },
   methods: {
     sourceChanged(value){
       if(value === 'elder'){
         const elder = this.ticket.elder;
-        this.updateTicketSource(value);
         this.updateTicket({ issuingPerson: elder });
         this.$emit('canContinue', true);
-      }
+        }
     },
-    ...mapMutations(['updateTicket', 'updateTicketSource'])
+    ...mapMutations(['updateTicket'])
   }
 }
 </script>

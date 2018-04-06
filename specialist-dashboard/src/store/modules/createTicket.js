@@ -4,7 +4,6 @@ import { TicketStatus } from '@/constants/enums/index';
 import _ from 'lodash';
 const state = {
     ticket: undefined,
-    ticketSource: undefined,
     currentStep: 1,
 };
   
@@ -51,9 +50,6 @@ const mutations = {
     updateTicket (state, ticketUpdate) {
         state.ticket = _.merge({}, state.ticket, {isDirty: true}, ticketUpdate);
     },
-    updateTicketSource(state, source) {
-          state.ticketSource = source;
-      },
     setTicketGroups(state, { groups }) {
         state.ticket = { ...state.ticket, groups: groups };
       },

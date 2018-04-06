@@ -78,6 +78,13 @@ startAddress: addressByStartAddressId {
   enterance
   location
 }
+issuingPerson: personByIssuingPerson{
+  id,
+  firstName,
+  lastName,
+  phoneNumber
+  type
+}
 status
 details
 remarks
