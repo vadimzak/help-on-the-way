@@ -5,9 +5,8 @@
     <Step :current-step="currentStep" step="2"><TicketTypeStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
     <Step :current-step="currentStep" step="3"><TicketDetailsStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
     <Step v-if="this.ticket.isIndoor" :current-step="currentStep" step="4"><TicketSummaryStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
-    <Step v-if="!this.ticket.isIndoor" :current-step="currentStep" step="4"><TicketRouteSummaryStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
-    <Step :current-step="currentStep" v-if="!this.ticket.isIndoor" step="5"><TicketMobilityStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
-    <Step :current-step="currentStep" :step="ticket.isIndoor ? 5 : 6"><AnnounceStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
+    <Step v-if="!this.ticket.isIndoor" :current-step="currentStep" step="4"><TicketRouteSummaryStep @update="updateTicket"  @canContinue="setCanContinue"/><TicketMobilityStep/></Step>
+    <Step :current-step="currentStep" step="5"><AnnounceStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
     <footer>
         <b-btn @click="back" v-if="currentStep > 1">חזור אחורה</b-btn>
         <b-btn @click="saveAndAdvanceStep" :disabled="saveInProgress" v-if="canContinue && currentStep < lastStep">המשך</b-btn>

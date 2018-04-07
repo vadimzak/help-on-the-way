@@ -16,7 +16,6 @@
                 <RadioBoxes v-model="transport" :options="ticketTransportTypes"/>
             </div>
       </div>
-    <input type="hidden" v-model="checkCanContinue">
   </div>
 </template>
 
@@ -28,9 +27,6 @@ import TicketTransportTypes from 'shared/constants/enums/TicketTransportType'
 
 export default {
 components: { RadioBoxes },
-  mounted(){
-    this.$emit('canContinue', !!this.elderMobility && !!this.transport);
-  },
   data () {
     return {
       elderMobilityOptions: Object.values(ElderMobilityTypes),
@@ -39,11 +35,6 @@ components: { RadioBoxes },
   },
   computed: {
       ...mapStateForForm(['elderMobility', 'transport'], 'createTicket', 'ticket', 'createTicket/updateTicket'),
-      checkCanContinue(){
-        if(this.elderMobility && this.transport){
-          this.$emit('canContinue', true)
-        }
-      }
   }
 }
 </script>
