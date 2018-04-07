@@ -6,7 +6,7 @@
     >
     </textarea>
     <br />
-    <button v-show="modified" @click="undoMods">בטל שינוים בהודעה</button>
+    <b-button variant="secondary" v-show="modified" @click="undoMods">בטל שינוים בהודעה</b-button>
   </div>
 </template>
 
