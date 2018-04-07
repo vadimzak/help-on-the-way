@@ -1,6 +1,9 @@
-export default function(value) {
+import moment from 'moment'
+export default function (value) {
     if (value) {
       let date = new Date(value);
-      return date.getDay() + '/' + date.getMonth() + '/' + date.getFullYear()
+      return moment(date).toNow()
+    } else {
+      return 'גמיש'
     }
   }

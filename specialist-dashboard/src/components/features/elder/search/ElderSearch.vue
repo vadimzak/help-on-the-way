@@ -98,7 +98,7 @@ function constructSearchQuery(textQuery){
         </b-col>
     </b-row>
     <b-row v-if="createElderMode" class="m-0">
-        <PersonForm :personType="elderType" @save="onElderPick"/>
+        <PersonForm :personType="elderType" @cancel="createElderMode = false" @save="onElderPick"/>
     </b-row>
 </div>
 </template>

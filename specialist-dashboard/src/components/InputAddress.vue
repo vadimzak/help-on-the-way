@@ -12,8 +12,8 @@
           @place_changed="onSelect($event)"
           :select-first-on-enter="true"
       ></GmapAutocomplete>
-      <input type="number" min="0" max="100" :value="value.floor" @input="(e) => updatedModel({floor: e.target.value})" placeholder="קומה">
-      <input type="text" :value="value.enterance" @input="(e) => updatedModel({enterance: e.target.value })" placeholder="כניסה">
+      <b-form-input type="number" min="0" max="100" v-if="value" :value="value.floor" @input="(e) => updatedModel({floor: e.target.value})" placeholder="קומה"/>
+      <b-form-input type="text" v-if="value" :value="value.enterance" @input="(e) => updatedModel({enterance: e.target.value })" placeholder="כניסה"/>
      </div>
   </div>
 </template>

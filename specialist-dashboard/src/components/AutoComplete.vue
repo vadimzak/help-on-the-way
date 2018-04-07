@@ -28,7 +28,7 @@
     </div>
     <div v-if="chosen && options.toggleOnChoice">
       {{choice.description}}
-      <button @click="unchoose">edit</button>
+      <b-button @click="unchoose">edit</b-button>
     </div>
   </div>
 </template>

@@ -1,34 +1,34 @@
 export default {
     open: {
-      presentationName: 'ממתינות למתנדב',
-      queryTern: 'OPEN'
+      text: 'ממתינות למתנדב',
+      value: 'OPEN'
     },
     closed: {
-      presentationName: 'סגורות',
-      queryTern: 'CLOSED'
+      text: 'סגורות',
+      value: 'CLOSED'
     },
     draft: {
-      presentationName: 'טיוטות',
-      queryTern: 'DRAFT'
+      text: 'טיוטות',
+      value: 'DRAFT'
     },
     matched: {
-      presentationName: 'לפני תיאום',
-      queryTern: 'MATCHED'
+      text: 'לפני תיאום',
+      value: 'MATCHED'
     },
     scheduled: {
-      presentationName: 'לפני מפגש',
-      queryTern: 'SCHEDULED'
+      text: 'לפני מפגש',
+      value: 'SCHEDULED'
     },
     done_verified: {
-      presentationName: 'סיפור הצלחה',
-      queryTern: 'DONE_VERIFIED'
+      text: 'סיפור הצלחה',
+      value: 'DONE_VERIFIED'
     },
     pending_approval: {
-      presentationName: 'ממתינות לאישור',
-      queryTern: 'PENDING_APPROVAL'
+      text: 'ממתינות לאישור',
+      value: 'PENDING_APPROVAL'
     },
     unapproved: {
-      presentationName: 'לא מאושרות',
-      queryTern: 'UNAPPROVED'
+      text: 'לא מאושרות',
+      value: 'UNAPPROVED'
     }
 };

@@ -1,8 +1,8 @@
 <template>
     <div>
-        <RadioBoxes :options="timeOptions" @input="pickedTime" />
-        <label  v-if="otherOpen">זמן אחר (דקות)
-            <input type="number" min="1" v-model="otherTime" @change="(e) => updateValue(e.target.value)"/>
+        <RadioBoxes :options="timeOptions" :value="pickerValue" @input="pickedTime" />
+        <label  v-if="pickerValue === 'other'">זמן אחר (דקות)
+            <b-form-input type="number" min="1" :value="value" @change="(e) => updateValue(e.target.value)"/>
         </label>
     </div>
 </template>
@@ -10,11 +10,9 @@
 import RadioBoxes from '@/components/inputs/RadioBoxes'
 export default {
   components: { RadioBoxes },
+  props: ['value'],
   data(){
-      return {
-          otherTime: undefined,
-          otherOpen: false,
-          timeOptions: [
+      const timeOptions = [
               { text: 'רבע שעה', value: 15 },
               { text: 'חצי שעה', value: 30 },
               { text: 'שעה', value: 60 },
@@ -22,7 +20,16 @@ export default {
               { text: 'שעתיים', value: 120 },
               { text: 'אחר', value: 'other' },
           ]
+      const timeOptionsAsValues = timeOptions.map( t => t.value)
+      return {
+          otherTime: undefined,
+          otherOpen: false,
+          timeOptions,
+          timeOptionsAsValues,
+          pickerValue: this.value && !timeOptionsAsValues.includes(this.value) ? 'other' : this.value
       }
+  },
+  computed: {
   },
   methods: {
       updateValue(value){
@@ -30,12 +37,11 @@ export default {
       },
       pickedTime(value){
           if(value !== 'other'){
-              this.otherOpen = false;
               this.updateValue(value);
           } else{
-             this.otherOpen = true;
-             this.updateValue(this.otherTime);
+            this.updateValue(null);
           }
+          this.pickerValue = value
       }
   }
 }

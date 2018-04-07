@@ -1,5 +1,16 @@
 import gql from 'graphql-tag';
 
+export const GROUP_FRAGMENT = `
+fragment groupFields on Group{
+  id,
+  channels,
+  type,
+  volunteers: groupVolunteersByGroupId{
+    count: totalCount
+  }
+}
+`
+
 export const CREATE = gql`
 mutation createGroup($group: GroupInput!){
     createGroup(input: {
@@ -15,15 +26,11 @@ export const GET_ALL = gql`
 query getGroups{
   allGroups{
     nodes{
-      id,
-      channels,
-      type,
-      volunteers: groupVolunteersByGroupId{
-        count: totalCount
-      }
+      ...groupFields
     }
   }
-}`
+}
+${GROUP_FRAGMENT}`
 
 export const ASSIGN_GROUP_TO_TICKET = gql`
 mutation assignGroupToTicket($ticketId: BigInt!, $groupId: Int! ){

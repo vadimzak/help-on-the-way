@@ -6,7 +6,7 @@
         </b-col>
         <b-col cols="12" class="justify-content-center d-flex">
         <label for="destinationAlias">שם/סוג המקום:</label>
-        <input
+        <b-form-input
                    class="align-self-start"
                   id="destinationAlias"
                   v-model.trim="destinationAlias"

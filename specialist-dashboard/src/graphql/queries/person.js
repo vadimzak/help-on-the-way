@@ -10,6 +10,7 @@ mutation autoCompletePersonOfType($input: GetPersonByConditionInput!){
         lastName,
         type,
         phoneNumber,
+        gender,
         address: addressByAddressId{
           id,
           city,

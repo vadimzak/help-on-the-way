@@ -4,10 +4,11 @@ const commitId = process.env.TRAVIS_COMMIT;
 async function deploy() {
     const commit = await git.show([commitId, '-s', '--format=%B']);
     const diff = await git.diffSummary([commitId + '^', commitId]);
+    const DEPLOY_ENV = commitContains(commit, '[deploy-prod]') ? 'PROD' : 'STAGE';
     const shouldDeployServer = commitContains(commit, '[deploy-server]') || containsFileFrom(diff.files, 'server/');
     const shouldDeployDashboard = commitContains(commit, '[deploy-dashboard]') || containsFileFrom(diff.files, 'specialist-dashboard/');
     const shouldDeployVolunteerApp = commitContains(commit, '[deploy-volunteer]') || containsFileFrom(diff.files, 'volunteer/');
-    console.log(`export DEPLOY_SERVER=${shouldDeployServer} && export DEPLOY_VOLUNTEER=${shouldDeployVolunteerApp} && export DEPLOY_DASHBOARD=${shouldDeployDashboard}`);
+    console.log(`export DEPLOY_SERVER=${shouldDeployServer} && export DEPLOY_VOLUNTEER=${shouldDeployVolunteerApp} && export DEPLOY_DASHBOARD=${shouldDeployDashboard} && export DEPLOY_TO=${DEPLOY_ENV}`);
 }
 
 function containsFileFrom(files, from) {

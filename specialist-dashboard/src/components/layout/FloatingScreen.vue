@@ -1,7 +1,7 @@
 <template>
 <div>
-    <b-popover ref="popover" :target="target" boundary="viewport" placement="left" triggers="click" container="floating-screen-container-root">
-            <button @click="close" class="close">x</button>
+    <b-popover ref="popover" @shown="(e) => $emit('shown', e)" @hidden="(e) => $emit('hidden', e)" :target="target" boundary="viewport" placement="bottomleft" triggers="click" container="floating-screen-container-root">
+            <b-button @click="close" class="close">x</b-button>
             <slot></slot>
 </b-popover>
 </div>
@@ -10,11 +10,21 @@
 <script>
 export default {
   props: {
-      target: { type: String, required: true }
+      target: { type: String, required: true },
   },
   methods: {
       close(){
           this.$refs.popover.$emit('close');
+          this.$emit('close');
+      }
+  },
+  watch: {
+      isOpen(newVal){
+          if(newVal){
+            this.$refs.popover.$emit('open');
+          } else{
+            this.$refs.popover.$emit('close');
+          }
       }
   }
 }

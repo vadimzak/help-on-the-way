@@ -21,6 +21,7 @@ export default {
     return {
       currentSelection: this.value,
     }
+    
   },
   methods: {
     changeSelection(value){

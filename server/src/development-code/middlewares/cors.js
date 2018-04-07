@@ -1,7 +1,7 @@
 const cors = require('cors');
-
+const whiteList = process.env.CORS_FOR_DEV_VOLUNTEER_APP_URL ? process.env.CORS_FOR_DEV_VOLUNTEER_APP_URL.split(',') : [];
 const corsOptions = {
-	origin: process.env.CORS_FOR_DEV_VOLUNTEER_APP_URL,
+	origin: whiteList,
 	credentials: true
 };
 

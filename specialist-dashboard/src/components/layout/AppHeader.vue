@@ -1,9 +1,9 @@
 <template>
   <div id="app-header" class="m-0 row align-items-center h3">
-    <div class="pr-5 app-header-text text-right col-2">
-      עזרה בדרך
-    </div>
-     <NewTicketButton/>
+    <h3 @click=" () => $router.push('/')" class="pr-5 app-header-text text-right row align-content-center align-items-center">
+       עזרה בדרך
+    </h3>
+      <NewTicketButton class="mr-5"/>
   </div>
 </template>
 
@@ -36,7 +36,8 @@ export default {
   box-shadow: 0px 2px 38px 0 rgba(39, 39, 39, 0.06);
 }
 .app-header-text{
-font-family: 'Amatic SC', cursive;
+  cursor: pointer;
+  font-family: 'Amatic SC', cursive;
   font-size: 73px;
   font-style: normal;
   font-stretch: normal;

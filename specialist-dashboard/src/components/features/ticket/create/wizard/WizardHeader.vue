@@ -1,18 +1,19 @@
 <template>
   <div class="my-4 d-flex align-items-start steps-bar">
-        <div class="p-3 d-flex flex-column  align-items-start justify-content-start ">
-            <Truncate class="font-weight-bold" v-if="ticket.elder">{{ticket.elder | formatName}}</Truncate>
+        <div class="p-3 d-flex flex-column  align-items-start justify-content-start">
+            <Truncate class="font-weight-bold" v-if="ticket.elder" ><span @click="() => $store.commit('createTicket/setStep', 1)">{{ticket.elder | formatName}}</span></Truncate>
             <Truncate class="small" v-if="ticket.elder">{{ticket.elder.address | formatAddress}}</Truncate>
         </div>
         <div class="p-3 d-flex flex-column  align-items-start justify-content-start ">
-            <Truncate class="font-weight-bold" v-if="ticket.category">{{ticket.category| formatCategory}}</Truncate>
+            <Truncate class="font-weight-bold" v-if="ticket.category"><span  @click="() => $store.commit('createTicket/setStep', 2)">{{ticket.category| formatCategory}}</span></Truncate>
             <Truncate class="small" v-if="ticket.subCategory">{{ticket.subCategory | formatSubCategory}}</Truncate>
         </div>
         <div class="p-3 d-flex flex-column  align-items-start justify-content-center ">
-            <Truncate class="font-weight-bold" v-if="ticket.durationEta">{{ticket.durationEta| formatMinutes}}</Truncate>
+            <Truncate class="font-weight-bold" v-if="ticket.durationEta"><span @click="() => $store.commit('createTicket/setStep', 3)">{{ticket.durationEta| formatMinutes}}</span></Truncate>
             &nbsp;
         </div>
         <div class="p-3 d-flex flex-column  align-items-start justify-content-center ">
+                <Truncate class="font-weight-bold" v-if="ticket.groups && ticket.groups.length"><span @click="() => $store.commit('createTicket/setStep', 5)">{{ticket.groups[0].channels}}</span></Truncate>
                 &nbsp;
         </div>
     </div>
@@ -58,7 +59,7 @@ export default {
     .steps-bar > div{
         width: 50px;
         flex: 1;
-        height: 100%;
+        /* height: 100%; */
         border-left: 2px solid white;
     }
 

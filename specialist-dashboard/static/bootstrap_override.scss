@@ -1,0 +1,32 @@
+
+/* COLORS */
+$light-gray: #f4f4f4;
+$medium-gray: #757575;
+$dark-gray: #212121;
+$primary-blue: #0089fd;
+
+/* General Settings */
+$enable-rounded: false;
+$font-family-base: "Open Sans Hebrew";
+$theme-colors: (
+    "primary" : $primary-blue,
+    "secondary": $medium-gray,
+
+);
+
+// Forms
+$input-bg: $light-gray;
+$input-color: $dark-gray;
+$input-border-width: 0;
+
+// Buttons
+$input-btn-border-width: 0;
+$input-btn-padding-y: .3rem;
+//Bootstrap and its default variables 
+@import "node_modules/bootstrap/scss/bootstrap";
+
+
+label{
+    color: $primary-blue;
+    font-size: $font-size-sm;
+}

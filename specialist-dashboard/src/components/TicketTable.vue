@@ -5,7 +5,7 @@
         שם הזקן
       </div>
       <div class="col">
-        סוג הפניה
+        נושא הפניה
       </div>
       <div class="col">
         איך ליצור קשר?
@@ -16,13 +16,14 @@
     </div>
     <div class="table-body">
     <div class="row ticket m-0" :style="getStyle(ticket)" v-bind:class="{'active': ticket.id == selectedTicket.id}"
+     @contextmenu.prevent="(e) => $refs.ctxMenu.open(e, ticket)"
      v-for="ticket in tickets"
      v-bind:key="ticket.id" v-on:click="onTicketClicked(ticket)">
       <div class="col d-flex justify-content-center ticket-cell elder-name-cell">
-        <span class="elder-name">{{ticket.personByElderId.firstName}} {{ticket.personByElderId.lastName}}</span>
+        <span class="elder-name">{{ticket.elder.firstName}} {{ticket.elder.lastName}}</span>
       </div>
       <div class="col d-flex justify-content-center ticket-cell">
-           {{getTicketActivity(ticket)}}
+           {{ticket | formatTicketTitle}}
       </div>
       <div class="col d-flex justify-content-center ticket-cell">
         <div class="phone-numbers">
@@ -30,7 +31,7 @@
             <span></span>
           </div>
           <div class="phone-number">
-            <span> {{ticket.personByElderId.phoneNumber}} </span>
+            <span> {{ticket.elder.phoneNumber}} </span>
           </div>
         </div>
       </div>
@@ -43,12 +44,17 @@
       </div>
     </div>
     </div>
+    <context-menu ref="ctxMenu" @ctx-open="(data) => contextTicket = data">
+      <li @click="() => $router.push({name: 'Ticket', params: { id: contextTicket.id }})">עריכת פנייה</li>
+    </context-menu>
   </div>
 </template>
 
 <script>
+import contextMenu from 'vue-context-menu'
 import categoriesTree from 'shared/constants/categoriesTree';
 export default {
+  components: { contextMenu },
 	props: {
 		tickets: Array,
 		onTicketClicked: Function,
@@ -57,12 +63,9 @@ export default {
 	methods: {
 		getStyle(ticket) {
 			return {
-				'--category-color': categoriesTree[ticket.category].self.color
+				'--category-color': ticket.category ? categoriesTree[ticket.category].self.color : 'var(--secondary)'
 			};
 		},
-		getTicketActivity(ticket) {
-			return categoriesTree[ticket.category].self.text;
-		}
 	}
 };
 </script>
