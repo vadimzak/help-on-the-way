@@ -2,7 +2,7 @@
     <div>
         <RadioBoxes :options="timeOptions" :value="pickerValue" @input="pickedTime" />
         <label  v-if="pickerValue === 'other'">זמן אחר (דקות)
-            <input type="number" min="1" :value="value" @change="(e) => updateValue(e.target.value)"/>
+            <b-form-input type="number" min="1" :value="value" @change="(e) => updateValue(e.target.value)"/>
         </label>
     </div>
 </template>

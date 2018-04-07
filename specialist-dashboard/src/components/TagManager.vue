@@ -9,15 +9,16 @@
       :style="colorStyle(tag)"
     >
       {{tag.title}}
-      <button class="btn btn-sm mr-2 p-1" @click="removeTag(i)">x</button>
+      <b-button class="btn btn-sm mr-2 p-1" @click="removeTag(i)">x</b-button>
     </a>
     <div class="form-inline mt-4">
-      <input class="form-control" type="text" v-model="newTagTitle" placeholder="הוספת תגית">
-      <button 
-        class="mr-2 btn btn-primary" 
+      <b-form-input class="form-control" type="text" v-model="newTagTitle" placeholder="הוספת תגית">
+      <b-button 
+        variant="primary"
+        class="mr-2 btn" 
         @click="addTag"
         :class="{disabled: newTagTitle===''}"
-      >הוסף</button>
+      >הוסף</b-button>
     </div>
 
   </div>

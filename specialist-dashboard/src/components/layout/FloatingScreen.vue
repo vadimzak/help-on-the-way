@@ -1,7 +1,7 @@
 <template>
 <div>
     <b-popover ref="popover" @shown="(e) => $emit('shown', e)" @hidden="(e) => $emit('hidden', e)" :target="target" boundary="viewport" placement="bottomleft" triggers="click" container="floating-screen-container-root">
-            <button @click="close" class="close">x</button>
+            <b-button @click="close" class="close">x</b-button>
             <slot></slot>
 </b-popover>
 </div>
