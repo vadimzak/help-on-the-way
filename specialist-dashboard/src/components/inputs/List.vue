@@ -38,9 +38,9 @@
                     <span class="members-count">[{{item.count}}]</span>
                   </slot>
               </div>
-              <b-button v-on:click="onRemove(index)" class="remove">
+              <button v-on:click="onRemove(index)" class="remove">
                 <i class="fa fa-trash" aria-hidden="true"></i>
-              </b-button>
+              </button>
           </div>
       </div>
   </div>
