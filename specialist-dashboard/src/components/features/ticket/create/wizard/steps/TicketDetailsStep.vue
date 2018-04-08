@@ -30,7 +30,7 @@
         </b-col>
         <b-col cols="12">
             <b-form-group
-                description="נושא זה ישמש לבניית ההודעה למתנדבים"
+                :description="ticket | formatTicketTitle"
                 label="נושא הפנייה"
                 label-for="ticketSubject">
                  <b-form-input id="ticketSubject"  v-model.trim="subject"></b-form-input>
