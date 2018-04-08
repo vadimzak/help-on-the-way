@@ -5,13 +5,13 @@ export default function (ticket) {
     return 'טיוטת פנייה'
 
   const category = categoriesTree[ticket.category].self;
-  const destination = ticket.details.destinationAlias
+  const destination = ticket.details.destinationAddressAlias
   return formatSentence(category.value, category.noun, ticket.elder.firstName, ticket.details.subject, destination)
 }
 
 function formatSentence(ticketType, categoryNoun, elderName, ticketSubject, destination){
   if (ticketType === 'MEDICAL')
-    return `${categoryNoun} ${elderName} ל${destination}`;
+    return `${categoryNoun} ${elderName} ל${ticketSubject || destination}`;
 
   if (ticketType === 'SHOPPING')
     return `${categoryNoun} ${elderName} לקניית ${ticketSubject}`;
