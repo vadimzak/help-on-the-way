@@ -4,6 +4,7 @@ const ticketFieldsFragment = `
 fragment ticketFields on TicketForVolunteer {
     id,
     category,
+    details,
     subCategory,
     description,
     durationEta,
