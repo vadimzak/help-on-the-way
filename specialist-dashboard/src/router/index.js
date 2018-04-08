@@ -5,7 +5,6 @@ import TicketsView from '@/components/TicketsView'
 import { FullScreenTicketEditor } from '@/components/features/ticket'
 import VolunteersView from '@/components/VolunteersView'
 import KitchenSink from '@/components/KitchenSink'
-import FontsDemo from '@/components/base/FontsDemo'
 import { Login, Unauthorized, PageNotFound } from '@/components/features/auth/'
 import authenticationForcer from '../services/authEnforce'
 Vue.use(Router)

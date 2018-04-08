@@ -7,13 +7,14 @@
       @click="changeSelection(option.value)"
       :class="{selected: option.value === currentSelection}"
     >
-    <span class="option-icon" :class="{ ['icon-' + option.icon ] : true }"></span>
+    <span class="option-icon" :class="{ [ getIconInfo(option).class ] : true }">{{getIconInfo(option).content}}</span>
       {{option.text}}
     </div>
   </div>
 </template>
 
 <script>
+import _ from 'lodash'
 export default {
   components: {  },
   props: [ 'options', 'value' ],
@@ -31,6 +32,15 @@ export default {
         this.currentSelection = value
       }
       this.$emit('input', this.currentSelection)
+    },
+    getIconInfo(option){
+      if(!option.icon){
+        return { class: '', content: '' }
+      }
+      if(_.isObject(option.icon)){
+        return option.icon
+      }
+      return { class: option.icon, content: '' }
     }
   }
 }

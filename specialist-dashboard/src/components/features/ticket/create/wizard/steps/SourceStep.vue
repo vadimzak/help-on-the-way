@@ -17,11 +17,11 @@ export default {
   data() {
     return {
       sources: [
-      { text: 'זקן', 'icon': 'old-man-with-cane', value: 'elder' },
-      { text: 'עו״ס', 'icon': 'prayer', value: 'social_worker' },
-      { text: 'מתנדב', 'icon': 'human-resources', value: 'volunteer' },
-      { text: 'קרוב משפחה', 'icon': 'family-group-of-father-and-mother-with-two-babies-and-a-dog', value: 'relative' },
-      { text: 'אחר', 'icon': '', value: 'other' },
+      { text: 'זקן', 'icon': 'd-icon-old-man', value: 'elder' },
+      { text: 'עו״ס', 'icon': 'd-icon-prayer', value: 'social_worker' },
+      { text: 'מתנדב', 'icon': 'd-icon-help-2', value: 'volunteer' },
+      { text: 'קרוב משפחה', 'icon': 'd-icon-family', value: 'relative' },
+      { text: 'אחר', 'icon': { class: 'material-icons', content: 'more' }, value: 'other' },
     ],
   }
   },
@@ -30,11 +30,14 @@ export default {
   },
   methods: {
     sourceChanged(value){
+      // TODO - implement the ability to chose other person types
       if(value === 'elder'){
         const elder = this.ticket.elder;
         this.updateTicket({ issuingPerson: elder });
-        this.$emit('canContinue', true);
+        }  else {
+           this.updateTicket({ issuingPerson: null });
         }
+        this.$emit('canContinue', !!this.ticket.issuingPerson);
     },
     ...mapMutations(['updateTicket'])
   }

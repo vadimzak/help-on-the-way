@@ -6,13 +6,13 @@
       </li>
  
       <li class="side-list-item">
-        <router-link to="/volunteers" class="nav-link" :class="{active: this.$route.name == 'VolunteerView' }"><i class="fa icon-human-resources"></i></router-link>
+        <router-link to="/volunteers" class="nav-link" :class="{active: this.$route.name == 'VolunteerView' }"><i class="fa d-icon-help-2"></i></router-link>
       </li>
       <!-- <li class="side-list-item">
         <a class="nav-link" href="#">קבוצות מתנדבים</a>
       </li> -->
       <li class="side-list-item">
-        <a class="nav-link" href="#"><i class="fa icon-old-man-with-cane"></i></a>
+        <a class="nav-link" href="#"><i class="fa d-icon-old-man"></i></a>
       </li>
       <!-- <li class="side-list-item">
         <router-link to="/tags" class="nav-link"  :class="{active: this.$route.name == 'TagManager' }">ניהול תגיות</router-link>
@@ -21,7 +21,7 @@
         <a class="nav-link" href="#">מפה</a>
       </li> -->
       <li class="side-list-item">
-        <router-link to="/kitchenSink" class="nav-link" :class="{active: this.$route.name == 'KitchenSink' }"><i class="fa icon-prayer"></i></router-link>
+        <router-link to="/kitchenSink" class="nav-link" :class="{active: this.$route.name == 'KitchenSink' }"><i class="fa d-icon-prayer"></i></router-link>
       </li>
     </ul>
   </div>
