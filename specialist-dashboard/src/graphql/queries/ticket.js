@@ -92,6 +92,8 @@ createdBy
 isIndoor
 isUrgent
 createdAt
+elderMobility
+transport
 maxVolunteers
 }
 ${GROUP_FRAGMENT}`
