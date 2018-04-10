@@ -1,33 +1,36 @@
 <template>
   <v-flex>
-    <v-card>
+    <v-card :tile="true">
       <v-card-media
         @click=" closePreview ? closePreview() : void 0"
         class="white--text card-image"
-        height="90px">
-        <v-container fill-height fluid>
-          <v-layout fill-height>
-            <v-flex xs12 align-end flexbo>
-                <span class="" id="ticket-headline">
+        height="88px" style="display: flex; height: 90px; align-items: center; justify-content: space-around;">
+      <div class="related-title">
+ <v-list-tile-title>
                   {{ticket | formatTicketTitle}}
-                </span>
-              <span class="duration">
-                  {{timeCount}}
-                </span>
-              <span class="hours">
-                 {{timeUnit}}
-              </span>
-            </v-flex>
-          </v-layout>
-        </v-container>
+                </v-list-tile-title>
+                <v-list-tile-sub-title>
+                  {{ticket.startAddress | formatAddress}}
+                </v-list-tile-sub-title>
+			</div>
+      <div class="related-when">
+                {{ticket.when}}
+                מחר
+              </div>
+              <div class="related-duration">
+                <!-- {{ticket.durationEta | formatMinutes }} -->
+                <div class="duration">
+                  45
+                </div>
+                <div class="unit">
+                  דקות
+                </div>
+              </div>
+        
       </v-card-media>
       <v-card-title class="card-content">
         <div class="ticket-details">
           <ul>
-            <li>
-              <i class="material-icons">account_circle</i>
-              {{ticket.elderFirstName}} {{ticket.elderLastName}}
-            </li>
             <li>
               <i class="material-icons">date_range</i>
               {{this.$moment(ticket.dueDate).format('L')}}
@@ -41,16 +44,16 @@
             <div class="address">
               <v-card class="start-address">
                 <img src="static/assets/placeholder-copy.png">
-                {{ticket.startAddressStreet}},
-                {{ticket.startAddressCity}}
+                {{ticket.startAddress.street}},
+                {{ticket.startAddress.city}}
               </v-card>
               <div class="arrows">
                 <img src="static/assets/transfer-1.png">
               </div>
               <v-card class="end-address">
                 <img src="static/assets/flag.png">
-                {{ticket.endAddressStreet}},
-                {{ticket.endAddressCity}}
+                {{ticket.endAddress.street}},
+                {{ticket.endAddress.city}}
               </v-card>
             </div>
           </ul>
@@ -155,7 +158,7 @@ export default {
 }
 
 #ticket-headline {
-	font-size: 22px;
+	font-size: 20px;
 	line-height: 32px;
 	letter-spacing: -1px;
 	font-weight: bold;
@@ -180,7 +183,21 @@ export default {
 
 .card-image {
 	background-image: linear-gradient(63deg, #963efa, #7146fe);
-	box-shadow: 0px 3px 14.6px 1.4px rgba(126, 67, 253, 0.42);
+	box-shadow: 0px 2px 14.6px 1.4px rgba(126, 67, 253, 0.42);
+	    display: flex;
+    height: 90px;
+    align-items: center;
+    justify-content: center;
+		color:white;
+		padding-right: 22px;
+		padding-left: 18px;
+}
+
+* >>> .card__media__content {
+	    display: flex;
+    height: 90px;
+    align-items: center;
+    justify-content: space-between;
 }
 
 .ticket-details {
@@ -221,7 +238,7 @@ export default {
 	margin: auto;
 	font-size: 24px;
 	font-weight: bold;
-	border-radius: 10px;
+	border-radius: 0;
 	background-color: #1273ff;
 	box-shadow: 0px 6px 13px 0 rgba(136, 136, 136, 0.44);
 }
@@ -249,20 +266,6 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-}
-
-.duration,
-.hours {
-	font-weight: bold;
-	left: 10px;
-	position: absolute;
-	top: 15px;
-	font-size: 28px;
-}
-
-.hours {
-	top: 45px;
-	font-size: 16px;
 }
 
 .dialog-card {
@@ -318,4 +321,65 @@ export default {
 	display: flex;
 	flex-direction: column;
 }
+
+
+  .list .list__tile__sub-title, .list__tile__title {
+    text-align: right;
+		color:white;
+  }
+
+  .list__tile__title {
+    font-weight: bold;
+    font-size:20px;
+  }
+
+  .list__tile__sub-title {
+    font-size: 15px;
+  }
+	  .list__tile__sub-title {
+    font-size: 15px;
+  }
+
+  .list__tile__content {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid gainsboro;
+  }
+
+  .related-tickets li{
+    border-right: 6px solid var(--category-color);
+    /* height: 95px; */
+  }
+
+  .related-title {
+        line-height: 13px;
+            width: 68%;
+  }
+
+.related-when {
+      font-size: 20px;
+}
+
+  .related-duration {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+        line-height: 16px;
+  }
+
+  .duration {
+    font-size: 25px;
+    font-weight: bold;
+  }
+
+  .unit{
+    font-size: 10px;
+    font-weight: bold;
+    text-align: center;
+  }
+
 </style>

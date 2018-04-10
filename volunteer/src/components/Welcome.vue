@@ -26,8 +26,9 @@ export default {
 <style scoped>
 
   .divider-title {
-    height: 180px;
+    height: 231px;
     position: relative;
+    font-weight: light;
     background-color: #f4f4f4;
     display: flex;
     align-items: center;
@@ -43,15 +44,16 @@ export default {
   }
 
   .divider-text {
-    font-size: 20px;
-    font-weight: bold;
+    padding-top: 36px;
+    font-size: 25px;
+    font-weight: light;
     font-style: normal;
     font-stretch: normal;
     line-height: 30px;
     letter-spacing: 0px;
     text-align: center;
     color: #1273ff;
-    width: 70%;
+    width: 80%;
     margin: auto;
     margin-top: 0;
     z-index: 1;
@@ -63,8 +65,7 @@ export default {
 
 
   .highlighted{
-    background-color: #1273ff;
-    color: white;
+    font-weight: bold;
   }
 
 </style>

@@ -123,6 +123,10 @@
     font-family: 'Open Sans Hebrew', Arial;
   }
 
+  .card {
+    max-width: 100vw;
+  }
+
   .card-content ul {
     list-style: none;
   }

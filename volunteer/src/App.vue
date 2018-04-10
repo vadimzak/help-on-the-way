@@ -3,7 +3,7 @@
     <app-header></app-header>
     <app-sidenav></app-sidenav>
     <v-content>
-      <h4 class="greeting" v-if="$store.state.user && $store.state.user.role!=='ANONYMOUS'">היי, {{$store.state.user.name}}, כיף לראות אותך כאן :) </h4>
+      <h4 class="greeting" v-if="$store.state.user && $store.state.user.role!=='ANONYMOUS'">היי, {{$store.state.user.name}}, כיף לראות אותך כאן 😘 </h4>
       <v-container fluid fill-height>
         <router-view></router-view>
       </v-container>
@@ -32,7 +32,7 @@
 
 <style>
   .application {
-    font-family: 'Rubik', Helvetica, Arial, sans-serif;
+    font-family: 'Open Sans Hebrew', Arial;
     direction: rtl;
     text-align: right;
   }
