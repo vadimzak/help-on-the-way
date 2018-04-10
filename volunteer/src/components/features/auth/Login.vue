@@ -25,7 +25,7 @@ export default {
   methods: {},
   data () {
     return {
-      redirectUrl: `${config.APP_URL}/welcome`,
+      redirectUrl: `${window.location.origin}`,
       SERVER_BASE_URL: config.SERVER_BASE_URL,
       APP_URL: config.APP_URL
     }
