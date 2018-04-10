@@ -9,13 +9,13 @@
       <img src="static/assets/placeholder-copy.png" v-if="ticket.endAddress && ticket.endAddress.location">
     </div>
     <div class="route-addresses">
-      <a class="address" v-if="ticket.startAddress && ticket.startAddress.location" target="_blank" :href="`geo:${ticket.startAddress.location.lat},${ticket.startAddress.location.lng}`">
+      <a class="address" v-if="ticket.startAddress && ticket.startAddress.location" target="_blank" :href="`${getGeoPrefix()}${ticket.startAddress.location.lat},${ticket.startAddress.location.lng}`">
         {{ticket.startAddress | formatAddress }}
       </a>
-      <a class="address" v-if="ticket.destinationAddress && ticket.destinationAddress.location"  target="_blank" :href="`geo:${ticket.destinationAddress.location.lat},${ticket.destinationAddress.location.lng}`">
+      <a class="address" v-if="ticket.destinationAddress && ticket.destinationAddress.location"  target="_blank" :href="`${getGeoPrefix()}${ticket.destinationAddress.location.lat},${ticket.destinationAddress.location.lng}`">
         {{ticket.destinationAddress | formatAddress }}
       </a>
-      <a class="address" v-if="ticket.endAddress && ticket.endAddress.location" target="_blank" :href="`geo:${ticket.endAddress.location.lat},${ticket.endAddress.location.lng}`">
+      <a class="address" v-if="ticket.endAddress && ticket.endAddress.location" target="_blank" :href="`${getGeoPrefix()}${ticket.endAddress.location.lat},${ticket.endAddress.location.lng}`">
         {{ticket.endAddress | formatAddress }}
       </a>
     </div>
@@ -27,6 +27,11 @@
     props: ['ticket'],
     data() {
       return {}
+    },
+    methods: {
+      getGeoPrefix(){
+        return 'geo:0,0?q='
+      }
     }
   }
 </script>
