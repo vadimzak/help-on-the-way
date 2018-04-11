@@ -23,7 +23,7 @@
         <span class="elder-name">{{ticket.elder.firstName}} {{ticket.elder.lastName}}</span>
       </div>
       <div class="col d-flex justify-content-center ticket-cell">
-           {{ticket | formatTicketTitle}}
+           {{ticket | formatTicketTitle(true)}}
       </div>
       <div class="col d-flex justify-content-center ticket-cell">
         <div class="phone-numbers">
