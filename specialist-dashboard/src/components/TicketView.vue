@@ -11,14 +11,14 @@
         <span>פרטי המתנדב</span>
       </div>
     </div>
-    <div v-if="selectedView=='elderDetailsView'" class="ticket-details p-4">
-      <div class="ticket-detail p-4">
+    <div v-if="selectedView=='elderDetailsView'" class="ticket-details p-2">
+      <div class="ticket-detail p-2">
         <span class="ticket-sub-header">שם: </span>
         <div>
           <span>{{ticket.elder.firstName}}</span> <span>{{ticket.elder.lastName}}</span>
         </div>
       </div>
-      <div class="ticket-detail p-4">
+      <div class="ticket-detail p-2">
         <span class="ticket-sub-header">כתובת: </span>
         <div>
           <span>{{ticket.elder.address.street}}</span>
@@ -26,30 +26,24 @@
         </div>
       </div>
     </div>
-    <div v-if="selectedView=='ticketDetailsView'" class="ticket-details p-4">
-      <div class="ticket-detail p-4">
-        <span class="ticket-sub-header">מספר פניה</span>
+    <div v-if="selectedView=='ticketDetailsView'" class="ticket-details p-2">
+      <div class="ticket-detail p-2">
+        <span class="ticket-sub-header d-flex justify-content-between">
+          <span>מספר פניה</span>
+          <span class="small">התקבלה ביום {{ticket.createdAt | formatDate('localString')}}</span>
+        </span>
         <div>
            {{ticket.id}}
         </div>
       </div>
-      <div class="ticket-detail p-4">
+      <div class="ticket-detail p-2">
         <span class="ticket-sub-header"> מבקש הפנייה</span>
         <div>
         <span v-if="ticket.issuingPerson">{{ticket.issuingPerson | formatName}} - {{ticket.issuingPerson.phoneNumber}}</span>
         <span v-else>עוד לא הוגדר</span>
         </div>
       </div>
-      <div class="ticket-detail p-4">
-        <span class="description-header ticket-sub-header">נקודות חשובות</span>
-        <ul v-if="ticket.details && ticket.details.needToKnow">
-          <li v-for="(item, index) in ticket.details.needToKnow" :key="index">{{item}}</li>
-        </ul>
-        <div v-else>
-          לא הוגדרו נקודות
-        </div>
-      </div>
-      <div class="start-location-details ticket-detail p-4 location-details">
+      <div class="start-location-details ticket-detail p-2 location-details">
         <div class="start-location-icon ticket-location-details-icon">
           <i class="fa fa-map-marker"></i>
         </div>
@@ -62,9 +56,9 @@
           </div>
         </div>
       </div>
-      <div class="destination-location-details ticket-detail p-4 location-details">
+      <div class="destination-location-details ticket-detail p-2 location-details">
         <div class="destination-location-icon ticket-location-details-icon">
-          <i class="fa fa-compass"></i>
+          <i class="material-icons flag-icon">flag</i>
         </div>
         <div class="ticket-location-details">
           <div class="ticket-sub-header">
@@ -75,7 +69,7 @@
           </div>
         </div>
       </div>
-      <div class="end-location-details ticket-detail p-4 location-details">
+      <div class="end-location-details ticket-detail p-2 location-details">
         <div class="start-location-icon ticket-location-details-icon">
           <i class="fa fa-map-marker"></i>
         </div>
@@ -88,22 +82,31 @@
           </div>
         </div>
       </div>
+      <div class="ticket-detail p-2">
+        <span class="description-header ticket-sub-header">נקודות חשובות</span>
+        <ul v-if="ticket.details && ticket.details.needToKnow">
+          <li v-for="(item, index) in ticket.details.needToKnow" :key="index">{{item}}</li>
+        </ul>
+        <div v-else>
+          לא הוגדרו נקודות
+        </div>
+      </div>
     </div>
-    <div v-if="selectedView=='volunteerDetailsView'" class="ticket-details p-4">
+    <div v-if="selectedView=='volunteerDetailsView'" class="ticket-details p-2">
       <div v-if="volunteer" class="volunteer-view">
-        <div class="ticket-detail p-4">
+        <div class="ticket-detail p-2">
           <span class="ticket-sub-header">שם המתנדב:</span>
           <div>
             <span>{{volunteer.firstName}}</span> <span>{{volunteer.lastName}}</span>
           </div>
         </div>
-        <div class="ticket-detail p-4">
+        <div class="ticket-detail p-2">
           <span class="ticket-sub-header">טלפון</span>
           <div>
             <span>{{volunteer.phoneNumber}}</span>
           </div>
         </div>
-        <div v-if="volunteer.groups.nodes" class="ticket-detail p-4">
+        <div v-if="volunteer.groups.nodes" class="ticket-detail p-2">
           <span class="ticket-sub-header">קבוצות:</span>
           <span v-for="group of volunteer.groups.nodes">{{group.group.channels}}</span>
         </div>
@@ -228,6 +231,9 @@
     font-family: 'Open Sans Hebrew'
   }
 
+  .flag-icon{
+    margin-right: -4px;
+  }
   .location-details{
       display: flex;
       flex-flow: row;
@@ -249,6 +255,7 @@
   }
 
   .ticket-sub-header {
+    font-size: 12px;
     color: #888888;
   }
 
@@ -287,7 +294,7 @@
   }
 
   .ticket-detail i{
-    font-size:23px;
+    font-size: 14px;
     text-align: right;
     color: #888888;
   }

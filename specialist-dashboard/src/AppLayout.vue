@@ -5,10 +5,10 @@
     </div>
     <div id="app" class="container-fluid">
       <div class="row">
-        <div class="col-1">
+        <div class="side-bar pl-0 pr-0">
           <side-bar />
         </div>
-        <div class="col-10 content pl-0">
+        <div class="col-10 content pl-0 pr-0">
           <router-view/>
         </div>
       </div>
@@ -32,4 +32,10 @@ export default {
 </script>
 
 <style>
+#app{
+  padding-top: 75px; 
+}
+.side-bar{
+  width: 75px;
+}
 </style>

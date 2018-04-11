@@ -23,7 +23,6 @@ import authPlugin from 'shared/providers/authProvider'
 import 'shared/initializers/facebookRedirectHashFixer'
 import * as whatsAppCommunicator from '@/services/whatsAppCommunicator'
 import VeeValidate from 'vee-validate'
-
 Vue.config.productionTip = false
 
 Vue.use(vueResourceSetup)

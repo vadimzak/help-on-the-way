@@ -50,7 +50,8 @@ volunteers: ticketAssignedVolunteersByTicketId{
 }
 description
 durationEta
-dueDate
+dueDate,
+dueTime
 destinationAddress: addressByDestinationAddressId {
   id
   city
@@ -92,6 +93,7 @@ createdBy
 isIndoor
 isUrgent
 createdAt
+modifiedAt
 elderMobility
 transport
 maxVolunteers

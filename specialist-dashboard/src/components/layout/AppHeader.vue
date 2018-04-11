@@ -31,14 +31,17 @@ export default {
 
 <style scoped>
 #app-header{
-  height: 147px;
+  height: 75px;
+  position: fixed;
+  z-index: 15;
+  width: 100%;
   background-color: #ffffff;
   box-shadow: 0px 2px 38px 0 rgba(39, 39, 39, 0.06);
 }
 .app-header-text{
   cursor: pointer;
   font-family: 'Amatic SC', cursive;
-  font-size: 73px;
+  font-size: 40px;
   font-style: normal;
   font-stretch: normal;
   line-height: 2.65;

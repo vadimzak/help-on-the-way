@@ -2,7 +2,7 @@ export default {
     INDEPENDENT: {
         icon: 'accessibility',
         text: 'ללא סיוע',
-        value: 'INDEPENDENT',
+        value: 'd-icon-walk-indepndent',
     },
     WALKING_STICK: {
         icon: 'rowing',

@@ -1,14 +1,18 @@
 <template>
   <div v-if="ready" class="mt-5">
     <tickets-filter :filterChanged="ticketFilterChanged" :buttonFilters="filters.buttons"></tickets-filter>
-    <div class="row col-9 mt-5 p-0 mb-5 tickets-view">
-       <div class="col tickets-list p-0">
-      <ticket-table v-bind:selected-ticket="selectedTicket" v-bind:tickets="allTickets" v-bind:on-ticket-clicked="onTicketSelect"></ticket-table>
+  <div class="row  mt-5 p-0 mb-5 tickets-view">
+    <div class="col-8 pl-4 p-0">
+      <div class="table-overflow-wrap">
+        <div class="tickets-list">
+         <ticket-table v-bind:selected-ticket="selectedTicket" v-bind:tickets="allTickets" v-bind:on-ticket-clicked="onTicketSelect"></ticket-table>
+      </div>
+      </div>
     </div>
-    <div  class="col p-0 ticket-view">
-      <ticket-view v-bind:ticket="selectedTicket"></ticket-view>
+    <div  class="col-4 p-0 pr-4">
+      <ticket-view class="ticket-view" v-bind:ticket="selectedTicket"></ticket-view>
     </div>
-    </div>
+  </div>
   <div v-if="!ready">
     טוען פניות מהשרת....
   </div>
@@ -22,7 +26,6 @@ import { ALL_TICKETS_QUERY, TICKET_BY_TYPE_COUNT } from '@/graphql/queries/ticke
 import TicketsFilter from '@/components/TicketsFilter'
 import TicketStatus from '@/constants/enums/TicketStatus'
 import _ from 'lodash'
-
 export default {
   components: {  TicketTable, TicketView ,TicketsFilter},
   data () {
@@ -106,15 +109,22 @@ export default {
 </script>
 
 <style scoped>
+.table-overflow-wrap{
+  position: relative;
+}
 .tickets-view{
-  background-color: #ffffff;
-  box-shadow: 0px 5px 25.1px 1.9px rgba(142, 142, 142, 0.15);
+
   margin: 0 auto;
 }
   .tickets-list {
+    /* height: 60vh;
+    position: static;
+    overflow-x: hidden;
+    overflow-y: auto; */
     padding-left: 0;
   }
   .ticket-view {
+    position: relative;
     padding-right: 0;
     background-color: #f4f4f4;
     height: auto;
