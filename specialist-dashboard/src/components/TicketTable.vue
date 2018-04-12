@@ -32,7 +32,7 @@
       <div class="col d-flex justify-content-center ticket-cell text-truncate">
         <div class="ticket-dates">
           <div>
-            <span> {{ticket.dueTime || '14:00'}} </span>
+            <span> {{(ticket.dueTime || '14:00') | formatTime}} </span>
           </div>
         </div>
       </div>
