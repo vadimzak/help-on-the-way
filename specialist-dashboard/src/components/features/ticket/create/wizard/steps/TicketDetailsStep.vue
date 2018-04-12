@@ -2,7 +2,7 @@
   <div>
       <b-row v-if="!this.ticket.isIndoor">
         <b-col cols="12">
-        <h4>לאן</h4>
+        <h5>לאן</h5>
         </b-col>
         <b-col cols="12" class="justify-content-center d-flex">
         <label for="destinationAlias">שם/סוג המקום:</label>
@@ -17,7 +17,7 @@
       </b-row>
       <b-row>
         <b-col cols="12">
-        <h4>זמן ביצוע מוערך</h4>
+        <h5>זמן ביצוע מוערך</h5>
         </b-col>
         <b-col cols="12" class="justify-content-center d-flex">
            <DurationPicker v-model="durationEta"/>
@@ -37,7 +37,7 @@
             </b-form-group>
         </b-col>
         <b-col cols="12">
-            <h4>נקודות חשובות למתנדב</h4>
+            <h5>דברים שחשוב לדעת <span>(עד 30 תווים) </span></h5>
             <TicketNeedToKnowPoints v-model="needToKnow"/>
         </b-col>
       </b-row>
@@ -97,3 +97,7 @@ export default {
 }
 
 </script>
+
+<style scoped>
+
+</style>

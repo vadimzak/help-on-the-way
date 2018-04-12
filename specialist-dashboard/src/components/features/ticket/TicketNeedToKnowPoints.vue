@@ -1,14 +1,17 @@
 <template>
   <b-row>
-      <b-col>
-            <b-form-input placeholder="הוספת נקודה" v-model="newPointModel" @keyup.enter.native="addItem"/>
+       <b-col cols="9">        
+           <b-form-input  v-model="newPointModel" @keyup.enter.native="addItem"/>
              <b-list-group>
                  <b-list-group-item v-for="(item, index) in value" :key="index" class="d-flex justify-content-between align-items-center">
                      {{item}}
                       <b-badge href="#" variant="dark" @click="() => removeItem(index)">מחק הערה</b-badge>
                  </b-list-group-item>
              </b-list-group>
-      </b-col>
+        </b-col>
+        <b-col cols="3">
+           <b-btn variant="primary" v-on:click="addItem"> + פניה חדשה</b-btn>   
+        </b-col>
   </b-row>
 </template>
 <script>
