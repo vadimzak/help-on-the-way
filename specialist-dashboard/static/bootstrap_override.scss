@@ -34,3 +34,26 @@ label{
 h5{
     color: $medium-gray;
 }
+
+
+
+// Element UI overrides to match bootstrap
+.el-picker-panel__sidebar{
+    left: 0;    
+ }
+
+ .el-picker-panel__shortcut {
+     text-align: right;
+ }
+
+ .el-time-spinner{
+     direction: ltr;
+ }
+
+
+ .el-input__inner, .el-input--prefix .el-input__inner, .el-input--suffix .el-input__inner{
+    @extend .form-control;  
+    padding-left: $input-padding-x;
+    padding-right: $input-padding-x;
+    height: unset;
+} 

@@ -12,7 +12,10 @@ const { mapState, mapActions, mapMutations } = createNamespacedHelpers('createTi
 export default {
   components: { RadioBoxes },
   mounted(){
-        this.$emit('canContinue', !!this.ticket.issuingPerson);
+        if(!this.ticket.issuingPerson){
+          this.updateTicket({ issuingPerson: this.ticket.elder });
+        }
+        this.$emit('canContinue', true);
   },
   data() {
     return {

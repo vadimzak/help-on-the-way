@@ -23,6 +23,23 @@
            <DurationPicker v-model="durationEta"/>
         </b-col>
       </b-row>
+       <b-row class="justify-content-center">
+           <b-col cols="12">
+           <h5>מועד הפנייה</h5>
+           </b-col>
+           <b-col cols="12" class="justify-content-center d-flex">
+                <DueDatePicker :value="ticket.dueDate" @input="(v) => $store.commit('createTicket/setTicketDueDate', v)" />
+           </b-col>
+      </b-row>      
+       <b-row class="justify-content-center">
+           <b-col cols="12">
+           <h5>שעת התחלת פנייה</h5>
+           </b-col>
+           <b-col cols="12" class="justify-content-center d-flex">
+                <TimePicker :value="ticket.dueTime" @input="(v) => $store.commit('createTicket/setTicketDueTime', v)" class="mx-3" />
+                <FlexibleHourPicker :value="ticket.details.flexibleTime"  @input="(v) => $store.commit('createTicket/setTicketFlexibleTime', v)" />
+           </b-col>
+      </b-row>
       <b-row>
         <b-col cols="12">
         <h3>פרטים נוספים</h3>
@@ -38,7 +55,7 @@
         </b-col>
         <b-col cols="12">
             <h5>דברים שחשוב לדעת <span>(עד 30 תווים) </span></h5>
-            <TicketNeedToKnowPoints v-model="needToKnow"/>
+            <NeedToKnowPoints v-model="needToKnow"/>
         </b-col>
       </b-row>
     <input type="hidden" v-model="checkCanContinue">
@@ -47,18 +64,18 @@
 <script>
 import _ from 'lodash';
 import { mapState, mapActions, mapMutations, mapGetters } from 'vuex';
-import DurationPicker from '@/components/inputs/DurationPicker'
+import { DurationPicker, TimePicker } from '@/components/inputs'
 import InputAddress from '@/components/InputAddress'
-import TicketNeedToKnowPoints from '@/components/features/ticket/TicketNeedToKnowPoints'
+import { FlexibleHourPicker, NeedToKnowPoints, DueDatePicker }  from '@/components/features/ticket/inputs'
 import { mapStateForForm } from '@/store/utils'
 
 export default {
-  components: { DurationPicker, InputAddress, TicketNeedToKnowPoints },
+  components: { DurationPicker, InputAddress, NeedToKnowPoints, DueDatePicker, TimePicker, FlexibleHourPicker },
   data() {
     return {}
   },
     computed: {
-        ...mapStateForForm(['durationEta', 'description', 'destinationAddress'], 'createTicket', 'ticket', 'createTicket/updateTicket'),
+        ...mapStateForForm(['durationEta', 'destinationAddress' ], 'createTicket', 'ticket', 'createTicket/updateTicket'),
         destinationAlias: {
             get(){
                 return this.ticket.details.destinationAddressAlias;     

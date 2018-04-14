@@ -5,7 +5,7 @@
       v-for="(option,index) of options" 
       :key="index"
       @click="changeSelection(option.value)"
-      :class="{selected: option.value === currentSelection}"
+      :class="{selected: option.value === value}"
     >
     <span class="option-icon" :class="{ [ getIconInfo(option).class ] : true }">{{getIconInfo(option).content}}</span>
       {{option.text}}
@@ -20,18 +20,18 @@ export default {
   props: [ 'options', 'value' ],
   data () {
     return {
-      currentSelection: this.value,
     }
     
   },
   methods: {
     changeSelection(value){
-      if(this.currentSelection === value){
-        this.currentSelection = ''
+      let valueToUpdate;
+      if(this.value === value){
+        valueToUpdate = ''
       } else {
-        this.currentSelection = value
+        valueToUpdate = value
       }
-      this.$emit('input', this.currentSelection)
+      this.$emit('input', valueToUpdate)
     },
     getIconInfo(option){
       if(!option.icon){

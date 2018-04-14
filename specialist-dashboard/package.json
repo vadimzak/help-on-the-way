@@ -14,6 +14,7 @@
   "dependencies": {
     "bootstrap": "4.0.0",
     "bootstrap-vue": "2.0.0-rc.1",
+    "element-ui": "2.3.4",
     "font-awesome": "4.7.0",
     "help-on-the-way-shared": "file:../shared",
     "lodash": "4.17.5",

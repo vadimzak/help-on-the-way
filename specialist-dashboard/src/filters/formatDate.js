@@ -10,6 +10,9 @@ export default function (value, format) {
       return fromNow(date)    
       break;
     default:
+      if (!value) {
+          return 'במהלך השבוע'
+        }  
        return moment(date).format(format)    
       break  
   }

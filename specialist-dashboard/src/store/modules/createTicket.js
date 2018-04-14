@@ -1,6 +1,7 @@
 import { CREATE_TICKET, UPDATE_TICKET, GET_BY_ID } from '@/graphql/queries/ticket';
 import { client as apolloClient } from 'shared/providers/apolloProvider';
 import { TicketStatus } from '@/constants/enums/index';
+import moment from 'moment';
 import _ from 'lodash';
 const state = {
     ticket: undefined,
@@ -57,6 +58,15 @@ const mutations = {
         state.ticket.details = { ...state.ticket.details, needToKnow: points, isDirty: true }
         state.ticket = { ...state.ticket}  
     },
+    setTicketDueDate(state, dueDate) {
+        this.commit('createTicket/updateTicket', { dueDate, fixedDueDate: !!dueDate }) 
+    },
+    setTicketDueTime(state, dueTime) {
+        this.commit('createTicket/updateTicket', { dueTime, fixedDueTime: true, details: { flexibleTime: null } }) 
+    },
+    setTicketFlexibleTime(state, time) {
+        this.commit('createTicket/updateTicket', { dueTime: null, fixedDueTime: false, details: { flexibleTime: time } }) 
+    },
     nextStep(state) {
         state.currentStep++;  
     },
@@ -95,6 +105,9 @@ function normalizeTicket(ticket) {
         // server will return array of { group: {...actualGroupFields} }
         // maps to array of actual groups without the wrapping object
         ticket.groups = ticket.groups.nodes.map( g => g.group)
+    }
+    if (ticket.dueTime) {
+        ticket.dueTime = moment(ticket.dueTime, "hh:mm:Z").utc().toDate();
     }
     return ticket
 }
@@ -150,14 +163,25 @@ function mapToServerModel(ticket) {
         endAddress: 'endAddressId',
         issuingPerson: 'issuingPerson',
     };
-    const stripFields = {groups: true, volunteers: true, __typename: true , isDirty: true};
+    const stripFields = { groups: true, volunteers: true, __typename: true, isDirty: true };
+    
+    const transformers = {
+        dueTime(val) {
+          return val ? moment(val).utc().format('hh:mm:Z') : val// transform DueTime to UTC string of time
+        },
+        dueDate(val) {
+                return val ? moment(val).utc().toDate() : val // normalize to UTC iso string                : val// transform DueTime to UTC string of time
+        }
+    }
+
     return Object.keys(ticket).reduce((serverModel, currentField) => {
         const mappedName = mapFullModelToId[currentField];
         if (mappedName) {
             const currentValue = ticket[currentField];
             serverModel[mappedName] = currentValue ? currentValue.id : undefined;
-        } else if(!stripFields[currentField]){
-            serverModel[currentField] = ticket[currentField];
+        } else if (!stripFields[currentField]) {
+            const transform = transformers[currentField];
+            serverModel[currentField] = transform ? transform(ticket[currentField]) : ticket[currentField];
         }
         return serverModel;
     }, {});

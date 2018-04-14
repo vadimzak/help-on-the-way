@@ -1,5 +1,6 @@
 // The Vue build version to load with the `import` command
 // (runtime-only or standalone) has been set in webpack.base.conf with an alias.
+require('element-ui/lib/theme-chalk/index.css')
 require('../static/bootstrap_override.scss')
 require('../static/fonts.css')
 require('../static/scroll.css')
@@ -23,6 +24,10 @@ import authPlugin from 'shared/providers/authProvider'
 import 'shared/initializers/facebookRedirectHashFixer'
 import * as whatsAppCommunicator from '@/services/whatsAppCommunicator'
 import VeeValidate from 'vee-validate'
+import lang from 'element-ui/lib/locale/lang/en'
+import locale from 'element-ui/lib/locale'
+locale.use(lang)
+
 Vue.config.productionTip = false
 
 Vue.use(vueResourceSetup)
