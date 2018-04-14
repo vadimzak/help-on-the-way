@@ -83,7 +83,7 @@ function constructSearchQuery(textQuery){
                     v-if="elders.length"
                     class="scroller"
                     :items="elders"
-                    item-height="100">
+                    item-height="52">
                     <template slot-scope="props">
                         <ElderRow class="item" :callToAction="callToActionLabel" :onPick="onElderPick" :elder="props.item"></ElderRow>
                     </template>
@@ -109,6 +109,10 @@ function constructSearchQuery(textQuery){
 .results-container{
     height: 100%;;
     flex: 1;
+}
+.virtual-scroller{
+    max-height: 278px;
+
 }
 </style>
 

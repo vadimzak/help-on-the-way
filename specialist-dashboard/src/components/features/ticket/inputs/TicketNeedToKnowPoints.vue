@@ -5,12 +5,12 @@
              <b-list-group>
                  <b-list-group-item v-for="(item, index) in value" :key="index" class="d-flex justify-content-between align-items-center">
                      {{item}}
-                      <b-badge href="#" variant="dark" @click="() => removeItem(index)">מחק הערה</b-badge>
+                      <b-btn  variant="secondary" @click="() => removeItem(index)">מחק הערה</b-btn>
                  </b-list-group-item>
              </b-list-group>
         </b-col>
         <b-col cols="3">
-           <b-btn variant="primary" v-on:click="addItem"> + פניה חדשה</b-btn>   
+           <b-btn class="px-5" variant="primary" size="lg" v-on:click="addItem">  +    הוסף   </b-btn>   
         </b-col>
   </b-row>
 </template>
