@@ -20,6 +20,7 @@
     "lodash": "4.17.5",
     "moment": "2.21.0",
     "moment-duration-format": "2.2.2",
+    "sticky-state": "2.4.1",
     "vee-validate": "2.0.6",
     "vue": "2.5.2",
     "vue-context-menu": "2.0.6",

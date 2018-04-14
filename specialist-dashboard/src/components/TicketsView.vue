@@ -1,16 +1,18 @@
 <template>
   <div v-if="ready" class="mt-5">
-    <tickets-filter :filterChanged="ticketFilterChanged" :buttonFilters="filters.buttons"></tickets-filter>
+    <tickets-filter  :filterChanged="ticketFilterChanged" :buttonFilters="filters.buttons"></tickets-filter>
   <div class="row  mt-5 p-0 mb-5 tickets-view">
     <div class="col-8 pl-4 p-0">
-      <div class="table-overflow-wrap">
+      <div>
         <div class="tickets-list">
          <ticket-table v-bind:selected-ticket="selectedTicket" v-bind:tickets="allTickets" v-bind:on-ticket-clicked="onTicketSelect"></ticket-table>
       </div>
       </div>
     </div>
     <div  class="col-4 p-0 pr-4">
+      <div class="sticky-wrapper" v-sticky>
       <ticket-view class="ticket-view" v-bind:ticket="selectedTicket"></ticket-view>
+      </div>
     </div>
   </div>
   <div v-if="!ready">
@@ -32,6 +34,7 @@ export default {
     return {
       selectedTicket: {},
       ready: false,
+      filtersSticky: false,
       ticketsStatus: TicketStatus,
       selectedFilter: { },
       ticketsByTypeCount: {},
@@ -104,7 +107,7 @@ export default {
         return ticketsCount[filter];
       };
     }
-  }
+  },
 }
 </script>
 

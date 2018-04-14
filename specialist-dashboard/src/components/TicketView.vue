@@ -226,7 +226,13 @@
 </script>
 
 <style scoped>
+  .is-sticky .ticket-preview{
+    position: absolute;
+    width: 100%;
+    top: 100px;
+  }
   .ticket-preview {
+    transition: all 2s ease 0s;
     background-color: #f4f4f4;
     font-family: 'Open Sans Hebrew'
   }

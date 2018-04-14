@@ -4,7 +4,6 @@ require('element-ui/lib/theme-chalk/index.css')
 require('../static/bootstrap_override.scss')
 require('../static/fonts.css')
 require('../static/scroll.css')
-
 import Vue from 'vue'
 import App from './App'
 import router from './router'
@@ -24,6 +23,7 @@ import authPlugin from 'shared/providers/authProvider'
 import 'shared/initializers/facebookRedirectHashFixer'
 import * as whatsAppCommunicator from '@/services/whatsAppCommunicator'
 import VeeValidate from 'vee-validate'
+import directives from './directives'
 import lang from 'element-ui/lib/locale/lang/en'
 import locale from 'element-ui/lib/locale'
 locale.use(lang)
