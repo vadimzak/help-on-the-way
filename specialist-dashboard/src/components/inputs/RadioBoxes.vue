@@ -70,6 +70,6 @@ export default {
     background-color: #eee;
   }
   .box.selected{
-    color: #0089fd;
+    color: var(--primary);
   }
 </style>
