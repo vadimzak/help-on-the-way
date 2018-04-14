@@ -1,7 +1,11 @@
 <template>
   <div v-on-click-outside="hidePlaceInput" v-on:click="showPlaceInput()">
     <div>
-      <span v-if="!showAddressSelector && !keepOpen">{{addressAlias ? addressAlias + ',' : ''}}{{value | formatAddress | formatEmpty}}</span>
+      <span v-if="!showAddressSelector && !keepOpen">
+        {{addressAlias ? addressAlias : ''}}
+        <i v-if="addressAlias" class="material-icons ml-5 mr-5">mode_edit</i> 
+        {{value | formatAddress | formatEmpty}}
+        </span>
     </div>
     <div v-if="showAddressSelector || keepOpen" >
       <GmapAutocomplete
@@ -74,5 +78,8 @@
  .pac-container{
    /* temp hack to make sure the palce auto compelte is aboved the popover, we need to find a better way */
    z-index: 1900;
+ }
+ i{
+   color: var(--primary);
  }
 </style>

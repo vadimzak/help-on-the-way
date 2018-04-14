@@ -1,47 +1,30 @@
 <template> 
-    <div class="container">
-        <h4 class="title">כתובות</h4>
+    <div class="container-fluid mb-5">
+        <h4 class="title row mb-5">מסלול הפנייה</h4>
 
         <div class="pickup address">
-            <i class="fa fa-map-marker"></i>
-
+            <span class="sub-title">ממקום</span>
             <div class="input-wrapper">
-                <h5 class="sub-title">איסוף</h5>
                 <InputAddress :addressAlias="ticket.details.startAddressAlias" :keepOpen="false" name="startAddress" 
                 v-validate="'address'" v-model="startAddress"/>
             </div>
 
-            <button class="remove-address" v-on:click="removeStartAddress">
-                <i class="fa fa-trash" aria-hidden="true"></i>
-            </button>
         </div>
 
         <div class="destination address">
-            <i class="fa fa-flag"></i>
-
+            <span class="sub-title">למקום</span>
             <div class="input-wrapper">
-                <h5 class="sub-title">יעד</h5>
                 <InputAddress :addressAlias="ticket.details.destinationAddressAlias" :keepOpen="false" name="destinationAddress" 
                 v-validate="'address'" v-model="destinationAddress"/>
             </div>
-
-            <button class="remove-address" v-on:click="removeDestinationAddress">
-                <i class="fa fa-trash" aria-hidden="true"></i>
-            </button>
         </div>
 
         <div class="end address">
-            <i class="fa fa-map-marker"></i>
-
+            <span class="sub-title">חזרה</span>
             <div class="input-wrapper">
-                <h5 class="sub-title">חזרה</h5>
                  <InputAddress :addressAlias="ticket.details.endAddressAlias" :keepOpen="false" name="endAddress" 
                  v-validate="'address'" v-model="endAddress"/>
             </div>
-
-            <button class="remove-address" v-on:click="removeEndAddress">
-                <i class="fa fa-trash" aria-hidden="true"></i>
-            </button>
         </div>
     </div>
 </template>
@@ -108,24 +91,34 @@ export default {
     .title{
         font-size: 2rem;
         margin-bottom: 0;
-        border-bottom: 2px solid gray;
+        color: var(--secondary);
     }
     .sub-title{
         font-size: 1.2rem;
-        color: #8a8585;
+        color: var(--primary);
+        letter-spacing: 0.4px;
     }
     .address{
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        padding-bottom: 10px;
-        border-bottom: 1px solid lightgray;
+        justify-content: space-between;
+        padding-bottom: 20px;
+        padding-top:20px;
+        border-bottom: 1px solid var(--light);
+    }
+    .end{
+        border: none;
+    }
+    .end .sub-title{
+          color: var(--secondary);
     }
     .input-wrapper{
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        flex: 0 0 75%;
+        flex: 0 0 90%;
+        font-size: 1.5rem;
+        color: var(--secondary);
     }
     .remove-address{
         background: transparent;

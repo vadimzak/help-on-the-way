@@ -1,8 +1,8 @@
 $font-size-base: 0.9rem;
 /* COLORS */
-$light-gray: #f4f4f4;
+$light: #f4f4f4;
 $medium-gray: #757575;
-$dark-gray: #212121;
+$dark: #212121;
 $primary-blue: #0089fd;
 
 /* General Settings */
@@ -13,10 +13,9 @@ $theme-colors: (
     "secondary": $medium-gray,
 
 );
-
 // Forms
-$input-bg: $light-gray;
-$input-color: $dark-gray;
+$input-bg: $light;
+$input-color: $dark;
 $input-border-width: 0;
 
 // Buttons
