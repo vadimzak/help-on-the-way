@@ -1,14 +1,19 @@
 <template>
-  <div>
-    <div 
-      class="option text-center"
+  <div class="boxes-container">
+    <div class="box"
       v-for="(option,index) of options" 
       :key="index"
       @click="changeSelection(option.value)"
       :class="{selected: option.value === value}"
     >
-    <span class="option-icon" :class="{ [ getIconInfo(option).class ] : true }">{{getIconInfo(option).content}}</span>
-      {{option.text}}
+      <div v-if="option.icon" class="box-content" :class="{ [ getIconInfo(option).class ] : true }">
+        {{getIconInfo(option).content}}
+        <span class="box-text">{{option.text}}</span>
+      </div>
+      <b-button v-if="!option.icon" class="box-button" 
+      :variant="option.value === value ? 'primary' : 'secondary'">
+        <span class="box-text">{{option.text}}</span>
+      </b-button>
     </div>
   </div>
 </template>
@@ -18,25 +23,17 @@ import _ from 'lodash'
 export default {
   components: {  },
   props: [ 'options', 'value' ],
-  data () {
-    return {
-    }
-    
-  },
   methods: {
     changeSelection(value){
       let valueToUpdate;
       if(this.value === value){
-        valueToUpdate = ''
+        valueToUpdate = null
       } else {
         valueToUpdate = value
       }
       this.$emit('input', valueToUpdate)
     },
     getIconInfo(option){
-      if(!option.icon){
-        return { class: '', content: '' }
-      }
       if(_.isObject(option.icon)){
         return option.icon
       }
@@ -47,26 +44,32 @@ export default {
 </script>
 
 <style scoped>
-  .option{
-    display: inline-block;
-    padding: 20px;
-    border: 1px solid #333;
+  .boxes-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+  .box{
     margin: 5px;
     cursor: pointer;
     user-select: none;
-  }
-
-  .option-icon{
-    display: block;
     text-align: center;
-    font-size: 40px;
   }
-  .option:hover{
+  .box-content{
+    display: flex;
+    flex-direction: column;
+    font-size: 40px;
+    padding: 20px;
+  }
+  .box-text{
+    font-family:  'Open Sans Hebrew';
+    font-size: 1.4rem;
+  }
+  .box:hover{
     background-color: #eee;
   }
-
-  .option.selected{
-    background-color: #333;
-    color: #eee;
+  .box.selected{
+    color: #0089fd;
   }
 </style>
