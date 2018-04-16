@@ -1,12 +1,12 @@
 <template>
-  <div v-if="selectedFilter"  id="filters" class="row my-4">
+  <div class="row my-4">
     <div class="button-filters justify-content-around col-12 row">
-      <div v-for="(filter,index) in buttonFilters"
+      <div v-for="(filter,index) in filters"
            :key="index"
-           v-bind:class="{'active': filter.name==selectedFilter.name}"
+           v-bind:class="{'active': filter.value === currentFilter}"
            class="button-filter d-flex col-2 flex-row p-0"
-           v-on:click="selectedFilterChanged(filter)">
-        <span class="filter-count">  {{ filter.count() }} </span>
+           @click="setFilter(filter.value)">
+        <span class="filter-count"> {{ statusCount[filter.value.toLowerCase()]}} </span>
         <span class="filter-text">{{filter.name}}</span>
       </div>
     </div>
@@ -14,27 +14,36 @@
 </template>
 
 <script>
-
+import TicketsFilter from '@/components/TicketsFilter'
+import TicketStatus from '@/constants/enums/TicketStatus'
+import { mapState, mapMutations } from 'vuex'
 export default {
-  props: {
-    buttonFilters: Array,
-    filterChanged: Function
-  },
-  created() {
-    if (this.buttonFilters) {
-      this.selectedFilter = this.buttonFilters[0];
-      this.filterChanged(this.selectedFilter);
-    }
-  },
   methods: {
-    selectedFilterChanged: function(filter) {
-      this.selectedFilter = filter;
-      this.filterChanged(filter);
-    },
+    ...mapMutations('createTicket', ['setFilter'])
+  },
+  computed: {
+        ...mapState('createTicket', ['statusCount', 'currentFilter']),
   },
   data () {
     return {
-      selectedFilter: {},
+      filters: [
+        {
+          name: TicketStatus.draft.text,
+          value: TicketStatus.draft.value
+        },
+        {
+          name: TicketStatus.open.text,
+          value: TicketStatus.open.value
+        },
+        {
+          name: TicketStatus.matched.text,
+          value: TicketStatus.matched.value
+        },
+        {
+          name: TicketStatus.scheduled.text,
+          value: TicketStatus.scheduled.value
+        }
+      ],
     }
   },
 }

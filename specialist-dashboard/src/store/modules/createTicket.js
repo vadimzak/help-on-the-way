@@ -3,8 +3,13 @@ import { client as apolloClient } from 'shared/providers/apolloProvider';
 import { TicketStatus } from '@/constants/enums/index';
 import moment from 'moment';
 import _ from 'lodash';
+import { stat } from 'fs';
 const state = {
     ticket: undefined,
+    statusCount: {},
+    list: [],
+    currentPreview: undefined,
+    currentFilter: 'OPEN',
     currentStep: 1,
 };
   
@@ -75,6 +80,18 @@ const mutations = {
       },
     goBackStep(state) {
           state.currentStep = Math.max(1, state.currentStep - 1);
+    },
+    setStatusCount(state, count) {
+        state.statusCount = count
+    },
+    setList(state, list) {
+        state.list = list
+    },
+    setCurrentPreview(state, ticket) {
+        state.currentPreview = ticket
+    },
+    setFilter(state, filter) {
+        state.currentFilter = filter
     }
   }
   

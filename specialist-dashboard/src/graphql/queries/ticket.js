@@ -141,12 +141,22 @@ query allTicketsSearchQuery($ticketStatus: TicketStatus!) {
   }
   ${FULL_TICKET_FRAGMENT}`;
 
-export const TICKET_BY_TYPE_COUNT = gql`
-query ticketsByTypeCount($ticketStatus: TicketStatus!) {
-    allTickets(condition: {status: $ticketStatus}) {
-      totalCount
-    }
-  }`;
+
+export const TICKETS_COUNT_PER_STATUS = gql`
+query ticketsCount{
+  draft: allTickets(condition: { status: DRAFT }){
+  totalCount
+},
+  open: allTickets(condition: { status: OPEN }){
+  totalCount
+},
+  matched: allTickets(condition: { status: MATCHED }){
+  totalCount
+},
+  scheduled: allTickets(condition: { status: SCHEDULED }){
+  totalCount
+}
+}`
 
 export const VOLUNTEERS_BY_TICKET_ID = gql `query getTicketVolunteers($ticketId : BigInt!){
   ticketById(id: $ticketId){
