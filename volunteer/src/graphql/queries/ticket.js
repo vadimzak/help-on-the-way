@@ -9,6 +9,7 @@ fragment ticketFields on TicketForVolunteer {
     description,
     durationEta,
     dueDate,
+    dueTime,
     status,
     elder,
     startAddress,

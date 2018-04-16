@@ -31,47 +31,62 @@
       <v-card-title class="card-content">
         <div class="ticket-details">
           <ul>
-            <li>
+            <li v-if="ticket.dueDate">
               <i class="material-icons">date_range</i>
+              <span>יום &nbsp;</span>
+              {{this.$moment(ticket.dueDate).format('ddd')}}
+              <span>, &nbsp;</span>
               {{this.$moment(ticket.dueDate).format('L')}}
               {{this.$moment(ticket.dueDate).format('HH:mm')}}-
-              {{this.$moment(ticket.dueDate).add(ticket.durationEta, 'hour').format('HH:mm')}}
+              {{ticket | formatTicketTime}}
             </li>
-            <li>
+            <li v-else>
+              <i class="material-icons">date_range</i>
+              <span>בהמשך השבוע</span>
+           </li>
+            <li class="transport">
+              <div>
               <i class="material-icons">local_taxi</i>
-              נוסעים במונית
-            </li>
-            <div class="address">
+              <span> נוסעים במונית</span>
+              </div>
+              <div class="address">
               <v-card class="start-address">
                 <img src="static/assets/placeholder-copy.png">
-                {{ticket.startAddress.street}},
-                {{ticket.startAddress.city}}
+                <span class="address-alias">{{ticket | formatTicketAddressAlias('start')}}</span>
+                <span class="address-text">
+                  {{ticket.startAddress.street}},
+                  {{ticket.startAddress.city}}
+                </span>
               </v-card>
               <div class="arrows">
                 <img src="static/assets/transfer-1.png">
               </div>
               <v-card class="end-address">
                 <img src="static/assets/flag.png">
+                <span class="address-alias">{{ticket | formatTicketAddressAlias('end')}}</span>
+                <span class="address-text">
                 {{ticket.endAddress.street}},
                 {{ticket.endAddress.city}}
+                </span>
               </v-card>
             </div>
+            </li>
           </ul>
         </div>
         <div class="ticket-tags">
-          <div class="tag" v-for="tag in ticket.tags">
+          <div class="tag" v-for="(tag, index) in ticket.tags" :key="index">
             <i class="material-icons">{{tag.icon}}</i>
             {{tag.name}}
           </div>
         </div>
       </v-card-title>
       <v-card-title class="important-things">
-        <h2>
+        <h2 class="important-things-title">
           <i class="material-icons">star</i>
-          דברים שחשוב לדעת
+          <span class="title-text">דברים שחשוב לדעת</span>
         </h2>
-        <ul>
-          <li v-for="info in ticket.importantInfo">
+        <ul class="important-things-list">
+          <li v-for="(info, index) in ticket.details.needToKnow" :key="index">
             {{info}}
           </li>
         </ul>
@@ -163,6 +178,9 @@ export default {
 	letter-spacing: -1px;
 	font-weight: bold;
 }
+.card-content{
+  padding: 0 16px;
+}
 
 .card-content ul {
 	list-style: none;
@@ -172,10 +190,14 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-	margin-bottom: 10px;
+  padding: 16px 0;
+  border-bottom: 2px solid #ebebeb;
 	font-size: 16px;
 }
-
+.card-content ul li.transport{
+  flex-direction: column;
+  align-items: flex-start;
+}
 .card-content ul li i {
 	width: 40px;
 	text-align: right;
@@ -198,6 +220,7 @@ export default {
     height: 90px;
     align-items: center;
     justify-content: space-between;
+        width: 100%;
 }
 
 .ticket-details {
@@ -227,6 +250,28 @@ export default {
 
 .important-things > * {
 	width: 100%;
+}
+
+.important-things-title{
+  display: flex;
+  align-items: center;
+  width: 50%;
+  justify-content: space-between;
+}
+.important-things-title .title-text{
+  font-size: 15px;
+}
+
+.important-things-list {
+  padding-right: 10%;
+  list-style-type: none;
+}
+.important-things-list > li {
+  text-indent: -5px;
+}
+.important-things-list > li:before {
+  content: "-";
+  text-indent: -5px;
 }
 
 .volunteer,
@@ -287,10 +332,17 @@ export default {
 
 .address {
 	display: flex;
-	align-items: center;
+	align-items: baseline;
 	justify-content: space-around;
+  width: 100%;
+  padding: 15px 0;
 }
-
+.address .address-alias{
+  font-weight: bold;
+}
+.address .address-text{
+  font-size: 12px;
+}
 .address .card {
 	flex: 3;
 	display: flex;
@@ -311,6 +363,7 @@ export default {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+  align-self: center;
 }
 
 .arrows img {

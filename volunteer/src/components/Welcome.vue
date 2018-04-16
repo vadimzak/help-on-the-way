@@ -24,6 +24,9 @@ export default {
 </script>
 
 <style scoped>
+  .layout{
+    width: 100%;
+  }
 
   .divider-title {
     height: 231px;
