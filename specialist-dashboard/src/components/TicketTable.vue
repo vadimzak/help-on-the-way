@@ -127,4 +127,10 @@ export default {
 	font-stretch: normal;
 	text-align: center;
 }
+>>> .ctx-menu  {
+   text-align: right !important;
+   padding-right: 10px;
+   cursor: pointer;
+}
+
 </style>

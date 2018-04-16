@@ -4,15 +4,21 @@
         <b-col cols="12">
         <h5>לאן</h5>
         </b-col>
-        <b-col cols="12" class="justify-content-center d-flex">
-        <label for="destinationAlias">שם/סוג המקום:</label>
-        <b-form-input
-                   class="align-self-start"
-                  id="destinationAlias"
-                  v-model.trim="destinationAlias"
-                  type="text"
-                  placeholder="שם המקום"/>
-           <InputAddress class="w-100" :keepOpen="true" name="address" v-validate="'address'" v-model="destinationAddress"/>
+        <b-col cols="12" >
+            <b-row>
+                <b-col cols="6" class="justify-content-center d-flex">
+                    <label for="destinationAlias">שם/סוג המקום:</label>
+                    <b-form-input
+                            class="align-self-start"
+                            id="destinationAlias"
+                            v-model.trim="destinationAlias"
+                            type="text"
+                            placeholder="שם המקום"/>
+                </b-col>
+                <b-col cols="6">
+                    <InputAddress class="w-100" :keepOpen="true" name="address" v-validate="'address'" v-model="destinationAddress"/>
+                </b-col>
+            </b-row>
         </b-col>
       </b-row>
       <b-row>

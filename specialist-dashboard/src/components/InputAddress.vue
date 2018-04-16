@@ -8,17 +8,26 @@
         </span>
     </div>
     <div v-if="showAddressSelector || keepOpen" >
-      <GmapAutocomplete
-          :componentRestrictions="{country: 'IL'}"
-          :types="['address']"
-          class="w-100"
-          :value="value | formatAddress"
-          @place_changed="onSelect($event)"
-          :select-first-on-enter="true"
-      ></GmapAutocomplete>
-      <b-form-input type="number" min="0" max="100" v-if="value" :value="value.floor" @input="(e) => updatedModel({floor: e.target.value})" placeholder="קומה"/>
-      <b-form-input type="text" v-if="value" :value="value.enterance" @input="(e) => updatedModel({enterance: e.target.value })" placeholder="כניסה"/>
-     </div>
+      <b-row>
+        <b-col cols="6">
+          <GmapAutocomplete
+                    :componentRestrictions="{country: 'IL'}"
+                    :types="['address']"
+                    class="w-100 form-control"
+                    :value="value | formatAddress"
+                    @place_changed="onSelect($event)"
+                    :select-first-on-enter="true"
+                ></GmapAutocomplete>
+        </b-col>
+        <b-col cols="3">
+          <b-form-input type="number" min="0" max="100" v-if="value" :value="value.floor" @input="(e) => updatedModel({floor: e.target.value})" placeholder="קומה"/>
+        </b-col>
+        <b-col cols="3">
+             <b-form-input type="text" v-if="value" :value="value.enterance" @input="(e) => updatedModel({enterance: e.target.value })" placeholder="כניסה"/>
+        </b-col>
+      </b-row>
+      
+       </div>
   </div>
 </template>
 
