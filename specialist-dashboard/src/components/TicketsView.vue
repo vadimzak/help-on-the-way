@@ -43,7 +43,7 @@ export default {
           ticketStatus: this.currentFilter,
         }
       },
-      pollInterval: 1000 * 30, // refetch every minute
+      pollInterval: 1000 * 30,
       update: (data) => data.allTickets.nodes,
       result(value) {
         this.setList(value.data.allTickets.nodes)
@@ -53,7 +53,7 @@ export default {
     },
     ticketsCount: {
       query: TICKETS_COUNT_PER_STATUS,
-      pollInterval: 1000 * 30, // refetch every minute
+      pollInterval: 1000 * 30,
       update: (data) => data,
       result(value){
         const count = 
