@@ -16,6 +16,10 @@ export default {
 }
 </script>
 <template>
-  <AutoComplete v-model="value" @input="val => value = val" :searchFunction="searchPerson" placeholder="חיפוש"/>
+  <AutoComplete v-model="value" @input="val => value = val" :searchFunction="searchPerson" placeholder="חיפוש">
+    <template slot-scope="props">
+      {{props.item}}
+    </template>
+  </AutoComplete>
 </template>
 
