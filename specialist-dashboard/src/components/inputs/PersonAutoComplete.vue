@@ -8,8 +8,7 @@ export default {
   },
   methods: {
       async searchPerson(value) {
-        debugger;
-        return value;
+        return [value];
       }
   },
   components: { AutoComplete,}
