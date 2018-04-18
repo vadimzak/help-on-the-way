@@ -2,15 +2,18 @@
   <div>
       <h2>פתיחת פניה חדשה</h2>
       <p class="small">נא לבחור את מקור הפניה.</p>
-      <RadioBoxes :value="'elder'" @input="sourceChanged" :options="sources"/>
+      <RadioBoxes :value="ticketSource" @input="sourceChanged" :options="sources"/>
+      <PersonAutoComplete :value="value" :personType="ticketSource" />
   </div>
 </template>
 <script>
-import RadioBoxes from '@/components/inputs/RadioBoxes';
+import { RadioBoxes, PersonAutoComplete } from '@/components/inputs';
+import PersonTypes from '@/constants/enums/PersonTypes';
 import { createNamespacedHelpers } from 'vuex';
 const { mapState, mapActions, mapMutations } = createNamespacedHelpers('createTicket');
 export default {
-  components: { RadioBoxes },
+  components: { RadioBoxes, PersonAutoComplete },
+  props: ['value'],
   mounted(){
         if(!this.ticket.issuingPerson){
           this.updateTicket({ issuingPerson: this.ticket.elder });
@@ -20,27 +23,38 @@ export default {
   data() {
     return {
       sources: [
-      { text: 'זקן', 'icon': 'd-icon-old-man', value: 'elder' },
-      { text: 'עו״ס', 'icon': 'd-icon-prayer', value: 'social_worker' },
-      { text: 'מתנדב', 'icon': 'd-icon-help-2', value: 'volunteer' },
-      { text: 'קרוב משפחה', 'icon': 'd-icon-family', value: 'relative' },
+      { text: 'זקן', 'icon': 'd-icon-old-man', value: PersonTypes.elder },
+      { text: 'עו״ס', 'icon': 'd-icon-prayer', value: PersonTypes.socialWorker },
+      { text: 'מתנדב', 'icon': 'd-icon-help-2', value: PersonTypes.volunteer },
+      { text: 'קרוב משפחה', 'icon': 'd-icon-family', value: PersonTypes.relative },
       { text: 'אחר', 'icon': { class: 'material-icons', content: 'more' }, value: 'other' },
     ],
+    ticketSource: this.value || 'elder',
   }
   },
     computed: {
       ...mapState(['ticket']),
   },
   methods: {
+    updateValue(value){
+      this.$emit('input', value);
+      this.$emit('personType', value);
+    },
     sourceChanged(value){
       // TODO - implement the ability to chose other person types
       if(value === 'elder'){
-        const elder = this.ticket.elder;
+        const elder = this.ticket.elder || this.value;
         this.updateTicket({ issuingPerson: elder });
         }  else {
-           this.updateTicket({ issuingPerson: null });
+           this.updateTicket({ issuingPerson: this.value });
         }
-        this.$emit('canContinue', !!this.ticket.issuingPerson);
+          if(value !== 'other'){
+              this.updateValue(value);
+          } else{
+            this.updateValue(null);
+          }
+          this.ticketSource = value;
+          this.$emit('canContinue', !!this.ticket.issuingPerson);
     },
     ...mapMutations(['updateTicket'])
   }
