@@ -3,7 +3,7 @@
       <h2>פתיחת פניה חדשה</h2>
       <p class="small">נא לבחור את מקור הפניה.</p>
       <RadioBoxes :value="ticketSource" @input="sourceChanged" :options="sources"/>
-      <PersonAutoComplete :value="value" :personType="ticketSource" />
+      <PersonAutoComplete @input="personChanged" :value="value" :personType="ticketSource" />
   </div>
 </template>
 <script>
@@ -29,7 +29,7 @@ export default {
       { text: 'קרוב משפחה', 'icon': 'd-icon-family', value: PersonTypes.relative },
       { text: 'אחר', 'icon': { class: 'material-icons', content: 'more' }, value: 'other' },
     ],
-    ticketSource: this.value || 'elder',
+    ticketSource: this.value || PersonTypes.elder,
   }
   },
     computed: {
@@ -38,7 +38,6 @@ export default {
   methods: {
     updateValue(value){
       this.$emit('input', value);
-      this.$emit('personType', value);
     },
     sourceChanged(value){
       // TODO - implement the ability to chose other person types
@@ -55,6 +54,13 @@ export default {
           }
           this.ticketSource = value;
           this.$emit('canContinue', !!this.ticket.issuingPerson);
+    },
+    personChanged(value) {
+      if (value) {
+        this.updateTicket({ issuingPerson: value });
+        // this.value = value;
+        this.$emit('canContinue', !!this.ticket.issuingPerson);        
+      }
     },
     ...mapMutations(['updateTicket'])
   }
