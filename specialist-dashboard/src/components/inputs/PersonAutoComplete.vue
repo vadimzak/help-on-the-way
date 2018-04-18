@@ -40,7 +40,7 @@ function constructSearchQuery(textQuery){
 </script>
 <template>
   <auto-complete
-  v-model="value"
+  :value="value"
   @input="personChanged"
   :searchFunction="searchPerson"
   placeholder="חיפוש">

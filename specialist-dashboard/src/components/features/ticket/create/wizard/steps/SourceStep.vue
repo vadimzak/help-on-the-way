@@ -56,9 +56,10 @@ export default {
           this.$emit('canContinue', !!this.ticket.issuingPerson);
     },
     personChanged(value) {
+      debugger;
       if (value) {
         this.updateTicket({ issuingPerson: value });
-        // this.value = value;
+        this.updateValue(value);
         this.$emit('canContinue', !!this.ticket.issuingPerson);        
       }
     },
