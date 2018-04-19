@@ -129,9 +129,6 @@ function normalizeTicket(ticket) {
         // maps to array of actual groups without the wrapping object
         ticket.groups = ticket.groups.nodes.map( g => g.group)
     }
-    if (ticket.dueTime) {
-        ticket.dueTime = moment(ticket.dueTime, "hh:mm:Z").utc().toDate();
-    }
     if (!ticket.details) {
         ticket.details = {}
     }
