@@ -2,10 +2,9 @@
   <div>
     <WizardHeader/>
     <Step :current-step="currentStep" step="1"><SourceStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
-    <Step :current-step="currentStep" step="2"><TicketTypeStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
-    <Step :current-step="currentStep" step="3"><TicketDetailsStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
-    <Step v-if="this.ticket.isIndoor" :current-step="currentStep" step="4"><TicketSummaryStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
-    <Step v-if="!this.ticket.isIndoor" :current-step="currentStep" step="4"><TicketRouteSummaryStep @update="updateTicket"  @canContinue="setCanContinue"/><TicketMobilityStep/></Step>
+    <Step :current-step="currentStep" step="2"><TicketDetailsStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
+    <Step :current-step="currentStep" step="3"><TicketTimingStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
+    <Step v-if="!this.ticket.isIndoor" :current-step="currentStep" step="4"><TicketRouteStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
     <Step :current-step="currentStep" step="5"><AnnounceStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
     <footer>
         <b-btn @click="back" v-if="currentStep > 1">חזור אחורה</b-btn>

@@ -79,12 +79,22 @@ const mutations = {
         this.commit('createTicket/updateTicket', { dueTime: null, fixedDueTime: false, details: { flexibleTime: time } }) 
     },
     nextStep(state) {
+        // skip route step for indoor tickets
+        if (state.currentStep === 3 && state.ticket.isIndoor) {
+            state.currentStep = 5;
+            return;
+        }
         state.currentStep++;  
     },
     setStep(state, step) {
           state.currentStep = step
       },
     goBackStep(state) {
+        // skip route step for indoor tickets
+        if (state.currentStep === 5 && state.ticket.isIndoor) {
+            state.currentStep = 3; 
+            return;
+        }      
           state.currentStep = Math.max(1, state.currentStep - 1);
     },
     setStatusCount(state, count) {

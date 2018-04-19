@@ -8,13 +8,14 @@
   "author": "Dor le Dor Dev Team",
   "license": "MIT",
   "dependencies": {
-    "vue-apollo": "3.0.0-beta.5",
-    "vue-resource": "1.5.0",
-    "moment": "2.21.0",
-    "graphql": "0.13.2",
-    "graphql-tag": "2.8.0",
     "apollo-cache-inmemory": "1.1.11",
     "apollo-client": "2.2.7",
-    "apollo-link-http": "1.5.3"
+    "apollo-link-http": "1.5.3",
+    "graphql": "0.13.2",
+    "graphql-tag": "2.8.0",
+    "lodash": "4.17.5",
+    "moment": "2.21.0",
+    "vue-apollo": "3.0.0-beta.5",
+    "vue-resource": "1.5.0"
   }
 }

@@ -1,22 +1,17 @@
 export default {
     INDEPENDENT: {
-        icon: 'accessibility',
-        text: 'ללא סיוע',
-        value: 'd-icon-walk-indepndent',
-    },
-    WALKING_STICK: {
-        icon: 'rowing',
-        text: 'מקל/הליכון',
-        value: 'WALKING_STICK',
-    },
-    WHEEL_CHAIR: {
-        icon: 'accessible',
-        text: 'כיסא גלגלים',
-        value: 'WHEEL_CHAIR',
+        icon: 'd-icon-walk-indepndent',
+        text: 'עצמאי',
+        value: 'INDEPENDENT',
     },
     NEEDS_SUPPORT: {
-        icon: 'supervisor_account',
-        text: 'תמיכה וסיוע',
+        icon: 'd-icon-help-2',
+        text: 'נדרשת תמיכה',
         value: 'NEEDS_SUPPORT',
     },
+    WHEEL_CHAIR: {
+        icon: 'd-icon-wheel-chair',
+        text: 'כיסא גלגלים',
+        value: 'WHEEL_CHAIR',
+    }
 }

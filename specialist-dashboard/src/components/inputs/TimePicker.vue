@@ -8,6 +8,7 @@
             :value="value"
             prefix-icon="hidden"
             clear-icon="hidden"
+            :pickerOptions="pickerOptions"
             class="a"
             @input="(val) => updateInput(val, true)" />
      </div>
@@ -20,7 +21,7 @@ export default {
     data(){
         return {
             pickerOptions: {
-                start: '07:00',
+                start: '00:00',
                 step: '00:30',
                 end: '23:30'
             },

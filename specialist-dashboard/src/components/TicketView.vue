@@ -108,7 +108,7 @@
         </div>
         <div v-if="volunteer.groups.nodes" class="ticket-detail p-2">
           <span class="ticket-sub-header">קבוצות:</span>
-          <span v-for="group of volunteer.groups.nodes">{{group.group.channels}}</span>
+          <span v-for="(group,index) of volunteer.groups.nodes" :key="index">{{group.group.channels}}</span>
         </div>
       </div>
     </div>
@@ -117,11 +117,10 @@
 
 <script>
   import InputAddress from '@/components/InputAddress'
-  import EditableInput from '@/components/EditableInput'
   import { UPDATE_TICKET, ALL_TICKETS_QUERY, VOLUNTEERS_BY_TICKET_ID } from '../graphql/queries/ticket'
 
   export default {
-    components: {  InputAddress, EditableInput },
+    components: {  InputAddress },
     data () {
       return {
         selectedView: 'ticketDetailsView',

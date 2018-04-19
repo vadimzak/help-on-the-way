@@ -50,7 +50,10 @@ export default {
   
     },
     getDueDateAlias(dueDate){
-        return 'בימים הקרובים'
+        return this.$options.filters.formatDate(dueDate)
+    },
+    getStartAddres(){
+        return this.ticket.startAddress ? this.ticket.startAddress.street : this.ticket.details.startAddressAlias
     },
     getWordByGender(maleWord,FemaleWord){
         return this.ticket.elder.gender === 'MALE' ? maleWord : FemaleWord
@@ -78,30 +81,30 @@ export default {
     },
   
     buildCategoryMedicalMessage(){
-      return `${this.ticket.elder.firstName} מ${this.ticket.startAddress.street} ${this.getWordByGender('צריך', 'צריכה')}  לווי ל ${this.ticket.details.subject}  ${this.getDueDateAlias(this.ticket.dueDate)}  . רוצה לעזור ל ${this.ticket.elder.firstName}? ` ;
+      return `${this.ticket.elder.firstName} מ${this.getStartAddres()} ${this.getWordByGender('צריך', 'צריכה')}  לווי ל ${this.ticket.details.subject}  ${this.getDueDateAlias(this.ticket.dueDate)}  . רוצה לעזור ל ${this.ticket.elder.firstName}? ` ;
    
     },
     buildCategorySocialMessage(){
-       return `${this.ticket.elder.firstName} מ${this.ticket.startAddress.street} רוצה  עזרה  ב ${this.ticket.details.subject} ${this.getWordByGender('והיה', 'והייתה')} ${this.getWordByGender('שמח', 'שמחה')} שזה יקרה ${this.getDueDateAlias(this.ticket.dueDate)} 🔧 . רוצה לעזור ל ${this.ticket.elder.firstName}? ` ;
+       return `${this.ticket.elder.firstName} מ${this.getStartAddres()} רוצה  עזרה  ב ${this.ticket.details.subject} ${this.getWordByGender('והיה', 'והייתה')} ${this.getWordByGender('שמח', 'שמחה')} שזה יקרה ${this.getDueDateAlias(this.ticket.dueDate)} 🔧 . רוצה לעזור ל ${this.ticket.elder.firstName}? ` ;
   
     },
     buildCategoryRepearMessage(){
-      return `${this.ticket.elder.firstName} מ${this.ticket.startAddress.street} ${this.getWordByGender('צריך', 'צריכה')} עזרה בתיקון של ${this.ticket.details.subject} ${this.getWordByGender('והיה', 'והייתה')} ${this.getWordByGender('שמח', 'שמחה')} שזה יקרה ${this.getDueDateAlias(this.ticket.dueDate)} 🔧 . רוצה לעזור ל ${this.ticket.elder.firstName}? ` ;
+      return `${this.ticket.elder.firstName} מ${this.getStartAddres()} ${this.getWordByGender('צריך', 'צריכה')} עזרה בתיקון של ${this.ticket.details.subject} ${this.getWordByGender('והיה', 'והייתה')} ${this.getWordByGender('שמח', 'שמחה')} שזה יקרה ${this.getDueDateAlias(this.ticket.dueDate)} 🔧 . רוצה לעזור ל ${this.ticket.elder.firstName}? ` ;
     }, 
     buildCategoryShoppingMessage(){
-       return `${this.ticket.elder.firstName} מ${this.ticket.startAddress.street} רוצה לצאת ${this.getDueDateAlias(this.ticket.dueDate)} ל ${this.ticket.details.subject} ומחפשת שותפ/ה. רוצה לעזור ל${this.ticket.elder.firstName}?`
+       return `${this.ticket.elder.firstName} מ${this.getStartAddres()} רוצה לצאת ${this.getDueDateAlias(this.ticket.dueDate)} ל ${this.ticket.details.subject} ומחפשת שותפ/ה. רוצה לעזור ל${this.ticket.elder.firstName}?`
     },
     buildCategorySocialEscortMessage(){
-      return `${this.ticket.elder.firstName} מ${this.ticket.startAddress.street} רוצה לצאת ${this.getDueDateAlias(this.ticket.dueDate)} ל ${this.ticket.details.subject} ומחפשת שותפ/ה. רוצה לארח חברה ל${this.ticket.elder.firstName}?`
+      return `${this.ticket.elder.firstName} מ${this.getStartAddres()} רוצה לצאת ${this.getDueDateAlias(this.ticket.dueDate)} ל ${this.ticket.details.subject} ומחפשת שותפ/ה. רוצה לארח חברה ל${this.ticket.elder.firstName}?`
     },
     buildCategoryInstructionsMessage(){
-      return `${this.ticket.elder.firstName} מ${this.ticket.startAddress.street} ${this.getWordByGender('צריך', 'צריכה')} עזרה בהדרכה של ${this.ticket.details.subject} ${this.getWordByGender('והיה', 'והייתה')} ${this.getWordByGender('שמח', 'שמחה')} שזה יקרה ${this.getDueDateAlias(this.ticket.dueDate)} 🔧 . רוצה לעזור ל ${this.ticket.elder.firstName}? ` ;
+      return `${this.ticket.elder.firstName} מ${this.getStartAddres()} ${this.getWordByGender('צריך', 'צריכה')} עזרה בהדרכה של ${this.ticket.details.subject} ${this.getWordByGender('והיה', 'והייתה')} ${this.getWordByGender('שמח', 'שמחה')} שזה יקרה ${this.getDueDateAlias(this.ticket.dueDate)} 🔧 . רוצה לעזור ל ${this.ticket.elder.firstName}? ` ;
     },
     buildCategoryCleanOrganizeMessage(){
-       return `${this.ticket.elder.firstName} מ${this.ticket.startAddress.street} רוצה  עזרה  ב ${this.ticket.details.subject} ${this.getWordByGender('והיה', 'והייתה')} ${this.getWordByGender('שמח', 'שמחה')} שזה יקרה ${this.getDueDateAlias(this.ticket.dueDate)} 🔧 . רוצה לעזור ל ${this.ticket.elder.firstName}? ` ;
+       return `${this.ticket.elder.firstName} מ${this.getStartAddres()} רוצה  עזרה  ב ${this.ticket.details.subject} ${this.getWordByGender('והיה', 'והייתה')} ${this.getWordByGender('שמח', 'שמחה')} שזה יקרה ${this.getDueDateAlias(this.ticket.dueDate)} 🔧 . רוצה לעזור ל ${this.ticket.elder.firstName}? ` ;
     }, 
     buildCategoryBureaucracyMessage(){
-      return `${this.ticket.elder.firstName} מ${this.ticket.startAddress.street} ${this.getWordByGender('צריך', 'צריכה')} עזרה בירוקרטית של ${this.ticket.details.subject} ${this.getWordByGender('והיה', 'והייתה')} ${this.getWordByGender('שמח', 'שמחה')} שזה יקרה ${this.getDueDateAlias(this.ticket.dueDate)} 🔧 . רוצה לעזור ל ${this.ticket.elder.firstName}? ` ;
+      return `${this.ticket.elder.firstName} מ${this.getStartAddres()} ${this.getWordByGender('צריך', 'צריכה')} עזרה בירוקרטית של ${this.ticket.details.subject} ${this.getWordByGender('והיה', 'והייתה')} ${this.getWordByGender('שמח', 'שמחה')} שזה יקרה ${this.getDueDateAlias(this.ticket.dueDate)} 🔧 . רוצה לעזור ל ${this.ticket.elder.firstName}? ` ;
    
     },
   }

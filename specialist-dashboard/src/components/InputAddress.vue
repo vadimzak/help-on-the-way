@@ -1,23 +1,22 @@
 <template>
   <div v-on-click-outside="hidePlaceInput" v-on:click="showPlaceInput()">
     <div>
-      <span v-if="!showAddressSelector && !keepOpen">
-        {{addressAlias ? addressAlias : ''}}
-        <i v-if="addressAlias" class="material-icons ml-5 mr-5">mode_edit</i> 
+      <span v-show="!showAddressSelector && !keepOpen">
         {{value | formatAddress | formatEmpty}}
         </span>
     </div>
-    <div v-if="showAddressSelector || keepOpen" >
+    <div v-show="showAddressSelector || keepOpen" >
       <b-row>
         <b-col cols="6">
           <GmapAutocomplete
                     :componentRestrictions="{country: 'IL'}"
                     :types="['address']"
-                    class="w-100 form-control"
+                    class="form-control"
                     :value="value | formatAddress"
                     @place_changed="onSelect($event)"
                     :select-first-on-enter="true"
                 ></GmapAutocomplete>
+                <span class="cancel-button material-icons" v-show="value" @click="() => $emit('input', null)">close</span>
         </b-col>
         <b-col cols="3">
           <b-form-input type="number" min="0" max="100" v-if="value" :value="value.floor" @input="(e) => updatedModel({floor: e.target.value})" placeholder="קומה"/>
@@ -26,7 +25,6 @@
              <b-form-input type="text" v-if="value" :value="value.enterance" @input="(e) => updatedModel({enterance: e.target.value })" placeholder="כניסה"/>
         </b-col>
       </b-row>
-      
        </div>
   </div>
 </template>
@@ -57,7 +55,8 @@
         showPlaceInput: function() {
             this.showAddressSelector = true;
         },
-        hidePlaceInput: function() {
+        hidePlaceInput: function(e) {
+          debugger;
           this.showAddressSelector = false;
         },
         onSelect: function(address) {
@@ -84,6 +83,13 @@
   }
 </script>
 <style>
+  .cancel-button{
+    left: 10%;
+    position: absolute;
+    top: 8px;
+    font-size: 1rem;
+    cursor: pointer;
+  }
  .pac-container{
    /* temp hack to make sure the palce auto compelte is aboved the popover, we need to find a better way */
    z-index: 1900;

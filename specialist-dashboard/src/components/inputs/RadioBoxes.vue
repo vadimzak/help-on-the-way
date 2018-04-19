@@ -46,7 +46,7 @@ export default {
 <style scoped>
   .boxes-container{
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     flex-wrap: wrap;
   }
