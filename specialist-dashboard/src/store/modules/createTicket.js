@@ -132,6 +132,9 @@ function normalizeTicket(ticket) {
     if (ticket.dueTime) {
         ticket.dueTime = moment(ticket.dueTime, "hh:mm:Z").utc().toDate();
     }
+    if (!ticket.details) {
+        ticket.details = {}
+    }
     return ticket
 }
 
@@ -189,11 +192,8 @@ function mapToServerModel(ticket) {
     const stripFields = { groups: true, volunteers: true, __typename: true, isDirty: true };
     
     const transformers = {
-        dueTime(val) {
-          return val ? moment(val).utc().format('hh:mm:Z') : val// transform DueTime to UTC string of time
-        },
         dueDate(val) {
-                return val ? moment(val).utc().toDate() : val // normalize to UTC iso string                : val// transform DueTime to UTC string of time
+                return val ? moment(val).utc().toDate() : val // normalize to UTC iso string
         }
     }
 

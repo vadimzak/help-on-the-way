@@ -1,6 +1,6 @@
 <template>
      <div>
-         <TimePicker
+         <TimeSelect
             :arrow-control="true"
             align="center"
             format="HH:mm"
@@ -13,10 +13,10 @@
      </div>
 </template>
 <script>
-import { TimePicker } from 'element-ui'
+import { TimeSelect } from 'element-ui'
 export default {
     props: ['value'],
-    components: { TimePicker },
+    components: { TimeSelect },
     data(){
         return {
             pickerOptions: {
