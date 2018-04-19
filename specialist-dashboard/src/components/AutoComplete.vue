@@ -27,8 +27,10 @@
       </div>
     </div>
     <div v-if="chosen && options.toggleOnChoice">
-      {{choice.description}}
-      <b-button @click="unchoose">edit</b-button>
+        <slot :item="value">
+          {{value }}
+        </slot>
+      <b-button @click="unchoose">עריכה</b-button>
     </div>
   </div>
 </template>
@@ -42,7 +44,9 @@ export default {
       toggleOnChoice: VueTypes.bool,
       }).def({ toggleOnChoice: true}), 
     placeholder: String,
-    searchFunction: Function
+    searchFunction: Function,
+    value: Object,
+    itemTextFormater: Function,
   },
   created(){
   },
@@ -50,8 +54,7 @@ export default {
     return {
       textInput: '',
       results: [],
-      chosen: false,
-      choice: undefined,
+      chosen: !!this.value,
       currentlySelected: undefined
     }
   },
@@ -75,7 +78,8 @@ export default {
         this.currentlySelected++
         this.currentlySelected = this.currentlySelected%this.results.length
       }
-      this.textInput == this.results[this.currentlySelected].description
+      const selected = this.results[this.currentlySelected]
+      this.textInput = this.itemTextFormater ? this.itemTextFormater(selected) : selected
     },
     selectPrev(){
       if(!this.currentlySelected) {
@@ -88,16 +92,15 @@ export default {
     chooseResult(){
       if(this.results.length){
         this.chosen = true
-        this.choice = this.results[this.currentlySelected]
+        const choice = this.results[this.currentlySelected]
         this.textInput = '';
         this.results = [];
-        this.$emit('input', this.choice)
+        this.$emit('input', choice)
       }
     },
     unchoose(){
       this.chosen = false
-      this.textInput = this.choice.description 
-      this.choice = undefined
+      this.textInput = this.itemTextFormater ? this.itemTextFormater(this.value) : this.value
       this.results = []
       this.currentlySelected = undefined
       this.$nextTick(() => {

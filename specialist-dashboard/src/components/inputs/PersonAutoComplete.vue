@@ -42,6 +42,7 @@ function constructSearchQuery(textQuery){
   <auto-complete
   :value="value"
   @input="personChanged"
+  :itemTextFormater="(i) => $options.filters.formatName(i)"
   :searchFunction="searchPerson"
   placeholder="חיפוש">
     <template slot-scope="props">
