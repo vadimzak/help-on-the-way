@@ -31,6 +31,12 @@ const actions = {
     },
     getTicketById({}, id) {
         return getTicketById(id)
+    },
+    updateTicketStatus({ commit }, {id, status}) {
+        if (id && status) {
+            commit('updateTicket', { status });
+            return updateTicket({ id, status });
+        }    
     }
 };
   
