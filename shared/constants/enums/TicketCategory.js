@@ -6,7 +6,7 @@ export default {
         color: '#ff5f5f',
         icon: 'd-icon-medical',
         isIndoor: false,
-        background:'linear-gradient(60deg, #ff9b51, #ff5fc1, #ff8886, #ff5f5f)',
+        background:'linear-gradient(60deg, #ff8886, #ff5f5f)',
         actionColor: '#207bff',
     },
     shopping: {

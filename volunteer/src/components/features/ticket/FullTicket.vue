@@ -3,19 +3,20 @@
     <v-card>
       <v-card-media
         class="white--text card-image"
-        height="30vh"
+        height="235px"
         :style="getStyle(ticket)">
         <v-container fill-height fluid>
-          <v-layout fill-height class="mr-4 ml-2">
             <v-flex xs12 align-end flexbox>
               <v-layout column>
                 <span class="" id="ticket-headline">
                   {{ticket | formatTicketTitle}}
                 </span>
+                <span id="ticket-subheader">
+                  {{ticket.elder.firstName}} מצפה לטלפון ממך                  
+                </span>
                 <img align-self-center :src="`static/assets/posters/${ticket.category.toLowerCase()}.png`" class="ticket-poster">
               </v-layout>
             </v-flex>
-          </v-layout>
         </v-container>
       </v-card-media>
       <v-btn
@@ -96,6 +97,7 @@
       getStyle(ticket) {
         return {
           '--background-color': categoriesTree[ticket.category].self.background,
+          '--box-shadow': categoriesTree[ticket.category].self.color
         }
       },
       getActionStyle(ticket) {
@@ -114,17 +116,27 @@
   }
 </script>
 
-<style scoped>
-
+<style scoped> 
   #ticket-headline {
-    font-size: 22px;
+    font-size: 25px;
     line-height: 32px;
     letter-spacing: -1px;
     font-family: 'Open Sans Hebrew', Arial;
   }
 
+  #ticket-subheader {
+    font-size: 18px;
+  } 
+
   .card {
     max-width: 100vw;
+    box-shadow: none;
+    height: 36.7vh;
+  }
+
+  .card-content{
+    height: 39.9vh;
+    overflow-y:scroll;
   }
 
   .card-content ul {
@@ -146,15 +158,20 @@
 
   .card-image {
     background-image: var(--background-color);
-    box-shadow: 0px 1px 2px 1px rgba(126, 67, 253, 0.42);
+    /* box-shadow:  0px 1.5px 7px 0.5px  var(--box-shadow); */
+    box-shadow:  0px 1.5px 7px 0.5px rgba(0,0,0,0.3);
+
   }
 
   .call-button{
     background-color: var(--action-color);
     position: absolute;
-    left: 0;
     bottom: -35px;
     border-radius: 100px;
+        width: 65px;
+    height: 65px;
+        left: 10px;
+        z-index: 99;
   }
 
   .ticket-details {
@@ -167,6 +184,11 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+  }
+
+  .container {
+    align-items: flex-start;
+        padding: 5px;
   }
 
   .tag {
@@ -211,26 +233,44 @@
   .add-to-calendar {
     color: #2d83ff;
     font-size: 12px;
+     text-decoration: none;
+    font-weight: bold;
   }
 
   .section{
-    padding: 15px;  
+    padding: 25px;
     position:relative;
+    color : #757575;
+  }
+
+  .section.where {
+    padding-bottom: 7px;
+  }
+
+  .seci.when i {
+    font-size: 25px;
   }
 
   .section:after{
     content:"";
-    width: 80%;
+    width: 72%;
     height: 1px;
     position: absolute;
     bottom: 0;
     background-color: gainsboro;
-    margin-right: 8%;
+    margin-right: 7%;
   }
 
   .ticket-poster{
     align-self: center;
-    max-height: 100%;
+    max-height: 210px;
     width: auto;
+    position: absolute;
+    bottom: -20px;
+    padding-left: 6px;
+  }
+
+  .section.important-things:after {
+    width:0;
   }
 </style>

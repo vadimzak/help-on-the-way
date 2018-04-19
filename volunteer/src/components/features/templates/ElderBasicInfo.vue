@@ -32,10 +32,12 @@
   margin-bottom:10px;
   width:100%;
   position: relative;
+  font-size: 15px;
 }
 
 div .person-icon {
 margin-left:10px;
+font-size: 25px;
 }
 
 .details{
@@ -45,10 +47,11 @@ margin-left:10px;
 .more-reviews{
   color: #2d83ff;
   font-size: 12px;
+  font-weight: bold;
 }
 .elder-mobility{
    position: absolute;
-   left:0;
+    left: 17px;
     color: white;
     top: 0;
     display: flex;
@@ -59,10 +62,10 @@ margin-left:10px;
 
 .elder-mobility i {
     background-color: #bbbbbb;
-    padding:5px;
+   padding: 8px;
     border-radius: 100px;
-    height: 34px;
-    width: 34px;
+    height: 40px;
+    width: 40px;
 }
 
 .elder-mobility span{

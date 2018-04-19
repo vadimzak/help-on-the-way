@@ -3,7 +3,7 @@
     <app-header></app-header>
     <app-sidenav></app-sidenav>
     <v-content>
-      <h4 class="greeting" v-if="$store.state.user && $store.state.user.role!=='ANONYMOUS'">היי, {{$store.state.user.name}}, כיף לראות אותך כאן 😘 </h4>
+      <h4 class="greeting" v-if="$store.state.user && $store.state.user.role!=='ANONYMOUS'">היי, {{$store.state.user.name}}, כיף לראות אותך כאן 😇 </h4>
       <v-container fluid fill-height>
         <router-view></router-view>
       </v-container>
@@ -44,5 +44,9 @@
     width: 100%;
     margin: 15px 0;
     font-weight: lighter;
+  }
+
+  .content {
+    padding-bottom: 50px;
   }
 </style>
