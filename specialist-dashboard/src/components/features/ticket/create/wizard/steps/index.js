@@ -2,7 +2,7 @@ import SourceStep from './SourceStep';
 import TicketTimingStep from './TicketTimingStep';
 import TicketDetailsStep from './TicketDetailsStep';
 import TicketRouteStep from './TicketRouteStep';
-import AnnounceStep from './AnnounceStep';
+import TicketSummaryStep from './TicketSummaryStep'
 import Step from './Step';
 
 export default {
@@ -10,6 +10,6 @@ export default {
     TicketTimingStep,
     TicketDetailsStep,
     TicketRouteStep,
-    AnnounceStep,
+    TicketSummaryStep,
     Step
 }

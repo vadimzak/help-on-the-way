@@ -80,7 +80,7 @@ const mutations = {
     },
     nextStep(state) {
         // skip route step for indoor tickets
-        if (state.currentStep === 3 && state.ticket.isIndoor) {
+        if (+state.currentStep === 3 && state.ticket.isIndoor) {
             state.currentStep = 5;
             return;
         }
@@ -91,7 +91,7 @@ const mutations = {
       },
     goBackStep(state) {
         // skip route step for indoor tickets
-        if (state.currentStep === 5 && state.ticket.isIndoor) {
+        if (+state.currentStep === 5 && state.ticket.isIndoor) {
             state.currentStep = 3; 
             return;
         }      

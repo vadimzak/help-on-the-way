@@ -4,10 +4,15 @@
         <b-col
          cols="12"
          class="d-flex align-items-center my-2"
-        v-for="(address, index) in addresses"
-        v-if="ticket[address.field]" :key="index">
-        <span  class="icon mx-3" :class="{ [address.icon] : true }"></span>
-        <span> {{ticket.details[address.field + 'Name'] ? ticket.details[address.field + 'Alias'] + ',' : ''}} {{ticket[address.field] | formatAddress }}  </span>
+        v-for="(address, index) in addresses" :key="index">
+        <span  class="material-icons mx-3">{{address.icon}}</span>
+        <span> {{ticket.details[address.field + 'Alias'] ? ticket.details[address.field + 'Alias'] + ', &nbsp;' : 'אין, &nbsp;'}}</span>
+        <span v-if="ticket[address.field]">
+            {{ ticket[address.field] | formatAddress }}
+        </span>
+        <span v-else>
+            ללא
+        </span>
         </b-col>
       </b-row>
   </div>
@@ -21,16 +26,16 @@ export default {
         addresses: [{
             label: '',
             field: 'startAddress',
-            icon: 'fa fa-map-marker'
+            icon: 'place'
         },{
             label: 'יעד',
             field: 'destinationAddress',
-            icon: 'fa fa-map-marker'
+            icon: 'flag'
         },
         {
             label: 'חזרה',
             field: 'endAddress',
-            icon: 'fa fa-map-marker'
+            icon: 'place'
         }]
     }
   },
@@ -44,7 +49,8 @@ export default {
 
 </script>
 <style scoped>
-    .icon{
-        font-size: 30px;
+    .material-icons{
+        font-size: 1.5rem;
+        color: var(--primary);
     }
 </style>

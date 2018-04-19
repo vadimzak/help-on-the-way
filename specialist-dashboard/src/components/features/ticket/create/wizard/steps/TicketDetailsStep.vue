@@ -98,7 +98,7 @@ export default {
                 startAddressAlias: 'בית הזקן',
             }
             if(indoors){
-                this.updateTicket({isIndoor: indoors, startAddress: ticket.elder.address, details, endAddress: null, destinationAddress: null })
+                this.updateTicket({isIndoor: indoors, startAddress: ticket.elder.address, details, endAddress: null, destinationAddress: null, transport: null, elderMobility: null })
             }else{
                 details.endAddressAlias = 'בית הזקן'
                 this.updateTicket({

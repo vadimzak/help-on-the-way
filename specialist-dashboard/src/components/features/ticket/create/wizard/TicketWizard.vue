@@ -5,11 +5,11 @@
     <Step :current-step="currentStep" step="2"><TicketDetailsStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
     <Step :current-step="currentStep" step="3"><TicketTimingStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
     <Step v-if="!this.ticket.isIndoor" :current-step="currentStep" step="4"><TicketRouteStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
-    <Step :current-step="currentStep" step="5"><AnnounceStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
+    <Step :current-step="currentStep" step="5"><TicketSummaryStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
     <footer>
         <b-btn @click="back" v-if="currentStep > 1">חזור אחורה</b-btn>
         <b-btn @click="saveAndAdvanceStep" :disabled="saveInProgress" v-if="canContinue && currentStep < lastStep">המשך</b-btn>
-        <b-btn @click="saveAndClose"  v-if="currentStep === lastStep">שמור וסגור</b-btn>
+        <b-btn @click="saveAndClose"  v-if="+currentStep === +lastStep">שמור וסגור</b-btn>
     </footer>
   </div>
 </template>
