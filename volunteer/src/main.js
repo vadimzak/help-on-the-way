@@ -14,7 +14,7 @@ import 'shared/initializers/facebookRedirectHashFixer'
 import vueResourceSetup from 'shared/providers/vueResource'
 import authPlugin from 'shared/providers/authProvider'
 import './filters'
-
+import stickyDirective from './directives/sticky'
 Vue.config.productionTip = false
 Vue.use(vueResourceSetup)
 Vue.use(apolloInit)
@@ -23,6 +23,7 @@ Vue.use(Vuetify, {
     primary: 'var(--primary)'
   }
 })
+Vue.directive('sticky', stickyDirective)
 Vue.use(authPlugin)
 Vue.use(momentSetup)
 /* eslint-disable no-new */

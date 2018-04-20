@@ -19,3 +19,12 @@
 .loggged-out{
     /* padding-top: 56px; */
 }
+
+.ellipsis{
+    -webkit-line-clamp: unset !important;
+    white-space: nowrap !important;
+    overflow: hidden !important;
+    text-overflow: ellipsis !important;
+    width: 100% !important;
+    display: block !important;
+}

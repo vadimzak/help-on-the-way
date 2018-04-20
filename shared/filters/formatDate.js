@@ -20,8 +20,19 @@ export default function (value, format) {
   
 
 function fromNow(value) {
-  if (value) {
-    return moment(value).toNow()
+    if (value) {
+        const momentObj = moment(value)
+        const isPast = momentObj.isBefore(Date.now());
+        if (isPast) {
+            return 'עברה'
+        }
+        return momentObj.calendar(null, {
+            sameDay: 'היום',
+            nextDay: 'מחר',
+            nextWeek: 'dddd',
+            sameElse: 'D.M'
+        });
+    return 
   } else {
     return 'גמיש'
   }

@@ -29,4 +29,7 @@
   font-family: 'Amatic SC', cursive;
   font-size: 35px;
 }
+.toolbar--fixed{
+  z-index: 3;
+}
 </style>

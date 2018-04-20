@@ -1,38 +1,29 @@
 import moment from 'moment';
-export default function getTimeFromMins(minutes) { 
+export default function getTimeFromMins(minutes, format) { 
+    let unit;
+    let count;
     minutes = +minutes; // parse to number
     if (minutes === 1) {
-        return 'דקה';
+        unit = 'דקה';
+    } else if (minutes < 60) {
+        unit = 'דקות' 
+        count = minutes
+    } else {
+        const toHours = 
+        count = Math.round((minutes / 60) * 2) / 2; // convert to half hours scale
+        unit = 'שעות'
     }
 
-    if (minutes === 15) {
-        return 'רבע שעה';
+    switch (format) {
+        case 'unitOnly':
+            return unit    
+        break;   
+        case 'countOnly':
+            return  count   
+        break;
+        default:
+            return `${count} ${units}`
+        break;    
     }
-
-    if (minutes === 30) {
-        return 'חצי שעה';
-    }
-
-    if (minutes < 60) {
-        return `${minutes} דקות`
-    }
-
-    if (minutes === 60) {
-        return 'שעה'
-    }
-    
-    if (minutes === 90) {
-        return 'שעה וחצי'
-    }
-
-    if (minutes === 120) {
-        return 'שעתיים'
-    }
-
-    if (minutes % 60 === 0) {
-        return `${minutes % 60} שעות`
-    }
-
-    return `${moment.duration(minutes, 'minutes').format('h:mm')} שעות` ;
 }
     

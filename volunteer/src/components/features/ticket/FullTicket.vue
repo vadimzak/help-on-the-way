@@ -1,6 +1,6 @@
 <template>
   <v-flex>
-    <v-card>
+    <v-card v-sticky>
       <v-card-media
         class="white--text card-image"
         height="235px"
@@ -49,13 +49,6 @@
           <div class="who section">
             <ElderBasicInfo :elder="ticket.elder" :elder-mobility="ticket.elderMobility"/>
           </div>
-          <div class="ticket-tags">
-            <div class="tag" v-for="tag in ticket.tags">
-              <i class="material-icons">{{tag.icon}}</i>
-              {{tag.name}}
-            </div>
-          </div>
-
       <div class="important-things section">
         <NeedToKnow :items="ticket.details.needToKnow"/>
       </div>
@@ -84,15 +77,7 @@
         dialog: false,
       }
     },
-    computed: {
-      timeUnit() {
-        return this.$options.filters.formatMinutes(this.ticket.durationEta).split(' ')[1]
-      },
-      timeCount() {
-        return this.$options.filters.formatMinutes(this.ticket.durationEta).split(' ')[0]
-
-      }
-    },
+    computed: {},
     methods: {
       getStyle(ticket) {
         return {
@@ -131,11 +116,15 @@
   .card {
     max-width: 100vw;
     box-shadow: none;
-    height: 36.7vh;
+
+  }
+
+  .card.is-sticky{
+    padding-top: 56px;
+    z-index: 1;
   }
 
   .card-content{
-    height: 39.9vh;
     overflow-y:scroll;
   }
 

@@ -1,5 +1,5 @@
 <template>
-  <v-footer app fixed="true">
+  <v-footer>
     <a href="tel:*5823">
     <span>המוקד שלנו זמין לכל שאלה</span>
     <i class="material-icons phone-icon">phone</i>

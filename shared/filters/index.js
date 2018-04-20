@@ -8,6 +8,7 @@ import formatTicketTime from "./formatTicketTime";
 import formatTicketAddressAlias from "./formatTicketAddressAlias";
 import formatElderMobility from "./formatElderMobility";
 import formatTransportType from "./formatTransportType";
+import formatDate from './formatDate'
 
 function install(Vue) {
     Vue.filter('formatCategory', formatCategory)
@@ -20,6 +21,7 @@ function install(Vue) {
     Vue.filter('formatTransport', formatTransportType)
     Vue.filter('formatElderMobility', formatElderMobility)
     Vue.filter('formatTicketAddressAlias', formatTicketAddressAlias)
+    Vue.filter('formatDate', formatDate)
 }
 
 export default {

@@ -3,7 +3,6 @@
     <i class="material-icons person-icon">person</i>
     <div class="details">
     <div class="elder-name">{{elder.firstName+' '+elder.lastName}}</div>
-    <div class="more-reviews">קרא חוויות ממפגשים קודמים</div>
     </div>
     <div class="elder-mobility" v-if="elderMobility">
       <i class="material-icons">{{elderMobilityType[elderMobility].icon}}</i>
