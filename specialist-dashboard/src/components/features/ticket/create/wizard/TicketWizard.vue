@@ -6,10 +6,21 @@
     <Step :current-step="currentStep" step="3"><TicketTimingStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
     <Step v-if="!this.ticket.isIndoor" :current-step="currentStep" step="4"><TicketRouteStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
     <Step :current-step="currentStep" step="5"><TicketSummaryStep @update="updateTicket"  @canContinue="setCanContinue"/></Step>
-    <footer>
+    <StepCard v-if="+currentStep !== 1 && +currentStep !== 5">
+        <template slot="content">
+          <StepNeedToKnowPoint :value="ticket.details.needToKnow" :step="currentStep" @input="setNeedToKnowPoints"/>
+        </template>
+    </StepCard>
+    <footer class="my-5 d-flex justify-content-between">
         <b-btn @click="back" v-if="currentStep > 1">חזור אחורה</b-btn>
-        <b-btn @click="saveAndAdvanceStep" :disabled="saveInProgress" v-if="canContinue && currentStep < lastStep">המשך</b-btn>
-        <b-btn @click="saveAndClose"  v-if="+currentStep === +lastStep">שמור וסגור</b-btn>
+        <b-btn variant="primary" @click="saveAndAdvanceStep" :disabled="saveInProgress" v-if="canContinue && currentStep < lastStep">המשך</b-btn>
+        <span class="d-flex" v-if="+currentStep === +lastStep">
+          <b-btn variant="primary" @click="saveAndClose">שמור וסגור</b-btn>
+          <Modal title="הפצת פנייה">
+            <template slot="trigger"><b-btn class="mx-3" variant="success">הפץ פניה</b-btn></template>
+            <template slot="modal"><AnnounceTicketForm/></template>
+          </Modal>
+        </span>
     </footer>
   </div>
 </template>
@@ -18,6 +29,8 @@ import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions, mapMutations } = createNamespacedHelpers('createTicket')
 import steps from './steps/'
 import WizardHeader from './WizardHeader'
+import { AnnounceTicketForm } from '@/components/features/ticket/'
+import { Modal } from '@/components/base'
 export default {
   data(){
     return {
@@ -26,7 +39,7 @@ export default {
       saveInProgress: false
     }
   },
-  components: {  ...steps, WizardHeader  },
+  components: { AnnounceTicketForm,  ...steps, WizardHeader, Modal,   },
   computed: {
       ...mapState(['currentStep', 'ticket'])
   },
@@ -65,7 +78,7 @@ export default {
       this.canContinue = false;
       this.$store.commit('createTicket/goBackStep');
     },
-    ...mapMutations(['updateTicket']),
+    ...mapMutations(['updateTicket', 'setNeedToKnowPoints']),
     setCanContinue(value){
       this.canContinue = value;
     }

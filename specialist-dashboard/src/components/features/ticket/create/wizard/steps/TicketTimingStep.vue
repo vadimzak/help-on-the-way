@@ -27,12 +27,6 @@
                     <FlexibleHourPicker :value="ticket.details.flexibleTime"  @input="(v) => $store.commit('createTicket/setTicketFlexibleTime', v)" />
             </b-col>
         </b-row>
-        <b-row>
-            <b-col cols="12">
-                <h5>דברים שחשוב לדעת <span>(עד 30 תווים) </span></h5>
-                <NeedToKnowPoints v-model="needToKnow"/>
-            </b-col>
-        </b-row>
         <input type="hidden" v-model="checkCanContinue">
     </template>
   </StepCard>

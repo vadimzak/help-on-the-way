@@ -44,6 +44,12 @@ export default {
             display: () => {
                 return instance.ticket.id
             }
+        },{
+            label: 'סטטוס הפנייה',
+            condition: () => true,
+            display: () => {
+                return instance.$options.filters.formatTicketStatus(instance.ticket.status)
+            }
         },
         {
             label: 'מבקש הפנייה',

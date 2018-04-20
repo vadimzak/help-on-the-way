@@ -6,8 +6,8 @@
   </div>
 <div class="items-list"> 
   <ul>
-          <li v-for="info in items">
-            {{info}}
+          <li v-for="(info,index) in items" :key="index">
+            {{info.text ? info.text : info }} 
           </li>
         </ul>
 </div>

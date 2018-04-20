@@ -4,7 +4,7 @@
            <b-form-input  v-model="newPointModel" @keyup.enter.native="addItem"/>
              <b-list-group class="my-2">
                  <b-list-group-item  v-for="(item, index) in value" :key="index" class="d-flex justify-content-between align-items-center">
-                     {{item}}
+                     {{item.text ? item.text : item}}
                       <b-btn  variant="secondary" @click="() => removeItem(index)">מחק הערה</b-btn>
                  </b-list-group-item>
              </b-list-group>
@@ -24,7 +24,7 @@
         },
         methods: {
             addItem(item){
-                this.$emit('input', [...this.value, this.newPointModel])
+                this.$emit('input', [...this.value, { text: this.newPointModel, step: 'none' }])
                 this.newPointModel = ''
             },
             removeItem(indexToRemove){

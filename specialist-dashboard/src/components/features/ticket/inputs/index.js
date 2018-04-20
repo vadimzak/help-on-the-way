@@ -12,5 +12,5 @@ export {
     NeedToKnowPoints,
     GroupMessage,
     StatusSelect,
-    TicketTitle
+    TicketTitle,
 }

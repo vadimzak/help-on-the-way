@@ -85,7 +85,7 @@
       <div class="ticket-detail p-2">
         <span class="description-header ticket-sub-header">נקודות חשובות</span>
         <ul v-if="ticket.details && ticket.details.needToKnow">
-          <li v-for="(item, index) in ticket.details.needToKnow" :key="index">{{item}}</li>
+          <li v-for="(item, index) in ticket.details.needToKnow" :key="index">{{item.text ? item.text : item}}</li>
         </ul>
         <div v-else>
           לא הוגדרו נקודות

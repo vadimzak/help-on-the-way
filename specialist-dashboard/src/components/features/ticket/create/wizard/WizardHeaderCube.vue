@@ -1,5 +1,5 @@
 <template>
-<div @click="goToStep" :class="{ 'completed': !!heading, 'active': active, disabled: disabled, 'actionable': step && !disabled }" class="p-3 d-flex flex-column  align-items-start justify-content-start">
+<div @click="goToStep" :class="{ 'completed': !!completed, 'active': active, disabled: disabled, 'actionable': step && !disabled }" class="p-3 d-flex flex-column  align-items-start justify-content-start">
             <Truncate class="h3">
                 <span>{{heading || emptyheading }}</span>
             </Truncate>
@@ -13,7 +13,7 @@ import Truncate from '@/components/base/Truncate';
 
 export default {
 components: { Truncate },
-  props: ['heading', 'subheading', 'disabled', 'emptyheading', 'step'],
+  props: ['heading', 'subheading', 'disabled', 'emptyheading', 'step', 'completed'],
   computed: {
       active(){
           return this.$store.state.createTicket.currentStep == this.step
@@ -48,8 +48,8 @@ components: { Truncate },
         border-bottom: 7px solid var(--white);
     }
     div{
-        background-color: var(--white);
-        border-bottom: 7px solid var(--secondary);
+        background-color: white;
+        border-bottom: 7px solid var(--light);
         box-shadow: 0px 2px 8px 0 rgba(0, 0, 0, 0.08);
         flex: 1;
         height: 95px;

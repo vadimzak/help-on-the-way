@@ -28,7 +28,7 @@ let router = new Router({
             try {
               const ticket = await app.$store.dispatch('createTicket/getTicketById', to.params.id)
               app.$store.commit('createTicket/setActiveTicket', ticket)
-              app.$store.commit('createTicket/setStep', 1)
+              app.$store.commit('createTicket/setStep', ticket.issuingPerson ? 2 : 1)
               next()
             } catch (error) {
               console.error(error);

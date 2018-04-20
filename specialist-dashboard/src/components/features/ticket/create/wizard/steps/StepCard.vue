@@ -1,5 +1,5 @@
 <template>
-  <b-card class="my-5">
+  <b-card class="mt-5">
       <h3><slot name="header"/></h3>
       <div><slot name="content"/></div>
   </b-card>

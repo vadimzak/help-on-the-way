@@ -22,7 +22,7 @@
           <b-form-input type="number" min="0" max="100" v-if="value" :value="value.floor" @input="(e) => updatedModel({floor: e.target.value})" placeholder="קומה"/>
         </b-col>
         <b-col cols="3">
-             <b-form-input type="text" v-if="value" :value="value.enterance" @input="(e) => updatedModel({enterance: e.target.value })" placeholder="כניסה"/>
+             <b-form-input type="text" v-if="value" :value="value.enterance" @input="(e) => updatedModel({enterance: e.target ? e.target.value : '' })" placeholder="כניסה"/>
         </b-col>
       </b-row>
        </div>

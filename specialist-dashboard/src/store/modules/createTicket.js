@@ -66,8 +66,8 @@ const mutations = {
         state.ticket = { ...state.ticket, groups: groups };
       },
     setNeedToKnowPoints(state, points) {
-        state.ticket.details = { ...state.ticket.details, needToKnow: points, isDirty: true }
-        state.ticket = { ...state.ticket}  
+        state.ticket.details = { ...state.ticket.details, needToKnow: points, }
+        state.ticket = { ...state.ticket, isDirty: true }  
     },
     setTicketDueDate(state, dueDate) {
         this.commit('createTicket/updateTicket', { dueDate, fixedDueDate: !!dueDate }) 
@@ -87,7 +87,7 @@ const mutations = {
         state.currentStep++;  
     },
     setStep(state, step) {
-          state.currentStep = step
+          state.currentStep = +step
       },
     goBackStep(state) {
         // skip route step for indoor tickets
