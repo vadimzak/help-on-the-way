@@ -19,6 +19,7 @@ function install(Vue) {
     Vue.filter('formatTicketTime', formatTicketTime)
     Vue.filter('formatTransport', formatTransportType)
     Vue.filter('formatElderMobility', formatElderMobility)
+    Vue.filter('formatTicketAddressAlias', formatTicketAddressAlias)
 }
 
 export default {
