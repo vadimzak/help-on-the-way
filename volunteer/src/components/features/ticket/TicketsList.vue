@@ -102,7 +102,7 @@
     border-bottom: 1px solid gainsboro;
   }
 
-  .related-tickets li{
+  .related-tickets .list-tile-wrap{
     border-right: 6px solid var(--category-color);
     /* height: 95px; */
   }
