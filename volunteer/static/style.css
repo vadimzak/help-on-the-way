@@ -1,0 +1,21 @@
+.img-responsive{
+    max-width: 100%;
+}
+
+* {
+    --primary: #0089fd;
+    --pink: #ff5f5f;
+    --secondary: #757575;
+}
+
+.color-secondary{
+    color: var(--secondary);
+}
+
+.color-primary{
+    color: var(--primary);
+}
+
+.loggged-out{
+    /* padding-top: 56px; */
+}

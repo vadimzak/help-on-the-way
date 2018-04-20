@@ -1,14 +1,14 @@
 <template>
-  <v-app id="app">
-    <app-header></app-header>
-    <app-sidenav></app-sidenav>
+  <v-app id="app" :class="{ 'loggged-out': !isLoggedIn }">
+    <app-header v-if="isLoggedIn"></app-header>
+    <app-sidenav v-if="isLoggedIn"></app-sidenav>
     <v-content>
-      <h4 class="greeting" v-if="$store.state.user && $store.state.user.role!=='ANONYMOUS'">היי, {{$store.state.user.name}}, כיף לראות אותך כאן 😇 </h4>
+      <h4 class="greeting" v-if="isLoggedIn">היי, {{$store.state.user.name}}, כיף לראות אותך כאן 😇 </h4>
       <v-container fluid fill-height>
         <router-view></router-view>
       </v-container>
     </v-content>
- <app-footer></app-footer>
+ <app-footer v-if="isLoggedIn"></app-footer>
   </v-app>
 </template>
 
@@ -24,6 +24,11 @@
       AppFooter
     },
     name: 'App',
+    computed: {
+      isLoggedIn(){
+        return this.$store.state.user && this.$store.state.user.role!=='ANONYMOUS' && this.$store.state.user.role!=='VOLUNTEER_UNVERIFIED'
+      }
+    },
     props: {
       source: String
     }

@@ -1,17 +1,25 @@
 <template>
-  <v-layout column wrap>
-    <form class="container">
-      <img src="static/assets/sms.png" class="sms">
-      <h2>הכנס את מס' הנייד שלך לצורך אימות</h2>
-      <input type="number"
-        required
-        v-model="phoneNumber"
-        ref="number"
-        placeholder="05*-*******"
-      />
-      <v-btn @click="submit()" color="success">שלח קוד</v-btn>
-
-    </form>
+  <v-layout column wrap class="container">
+	  <div class=" text-xs-center"><img src="static/assets/update-phone.png" class="img-responsive" title="התחברות"></div>
+      <div class="message">
+        <h4 class="headline text-xs-center color-secondary">נשמח לקבל את הטלפון שלך</h4>
+          <div class="body-2 color-secondary text-xs-center">
+               <p> כדי שנוכל לצרף אותך לקבוצת הוואטסאפ של עזרה בדרך  </p>
+               <p> אין שם חפירות – רק עדכונים על פניות חדשות  </p>
+          </div>
+      </div>
+      <v-form  v-model="valid" ref="form">              
+        <v-text-field
+          v-model.lazy="phoneNumber"
+          class="text-xs-left phone-input"
+          type="phone"
+          @blur="postponeValidation = false"
+          placeholder="מספר הנייד שלך"
+          :rules="[v => postponeValidation || !!v.match(/^\d{10}$/) || 'מספר נייד תקין בלבד, 10 ספרות']"
+          required>
+        </v-text-field>
+        <v-btn block :disabled="!phoneNumber.match(/^\d{10}$/)" depressed @click="submit()" color="primary">אחלה, צרפו אותי!</v-btn>
+      </v-form>
   </v-layout>
 </template>
 
@@ -23,6 +31,8 @@ export default {
 	name: 'LoginUpdate',
 	data() {
 		return {
+      valid: undefined,
+      postponeValidation: true,
 			phoneNumber: ''
 		};
 	},
@@ -44,22 +54,12 @@ export default {
 </script>
 
 <style scoped>
-  form {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-  }
+h4{
+  font-weight: bold;
+}
 
-  .sms {
-    max-width: 30%;
-  }
-
-  input {
-    width: 60%;
-    height: 40px;
-    font-size: 32px;
-    direction: ltr;
-    border-bottom: 1px solid lightgray;
-  }
+.message p{
+    text-align: center;
+    margin-bottom: 0;
+}
 </style>

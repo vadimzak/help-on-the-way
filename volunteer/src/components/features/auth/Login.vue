@@ -1,17 +1,24 @@
 <template>
   <v-layout column wrap class="container">
-						<h1>התחברות</h1>
+						<div class=" text-xs-center"><img src="static/assets/login.png" class="img-responsive" title="התחברות"></div>
+            <div class="message">
+              <h4 class="display-1 text-xs-center color-secondary">איזה יופי שבאת!</h4>
+              <div class="body-2 color-secondary text-xs-center">
+               <p>כדי לשמור על הפרטיות של הזקנים, אפשר לצפות </p>
+               <p>  בפניות המלאות רק אחרי שנכנסים למערכת </p>
+               <p>לוקח פחות מדקה, מדדנו!</p>
+                <p class="mt-2 color-primary"> אנו מבטיחים שלא נפרסם שום דבר בשמך </p>
+              </div>
+            </div>
             <div class="social-login">
               <a :href="`${SERVER_BASE_URL}/login/facebook?redirectUrl=${redirectUrl}`"
                  class="btn-login-with bg1 m-b-10">
-                <i class="fa fa-facebook-official fa-lg"></i>
-                Login with Facebook
+                כניסה עם Facebook
               </a>
 
               <a :href="`${SERVER_BASE_URL}/login/google?redirectUrl=${redirectUrl}`"
                  class="btn-login-with bg2">
-                <i class="fa fa-google fa-lg"></i>
-                Login with Google
+                כניסה עם Google
               </a>
             </div>
   </v-layout>
@@ -34,32 +41,28 @@ export default {
 </script>
 
 <style scoped>
-  h1{
+.message p{
     text-align: center;
-  }
+    margin-bottom: 0;
+}
   .social-login{
     position:relative;
-    float: left;
     width: 100%;
     height:auto;
-    padding: 10px 0 15px 0;
-    border-bottom: 1px solid #eee;
     display:flex;
     flex-direction: column;
   }
   .social-login a{
     position:relative;
-    float: left;
     text-decoration: none;
     color: #fff;
     border: 1px solid rgba(0,0,0,0.05);
-    padding: 12px;
-    border-radius: 2px;
-    font-size: 12px;
-    text-transform: uppercase;
+    padding: 1vh;
+    font-size: 20px;
     text-align:center;
     flex:1;
-    margin-top: 4vh;
+    line-height: 1;
+    margin-top: 20px;
 
   }
   .social-login a i{
@@ -69,9 +72,11 @@ export default {
     top: 2px;
   }
   .social-login a:first-child{
-    background-color: #49639F;
+    background-color: var(--primary);
   }
   .social-login a:last-child{
-    background-color: #DF4A32;
+    background-color:var(--pink);
   }
 </style>
+
+
