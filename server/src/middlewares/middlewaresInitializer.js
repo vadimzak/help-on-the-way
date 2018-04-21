@@ -7,8 +7,10 @@ const authCookieToHeaderMiddleware = require('./authCookieToHeader');
 const postgraphqlMiddlesware = require('./postgraphql');
 const shortUrlMiddleware = require('./shortUrl');
 const volunteerToGroupAdderMiddleware = require('./volunteerToGroupAdder');
+const cors = require('./cors');
 
 const init = app => {
+	app.use(cors());
 	app.use(sessionMiddleware);
 	app.use(cookieParser());
 	app.use(bodyParser.json());
