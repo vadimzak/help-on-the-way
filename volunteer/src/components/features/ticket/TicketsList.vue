@@ -25,7 +25,7 @@
               </div>
             </v-list-tile-content>
           </v-list-tile>
-          <TicketPreview :ticket="ticket" :ref="previewRefs[index]" v-show="ticketToPreivew === ticket.id" :closePreview="() => ticketToPreivew = -1" />
+          <TicketPreview :ticket="ticket" ref="previewRefs" :key="ticket.id" v-if="ticketToPreivew === ticket.id" :closePreview="() => ticketToPreivew = -1" />
         </template>
       </v-list>
     </div>
@@ -51,7 +51,6 @@
     },
     data(){
       return {
-        previewRefs: [],
         ticketToPreivew: -1,
       }
     },
@@ -67,10 +66,9 @@
           } else{
             this.ticketToPreivew = ticket.id
             const goTo = $vuetify.goTo;
-            debugger;
             const that = this;
             setTimeout(function(){
-              goTo(that.previewRefs[index])
+              goTo(that.$refs.previewRefs[0], { offset: -56}) // header offset
             }, 0)
           }
       },

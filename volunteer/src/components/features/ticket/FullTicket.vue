@@ -2,7 +2,7 @@
   <v-flex>
     <v-card v-sticky>
       <v-card-media
-        class="white--text card-image"
+        class="white--text card-image full-ticket-card"
         height="235px"
         :style="getStyle(ticket)">
         <v-container fill-height fluid>
@@ -120,10 +120,12 @@
   }
 
   .card.is-sticky{
-    padding-top: 56px;
+    transform:  translateY(56px);
     z-index: 1;
   }
-
+  .card{
+    transition: transform 0.3s ease;
+  }
   .card-content{
     overflow-y:scroll;
   }
