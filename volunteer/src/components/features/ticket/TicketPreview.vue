@@ -92,8 +92,8 @@
           <button class="volunteer" @click="dialog = !dialog" slot="activator">אני בפנים</button>
           <v-card class="dialog-card" v-if="!isTicketMatched">
             <v-card-text>             
-                <div> היי {{$store.state.user.firstName}},</div>
-                <div> האם ברצונך לסייע ל{{ticket.elderName}}?</div>
+                <div> היי {{$store.state.user.name}},</div>
+                <div> האם ברצונך לסייע ל{{ticket.elder.firstName}}?</div>
             </v-card-text>
             <v-card-actions class="actions">
               <v-spacer></v-spacer>
