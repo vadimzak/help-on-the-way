@@ -18,7 +18,7 @@
           <b-btn variant="primary" @click="saveAndClose">שמור וסגור</b-btn>
           <Modal title="הפצת פנייה">
             <template slot="trigger"><b-btn class="mx-3" variant="success">הפץ פניה</b-btn></template>
-            <template slot="modal"><AnnounceTicketForm/></template>
+            <template slot="modal"><AnnounceTicketForm></AnnounceTicketForm></template>
           </Modal>
         </span>
     </footer>
@@ -29,7 +29,7 @@ import { createNamespacedHelpers } from 'vuex'
 const { mapState, mapActions, mapMutations } = createNamespacedHelpers('createTicket')
 import steps from './steps/'
 import WizardHeader from './WizardHeader'
-import { AnnounceTicketForm } from '@/components/features/ticket/'
+import  AnnounceTicketForm  from '@/components/features/ticket/AnnounceTicketForm'
 import { Modal } from '@/components/base'
 export default {
   data(){
@@ -39,7 +39,7 @@ export default {
       saveInProgress: false
     }
   },
-  components: { AnnounceTicketForm,  ...steps, WizardHeader, Modal,   },
+  components: { ...steps, WizardHeader, Modal, AnnounceTicketForm  },
   computed: {
       ...mapState(['currentStep', 'ticket'])
   },

@@ -1,25 +1,16 @@
 <template>
-  <div v-if="!ticket.destinationAddress" class="address">
-    {{ticket.startAddress | formatAddress }}
-  </div>
-  <div v-else class="route">
+ <div class="route" :class="{ 'single-route': route.length === 1}">
     <div class="route-icons">
-      <img src="static/assets/placeholder-copy.png" v-if="ticket.startAddress && ticket.startAddress.location">
-      <div class="middle-destination" v-if="ticket.destinationAddress && ticket.destinationAddress.location"></div>
-      <img src="static/assets/placeholder-copy.png" v-if="ticket.endAddress && ticket.endAddress.location">
+      <span  v-for="(addressKey, index) in route" :key="index">
+          <img src="static/assets/placeholder-copy.png" v-if="index === 0">
+          <div class="middle-destination" v-if="index === 1"></div>
+          <img src="static/assets/placeholder-copy.png" v-if="index === 2">
+      </span>
     </div>
     <div class="route-addresses">
-      <a class="address" v-if="ticket.startAddress && ticket.startAddress.location" target="_blank" :href="`${getGeoPrefix()}${ticket.startAddress.location.lat},${ticket.startAddress.location.lng}`">
-         <span class="address-title">{{ticket.details.startAddressAlias ? ticket.details.startAddressAlias : 'איסוף'}}</span>
-        {{ticket.startAddress | formatAddress }}
-      </a>
-      <a class="address" v-if="ticket.destinationAddress && ticket.destinationAddress.location"  target="_blank" :href="`${getGeoPrefix()}${ticket.destinationAddress.location.lat},${ticket.destinationAddress.location.lng}`">
-        <span class="address-title">{{ticket.details.destinationAddressAlias ? ticket.details.destinationAddressAlias : 'יעד'}}</span>
-        {{ticket.destinationAddress | formatAddress }}
-      </a>
-      <a class="address" v-if="ticket.endAddress && ticket.endAddress.location" target="_blank" :href="`${getGeoPrefix()}${ticket.endAddress.location.lat},${ticket.endAddress.location.lng}`">
-         <span class="address-title">{{ticket.details.endAddressAlias ? ticket.details.endAddressAlias : 'חזרה'}}</span>
-        {{ticket.endAddress | formatAddress }}
+      <a  v-for="(addressKey, index) in route" :key="index" class="address"  target="_blank" :href="getGeoLink(ticket[addressKey])">
+         <span class="address-title">{{ticket.details[addressKey + 'Alias'] ? `${steps[index].preword}${ticket.details[addressKey + 'Alias']}` : steps[index].alias}}</span>
+        {{ticket[addressKey] | formatAddress(preview ? 'preview' : '') }}
       </a>
     </div>
   </div>
@@ -27,13 +18,25 @@
 
 <script>
   export default {
-    props: ['ticket'],
+    props: ['ticket', 'preview'],
     data() {
-      return {}
+      const ticket = this.ticket
+      const allAddresses = ['startAddress', 'destinationAddress', 'endAddress']
+      const route = allAddresses.filter(key => ((ticket[key] && ticket[key].location) || ticket.details[key + 'Alias']))
+      const steps = [{ preword: 'מ', alias: route.length > 1 ? 'איסוף' : 'מיקום'}, { preword: 'ל', alias: 'יעד'}, { preword: 'ול', alias: 'חזרה'}]
+      return {
+        route,
+        steps,
+      }
     },
     methods: {
-      getGeoPrefix(){
-        return 'geo:0,0?q='
+      getGeoLink(address){
+        if(address && address.location && !this.preview){
+          const coords = address.location
+          return `geo:0,0?q=${coords.lat},${coords.lng}`
+        }
+        return `javascript:void(0)`
+        
       }
     }
   }
@@ -76,12 +79,21 @@
   .route-icons img{
     max-width:100%;
     max-height:20px;
-    margin-bottom: 10px;
     z-index:1;
     background-color: #fafafa;
   }
 
-  .route-icons:before {
+  .route-icons span{
+    z-index: 1;
+  }
+  .route-icons span:first-child img{
+      margin-bottom: 10px;
+  }
+  .route-icons  span:last-child img{
+        margin-top: 10px;
+  }
+
+  .route-icons:not('.single-route'):before {
     content: "";
     width: 1px;
     position: absolute;
