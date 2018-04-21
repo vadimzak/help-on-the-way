@@ -3,7 +3,7 @@
       <h2>פתיחת פניה חדשה</h2>
       <p class="small">נא לבחור את מקור הפניה.</p>
       <RadioBoxes :value="ticketSource" @input="sourceChanged" :options="sources"/>
-      <PersonAutoComplete @input="personChanged" :value="ticket.issuingPerson" :personType="ticketSource" />
+      <PersonAutoComplete v-if="ticketSource !== 'ELDER'" class="person-auto-complete" @input="personChanged" :value="ticket.issuingPerson" :personType="ticketSource" />
   </div>
 </template>
 <script>
@@ -41,11 +41,11 @@ export default {
     },
     sourceChanged(value){
       // TODO - implement the ability to chose other person types
-      if(value === 'elder'){
+      if(value === PersonTypes.elder){
         const elder = this.ticket.elder || this.value;
         this.updateTicket({ issuingPerson: elder });
         }  else {
-           this.updateTicket({ issuingPerson: this.value });
+           this.updateTicket({ issuingPerson: null });
         }
           if(value !== 'other'){
               this.updateValue(value);
@@ -56,7 +56,6 @@ export default {
           this.$emit('canContinue', !!this.ticket.issuingPerson);
     },
     personChanged(value) {
-      debugger;
       if (value) {
         this.updateTicket({ issuingPerson: value });
         this.updateValue(value);
@@ -67,3 +66,9 @@ export default {
   }
 }
 </script>
+<style scoped>
+.person-auto-complete {
+    width: 50%;
+    margin-right: 25%;
+}
+</style>
