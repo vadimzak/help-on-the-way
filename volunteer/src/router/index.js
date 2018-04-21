@@ -34,5 +34,9 @@ let router = new Router({
 })
 
 authenticationForcer.force(router)
+router.beforeEach((to, from, next) => {
+  router.app.$store.commit('updateLayoutDisplay', { footer: true, greeting: true })
+  next()
+})
 
 export default router

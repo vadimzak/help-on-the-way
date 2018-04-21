@@ -7,7 +7,7 @@
         :style="getStyle(ticket)">
         <v-container fill-height fluid>
             <v-flex xs12 align-end flexbox>
-              <v-layout column>
+              <v-layout column align-self-start>
                 <span class="" id="ticket-headline">
                   {{ticket | formatTicketTitle}}
                 </span>
