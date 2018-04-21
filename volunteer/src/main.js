@@ -20,7 +20,7 @@ Vue.use(vueResourceSetup)
 Vue.use(apolloInit)
 Vue.use(Vuetify, {
   theme: {
-    primary: 'var(--primary)'
+    primary: '#0089fd'
   }
 })
 Vue.directive('sticky', stickyDirective)
