@@ -92,6 +92,8 @@ remarks
 createdBy
 isIndoor
 isUrgent
+fixedDueDate
+fixedDueTime 
 createdAt
 modifiedAt
 elderMobility

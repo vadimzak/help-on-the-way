@@ -37,6 +37,9 @@ h5{
 
 
 // Element UI overrides to match bootstrap
+.time-select .el-picker-panel__content{
+    direction: ltr;
+}
 .el-picker-panel__sidebar{
     left: 0;    
  }

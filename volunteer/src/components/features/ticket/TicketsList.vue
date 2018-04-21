@@ -2,32 +2,30 @@
     <div class="related-tickets">
       <v-list three-line>
         <template v-for="(ticket, index) in tickets">
-          <v-list-tile avatar class="list-tile-wrap" :style="getStyle(ticket)" :key="index" v-if="ticketToPreivew !== ticket.id &&  !excludeIds.includes(ticket.id)"  @click="onTicketClick(ticket)">
+          <v-list-tile avatar class="list-tile-wrap" :style="getStyle(ticket)" :key="index" v-if="ticketToPreivew !== ticket.id &&  !excludeIds.includes(ticket.id)"  @click="onTicketClick(ticket, index, $vuetify)">
             <v-list-tile-content>
               <div class="related-title">
                 <v-list-tile-title>
                   {{ticket | formatTicketTitle}}
                 </v-list-tile-title>
-                <v-list-tile-sub-title>
-                  {{ticket.startAddress | formatAddress}}
+                <v-list-tile-sub-title class="ellipsis">
+                  {{ticket.startAddress | formatAddress(true)}}
                 </v-list-tile-sub-title>
               </div>
               <div class="related-when">
-                {{ticket.when}}
-                מחר
+                {{ticket.dueDate | formatDate('fromNow')}}
               </div>
               <div class="related-duration">
-                <!-- {{ticket.durationEta | formatMinutes }} -->
                 <div class="duration">
-                  45
+                    {{ticket.durationEta | formatMinutes('countOnly') }}
                 </div>
                 <div class="unit">
-                  דקות
+                    {{ticket.durationEta | formatMinutes('unitOnly') }}
                 </div>
               </div>
             </v-list-tile-content>
           </v-list-tile>
-          <TicketPreview :ticket="ticket" :key="index" v-if="ticketToPreivew === ticket.id" :closePreview="() => ticketToPreivew = -1" />
+          <TicketPreview :ticket="ticket" ref="previewRefs" :key="ticket.id" v-if="ticketToPreivew === ticket.id" :closePreview="() => ticketToPreivew = -1" />
         </template>
       </v-list>
     </div>
@@ -62,11 +60,16 @@
           '--category-color': categoriesTree[ticket.category].self.color,
         }
       },
-      onTicketClick(ticket){
+      onTicketClick(ticket, index, $vuetify){
           if(this.goToTicketOnClick){
             this.$router.replace('/ticket/'+ticket.id)
           } else{
             this.ticketToPreivew = ticket.id
+            const goTo = $vuetify.goTo;
+            const that = this;
+            setTimeout(function(){
+              goTo(that.$refs.previewRefs[0], { offset: -56}) // header offset
+            }, 0)
           }
       },
     },
@@ -97,25 +100,24 @@
     border-bottom: 1px solid gainsboro;
   }
 
-  .related-tickets li{
+  .related-tickets .list-tile-wrap{
     border-right: 6px solid var(--category-color);
     /* height: 95px; */
   }
 
   .related-title {
-        line-height: 13px;
             width: 68%;
   }
 
 .related-when {
-      font-size: 20px;
+      font-size: 17px;
 }
 
   .related-duration {
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
         line-height: 16px;
   }
 
@@ -125,6 +127,8 @@
   }
 
   .unit{
+    position: relative;
+    top: 2px;
     font-size: 10px;
     font-weight: bold;
     text-align: center;

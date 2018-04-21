@@ -3,7 +3,6 @@
     <i class="material-icons person-icon">person</i>
     <div class="details">
     <div class="elder-name">{{elder.firstName+' '+elder.lastName}}</div>
-    <div class="more-reviews">קרא חוויות ממפגשים קודמים</div>
     </div>
     <div class="elder-mobility" v-if="elderMobility">
       <i class="material-icons">{{elderMobilityType[elderMobility].icon}}</i>
@@ -32,10 +31,12 @@
   margin-bottom:10px;
   width:100%;
   position: relative;
+  font-size: 15px;
 }
 
 div .person-icon {
 margin-left:10px;
+font-size: 25px;
 }
 
 .details{
@@ -45,10 +46,11 @@ margin-left:10px;
 .more-reviews{
   color: #2d83ff;
   font-size: 12px;
+  font-weight: bold;
 }
 .elder-mobility{
    position: absolute;
-   left:0;
+    left: 17px;
     color: white;
     top: 0;
     display: flex;
@@ -59,10 +61,10 @@ margin-left:10px;
 
 .elder-mobility i {
     background-color: #bbbbbb;
-    padding:5px;
+   padding: 8px;
     border-radius: 100px;
-    height: 34px;
-    width: 34px;
+    height: 40px;
+    width: 40px;
 }
 
 .elder-mobility span{

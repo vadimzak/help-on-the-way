@@ -18,9 +18,10 @@
   "dependencies": {
     "font-awesome": "^4.7.0",
     "help-on-the-way-shared": "file:../shared",
+    "sticky-state": "2.4.1",
     "vue": "^2.5.13",
     "vue-router": "^3.0.1",
-    "vuetify": "^0.17.7",
+    "vuetify": "1.0.16",
     "vuex": "^3.0.1"
   },
   "devDependencies": {

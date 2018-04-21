@@ -31,6 +31,12 @@ const actions = {
     },
     getTicketById({}, id) {
         return getTicketById(id)
+    },
+    updateTicketStatus({ commit }, {id, status}) {
+        if (id && status) {
+            commit('updateTicket', { status });
+            return updateTicket({ id, status });
+        }    
     }
 };
   
@@ -60,8 +66,8 @@ const mutations = {
         state.ticket = { ...state.ticket, groups: groups };
       },
     setNeedToKnowPoints(state, points) {
-        state.ticket.details = { ...state.ticket.details, needToKnow: points, isDirty: true }
-        state.ticket = { ...state.ticket}  
+        state.ticket.details = { ...state.ticket.details, needToKnow: points, }
+        state.ticket = { ...state.ticket, isDirty: true }  
     },
     setTicketDueDate(state, dueDate) {
         this.commit('createTicket/updateTicket', { dueDate, fixedDueDate: !!dueDate }) 
@@ -73,12 +79,22 @@ const mutations = {
         this.commit('createTicket/updateTicket', { dueTime: null, fixedDueTime: false, details: { flexibleTime: time } }) 
     },
     nextStep(state) {
+        // skip route step for indoor tickets
+        if (+state.currentStep === 3 && state.ticket.isIndoor) {
+            state.currentStep = 5;
+            return;
+        }
         state.currentStep++;  
     },
     setStep(state, step) {
-          state.currentStep = step
+          state.currentStep = +step
       },
     goBackStep(state) {
+        // skip route step for indoor tickets
+        if (+state.currentStep === 5 && state.ticket.isIndoor) {
+            state.currentStep = 3; 
+            return;
+        }      
           state.currentStep = Math.max(1, state.currentStep - 1);
     },
     setStatusCount(state, count) {
@@ -123,8 +139,8 @@ function normalizeTicket(ticket) {
         // maps to array of actual groups without the wrapping object
         ticket.groups = ticket.groups.nodes.map( g => g.group)
     }
-    if (ticket.dueTime) {
-        ticket.dueTime = moment(ticket.dueTime, "hh:mm:Z").utc().toDate();
+    if (!ticket.details) {
+        ticket.details = {}
     }
     return ticket
 }
@@ -183,11 +199,8 @@ function mapToServerModel(ticket) {
     const stripFields = { groups: true, volunteers: true, __typename: true, isDirty: true };
     
     const transformers = {
-        dueTime(val) {
-          return val ? moment(val).utc().format('hh:mm:Z') : val// transform DueTime to UTC string of time
-        },
         dueDate(val) {
-                return val ? moment(val).utc().toDate() : val // normalize to UTC iso string                : val// transform DueTime to UTC string of time
+                return val ? moment(val).utc().toDate() : val // normalize to UTC iso string
         }
     }
 

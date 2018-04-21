@@ -1,21 +1,22 @@
 <template>
   <v-flex>
-    <v-card>
+    <v-card v-sticky>
       <v-card-media
-        class="white--text card-image"
-        height="30vh"
+        class="white--text card-image full-ticket-card"
+        height="235px"
         :style="getStyle(ticket)">
         <v-container fill-height fluid>
-          <v-layout fill-height class="mr-4 ml-2">
             <v-flex xs12 align-end flexbox>
               <v-layout column>
                 <span class="" id="ticket-headline">
                   {{ticket | formatTicketTitle}}
                 </span>
+                <span id="ticket-subheader">
+                  {{ticket.elder.firstName}} מצפה לטלפון ממך                  
+                </span>
                 <img align-self-center :src="`static/assets/posters/${ticket.category.toLowerCase()}.png`" class="ticket-poster">
               </v-layout>
             </v-flex>
-          </v-layout>
         </v-container>
       </v-card-media>
       <v-btn
@@ -30,16 +31,8 @@
     </v-card>
        <div class="card-content">
         <div class="ticket-details">
-          <div class="when section">
-            <i class="material-icons">date_range</i>
-            <span v-if="ticket.dueDate">
-            {{this.$moment(ticket.dueDate).format('L')}}
-            {{this.$moment(ticket.dueDate).add(ticket.durationEta, 'hour').format('HH:mm')}}
-                 <a class="add-to-calendar" :href="getCalendarLink()" target="_blank">
-              הכנס ליומן
-            </a>
-              </span>
-            <span v-else>גמיש</span>
+          <div class="section">
+                <TicketDueDateTime :ticket="ticket"/>
           </div>
           <div class="where section">
             <TransportType :type="ticket.transport"/>
@@ -48,13 +41,6 @@
           <div class="who section">
             <ElderBasicInfo :elder="ticket.elder" :elder-mobility="ticket.elderMobility"/>
           </div>
-          <div class="ticket-tags">
-            <div class="tag" v-for="tag in ticket.tags">
-              <i class="material-icons">{{tag.icon}}</i>
-              {{tag.name}}
-            </div>
-          </div>
-
       <div class="important-things section">
         <NeedToKnow :items="ticket.details.needToKnow"/>
       </div>
@@ -68,6 +54,7 @@
   import TransportType from '../templates/TransportType'
   import TransportRoute from '../templates/TransportRoute'
   import ElderBasicInfo from '../templates/ElderBasicInfo'
+  import TicketDueDateTime from '../templates/TicketDueDateTime'
   import NeedToKnow from '../templates/NeedToKnow'
 
   export default {
@@ -76,6 +63,7 @@
       TransportType,
       TransportRoute,
       ElderBasicInfo,
+      TicketDueDateTime,
       NeedToKnow
     },
     data() {
@@ -83,19 +71,12 @@
         dialog: false,
       }
     },
-    computed: {
-      timeUnit() {
-        return this.$options.filters.formatMinutes(this.ticket.durationEta).split(' ')[1]
-      },
-      timeCount() {
-        return this.$options.filters.formatMinutes(this.ticket.durationEta).split(' ')[0]
-
-      }
-    },
+    computed: {},
     methods: {
       getStyle(ticket) {
         return {
           '--background-color': categoriesTree[ticket.category].self.background,
+          '--box-shadow': categoriesTree[ticket.category].self.color
         }
       },
       getActionStyle(ticket) {
@@ -103,28 +84,37 @@
           'background-color': '#207bff',
         }
       },
-      getCalendarLink(){
-        return `https://www.google.com/calendar/render?action=TEMPLATE
-        &dates=${this.$moment(this.ticket.dueDate).toISOString()}/${this.$moment(this.ticket.dueDate).toISOString()}
-        &text=${this.$options.filters.formatTicketTitle(this.ticket).replace(" ","")}
-        &location=${this.ticket.startAddress}
-        &details=`
-      }
     },
   }
 </script>
 
-<style scoped>
-
+<style scoped> 
   #ticket-headline {
-    font-size: 22px;
+    font-size: 25px;
     line-height: 32px;
     letter-spacing: -1px;
     font-family: 'Open Sans Hebrew', Arial;
   }
 
+  #ticket-subheader {
+    font-size: 18px;
+  } 
+
   .card {
     max-width: 100vw;
+    box-shadow: none;
+
+  }
+
+  .card.is-sticky{
+    transform:  translateY(56px);
+    z-index: 2;
+  }
+  .card{
+    transition: transform 0.3s ease;
+  }
+  .card-content{
+    overflow-y:scroll;
   }
 
   .card-content ul {
@@ -146,15 +136,20 @@
 
   .card-image {
     background-image: var(--background-color);
-    box-shadow: 0px 1px 2px 1px rgba(126, 67, 253, 0.42);
+    /* box-shadow:  0px 1.5px 7px 0.5px  var(--box-shadow); */
+    box-shadow:  0px 1.5px 7px 0.5px rgba(0,0,0,0.3);
+
   }
 
   .call-button{
     background-color: var(--action-color);
     position: absolute;
-    left: 0;
     bottom: -35px;
     border-radius: 100px;
+        width: 65px;
+    height: 65px;
+        left: 10px;
+        z-index: 99;
   }
 
   .ticket-details {
@@ -167,6 +162,11 @@
     display: flex;
     align-items: center;
     justify-content: space-around;
+  }
+
+  .container {
+    align-items: flex-start;
+        padding: 5px;
   }
 
   .tag {
@@ -186,20 +186,14 @@
     width: 100%;
   }
 
-  .when, .who {
+   .who {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     font-family: 'Tahoma';
   }
 
-  .when > span {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    flex-direction: column;
-    padding-right: 10px;
-  }
+
 
   .where {
     flex-direction: column;
@@ -208,29 +202,39 @@
     font-family: 'Tahoma';
   }
 
-  .add-to-calendar {
-    color: #2d83ff;
-    font-size: 12px;
-  }
 
   .section{
-    padding: 15px;  
+    padding: 25px;
     position:relative;
+    color : #757575;
   }
+
+  .section.where {
+    padding-bottom: 7px;
+  }
+
+
 
   .section:after{
     content:"";
-    width: 80%;
+    width: 72%;
     height: 1px;
     position: absolute;
     bottom: 0;
     background-color: gainsboro;
-    margin-right: 8%;
+    margin-right: 7%;
   }
 
   .ticket-poster{
     align-self: center;
-    max-height: 100%;
+    max-height: 210px;
     width: auto;
+    position: absolute;
+    bottom: -20px;
+    padding-left: 6px;
+  }
+
+  .section.important-things:after {
+    width:0;
   }
 </style>

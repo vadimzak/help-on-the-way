@@ -61,3 +61,14 @@ assignCurrentUserToTicket(input: {
     clientMutationId
   }
 }`
+
+export const UPDATE_TICKET_SCHEDULE = gql`
+mutation updateTicketDateTime($ticketId: BigInt!, $dueDate: Date, $dueTime: Time){
+  updateTicketDueDateForVolunteerById(input: {
+    id: $ticketId,
+    dueDate: $dueDate,
+    dueTime: $dueTime
+  }){
+    clientMutationId,
+  }
+}`

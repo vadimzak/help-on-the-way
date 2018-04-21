@@ -43,10 +43,11 @@ div{
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  margin-bottom:10px;
+  margin-bottom: 12px;
 }
 
 div i {
 margin-left:10px;
+font-size: 25px;
 }
 </style>

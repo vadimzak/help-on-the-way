@@ -2,6 +2,7 @@
   <v-flex>
     <v-card :tile="true">
       <v-card-media
+        :style="getStyle(ticket)"
         @click=" closePreview ? closePreview() : void 0"
         class="white--text card-image"
         height="88px" style="display: flex; height: 90px; align-items: center; justify-content: space-around;">
@@ -10,20 +11,18 @@
                   {{ticket | formatTicketTitle}}
                 </v-list-tile-title>
                 <v-list-tile-sub-title>
-                  {{ticket.startAddress | formatAddress}}
+                  {{ticket.startAddress | formatAddress(true)}}
                 </v-list-tile-sub-title>
 			</div>
       <div class="related-when">
-                {{ticket.when}}
-                מחר
+                {{ticket.dueDate | formatDate('fromNow')}}
               </div>
               <div class="related-duration">
-                <!-- {{ticket.durationEta | formatMinutes }} -->
                 <div class="duration">
-                  45
+                    {{ticket.durationEta | formatMinutes('countOnly') }}
                 </div>
                 <div class="unit">
-                  דקות
+                    {{ticket.durationEta | formatMinutes('unitOnly') }}
                 </div>
               </div>
         
@@ -46,16 +45,17 @@
            </li>
             <li class="transport">
               <div>
-              <i class="material-icons">local_taxi</i>
-              <span> נוסעים במונית</span>
+                <TransportType :type="ticket.transport"/>
               </div>
               <div class="address">
               <v-card class="start-address">
                 <img src="static/assets/placeholder-copy.png">
-                <span class="address-alias">{{ticket | formatTicketAddressAlias('start')}}</span>
+                <span class="address-alias">מ{{ticket | formatTicketAddressAlias('start')}}</span>
                 <span class="address-text">
-                  {{ticket.startAddress.street}},
-                  {{ticket.startAddress.city}}
+                  {{ticket.startAddress.street || 'הקרוב לבית מגוריו'}}
+                </span>
+                <span class="address-text">
+                  {{ticket.startAddress.city || '&nbsp;'}}
                 </span>
               </v-card>
               <div class="arrows">
@@ -63,21 +63,17 @@
               </div>
               <v-card class="end-address">
                 <img src="static/assets/flag.png">
-                <span class="address-alias">{{ticket | formatTicketAddressAlias('end')}}</span>
+                <span class="address-alias">ל{{ticket | formatTicketAddressAlias('destination')}}</span>
                 <span class="address-text">
-                {{ticket.endAddress.street}},
-                {{ticket.endAddress.city}}
+                {{ticket.destinationAddress.street || 'הקרוב לבית מגוריו'}}
+                </span>
+                <span class="address-text">
+                    {{ticket.destinationAddress.city || '&nbsp;'}}
                 </span>
               </v-card>
             </div>
             </li>
           </ul>
-        </div>
-        <div class="ticket-tags">
-          <div class="tag" v-for="(tag, index) in ticket.tags" :key="index">
-            <i class="material-icons">{{tag.icon}}</i>
-            {{tag.name}}
-          </div>
         </div>
       </v-card-title>
       <v-card-title class="important-things">
@@ -87,7 +83,7 @@
         </h2>
         <ul class="important-things-list">
           <li v-for="(info, index) in ticket.details.needToKnow" :key="index">
-            {{info}}
+            {{info.text ? info.text : info}}
           </li>
         </ul>
       </v-card-title>
@@ -96,8 +92,8 @@
           <button class="volunteer" @click="dialog = !dialog" slot="activator">אני בפנים</button>
           <v-card class="dialog-card" v-if="!isTicketMatched">
             <v-card-text>             
-                <div> היי {{$store.state.user.firstName}},</div>
-                <div> האם ברצונך לסייע ל{{ticket.elderName}}?</div>
+                <div> היי {{$store.state.user.name}},</div>
+                <div> האם ברצונך לסייע ל{{ticket.elder.firstName}}?</div>
             </v-card-text>
             <v-card-actions class="actions">
               <v-spacer></v-spacer>
@@ -125,7 +121,10 @@
 </template>
 
 <script>
+import categoriesTree from 'shared/constants/categoriesTree'
+import TransportType from '../templates/TransportType'
 export default {
+  components: { TransportType },
 	props: ['ticket', 'closePreview'],
 	data() {
 		return {
@@ -133,14 +132,7 @@ export default {
 			isTicketMatched: false
 		};
 	},
-	computed: {
-		timeUnit() {
-			return this.$options.filters.formatMinutes(this.ticket.durationEta).split(' ')[1];
-		},
-		timeCount() {
-			return this.$options.filters.formatMinutes(this.ticket.durationEta).split(' ')[0];
-		}
-	},
+	computed: {},
 	methods: {
 		assignTicket: async function() {
 			try {
@@ -160,7 +152,13 @@ export default {
         //Remove ticket from open tickets
          this.$store.commit('removeOpenTicket', this.ticket.id)
 			}
-		}
+    },
+      getStyle(ticket) {
+        return {
+          '--background-color': categoriesTree[ticket.category].self.background,
+          '--box-shadow': categoriesTree[ticket.category].self.color
+        }
+        }
 	}
 };
 </script>
@@ -204,9 +202,9 @@ export default {
 }
 
 .card-image {
-	background-image: linear-gradient(63deg, #963efa, #7146fe);
-	box-shadow: 0px 2px 14.6px 1.4px rgba(126, 67, 253, 0.42);
-	    display: flex;
+    background-image: var(--background-color);
+    box-shadow:  0px 1.5px 7px 0.5px rgba(0,0,0,0.3);
+	  display: flex;
     height: 90px;
     align-items: center;
     justify-content: center;
@@ -263,16 +261,9 @@ export default {
 }
 
 .important-things-list {
-  padding-right: 10%;
-  list-style-type: none;
+  padding-right: 15%;
 }
-.important-things-list > li {
-  text-indent: -5px;
-}
-.important-things-list > li:before {
-  content: "-";
-  text-indent: -5px;
-}
+
 
 .volunteer,
 .agree,
@@ -343,19 +334,22 @@ export default {
 .address .address-text{
   font-size: 12px;
 }
+.address-text:last-child{
+      line-height: 0.9rem;
+}
 .address .card {
 	flex: 3;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	flex-direction: column;
-	padding: 3vw;
+  padding: 3vw;
+  
 }
 
 .address .card img {
 	max-height: 20px;
 	width: auto;
-	margin-bottom: 10px;
 }
 
 .arrows {
