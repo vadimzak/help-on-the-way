@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import { ASSIGN_TICKET, GET_BY_ID } from '@/graphql/queries/ticket'
+import { ASSIGN_TICKET, GET_BY_ID, UPDATE_TICKET_SCHEDULE } from '@/graphql/queries/ticket'
 import { client as apolloClient } from 'shared/providers/apolloProvider'
 Vue.use(Vuex)
 const state = {
@@ -31,19 +31,28 @@ const mutations = {
   updateOpenTickets (state, tickets) {
     state.openTickets = tickets
   },
+  updateActiveTicket (state, update) {
+    state.activeTicket = { ...state.activeTicket, ...update }
+  },
   removeOpenTicket (state, id) {
-    state.openTickets = state.openTickets.filter(t => t.id !== id);
+    state.openTickets = state.openTickets.filter(t => t.id !== id)
   }
- 
 }
 
 const actions = {
   toggleMenu: ({commit}) => commit('toggleMenu'),
-  async assignTicket ({state, commit}, {id}) {
+  assignTicket ({state, commit}, {id}) {
     return assignTicket(id, state.user.id)
   },
-  async getTicketById ({ commit }, ticketId) {
+  getTicketById ({ commit }, ticketId) {
     return getTicketById(ticketId)
+  },
+  async updateTicketScheduleDate ({ state, commit }, updatedSchedule) {
+    if (!state.activeTicket) {
+      return
+    }
+    await scheduleTicket(state.activeTicket.id, updatedSchedule.dueDate, updatedSchedule.dueTime)
+    commit('updateActiveTicket', updatedSchedule)
   }
 }
 
@@ -70,4 +79,11 @@ async function getTicketById (ticketId) {
   }
   )
   return response.data.ticket
+}
+
+function scheduleTicket (ticketId, dueDate, dueTime) {
+  return apolloClient.mutate({
+    mutation: UPDATE_TICKET_SCHEDULE,
+    variables: { ticketId: ticketId, dueDate, dueTime }
+  })
 }

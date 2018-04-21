@@ -6,6 +6,7 @@
     --primary: #0089fd;
     --pink: #ff5f5f;
     --secondary: #757575;
+    --dark: #212121;
 }
 
 .color-secondary{
@@ -27,4 +28,8 @@
     text-overflow: ellipsis !important;
     width: 100% !important;
     display: block !important;
+}
+
+.picker{
+    direction: ltr !important;
 }

@@ -31,16 +31,8 @@
     </v-card>
        <div class="card-content">
         <div class="ticket-details">
-          <div class="when section">
-            <i class="material-icons">date_range</i>
-            <span v-if="ticket.dueDate">
-            {{this.$moment(ticket.dueDate).format('L')}}
-            {{this.$moment(ticket.dueDate).add(ticket.durationEta, 'hour').format('HH:mm')}}
-                 <a class="add-to-calendar" :href="getCalendarLink()" target="_blank">
-              הכנס ליומן
-            </a>
-              </span>
-            <span v-else>גמיש</span>
+          <div class="section">
+                <TicketDueDateTime :ticket="ticket"/>
           </div>
           <div class="where section">
             <TransportType :type="ticket.transport"/>
@@ -62,6 +54,7 @@
   import TransportType from '../templates/TransportType'
   import TransportRoute from '../templates/TransportRoute'
   import ElderBasicInfo from '../templates/ElderBasicInfo'
+  import TicketDueDateTime from '../templates/TicketDueDateTime'
   import NeedToKnow from '../templates/NeedToKnow'
 
   export default {
@@ -70,6 +63,7 @@
       TransportType,
       TransportRoute,
       ElderBasicInfo,
+      TicketDueDateTime,
       NeedToKnow
     },
     data() {
@@ -90,13 +84,6 @@
           'background-color': '#207bff',
         }
       },
-      getCalendarLink(){
-        return `https://www.google.com/calendar/render?action=TEMPLATE
-        &dates=${this.$moment(this.ticket.dueDate).toISOString()}/${this.$moment(this.ticket.dueDate).toISOString()}
-        &text=${this.$options.filters.formatTicketTitle(this.ticket).replace(" ","")}
-        &location=${this.ticket.startAddress}
-        &details=`
-      }
     },
   }
 </script>
@@ -199,20 +186,14 @@
     width: 100%;
   }
 
-  .when, .who {
+   .who {
     display: flex;
     align-items: center;
     justify-content: flex-start;
     font-family: 'Tahoma';
   }
 
-  .when > span {
-    display: flex;
-    align-items: flex-start;
-    justify-content: flex-start;
-    flex-direction: column;
-    padding-right: 10px;
-  }
+
 
   .where {
     flex-direction: column;
@@ -221,12 +202,6 @@
     font-family: 'Tahoma';
   }
 
-  .add-to-calendar {
-    color: #2d83ff;
-    font-size: 12px;
-     text-decoration: none;
-    font-weight: bold;
-  }
 
   .section{
     padding: 25px;
@@ -238,9 +213,7 @@
     padding-bottom: 7px;
   }
 
-  .seci.when i {
-    font-size: 25px;
-  }
+
 
   .section:after{
     content:"";
