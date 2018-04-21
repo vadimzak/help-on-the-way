@@ -3,7 +3,7 @@
       <h2>פתיחת פניה חדשה</h2>
       <p class="small">נא לבחור את מקור הפניה.</p>
       <RadioBoxes :value="ticketSource" @input="sourceChanged" :options="sources"/>
-      <PersonAutoComplete @input="personChanged" :value="value" :personType="ticketSource" />
+      <PersonAutoComplete @input="personChanged" :value="ticket.issuingPerson" :personType="ticketSource" />
   </div>
 </template>
 <script>
@@ -29,7 +29,7 @@ export default {
       { text: 'קרוב משפחה', 'icon': 'd-icon-family', value: PersonTypes.relative },
       { text: 'אחר', 'icon': { class: 'material-icons', content: 'more' }, value: 'other' },
     ],
-    ticketSource: this.value || PersonTypes.elder,
+    ticketSource: (this.ticket && this.ticket.issuingPerson) ? this.ticket.issuingPerson.type : PersonTypes.elder,
   }
   },
     computed: {
