@@ -14,10 +14,10 @@
           אופס נראה שהקוד שהזנת אינו תקין.
         </p>
         <div class="verification-digits">
-                <v-text-field class="digit input-group--focused" @input="(v) => focusInput('Two', v)" v-model="verificationCode[0]" ref="digitOne" mask="#" required></v-text-field>
-                <v-text-field class="digit input-group--focused" @input="(v) => focusInput('Three', v)" v-model="verificationCode[1]" ref="digitTwo" mask="#" required></v-text-field>
-                <v-text-field class="digit input-group--focused" @input="(v) => focusInput('Four', v)" v-model="verificationCode[2]" ref="digitThree" mask="#" required></v-text-field>
-                <v-text-field class="digit input-group--focused" v-model="verificationCode[3]" ref="digitFour" mask="#" required></v-text-field>
+                <v-text-field type="number" class="digit input-group--focused" @input="(v) => focusInput('Two', v)" v-model="verificationCode[0]" ref="digitOne" mask="#" required></v-text-field>
+                <v-text-field type="number" class="digit input-group--focused" @input="(v) => focusInput('Three', v)" v-model="verificationCode[1]" ref="digitTwo" mask="#" required></v-text-field>
+                <v-text-field type="number" class="digit input-group--focused" @input="(v) => focusInput('Four', v)" v-model="verificationCode[2]" ref="digitThree" mask="#" required></v-text-field>
+                <v-text-field type="number" class="digit input-group--focused" v-model="verificationCode[3]" ref="digitFour" mask="#" required></v-text-field>
         </div>              
         <v-btn block :loading="inProgress" :disabled="!valid" depressed @click="submit()" color="primary">בוא נתחיל לעזור לאנשים</v-btn>
         <div class="text-xs-center"><a  @click="retry">לא קיבלתי קוד</a></div>

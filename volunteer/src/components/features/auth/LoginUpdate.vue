@@ -12,7 +12,7 @@
         <v-text-field
           v-model.lazy="phoneNumber"
           class="text-xs-left phone-input"
-          type="phone"
+          type="number"
           @blur="postponeValidation = false"
           placeholder="מספר הנייד שלך"
           :rules="[v => postponeValidation || !!v.match(/^\d{10}$/) || 'מספר נייד תקין בלבד, 10 ספרות']"
