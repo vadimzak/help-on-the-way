@@ -121,7 +121,7 @@
 
   .card.is-sticky{
     transform:  translateY(56px);
-    z-index: 1;
+    z-index: 2;
   }
   .card{
     transition: transform 0.3s ease;
