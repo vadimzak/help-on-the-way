@@ -12,7 +12,7 @@
                     :componentRestrictions="{country: 'IL'}"
                     :types="['address']"
                     class="form-control"
-                    :value="value | formatAddress"
+                    :value="value | formatAddress('system')"
                     @place_changed="onSelect($event)"
                     :select-first-on-enter="true"
                 ></GmapAutocomplete>
