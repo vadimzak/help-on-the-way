@@ -10,7 +10,7 @@ module.exports = {
 	},
 	urls: {
 		//todo - change this to which url is relevant
-		dorledor: 'http://localhost:8080',
+		dorledor: 'https://dashboard.dorldor.org.il',
 		whatsapp: 'https://web.whatsapp.com'
 	},
 	script_paths: {

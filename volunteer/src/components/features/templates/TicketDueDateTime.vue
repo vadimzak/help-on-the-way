@@ -21,7 +21,7 @@
                 </div>  
             </div>  
                 <a v-if="ticket.dueTime && ticket.dueDate" class="date-time-action" :href="getCalendarLink()" target="_blank">
-                הכנס ליומן
+שמירה ביומן 
                 </a>
                 <a @click="triggerSchedule" class="date-time-action" v-else>
                     {{ callToActionText }}

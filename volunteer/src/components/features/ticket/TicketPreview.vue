@@ -93,11 +93,11 @@
           <v-card class="dialog-card" v-if="!isTicketMatched">
             <v-card-text>             
                 <div> היי {{$store.state.user.name}},</div>
-                <div> האם ברצונך לסייע ל{{ticket.elder.firstName}}?</div>
+                <div> רק בודקים - האם מסתדר לך לעזור ל{{ticket.elder.firstName}}?</div>
             </v-card-text>
             <v-card-actions class="actions">
               <v-spacer></v-spacer>
-              <button class="agree" flat @click="assignTicket()">אשמח לעזור :)</button>
+              <button class="agree" flat @click="assignTicket()">בטח!</button>
               <button class="cancel" flat @click="dialog=false">לחצתי בטעות</button>
             </v-card-actions>
           </v-card>

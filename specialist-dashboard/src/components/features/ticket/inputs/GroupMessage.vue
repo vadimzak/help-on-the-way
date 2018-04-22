@@ -46,7 +46,7 @@ export default {
       this.$emit('input', this.textareaText)
     },
     compileText(){
-      this.textareaText = 'היי :) ' + this.buildTextByCategory(this.ticket.category) + ' לחץ/י על הקישור ';
+      this.textareaText = 'היי :) חברים!' + this.buildTextByCategory(this.ticket.category) + 'מישהו יכול לעזור? הנה כל הפרטים?';
   
     },
     getDueDateAlias(dueDate){

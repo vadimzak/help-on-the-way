@@ -1,7 +1,7 @@
 <template>
   <v-footer>
-    <a href="tel:*5823">
-    <span>המוקד שלנו זמין לכל שאלה</span>
+    <a href="tel:0505973002">
+    <span>אנו זמינים לכל שאלה</span>
     <i class="material-icons phone-icon">phone</i>
     </a>
   </v-footer>

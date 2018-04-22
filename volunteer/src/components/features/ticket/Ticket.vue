@@ -8,7 +8,7 @@
       <div class="divider-title">
         <img src="static/assets/divider-image.png" class="divider-image">
         <div class="divider-text">
-          יש לנו הזדמנויות נוספות לעשות טוב בדרך שלך
+הנה עוד הזדמנויות לעזור למישהו בדרך שלך
           <i class="material-icons">keyboard_arrow_down</i>
         </div>
       </div>
