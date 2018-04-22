@@ -15,6 +15,7 @@ deploy:
   acl: public_read
   on:
     branch: master
+    condition: "$DEPLOY_VOLUNTEER" = true && $DEPLOY_TO = "PROD"    
 - provider: s3
   access_key_id: AKIAI4CFEBTFA24MOKFQ
   bucket: aws-website-dashboarddorldororgil-cu0yx
@@ -26,6 +27,8 @@ deploy:
   region: us-east-1
   on:
     branch: master
+    condition: "$DEPLOY_DASHBOARD" = true && $DEPLOY_TO = "PROD"
+
 deploy:
 - provider: s3
   access_key_id: AKIAI4CFEBTFA24MOKFQ
@@ -38,7 +41,7 @@ deploy:
   acl: public_read
   on:
     branch: master
-    condition: $DEPLOY_VOLUNTEER = true && $DEPLOY_TO = "STAGE"
+    condition: "$DEPLOY_VOLUNTEER" = true && $DEPLOY_TO = "STAGE"
 - provider: s3
   access_key_id: AKIAI4CFEBTFA24MOKFQ
   bucket: dashboard.dev.dorldor.org.il
@@ -50,5 +53,5 @@ deploy:
   region: eu-west-1
   on:
     branch: master
-    condition: $DEPLOY_DASHBOARD = true && $DEPLOY_TO = "STAGE"
+    condition: "$DEPLOY_DASHBOARD" = true && "$DEPLOY_TO" = "STAGE"
         
