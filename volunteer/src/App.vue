@@ -36,7 +36,7 @@
 </script>
 
 <style>
-  .application {
+  #app {
     font-family: 'Open Sans Hebrew', Arial;
     direction: rtl;
     text-align: right;
