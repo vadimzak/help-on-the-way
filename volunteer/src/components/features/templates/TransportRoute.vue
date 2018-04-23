@@ -2,9 +2,9 @@
  <div class="route" :class="{ 'single-route': route.length === 1}">
     <div class="route-icons">
       <span  v-for="(addressKey, index) in route" :key="index">
-          <img src="static/assets/placeholder-copy.png" v-if="index === 0">
+          <img src="static/assets/placeholder.png" v-if="index === 0">
           <div class="middle-destination" v-if="index === 1"></div>
-          <img src="static/assets/placeholder-copy.png" v-if="index === 2">
+          <img src="static/assets/placeholder.png" v-if="index === 2">
       </span>
     </div>
     <div class="route-addresses">

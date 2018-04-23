@@ -48,7 +48,7 @@
               </div>
               <div class="address" v-if="!ticket.isIndoor">
                 <v-card class="start-address">
-                  <img src="static/assets/placeholder-copy.png">
+                  <img src="static/assets/placeholder.png">
                   <span class="address-alias">{{ticket | formatTicketAddressAlias('start')}}</span>
                   <span class="address-text">
                     {{ticket.startAddress | formatAddress('street') }}
@@ -58,7 +58,7 @@
                   </span>
                 </v-card>
                 <div class="arrows">
-                  <img src="static/assets/transfer-1.png">
+                  <img src="static/assets/transfer.png">
                 </div>
                 <v-card class="end-address">
                   <img src="static/assets/flag.png">
