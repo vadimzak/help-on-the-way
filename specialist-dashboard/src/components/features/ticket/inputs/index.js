@@ -5,6 +5,8 @@ import NeedToKnowPoints from './TicketNeedToKnowPoints'
 import StatusSelect from './TicketStatusSelect'
 import GroupMessage from './GroupMessage'
 import TicketTitle from './TicketTitle'
+import RemoveVolunteer from './TicketRemoveVolunteer'
+
 export {
     DueDatePicker,
     FlexibleHourPicker,
@@ -13,4 +15,5 @@ export {
     GroupMessage,
     StatusSelect,
     TicketTitle,
+    RemoveVolunteer
 }

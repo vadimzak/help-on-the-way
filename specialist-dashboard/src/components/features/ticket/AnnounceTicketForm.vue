@@ -25,22 +25,24 @@
     </b-row>
     <b-row class="my-5">
       <b-col cols="12">
-        <b-form-group label="סטוס פנייה">
+        <b-form-group label="סטטוס פנייה">
           <StatusSelect v-model="status" />
+         <RemoveVolunteer :ticket="ticket"/>
         </b-form-group>
+         
       </b-col>
     </b-row>
   </div>
 </template>
 <script>
 
-import {GroupPicker, GroupMessage, StatusSelect } from '@/components/features/ticket/inputs';
+import {GroupPicker, GroupMessage, StatusSelect , RemoveVolunteer } from '@/components/features/ticket/inputs';
 import { mapStateForForm } from '@/store/utils';
 import { mapState } from 'vuex'
 import { TicketStatus} from "@/constants/enums";
 
 export default {
-  components: { GroupPicker, GroupMessage, StatusSelect },
+  components: { GroupPicker, GroupMessage, StatusSelect, RemoveVolunteer},
   data() {
     return {
       messageText: '',
