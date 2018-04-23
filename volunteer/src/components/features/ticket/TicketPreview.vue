@@ -58,7 +58,7 @@
                   </span>
                 </v-card>
                 <div class="arrows">
-                  <img src="static/assets/transfer-1.png">
+                  <img src="static/assets/transfer.png">
                 </div>
                 <v-card class="end-address">
                   <img src="static/assets/flag.png">
