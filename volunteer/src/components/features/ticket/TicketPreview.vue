@@ -10,7 +10,7 @@
  <v-list-tile-title>
                   {{ticket | formatTicketTitle}}
                 </v-list-tile-title>
-                <v-list-tile-sub-title>
+                <v-list-tile-sub-title class="color-white">
                   {{ticket.startAddress | formatAddress('preview')}}
                 </v-list-tile-sub-title>
 			</div>
@@ -308,6 +308,9 @@ export default {
 	justify-content: center;
 }
 
+.color-white{
+  color: white !important;
+}
 .dialog-card {
 	padding: 15px;
 	border-radius: 15px;

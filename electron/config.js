@@ -1,7 +1,10 @@
 module.exports = {
 	defaultBrowserOptions: {
-		width: 1024,
-		height: 720
+		width: 1920,
+		height: 1080,
+		webPreferences: {
+			devTools: false
+		}
 	},
 	specificBrowserOptions: {
 		whatsapp: {
