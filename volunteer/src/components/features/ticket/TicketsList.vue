@@ -9,7 +9,7 @@
                   {{ticket | formatTicketTitle}}
                 </v-list-tile-title>
                 <v-list-tile-sub-title class="ellipsis">
-                  {{ticket.startAddress | formatAddress(true)}}
+                  {{ticket.startAddress | formatAddress('preview')}}
                 </v-list-tile-sub-title>
               </div>
               <div class="related-when">

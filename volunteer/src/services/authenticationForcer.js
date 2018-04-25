@@ -11,14 +11,28 @@ const force = router => {
     let currentRole = store.state.user.role
 
     if (currentRole === ANONYMOUS && to.path !== routes.login) {
+      const postlogin = { path: to.path, params: to.params, name: to.name }
+      localStorage.setItem('postLoginRoute', JSON.stringify(postlogin))
       return next(routes.login)
     } else if (currentRole === 'VOLUNTEER_UNVERIFIED' && [routes.update, routes.verify].indexOf(to.path) === -1) {
       return next(routes.update)
     } else if (currentRole === 'VOLUNTEER' && [routes.login, routes.update, routes.verify].indexOf(to.path) !== -1) {
-      return next()
+      return checkPostLoginNext(currentRole, to, next)
     }
-    next()
+    checkPostLoginNext(currentRole, to, next)
   })
+}
+
+function checkPostLoginNext (currentRole, to, next) {
+  if (currentRole === 'VOLUNTEER') {
+    const postloginRoute = localStorage.getItem('postLoginRoute')
+    if (postloginRoute) {
+      localStorage.removeItem('postLoginRoute')
+      return next(JSON.parse(postloginRoute))
+    }
+    return next()
+  }
+  return next()
 }
 
 export default {

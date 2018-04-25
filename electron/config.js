@@ -1,7 +1,10 @@
 module.exports = {
 	defaultBrowserOptions: {
-		width: 1024,
-		height: 720
+		width: 1920,
+		height: 1080,
+		webPreferences: {
+			devTools: false
+		}
 	},
 	specificBrowserOptions: {
 		whatsapp: {
@@ -10,7 +13,7 @@ module.exports = {
 	},
 	urls: {
 		//todo - change this to which url is relevant
-		dorledor: 'http://localhost:8080',
+		dorledor: 'https://dashboard.dorldor.org.il',
 		whatsapp: 'https://web.whatsapp.com'
 	},
 	script_paths: {

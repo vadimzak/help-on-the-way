@@ -12,14 +12,14 @@
                     :componentRestrictions="{country: 'IL'}"
                     :types="['address']"
                     class="form-control"
-                    :value="value | formatAddress"
+                    :value="value | formatAddress('system')"
                     @place_changed="onSelect($event)"
                     :select-first-on-enter="true"
                 ></GmapAutocomplete>
                 <span class="cancel-button material-icons" v-show="value" @click="() => $emit('input', null)">close</span>
         </b-col>
         <b-col cols="3">
-          <b-form-input type="number" min="0" max="100" v-if="value" :value="value.floor" @input="(e) => updatedModel({floor: e.target.value})" placeholder="קומה"/>
+          <b-form-input type="number" min="0" max="100" v-if="value" :value="value.floor" @input="(e) => updatedModel({floor:  e.target ? e.target.value: ''})" placeholder="קומה"/>
         </b-col>
         <b-col cols="3">
              <b-form-input type="text" v-if="value" :value="value.enterance" @input="(e) => updatedModel({enterance: e.target ? e.target.value : '' })" placeholder="כניסה"/>

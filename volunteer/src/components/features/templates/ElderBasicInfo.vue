@@ -4,10 +4,6 @@
     <div class="details">
     <div class="elder-name">{{elder.firstName+' '+elder.lastName}}</div>
     </div>
-    <div class="elder-mobility" v-if="elderMobility">
-      <i class="material-icons">{{elderMobilityType[elderMobility].icon}}</i>
-      <span>{{elderMobilityType[elderMobility].text}}</span>
-    </div>
   </div>
 </template>
 

@@ -3,17 +3,19 @@
     <div v-if="ticketAssignedToCurrentuser">
       <FullTicket :ticket="activeTicket"/>
     </div>
-    <div v-else>
-      <TicketPreview v-if="activeTicket.status === 'OPEN'" :ticket="activeTicket"/>
-      <div v-else>היי! מישהו כבר לקח את הפנייה הזאת, אבל אולי תוכל לעזור במקום אחר</div>
+    <div v-else-if="activeTicket.status === 'OPEN'">
+      <TicketPreview :ticket="activeTicket"/>
       <div class="divider-title">
         <img src="static/assets/divider-image.png" class="divider-image">
         <div class="divider-text">
-          יש לנו הזדמנויות נוספות לעשות טוב בדרך שלך
+הנה עוד הזדמנויות לעזור למישהו בדרך שלך
           <i class="material-icons">keyboard_arrow_down</i>
         </div>
       </div>
       <RelatedTickets :excludeIds="[activeTicket.id]"/>
+    </div>
+    <div v-else>
+      <TicketTaken :ticket="activeTicket"/>
     </div>
   </v-layout>
 </template>
@@ -21,7 +23,8 @@
 <script>
   import TicketPreview from './TicketPreview'
   import FullTicket from './FullTicket'
-  import RelatedTickets from "./OpenTicketsList.vue";
+  import RelatedTickets from './OpenTicketsList.vue'
+  import TicketTaken from './TicketTaken'
   import {GET_BY_ID} from '@/graphql/queries/ticket'
   import {mapState} from 'vuex'
 
@@ -29,6 +32,7 @@
     components: {
       RelatedTickets,
       TicketPreview,
+      TicketTaken,
       FullTicket
     },
     methods: {},

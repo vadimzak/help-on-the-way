@@ -10,8 +10,8 @@
  <v-list-tile-title>
                   {{ticket | formatTicketTitle}}
                 </v-list-tile-title>
-                <v-list-tile-sub-title>
-                  {{ticket.startAddress | formatAddress(true)}}
+                <v-list-tile-sub-title class="color-white">
+                  {{ticket.startAddress | formatAddress('preview')}}
                 </v-list-tile-sub-title>
 			</div>
       <div class="related-when">
@@ -35,8 +35,7 @@
               <span>יום &nbsp;</span>
               {{this.$moment(ticket.dueDate).format('ddd')}}
               <span>, &nbsp;</span>
-              {{this.$moment(ticket.dueDate).format('L')}}
-              {{this.$moment(ticket.dueDate).format('HH:mm')}}-
+              {{this.$moment(ticket.dueDate).format('DD.MM.YYYY')}}
               {{ticket | formatTicketTime}}
             </li>
             <li v-else>
@@ -47,31 +46,32 @@
               <div>
                 <TransportType :type="ticket.transport"/>
               </div>
-              <div class="address">
-              <v-card class="start-address">
-                <img src="static/assets/placeholder-copy.png">
-                <span class="address-alias">מ{{ticket | formatTicketAddressAlias('start')}}</span>
-                <span class="address-text">
-                  {{ticket.startAddress.street || 'הקרוב לבית מגוריו'}}
-                </span>
-                <span class="address-text">
-                  {{ticket.startAddress.city || '&nbsp;'}}
-                </span>
-              </v-card>
-              <div class="arrows">
-                <img src="static/assets/transfer-1.png">
-              </div>
-              <v-card class="end-address">
-                <img src="static/assets/flag.png">
-                <span class="address-alias">ל{{ticket | formatTicketAddressAlias('destination')}}</span>
-                <span class="address-text">
-                {{ticket.destinationAddress.street || 'הקרוב לבית מגוריו'}}
-                </span>
-                <span class="address-text">
-                    {{ticket.destinationAddress.city || '&nbsp;'}}
-                </span>
-              </v-card>
+              <div class="address" v-if="!ticket.isIndoor">
+                <v-card class="start-address">
+                  <img src="static/assets/placeholder.png">
+                  <span class="address-alias">{{ticket | formatTicketAddressAlias('start')}}</span>
+                  <span class="address-text">
+                    {{ticket.startAddress | formatAddress('street') }}
+                  </span>
+                  <span class="address-text">
+                    {{ticket.startAddress |  formatAddress('city')  | formatEmpty('&nbsp;') }}
+                  </span>
+                </v-card>
+                <div class="arrows">
+                  <img src="static/assets/transfer.png">
+                </div>
+                <v-card class="end-address">
+                  <img src="static/assets/flag.png">
+                  <span class="address-alias">ל{{ticket | formatTicketAddressAlias('destination')}}</span>
+                  <span class="address-text">
+                  {{ticket.destinationAddress | formatAddress('street') }}
+                  </span>
+                  <span class="address-text">
+                      {{ticket.destinationAddress | formatAddress('city') | formatEmpty('&nbsp;')}}
+                  </span>
+                </v-card>
             </div>
+            <TransportRoute preview="true" :ticket="ticket" class="w-100" v-else />
             </li>
           </ul>
         </div>
@@ -93,11 +93,11 @@
           <v-card class="dialog-card" v-if="!isTicketMatched">
             <v-card-text>             
                 <div> היי {{$store.state.user.name}},</div>
-                <div> האם ברצונך לסייע ל{{ticket.elder.firstName}}?</div>
+                <div> רק בודקים - האם מסתדר לך לעזור ל{{ticket.elder.firstName}}?</div>
             </v-card-text>
             <v-card-actions class="actions">
               <v-spacer></v-spacer>
-              <button class="agree" flat @click="assignTicket()">אשמח לעזור :)</button>
+              <button class="agree" flat @click="assignTicket()">בטח!</button>
               <button class="cancel" flat @click="dialog=false">לחצתי בטעות</button>
             </v-card-actions>
           </v-card>
@@ -123,8 +123,9 @@
 <script>
 import categoriesTree from 'shared/constants/categoriesTree'
 import TransportType from '../templates/TransportType'
+import TransportRoute from '../templates/TransportRoute'
 export default {
-  components: { TransportType },
+  components: { TransportType, TransportRoute },
 	props: ['ticket', 'closePreview'],
 	data() {
 		return {
@@ -164,6 +165,9 @@ export default {
 </script>
 
 <style scoped>
+.w-100{
+  width: 100%;
+}
 .greeting {
 	text-align: center;
 	width: 100%;
@@ -304,6 +308,9 @@ export default {
 	justify-content: center;
 }
 
+.color-white{
+  color: white !important;
+}
 .dialog-card {
 	padding: 15px;
 	border-radius: 15px;

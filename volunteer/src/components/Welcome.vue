@@ -2,7 +2,7 @@
   <v-layout column wrap>
     <div class="divider-title">
       <div class="divider-text">
- יש לנו עבורך <span class="highlighted"> {{openTickets.length}} הזדמנויות </span> לעשות מעשה טוב בדרך שלך
+ יש לנו <span class="highlighted"> {{openTickets.length}} הזדמנויות </span> בשבילך לעזור למישהו בדרך שלך
       </div>
       <img src="static/assets/homepage.png" class="divider-image">
     </div>

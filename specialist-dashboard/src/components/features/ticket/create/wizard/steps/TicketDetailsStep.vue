@@ -95,12 +95,12 @@ export default {
       updateIndoorStatus(indoors){
             const ticket = this.ticket;
             const details = {
-                startAddressAlias: 'בית הזקן',
+                startAddressAlias: `הבית של ${ticket.elder.firstName}`,
             }
             if(indoors){
                 this.updateTicket({isIndoor: indoors, startAddress: ticket.elder.address, details, endAddress: null, destinationAddress: null, transport: null, elderMobility: null })
             }else{
-                details.endAddressAlias = 'בית הזקן'
+                details.endAddressAlias = `הבית של ${ticket.elder.firstName}`,
                 this.updateTicket({
                 isIndoor: indoors,
                 startAddress: ticket.elder.address, 

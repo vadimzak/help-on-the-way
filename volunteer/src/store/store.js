@@ -9,7 +9,11 @@ const state = {
   menuOpen: false,
   openTickets: [],
   assignedTickets: [],
-  activeTicket: undefined
+  activeTicket: undefined,
+  layoutDisplay: {
+    footer: true,
+    greeting: true
+  }
 }
 
 const mutations = {
@@ -36,6 +40,9 @@ const mutations = {
   },
   removeOpenTicket (state, id) {
     state.openTickets = state.openTickets.filter(t => t.id !== id)
+  },
+  updateLayoutDisplay (state, update) {
+    state.layoutDisplay = {...state.layoutDisplay, ...update}
   }
 }
 

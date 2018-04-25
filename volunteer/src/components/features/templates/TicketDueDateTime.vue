@@ -21,7 +21,7 @@
                 </div>  
             </div>  
                 <a v-if="ticket.dueTime && ticket.dueDate" class="date-time-action" :href="getCalendarLink()" target="_blank">
-                הכנס ליומן
+שמירה ביומן 
                 </a>
                 <a @click="triggerSchedule" class="date-time-action" v-else>
                     {{ callToActionText }}
@@ -36,12 +36,12 @@
         width="290px"
         :return-value.sync="dueTime"
       >
-        <v-time-picker v-if="scheduleStep === 'set-time'" v-model="dueTime" actions>
+        <v-time-picker v-if="scheduleStep === 'set-time'" format="24hr" v-model="dueTime" actions>
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="scheduleDialogOpen = false">ביטול</v-btn>
           <v-btn flat color="primary" :loading="scheduleSaveInProgress" @click="nextScheduleStep">שמירה</v-btn>
         </v-time-picker>
-        <v-date-picker v-if="scheduleStep === 'set-date' && !ticket.fixedDueDate" v-model="dueDate" no-title scrollable>
+        <v-date-picker  locale="he-IL" v-if="scheduleStep === 'set-date' && !ticket.fixedDueDate" v-model="dueDate" no-title scrollable>
           <v-spacer></v-spacer>
           <v-btn flat color="primary" @click="scheduleDialogOpen = false">ביטול</v-btn>
           <v-btn flat color="primary" :loading="scheduleSaveInProgress" @click="nextScheduleStep">שמירה</v-btn>
@@ -79,13 +79,13 @@ export default {
 			this.dueTime = ticket.dueTime;
 			this.dueDate = ticket.dueDate;
 			this.scheduleDialogOpen = true;
-			this.scheduleStep = ticket.fixedDueTime ? 'set-date' : 'set-time';
+			this.scheduleStep = ticket.fixedDueDate ? 'set-time' : 'set-date';
 		},
 		async nextScheduleStep() {
 			const ticket = this.ticket;
 			const currStep = this.scheduleStep;
-			if (currStep === 'set-time' && !ticket.fixedDueDate) {
-				this.scheduleStep = 'set-date';
+			if (currStep === 'set-date' && !ticket.fixedDueTime) {
+				this.scheduleStep = 'set-time';
 				return;
 			}
 			this.scheduleSaveInProgress = true;
