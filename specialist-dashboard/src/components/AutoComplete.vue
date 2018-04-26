@@ -1,8 +1,9 @@
 <template>
   <div>
-    <div v-show="!chosen || !options.toggleOnChoice">
+    <div v-show="!chosen || !options.toggleOnChoice" class="form-group">
       <input
         :placeholder="this.placeholder"
+        class="form-control"
         v-model="textInput"
         @input="searchIfNeeded"
         ref="inputField"
@@ -132,11 +133,10 @@ input{
 .results{
   z-index: 11;
   background-color: white;
-  position: absolute;
+  margin-top: 2px;
 }
 .result{
   border: 1px solid #777;
-  border-top: none;
   padding: 3px 5px 3px 5px;
   cursor: pointer;
 }
