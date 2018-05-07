@@ -1,9 +1,9 @@
 <template>
   <v-layout column wrap class="container">
-	  <div class=" text-xs-center"><img src="static/assets/update-phone.png" class="img-responsive" title="התחברות"></div>
+	  <div class=" text-xs-center"><img src="static/assets/update-phone.png" class="img-responsive top-image" title="התחברות"></div>
       <div class="message">
-        <h4 class="headline text-xs-center color-secondary">נשמח לקבל את הטלפון שלך</h4>
-          <div class="body-2 color-secondary text-xs-center">
+        <h4 class="top-title mt-1 text-xs-center color-secondary">נשמח לקבל את הטלפון שלך</h4>
+          <div class="body-2 mt-2 color-secondary text-xs-center">
                <p> כדי שנוכל לצרף אותך לקבוצת הוואטסאפ של עזרה בדרך  </p>
                <p> אין שם חפירות – רק עדכונים על פניות חדשות  </p>
           </div>
@@ -11,7 +11,7 @@
       <v-form  v-model="valid" ref="form">              
         <v-text-field
           v-model.lazy="phoneNumber"
-          class="text-xs-left phone-input"
+          class="text-xs-left phone-input mb-3"
           type="number"
           @blur="postponeValidation = false"
           placeholder="מספר הנייד שלך"
@@ -61,5 +61,31 @@ h4{
 .message p{
     text-align: center;
     margin-bottom: 0;
+}
+
+
+  .top-image {
+    height: 40vh;
+    overflow:hidden;
+  }
+
+  .top-image img {
+    height:100%;
+    overflow:hidden;
+  }
+
+
+.message {
+      height: 18vh;
+      overflow:hidden;
+}
+
+.top-title {
+    font-size: 1.5rem;
+}
+
+.phone-input {
+  font-size: 33px;
+    text-align: center;
 }
 </style>

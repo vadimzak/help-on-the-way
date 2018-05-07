@@ -1,7 +1,7 @@
 <template>
 
   <v-layout column  class="container">
-	  <div class=" text-xs-center w-100"><img src="static/assets/phone-verify.png" class="img-responsive" title="אימות טלפון"></div>
+	  <div class=" text-xs-center w-100"><img src="static/assets/phone-verify.png" class="img-responsive top-image" title="אימות טלפון"></div>
       <div class="message">
         <h4 class="headline text-xs-center color-secondary">שלחנו לך עכשיו קוד</h4>
           <div class="body-2 color-secondary text-xs-center">
@@ -99,4 +99,21 @@ export default {
     text-align: center;
     margin-bottom: 0;
 }
+
+ .top-image {
+    height: 40vh;
+    overflow:hidden;
+  }
+
+  .top-image img {
+    height:100%;
+    overflow:hidden;
+  }
+
+
+.message {
+      height: 18vh;
+      overflow:hidden;
+}
+
 </style>

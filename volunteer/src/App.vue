@@ -1,5 +1,5 @@
 <template>
-  <v-app id="app" :class="{ 'loggged-out': !isLoggedIn }">
+  <v-app id="app" :class="{ 'loggged-out': !isLoggedIn, 'hide-scroll': $route.meta.noScroll }">
     <app-header v-if="isLoggedIn"></app-header>
     <app-sidenav v-if="isLoggedIn"></app-sidenav>
     <v-content>
@@ -41,6 +41,13 @@
     direction: rtl;
     text-align: right;
   }
+
+  #app.hide-scroll {
+    height: calc(100vh - 56px);
+    max-height: calc(100vh - 56px);
+    overflow: hidden;
+  }
+
   .container.fill-height {
     padding: 0;
   }
@@ -54,4 +61,6 @@
   .content {
     padding-bottom: 50px;
   }
+
+
 </style>

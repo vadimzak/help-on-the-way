@@ -10,15 +10,18 @@ const paths = {
 
 const routes = [{
   path: paths.login,
-  component: Login
+  component: Login,
+  meta: { noScroll: true }
 },
 {
   path: paths.update,
-  component: LoginUpdate
+  component: LoginUpdate,
+  meta: { noScroll: true }
 },
 {
   path: paths.verify,
-  component: LoginVerify
+  component: LoginVerify,
+  meta: { noScroll: true }
 }]
 
 export {

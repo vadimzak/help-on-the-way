@@ -17,6 +17,9 @@
     color: var(--primary);
 }
 
+.bold {
+    font-weight: bold;
+}
 .loggged-out{
     /* padding-top: 56px; */
 }

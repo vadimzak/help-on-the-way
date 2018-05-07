@@ -1,8 +1,8 @@
 <template>
-  <v-layout column wrap class="container">
-						<div class=" text-xs-center"><img src="static/assets/login.png" class="img-responsive" title="התחברות"></div>
+  <v-layout column class="container">
+						<div class="text-xs-center top-image"><img src="static/assets/login.png" class="img-responsive" title="התחברות"></div>
             <div class="message">
-              <h4 class="display-1 text-xs-center color-secondary">איזה יופי שבאת!</h4>
+              <h4 class="headline mt-2 text-xs-center color-secondary bold">איזה יופי שבאת!</h4>
               <div class="body-2 color-secondary text-xs-center">
                <p>כדי לשמור על הפרטיות של הזקנים, אפשר לצפות </p>
                <p>  בפניות המלאות רק אחרי שנכנסים למערכת </p>
@@ -45,12 +45,19 @@ export default {
     text-align: center;
     margin-bottom: 0;
 }
+
+.message {
+      height: 23vh;
+      overflow:hidden;
+}
   .social-login{
     position:relative;
     width: 100%;
-    height:auto;
     display:flex;
     flex-direction: column;
+        height: 18vh;
+              overflow:hidden;
+
   }
   .social-login a{
     position:relative;
@@ -76,6 +83,16 @@ export default {
   }
   .social-login a:last-child{
     background-color:var(--pink);
+  }
+
+  .top-image {
+    height: 40vh;
+    overflow:hidden;
+  }
+
+  .top-image img {
+    height:100%;
+    overflow:hidden;
   }
 </style>
 
