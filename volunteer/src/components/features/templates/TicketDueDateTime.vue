@@ -64,11 +64,11 @@ export default {
 	},
 	methods: {
 		getCalendarLink() {
-			return `https://www.google.com/calendar/render?action=TEMPLATE
-        &dates=${this.$moment(this.ticket.dueDate).toISOString()}/${this.$moment(this.ticket.dueDate).toISOString()}
-        &text=${this.$options.filters.formatTicketTitle(this.ticket).replace(' ', '')}
-        &location=${this.ticket.startAddress}
-        &details=`;
+			return `https://calendar.google.com/calendar/r/eventedit?
+			text=${this.$options.filters.formatTicketTitle(this.ticket).replace(new RegExp(' ', 'g'),'+')}
+			&dates=${getDateRange.call(this)}
+			&details=${window.location.href}
+			&location=${getAddress(this.ticket.startAddress)}`;
 		},
 		triggerSchedule() {
 			const ticket = this.ticket;
@@ -113,6 +113,18 @@ export default {
 		}
 	}
 };
+function getDateRange() {
+	const dateFormat = 'YYYYMMDDTHHmmss[Z]';
+	const date = this.ticket.dueDate;
+	const time = this.ticket.dueTime;
+	const startDate = this.$moment(date+'T'+time);
+	const endDate = this.$moment(startDate);
+	endDate.add(this.ticket.durationEta, 'm');
+	return `${this.$moment(startDate.utc()).format(dateFormat)}/${this.$moment(endDate.utc()).format(dateFormat)}`;
+}
+function getAddress(address) {
+ return `${address.street} ${address.houseNumber}, ${address.city}`;
+}
 </script>
 <style scoped>
 .when-block {
