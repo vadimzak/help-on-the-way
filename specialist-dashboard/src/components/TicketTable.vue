@@ -41,6 +41,7 @@
     </div>
     <context-menu ref="ctxMenu" @ctx-open="(data) => contextTicket = data">
       <li @click="() => $router.push({name: 'Ticket', params: { id: contextTicket.id }})">עריכת פנייה</li>
+      <li v-if="hasVolunteer(selectedTicket)" @click="removeVolunteer()">הסרת מתנדב</li>
     </context-menu>
   </div>
 </template>
@@ -61,76 +62,85 @@ export default {
 			return {
 				'--category-color': ticket.category ? categoriesTree[ticket.category].self.color : 'var(--secondary)'
 			};
-		},
+    },
+    removeVolunteer(){
+
+    },
+    hasVolunteer(ticket){
+      return ticket.volunteers.nodes.length;
+    }
   }
 };
 </script>
 
 
-<style scoped>
-.tickets-table {
-	font-family: 'Open Sans Hebrew';
-}
+<style >
+  .tickets-table {
+    font-family: 'Open Sans Hebrew';
+  }
 
-.ticket.active {
-  background-color: white;
-  transform: scale(1.05);
-  width: 100%;
-  z-index: 22;
-  box-shadow: 0px 7px 14.9px 0.01px rgba(142, 142, 142, 0.3) !important;
-}
-.ticket.active + .ticket{
-  /* margin-top: 82px !important; */
-}
-.ticket {
-  transition: all .2s ease-in-out;
-  box-shadow: 0px 5px 14.9px 1.1px rgba(142, 142, 142, 0.05);
-	border-right: 7px solid var(--category-color);
-}
+  .ticket.active {
+    background-color: white;
+    transform: scale(1.05);
+    width: 100%;
+    z-index: 22;
+    box-shadow: 0px 7px 14.9px 0.01px rgba(142, 142, 142, 0.3) !important;
+  }
 
-.center-text {
-	vertical-align: middle;
-	text-align: center;
-}
+ 
+  .ticket {
+    transition: all .2s ease-in-out;
+    box-shadow: 0px 5px 14.9px 1.1px rgba(142, 142, 142, 0.05);
+    border-right: 7px solid var(--category-color);
+  }
 
-.phone-numbers,
-.ticket-dates {
-	padding-right: 7px;
-}
+  .center-text {
+    vertical-align: middle;
+    text-align: center;
+  }
 
-.due-date {
-	word-wrap: break-word;
-	font-size: 20px;
-	font-weight: normal;
-	font-style: normal;
-	font-stretch: normal;
-}
-.table-header {
-	background-color: #ffffff;
-	color: var(--secondary);
-	height: 35px;
-	white-space: nowrap;
-	align-items: center;
-}
-.ticket-cell {
-	align-self: center;
-	text-align: center;
-}
-.elder-name-cell {
-	display: flex;
-}
-.elder-name {
-	padding: 0 10px 0px 0;
-	font-size: 20px;
-	font-weight: normal;
-	font-style: normal;
-	font-stretch: normal;
-	text-align: center;
-}
->>> .ctx-menu  {
-   text-align: right !important;
-   padding-right: 10px;
-   cursor: pointer;
-}
+  .phone-numbers,
+  .ticket-dates {
+    padding-right: 7px;
+  }
+
+  .due-date {
+    word-wrap: break-word;
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+  }
+
+  .table-header {
+    background-color: #ffffff;
+    color: var(--secondary);
+    height: 35px;
+    white-space: nowrap;
+    align-items: center;
+  }
+  .ticket-cell {
+    align-self: center;
+    text-align: center;
+  }
+  
+  .elder-name-cell {
+    display: flex;
+  }
+  
+  .elder-name {
+    padding: 0 10px 0px 0;
+    font-size: 20px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    text-align: center;
+  }
+
+  .ctx-menu  {
+    text-align: right ;
+    padding-right: 10px;
+    cursor: pointer;
+  }
 
 </style>
