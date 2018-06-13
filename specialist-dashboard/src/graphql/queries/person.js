@@ -49,3 +49,20 @@ mutation updatePerson($id: Int!, $person: PersonPatch!){
     }
   }
   `
+
+export const ALL_PEOPLE_OF_TYPE = gql`
+query allPeopleOfType($type: PersonType!){
+  allPeople(condition: {type: $type}) {
+    nodes {
+      id
+      firstName
+      lastName
+      phoneNumber
+      addressByAddressId {
+        street
+        houseNumber
+        city
+      }            
+    }
+}
+}`;

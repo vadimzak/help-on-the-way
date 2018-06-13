@@ -40,7 +40,7 @@ export default {
     apollo: {
     allPersons:{
       query: gql`{
-        allPeople(condition: {type: VOLUNTEER}) {
+        allPeople(condition: {type: ${this.props.personType}}) {
           nodes {
             id
             firstName
@@ -54,7 +54,7 @@ export default {
           }
         }
       }`,
-    update: (data) =>{debugger; data.allPersons.nodes; },
+    update: (data) =>{debugger; data.allPeople.nodes; },
       // result(value) {
         // this.setList(value.data.allPersons.nodes)
         // this.ready = true
